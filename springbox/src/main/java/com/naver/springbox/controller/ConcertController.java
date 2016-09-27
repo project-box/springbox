@@ -11,15 +11,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 public class ConcertController {
-private static final Logger logger = LoggerFactory.getLogger(MusicController.class);
 	
-	/**
-	 * Simply selects the home view to render by returning its name.
-	 */
 	@RequestMapping(value = "/concertSample.box", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
-		
-		System.out.println("콘서트!");
 		
 		return "concert/concert_sample";
 	}
