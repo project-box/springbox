@@ -4,9 +4,11 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" type="text/css" href="css/sample.css" />
 <title>springbox index</title>
 </head>
 <body>
+	<h1>샘플페이지</h1>
 	<a href="music_sample.box">음악</a>
 	<a href="concert_sample.box">콘서트</a>
 	<a href="theme_sample.box">테마곡</a>
