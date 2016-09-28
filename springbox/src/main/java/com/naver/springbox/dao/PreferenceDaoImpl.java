@@ -7,18 +7,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.naver.springbox.dto.MusicBean;
+import com.naver.springbox.dto.PreferenceBean;
 
 @Repository
-public class MusicDaoImpl implements MusicDao {
+public class PreferenceDaoImpl implements PreferenceDao {
 	
 	@Autowired
 	private SqlSession sqlSession;
 
 	@Override
 	@Transactional
-	public List<MusicBean> getMusicList() {
-		return sqlSession.selectList("music.musicList");
+	public List<PreferenceBean> getPreferenceList() {
+		return sqlSession.selectList("preference.preference_list");
 	}
 
 }

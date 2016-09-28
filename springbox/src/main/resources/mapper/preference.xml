@@ -6,9 +6,9 @@
 <mapper namespace="preference">
 
 	<!-- 전체 음악 목록 -->
-	<select id="music_list">
+	<select id="preference_list" resultType="com.naver.springbox.dto.PreferenceBean">
 	    <![CDATA[
-		select * from music
+		select * from preference
 		]]>
 	</select>
 	

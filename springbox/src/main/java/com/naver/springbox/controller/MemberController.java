@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class MemberController {
 	
-	@RequestMapping(value = "/memberSample.box", method = RequestMethod.GET)
+	@RequestMapping(value = "/member_sample.box", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {		
 		
 		return "member/member_sample";

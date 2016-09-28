@@ -7,10 +7,10 @@
 <title>springbox index</title>
 </head>
 <body>
-	<a href="musicSample.box">음악</a>
-	<a href="concertSample.box">콘서트</a>
-	<a href="themeSample.box">테마곡</a>
-	<a href="memberSample.box">멤버</a>
+	<a href="music_sample.box">음악</a>
+	<a href="concert_sample.box">콘서트</a>
+	<a href="theme_sample.box">테마곡</a>
+	<a href="member_sample.box">멤버</a>
 	<a href="front.box">프론트</a>
 </body>
 </html>

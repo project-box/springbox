@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class ConcertController {
 	
-	@RequestMapping(value = "/concertSample.box", method = RequestMethod.GET)
+	@RequestMapping(value = "/concert_sample.box", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
 		
 		return "concert/concert_sample";

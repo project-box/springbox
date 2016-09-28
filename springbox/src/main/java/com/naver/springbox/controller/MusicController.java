@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class MusicController {
 	
-	@RequestMapping(value = "/musicSample.box", method = RequestMethod.GET)
+	@RequestMapping(value = "/music_sample.box", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
 		
 		return "music/music_sample";

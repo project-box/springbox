@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class ThemeController {
 
-	@RequestMapping(value = "/themeSample.box", method = RequestMethod.GET)
+	@RequestMapping(value = "/theme_sample.box", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {		
 		
 		return "theme/theme_sample";
