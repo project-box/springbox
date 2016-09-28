@@ -6,11 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.naver.springbox.dao.PreferenceDao;
+import com.naver.springbox.dto.ConcertBean;
+import com.naver.springbox.dto.MusicBean;
 import com.naver.springbox.dto.PreferenceBean;
 
 @Service
 public class PreferenceAction {
-	
+
 	@Autowired
 	private PreferenceDao preferenceDao;
 
@@ -21,5 +23,13 @@ public class PreferenceAction {
 		for (PreferenceBean preference : preferenceList) {
 			System.out.println(preference.getRate());
 		}
+	}
+
+	public List<MusicBean> suggestMusic(String userId) {
+		throw new UnsupportedOperationException();
+	}
+
+	public List<ConcertBean> suggestConcert(String userId) {
+		throw new UnsupportedOperationException();
 	}
 }
