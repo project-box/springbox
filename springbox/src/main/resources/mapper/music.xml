@@ -8,8 +8,10 @@
 	<!-- 전체 음악 목록 -->
 	<select id="musicList" resultType="com.naver.springbox.dto.MusicBean">
 	    <![CDATA[
-		select * from music
+		select * from 
+		 (select rownum rnum,music_num,music_genre,music_artist,music_title,music_album,music_publishdate,albumcoverfilepath,music_lyrics from  
+	  	  (select * from music order by id desc)) 
+	   	   where rnum >= ((#{page}-1) * 10+1)  and rnum <= (#{page} * 10)
 		]]>
 	</select>
-	
 </mapper>
