@@ -13,10 +13,12 @@
 	</select>
 	
 	<!-- 정수 1개를 받아서 concert 테이블에서 concert_num과 일치하는 데이터를 찾아서 모든 컬럼을 ConcertBean 
-		타입으로 리턴하는 sql -->
+		타입으로 리턴하는 sql -->		
 	<select id="concert_detail" parameterType="Integer"
 		resultType="com.naver.springbox.dto.ConcertBean">
-		select * from concert where concert_num=#{num}
+		<![CDATA[
+		select * from concert where concert_num=#{concert_num}
+		]]>
 	</select>
 	
 </mapper>

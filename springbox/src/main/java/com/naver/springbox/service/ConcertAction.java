@@ -16,11 +16,14 @@ import com.naver.springbox.dto.ConcertBean;
 public class ConcertAction {
 
 	@Autowired
-	private ConcertDao concertdao;
+	private ConcertDao concertDao;
+	
+	
+/*----------------콘서트 목록 서비스----------------------------*/
 
 	// HttpServletRequest를 매개변수로 받아서
 	// 작업을 수행
-	public Map<String, Object> execute(HttpServletRequest request) {
+	public Map<String, Object> concertList(HttpServletRequest request) {
 		// 기본적으로 사용할 페이지 번호 설정
 		int page = 1;
 		// 한 페이지에 출력할 데이터 개수 설정
@@ -43,10 +46,11 @@ public class ConcertAction {
 		map.put("end", end);
 
 		// 데이터 가져오기
-		List<ConcertBean> list = concertdao.getConcertList(map);
+		List<ConcertBean> list = concertDao.getConcertList(map);
+//		List<ConcertBean> list = concertDao.getConcertList();
 		
 		// 전체 데이터 개수 가져오기
-		int listcount = concertdao.getConcertListCount();
+		int listcount = concertDao.getConcertListCount();
 
 		// 가장 큰 페이지 번호 계산
 		int maxpage = (int) ((double) listcount / limit + 0.95);
@@ -70,5 +74,12 @@ public class ConcertAction {
 		return resultMap;
 
 	}
+	
+/*----------------디테일 서비스----------------------------*/
+	public ConcertBean concertDetail(int concert_num) throws Exception {
+		ConcertBean dto = concertDao.getConcertDetail(concert_num);
 
+		return dto;
+	}
+	
 }
