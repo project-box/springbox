@@ -25,11 +25,33 @@ public class PreferenceAction {
 		}
 	}
 
+	// 추천곡 목록을 가져오는 메서드(예정)
 	public List<MusicBean> suggestMusic(String userId) {
 		throw new UnsupportedOperationException();
 	}
 
+	// 추천공연 목록을 가져오는 메서드(예정)
 	public List<ConcertBean> suggestConcert(String userId) {
 		throw new UnsupportedOperationException();
+	}
+	
+	// ToDo: try~catch 밑에 null을 리턴하는게 맞는가?
+	public List<MusicBean> getMusicList(int count){
+		try {
+			return preferenceDao.getRecentMusicList(count);	
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	// ToDo: try~catch 밑에 null을 리턴하는게 맞는가?
+	public List<ConcertBean> getConcertList(int count){
+		try{
+			return preferenceDao.getConcertList(count);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 }

@@ -5,10 +5,32 @@
 
 <mapper namespace="preference">
 
-	<!-- 전체 음악 목록 -->
+	<!-- 전체 선호도 목록 -->
 	<select id="preference_list" resultType="com.naver.springbox.dto.PreferenceBean">
 	    <![CDATA[
 		select * from preference
+		]]>
+	</select>
+	
+	<!-- 최신 곡 목록-->
+	<select id="recent_music_list" parameterType="int" resultType="com.naver.springbox.dto.MusicBean">
+	    <![CDATA[
+		select * from 
+		  (select rownum rnum,music_num,music_genre,music_artist,
+		  music_title,music_album,music_publishdate,albumcoverfilepath,music_lyrics
+		  from (select * from music order by music_publishdate desc))
+		  where rnum <= #{count}
+		]]>
+	</select>
+	
+	<!-- 최신 공연 목록 -->
+	<select id="recent_concert_list" parameterType="int" resultType="com.naver.springbox.dto.ConcertBean">
+		<![CDATA[
+		select * from 
+			(select rownum rnum,concert_num,concert_title,concert_place,concert_startdate,concert_enddate,
+					  posterfilepath,concert_artist,locationx,locationy,concert_price
+					  from (select * from concert order by concert_startdate desc))
+		      where rnum <=  #{count}
 		]]>
 	</select>
 	
