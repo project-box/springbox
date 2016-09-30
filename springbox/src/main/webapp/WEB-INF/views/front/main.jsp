@@ -53,14 +53,14 @@
 
 			<c:forEach var="b" items="${musiclist}">
 				<div class="col-md-3 portfolio-item">
-					<a href="NewmusicDetailAction.box?num=${b.id}&page=${page}">
+					<a href="NewmusicDetailAction.box?num=${b.music_num}&page=${page}">
 						<img class="img-responsive img-center"
 						src="
 	                    <c:url value='/img/${b.albumcoverfilepath}'/>"
 						alt="">
 					</a>
 					<div class="well well-sm">
-						<c:out value="${b.title}" />
+						<c:out value="${b.music_title}" />
 						<br>
 					</div>
 				</div>
@@ -177,13 +177,13 @@
 							</h1>
 						</div>
 						
-						<c:forEach var="b" items="${recommendedmusiclist}">
+						<c:forEach var="b" items="${musiclist}">
 							<div class="col-md-3 portfolio-item">
-								<a href="./NewmusicDetailAction.box?num=${b.id}"> <img class="img-responsive img-center"
+								<a href="./NewmusicDetailAction.box?num=${b.music_num}"> <img class="img-responsive img-center"
 									src="<c:url value='/img/${b.albumcoverfilepath}'/>" alt="">
 								</a>
 								<div class="well well-sm">
-									<c:out value="${b.title}" />
+									<c:out value="${b.music_title}" />
 									<br>
 								</div>
 							</div>
@@ -202,14 +202,14 @@
 							</h1>
 						</div>
 						
-						<c:forEach var="b" items="${recommendedconcertlist}">
+						<c:forEach var="b" items="${concertlist}">
 							<div class="col-md-3 portfolio-item">
-								<a href="/projectbox/ConcertDetail.box?id=${b.id}&page=1"> <!-- <img class="img-responsive" src="http://placehold.it/750x450" alt="" > -->
+								<a href="/projectbox/ConcertDetail.box?id=${b.concert_num}&page=1"> <!-- <img class="img-responsive" src="http://placehold.it/750x450" alt="" > -->
 									<img class="img-responsive img-center"
 									src="<c:url value='/img/${b.posterfilepath}'/>" alt="">
 								</a>
 								<div class="well well-sm">
-									<c:out value="${b.title}" />
+									<c:out value="${b.concert_title}" />
 									<br>
 								</div>
 							</div>
@@ -220,7 +220,7 @@
         
         <!-- 게시판 -->
         <div class="row">
-            <div class="col-lg-12">
+            <%-- <div class="col-lg-12">
                 <h1 class="page-header">자유 게시판
                     <small>
                     	<a href="boardList.box" aria-label="Skip to main navigation">
@@ -248,7 +248,7 @@
 								<c:out value="${b.title}"/></a>
 							</td>
 							<td><c:out value="${b.name}"/></td>
-							<td><%-- <c:out value="${b.registerdate}"/> --%>
+							<td><c:out value="${b.registerdate}"/>
 								<c:set var="now" value="${b.registerdate}" />
 								<fmt:formatDate value="${now}" type="date" />							
 							</td>
@@ -256,7 +256,7 @@
 						</tr>
 					</c:forEach>
 				</tbody>
-			</table>
+			</table> --%>
 
 			<%-- <c:forEach var="b" items="${generalboardlist}">
             	<c:out value="${b.id}"/>
