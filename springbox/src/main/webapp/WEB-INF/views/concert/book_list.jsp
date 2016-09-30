@@ -7,6 +7,9 @@
 <title>Insert title here</title>
 </head>
 <body>
-	콘서트 샘플
+
+예매 정보 페이지 입니다.
+<a href="concert_detail.box">클릭 하면 디테일 페이지로</a>
+
 </body>
 </html>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="concert">
+
+	<!-- 콘서트 리스트 -->
+	<select id="concert_list" resultType="com.naver.springbox.dto.ConcertBean">
+	    <![CDATA[
+			select * from concert
+		]]>
+	</select>
+	
+	<!-- 정수 1개를 받아서 concert 테이블에서 concert_num과 일치하는 데이터를 찾아서 모든 컬럼을 ConcertBean 
+		타입으로 리턴하는 sql -->		
+	<select id="concert_detail" parameterType="Integer"
+		resultType="com.naver.springbox.dto.ConcertBean">
+		<![CDATA[
+		select * from concert where concert_num=#{concert_num}
+		]]>
+	</select>
+	
+</mapper>
