@@ -7,7 +7,6 @@ public class ConcertBean {
 	private String concert_place;
 	private Date concert_startdate;
 	private Date concert_enddate;
-	private String concert_showtime;
 	private String concert_title;
 	private String posterfilepath;
 	private String concert_artist;
@@ -38,12 +37,6 @@ public class ConcertBean {
 	}
 	public void setConcert_enddate(Date concert_enddate) {
 		this.concert_enddate = concert_enddate;
-	}
-	public String getConcert_showtime() {
-		return concert_showtime;
-	}
-	public void setConcert_showtime(String concert_showtime) {
-		this.concert_showtime = concert_showtime;
 	}
 	public String getConcert_title() {
 		return concert_title;
