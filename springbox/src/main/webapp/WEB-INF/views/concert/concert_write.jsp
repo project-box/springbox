@@ -64,7 +64,7 @@
 			
 			
 			<tr>
-				<td style="font-family: 돋음; font-size: 12" height="16">
+				<td rowspan=2 style="font-family: 돋음; font-size: 12" height="16">
 					<div align="center">공연장 위치정보</div>
 				</td>
 				<td style="font-family: 돋음; font-size: 12" height="16">
@@ -74,9 +74,6 @@
 					maxlength="100" value="" /></td>
 			</tr>
 			<tr>
-				<td style="font-family: 돋음; font-size: 12" height="16">
-					<div align="center">공연장 위치정보</div>
-				</td>
 				<td style="font-family: 돋음; font-size: 12" height="16">
 					<div align="center">경도</div>
 				</td>
