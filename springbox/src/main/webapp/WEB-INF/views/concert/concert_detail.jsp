@@ -13,12 +13,16 @@
 
 추천공연 디테일 페이지 입니다.
 
-<a href="book.box">클릭 하면 예매 페이지로</a>
+<a href="book.box"><button type="button">예매하기</button></a>
 <a href="concert_list.box">클릭 하면 리스트로</a>
 
 
 <h3>${concertdata.concert_title}</h3>
 <img src="./img/${concertdata.posterfilepath}" width="157" height="191" alt="title" />
+
+
+
+
 
 
 

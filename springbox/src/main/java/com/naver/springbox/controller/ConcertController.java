@@ -25,6 +25,16 @@ public class ConcertController {
 	private ConcertAction concertAction;
 	
 	
+	/*--------------------글쓰기(관리자)-----------------------*/
+	
+	@RequestMapping(value = "/concert_write.box", method = RequestMethod.GET)
+	public String concertWrite(Locale locale, Model model) {
+
+		return "concert/concert_write";
+	}
+	
+	
+	
 //	@RequestMapping(value = "/concert_list.box", method = RequestMethod.GET)
 //	public String list(Locale locale, Model model) {
 //
