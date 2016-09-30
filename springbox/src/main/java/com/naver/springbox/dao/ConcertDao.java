@@ -9,10 +9,16 @@ import com.naver.springbox.dto.ConcertBean;
 public interface ConcertDao {
 	
 	// 전체 데이터 개수를 리턴하는 메소드
-	public int getConcertListCount();	
+	public int getConcertListCount();
+
+	public List<ConcertBean> getConcertList();	
 	
-	// 맵을 받아서 데이터 목록을 리턴하는 메소드
-	public List<ConcertBean> getConcertList(Map<String, Object> map);
+	
+	
+//	// 맵을 받아서 데이터 목록을 리턴하는 메소드
+//	public List<ConcertBean> getConcertList(Map<String, Object> map);
+	
+	
 	/*	
 	
 	// 조회수를 1증가시키고 하나의 데이터를 가져오는 메소드
@@ -29,5 +35,6 @@ public interface ConcertDao {
 
 	// 정수 1개를 받아서 데이터를 삭제하는 메소드
 	public boolean deleteConcert(int num);*/
+
 
 }
