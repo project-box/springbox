@@ -4,17 +4,15 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>추천공연 등록 - 관리자페이지</title>
 </head>
 <body>
 
-<table>
-			<tr align="center" valign="middle">
-				<td colspan="5">게시판 글쓰기</td>
-			</tr>
+<h4 align="center" >추천공연 등록하기</h4>
 
+<table align="center" >
 			<tr>
-				<td style="font-family: 돋음; font-size: 12" height="16">
+				<td width="50" colspan=2 style="font-family: 돋음; font-size: 12" height="16">
 					<div align="center">공연제목</div>
 				</td>
 				<td><input name="board_Subject" type="text" size="50"
@@ -22,7 +20,7 @@
 			</tr>
 			
 			<tr>
-				<td style="font-family: 돋음; font-size: 12" height="16">
+				<td colspan=2 style="font-family: 돋음; font-size: 12" height="16">
 					<div align="center">공연날짜</div>
 				</td>
 				<td><input name="board_Subject" type="text" size="50"
@@ -30,7 +28,7 @@
 			</tr>
 			
 			<tr>
-				<td style="font-family: 돋음; font-size: 12" height="16">
+				<td colspan=2 style="font-family: 돋음; font-size: 12" height="16">
 					<div align="center">공연시간</div>
 				</td>
 				<td><input name="board_Subject" type="text" size="50"
@@ -38,7 +36,7 @@
 			</tr>
 			
 			<tr>
-				<td style="font-family: 돋음; font-size: 12" height="16">
+				<td colspan=2 style="font-family: 돋음; font-size: 12" height="16">
 					<div align="center">공연장소</div>
 				</td>
 				<td><input name="board_Subject" type="text" size="50"
@@ -46,7 +44,7 @@
 			</tr>
 			
 			<tr>
-				<td style="font-family: 돋음; font-size: 12" height="16">
+				<td colspan=2 style="font-family: 돋음; font-size: 12" height="16">
 					<div align="center">예매가격</div>
 				</td>
 				<td><input name="board_Subject" type="text" size="50"
@@ -54,7 +52,7 @@
 			</tr>
 			
 			<tr>
-				<td style="font-family: 돋음; font-size: 12">
+				<td  colspan=2 style="font-family: 돋음; font-size: 12">
 					<div align="center">상세정보</div>
 				</td>
 				<td><textarea name="board_Content" cols="67" rows="15"></textarea>
@@ -65,7 +63,7 @@
 			
 			<tr>
 				<td rowspan=2 style="font-family: 돋음; font-size: 12" height="16">
-					<div align="center">공연장 위치정보</div>
+					<div align="center">공연장<br> 위치정보</div>
 				</td>
 				<td style="font-family: 돋음; font-size: 12" height="16">
 					<div align="center">위도</div>
@@ -74,7 +72,7 @@
 					maxlength="100" value="" /></td>
 			</tr>
 			<tr>
-				<td style="font-family: 돋음; font-size: 12" height="16">
+				<td width="50" style="font-family: 돋음; font-size: 12" height="16">
 					<div align="center">경도</div>
 				</td>
 				<td><input name="board_Subject" type="text" size="50"
@@ -82,7 +80,7 @@
 			</tr>
 
 			<tr>
-				<td style="font-family: 돋음; font-size: 12">
+				<td colspan=2 style="font-family: 돋음; font-size: 12">
 					<div align="center">파일 첨부</div>
 				</td>
 
