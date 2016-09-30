@@ -1,6 +1,7 @@
 package com.naver.springbox.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +16,7 @@ public class ConcertDaoImpl implements ConcertDao {
 	@Autowired
 	private SqlSession sqlSession;
 
-	/*@Override
+	@Override
 	@Transactional// 메소드 수행 중에 예외가 발생하면 rollback 그렇지 않으면 commit
 	public List<ConcertBean> getConcertList(Map<String, Object> map) {
 		List<ConcertBean> list = sqlSession.selectList("concert.concert_list",
@@ -24,13 +25,13 @@ public class ConcertDaoImpl implements ConcertDao {
 			return null;
 		else
 			return list;
-	}*/
-	
-	@Override
-	@Transactional
-	public List<ConcertBean> getConcertList() {
-		return sqlSession.selectList("concert.concert_list");
 	}
+	
+//	@Override
+//	@Transactional
+//	public List<ConcertBean> getConcertList() {
+//		return sqlSession.selectList("concert.concert_list");
+//	}
 	
 
 	@Override

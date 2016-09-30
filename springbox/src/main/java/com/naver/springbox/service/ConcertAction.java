@@ -43,8 +43,8 @@ public class ConcertAction {
 		map.put("end", end);
 
 		// 데이터 가져오기
-//		List<ConcertBean> list = concertDao.getConcertList(map);
-		List<ConcertBean> list = concertDao.getConcertList();
+		List<ConcertBean> list = concertDao.getConcertList(map);
+//		List<ConcertBean> list = concertDao.getConcertList();
 		
 		// 전체 데이터 개수 가져오기
 		int listcount = concertDao.getConcertListCount();

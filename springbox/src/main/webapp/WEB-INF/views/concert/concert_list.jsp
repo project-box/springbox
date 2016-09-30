@@ -14,27 +14,26 @@
 <body>
 
 	추천공연 게시판 리스트
-	
-	<a href="concert_detail.box">클릭 하면 디테일페이지로</a>
-	
-	
-	<%-- <br>
+
+	<br>
 	<table>
 		<tr>
-			<c:forEach var="b" items="${concertlist}">
-				<td><a href="concert_list.box?num=${b.concert_num}"> 
-				<img src="<c:url value='/img/${b.posterfilepath}'/>" alt=""></a> 
-				<br> <c:out value="${b.concert_title}" /> <br>
-				</td>
-				
-				${fn:length(concertlist)}
 
-				<c:if test="${fn:length(concertlist)} % 4 == 0">
-		       </tr><tr>
-			    </c:if>
+			<c:forEach var="b" items="${concertlist}">
+
+				<c:set var="i" value="${i+1}" />
+
+				<td><a href="concert_detail.box"> 
+				<img src="<c:url value='/img/${b.posterfilepath}'/>" alt=""></a> <br>
+					<c:out value="${b.concert_title}" /> <br></td>
+
+				<c:if test="${i % 4 == 0}">
+		</tr>
+		<tr>
+			</c:if>
 
 			</c:forEach>
 		</tr>
-	</table> --%>
+	</table>
 </body>
 </html>

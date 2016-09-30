@@ -25,15 +25,14 @@ public class ConcertController {
 	private ConcertAction concertAction;
 	
 	
-	@RequestMapping(value = "/concert_list.box", method = RequestMethod.GET)
+	/*@RequestMapping(value = "/concert_list.box", method = RequestMethod.GET)
 	public String list(Locale locale, Model model) {
 
 		return "concert/concert_list";
 	}
+	*/
 	
-	
-	
-	/*@RequestMapping("/concert_list.box")
+	@RequestMapping("/concert_list.box")
 	public ModelAndView getConcertList(HttpServletRequest request) {
 		ModelAndView mav = new ModelAndView();
 		HttpSession session = request.getSession();
@@ -49,7 +48,7 @@ public class ConcertController {
 			mav.setViewName("/concert/concert_list");
 		
 		return mav;
-	}*/
+	}
 
 
 	@RequestMapping(value = "/concert_detail.box", method = RequestMethod.GET)

@@ -11,12 +11,12 @@ public interface ConcertDao {
 	// 전체 데이터 개수를 리턴하는 메소드
 	public int getConcertListCount();
 
-	public List<ConcertBean> getConcertList();	
+//	public List<ConcertBean> getConcertList();	
 	
 	
 	
-//	// 맵을 받아서 데이터 목록을 리턴하는 메소드
-//	public List<ConcertBean> getConcertList(Map<String, Object> map);
+	// 맵을 받아서 데이터 목록을 리턴하는 메소드
+	public List<ConcertBean> getConcertList(Map<String, Object> map);
 	
 	
 	/*	
