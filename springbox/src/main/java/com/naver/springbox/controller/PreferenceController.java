@@ -23,4 +23,10 @@ public class PreferenceController {
 		
 		return "front/main";
 	}
+	
+	@RequestMapping(value = "/main.box", method = RequestMethod.GET)
+	public String mainBox(Locale locale, Model model) {
+		
+		return "front/main";
+	}
 }
