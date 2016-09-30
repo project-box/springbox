@@ -1,6 +1,5 @@
 package com.naver.springbox.controller;
 
-import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
@@ -18,6 +17,7 @@ import com.naver.springbox.dto.ConcertBean;
 import com.naver.springbox.service.ConcertAction;
 
 
+
 @Controller
 public class ConcertController {
 
@@ -25,12 +25,13 @@ public class ConcertController {
 	private ConcertAction concertAction;
 	
 	
-	/*@RequestMapping(value = "/concert_list.box", method = RequestMethod.GET)
-	public String list(Locale locale, Model model) {
-
-		return "concert/concert_list";
-	}
-	*/
+//	@RequestMapping(value = "/concert_list.box", method = RequestMethod.GET)
+//	public String list(Locale locale, Model model) {
+//
+//		return "concert/concert_list";
+//	}
+	
+	/*---------------------콘서트목록------------------------*/
 	
 	@RequestMapping("/concert_list.box")
 	public ModelAndView getConcertList(HttpServletRequest request) {
@@ -38,7 +39,7 @@ public class ConcertController {
 		HttpSession session = request.getSession();
 		
 			// 게시물 목록 가져오기
-			Map<String, Object> map = concertAction.execute(request);
+			Map<String, Object> map = concertAction.concertList(request);
 			// 여러 개의 데이터를 묶어서 저장할 때는
 			// addObject를 사용하지 않고 Map을 저장할 수
 			// 있습니다.
@@ -50,12 +51,47 @@ public class ConcertController {
 		return mav;
 	}
 
-
-	@RequestMapping(value = "/concert_detail.box", method = RequestMethod.GET)
-	public String detail(Locale locale, Model model) {
-
-		return "concert/concert_detail";
+//	@RequestMapping(value = "/concert_detail.box", method = RequestMethod.GET)
+//	public String detail(Locale locale, Model model) {
+//	
+//		return "concert/concert_detail";
+//	}
+	
+	/*--------------------디테일페이지--------------------------*/
+	
+	
+//	@Autowired
+//	private ConcertBoardAction concertboardAction;
+	
+	@RequestMapping("/concert_detail.box")
+	public ModelAndView getConcertDetail(int concert_num, HttpSession session) throws Exception {
+		ModelAndView mav = new ModelAndView();
+//		// 로그인 정보를 확인해서 로그인 안되어
+//		// 있으면 로그인 페이지로 이동
+//		if (session.getAttribute("member") == null) {
+//			mav.setViewName("/member/login");
+//		} else {
+			ConcertBean dto = concertAction.concertDetail(concert_num);
+//			List<Map<String, Object>> list = replyListAction.getReplyList(num);
+			// 데이터를 저장
+			mav.addObject("concertdata", dto);
+//			mav.addObject("replydata", list);
+			// 출력할 뷰 파일 설정
+			mav.setViewName("/concert/concert_detail");
+//		}
+		return mav;
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 	@RequestMapping(value = "/book.box", method = RequestMethod.GET)
 	public String book(Locale locale, Model model) {

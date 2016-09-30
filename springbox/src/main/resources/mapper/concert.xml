@@ -17,7 +17,7 @@
 	<select id="concert_detail" parameterType="Integer"
 		resultType="com.naver.springbox.dto.ConcertBean">
 		<![CDATA[
-		select * from concert where concert_num=#{num}
+		select * from concert where concert_num=#{concert_num}
 		]]>
 	</select>
 	

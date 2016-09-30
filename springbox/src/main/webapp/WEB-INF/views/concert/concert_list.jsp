@@ -23,7 +23,7 @@
 
 				<c:set var="i" value="${i+1}" />
 
-				<td><a href="concert_detail.box"> 
+				<td><a href="concert_detail.box?concert_num=${b.concert_num}"> 
 				<img src="<c:url value='/img/${b.posterfilepath}'/>" alt=""></a> <br>
 					<c:out value="${b.concert_title}" /> <br></td>
 
