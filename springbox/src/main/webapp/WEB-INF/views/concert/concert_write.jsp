@@ -16,9 +16,8 @@
 <body>
 
 	<h4 align="center">추천공연 등록하기</h4>
-
-
-	<form action="./concert_write.box" method="post"
+	
+	<form action="./concert_add.box" method="post"
 		enctype="multipart/form-data" name="concertform">
 
 		<table align="center">
@@ -39,11 +38,11 @@
 				<td style="font-family: 돋음; font-size: 12" height="16">
 					<div align="center">시작날짜</div>
 				</td>
-				<td><input name="concert_startdate" type="text" size="4"
+				<td><input name="concert_startdate1" type="text" size="4"
 					maxlength="100" value="" />&nbsp;/
-					<input name="concert_startdate" type="text" size="02"
+					<input name="concert_startdate2" type="text" size="02"
 					maxlength="100" value="" />&nbsp;/
-					<input name="concert_startdate" type="text" size="02"
+					<input name="concert_startdate3" type="text" size="02"
 					maxlength="100" value="" />
 					</td>
 			</tr>
@@ -52,11 +51,11 @@
 				<td style="font-family: 돋음; font-size: 12" height="16">
 					끝나는 날짜
 				</td>
-				<td><input name="concert_startdate" type="text" size="4"
+				<td><input name="concert_enddate1" type="text" size="4"
 					maxlength="100" value="" />&nbsp;/
-					<input name="concert_startdate" type="text" size="02"
+					<input name="concert_enddate2" type="text" size="02"
 					maxlength="100" value="" />&nbsp;/
-					<input name="concert_startdate" type="text" size="02"
+					<input name="concert_enddate3" type="text" size="02"
 					maxlength="100" value="" />
 					</td>
 			</tr>
@@ -66,6 +65,14 @@
 					공연장소
 				</td>
 				<td><input name="concert_place" type="text" size="50"
+					maxlength="100" value="" /></td>
+			</tr>
+			
+			<tr>
+				<td colspan=2 style="font-family: 돋음; font-size: 12" height="16">
+					출연자
+				</td>
+				<td><input name="concert_artist" type="text" size="50"
 					maxlength="100" value="" /></td>
 			</tr>
 

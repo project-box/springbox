@@ -12,6 +12,7 @@ public class ConcertBean {
 	private String concert_artist;
 	private float locationx;
 	private float locationy;
+	private String concert_price;
 	
 	
 	public int getConcert_num() {
@@ -67,6 +68,12 @@ public class ConcertBean {
 	}
 	public void setLocationy(float locationy) {
 		this.locationy = locationy;
+	}
+	public String getConcert_price() {
+		return concert_price;
+	}
+	public void setConcert_price(String concert_price) {
+		this.concert_price = concert_price;
 	}
 	
 	

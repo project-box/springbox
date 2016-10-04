@@ -1,5 +1,9 @@
 package com.naver.springbox.service;
 
+import java.io.File;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,15 +15,74 @@ import org.springframework.stereotype.Service;
 
 import com.naver.springbox.dao.ConcertDao;
 import com.naver.springbox.dto.ConcertBean;
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 @Service
 public class ConcertAction {
 
 	@Autowired
 	private ConcertDao concertDao;
+
+	/*--------------공연 등록--------------------------------------*/
+
+	public boolean add(ConcertBean dto, HttpServletRequest request)  {
+		// 실제 파일 업로드 처리
+		// 업로드할 폴더의 경로를 생성
+		String realFolder = request.getSession().getServletContext()
+				.getRealPath("img");
+		
+		int fileSize = 5 * 1024 * 1024;
+		
+		try {
+			
+			MultipartRequest multi = null;
+	
+		multi = new MultipartRequest(request, realFolder, fileSize, "utf-8", new DefaultFileRenamePolicy());
+
+		DateFormat sdFormat = new SimpleDateFormat("MM/dd/yyyy");
+		String d1 = multi.getParameter("concert_startdate1").trim();
+		String d2 = multi.getParameter("concert_startdate2").trim();		
+		String d3 = multi.getParameter("concert_startdate3").trim();
+		String t1 = multi.getParameter("concert_enddate1").trim();
+		String t2 = multi.getParameter("concert_enddate2").trim();
+		String t3 = multi.getParameter("concert_enddate3").trim();
+		
+		String d = d2 +"/"+ d3 + "/" + d1;
+		
+		System.out.println(d);		
+		
+		String t = t2 +"/"+ t3 + "/" + t1;
+		
+		System.out.println(t);
+		
+		Date pDate = sdFormat.parse(d);
+		Date pDate2 = sdFormat.parse(t);
+		
+		dto.setConcert_place(multi.getParameter("concert_place").trim());
+		dto.setConcert_startdate(pDate);
+		dto.setConcert_enddate(pDate2);		
+		dto.setConcert_title(multi.getParameter("concert_title").trim());
+		dto.setPosterfilepath(multi.getFilesystemName((String) multi.getFileNames().nextElement()));
+		dto.setConcert_artist(multi.getParameter("concert_artist").trim());	
+		dto.setLocationx(Float.parseFloat(multi.getParameter("locationx").trim()));
+		dto.setLocationy(Float.parseFloat(multi.getParameter("locationy").trim()));
+		dto.setConcert_price(multi.getParameter("concert_price").trim());
+		
+		
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}	
+
+		// 데이터 삽입
+		boolean r = concertDao.insertConcert(dto);
+
+		return r;
+	}
 	
 	
-/*----------------콘서트 목록 서비스----------------------------*/
+	
+	/*----------------콘서트 목록 서비스----------------------------*/
 
 	// HttpServletRequest를 매개변수로 받아서
 	// 작업을 수행
@@ -47,8 +110,8 @@ public class ConcertAction {
 
 		// 데이터 가져오기
 		List<ConcertBean> list = concertDao.getConcertList(map);
-//		List<ConcertBean> list = concertDao.getConcertList();
-		
+		// List<ConcertBean> list = concertDao.getConcertList();
+
 		// 전체 데이터 개수 가져오기
 		int listcount = concertDao.getConcertListCount();
 
@@ -74,12 +137,12 @@ public class ConcertAction {
 		return resultMap;
 
 	}
-	
-/*----------------디테일 서비스----------------------------*/
+
+	/*----------------디테일 서비스----------------------------*/
 	public ConcertBean concertDetail(int concert_num) throws Exception {
 		ConcertBean dto = concertDao.getConcertDetail(concert_num);
 
 		return dto;
 	}
-	
+
 }

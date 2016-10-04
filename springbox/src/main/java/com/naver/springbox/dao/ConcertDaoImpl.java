@@ -15,6 +15,18 @@ public class ConcertDaoImpl implements ConcertDao {
 
 	@Autowired
 	private SqlSession sqlSession;
+	
+
+	@Override	
+	@Transactional// 메소드 수행 중에 예외가 발생하면 rollback 그렇지 않으면 commit
+	public boolean insertConcert(ConcertBean dto) {
+		int r = sqlSession.insert("concert.concert_add", dto);
+		if (r > 0)
+			return true;
+		else
+			return false;
+	}
+
 
 	@Override
 	@Transactional // 메소드 수행 중에 예외가 발생하면 rollback 그렇지 않으면 commit
@@ -31,6 +43,8 @@ public class ConcertDaoImpl implements ConcertDao {
 	// public List<ConcertBean> getConcertList() {
 	// return sqlSession.selectList("concert.concert_list");
 	// }
+
+	
 
 	@Override
 	public int getConcertListCount() {
