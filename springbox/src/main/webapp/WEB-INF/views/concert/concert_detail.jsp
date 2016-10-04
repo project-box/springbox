@@ -15,6 +15,7 @@
 
 <a href="book.box"><button type="button">예매하기</button></a>
 <a href="concert_list.box">클릭 하면 리스트로</a>
+<a href="concert_delete.box?num=${concertdata.concert_num}">[삭제]</a>
 
 
 <h3>${concertdata.concert_title}</h3>

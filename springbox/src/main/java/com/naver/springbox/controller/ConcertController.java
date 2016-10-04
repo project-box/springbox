@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.naver.springbox.dao.ConcertDao;
@@ -106,15 +107,23 @@ public class ConcertController {
 		return mav;
 	}
 	
+	/*----------------------------목록 삭제(관리자)-------------------------*/
 	
-	
-	
-	
-	
-	
-	
-	
-	
+	@RequestMapping("/concert_delete.box")
+	public ModelAndView getConcertDelete(@RequestParam("num") int num,
+			HttpSession session) {
+		ModelAndView mav = new ModelAndView();		
+		
+		boolean r = (concertAction).concertDelete(num);
+		System.out.println("들어옴");
+		if (r) {
+			mav.setViewName("redirect:concert_list.box");
+		} else {
+			mav.setViewName("index");
+		}
+		
+		return mav;
+	}
 	
 	
 	

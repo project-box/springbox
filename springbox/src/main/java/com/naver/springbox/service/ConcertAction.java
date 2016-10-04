@@ -144,5 +144,18 @@ public class ConcertAction {
 
 		return dto;
 	}
+	
+	/* -------------------------목록 삭제-------------------------*/
+	
+	public boolean concertDelete(int num) {
+		System.out.println("들어옴2");
+		
+		return concertDao.deleteConcert(num);
+	}
+	
+	
+	
+	
+	
 
 }

@@ -15,10 +15,9 @@ public class ConcertDaoImpl implements ConcertDao {
 
 	@Autowired
 	private SqlSession sqlSession;
-	
 
-	@Override	
-	@Transactional// 메소드 수행 중에 예외가 발생하면 rollback 그렇지 않으면 commit
+	@Override
+	@Transactional // 메소드 수행 중에 예외가 발생하면 rollback 그렇지 않으면 commit
 	public boolean insertConcert(ConcertBean dto) {
 		int r = sqlSession.insert("concert.concert_add", dto);
 		if (r > 0)
@@ -26,7 +25,6 @@ public class ConcertDaoImpl implements ConcertDao {
 		else
 			return false;
 	}
-
 
 	@Override
 	@Transactional // 메소드 수행 중에 예외가 발생하면 rollback 그렇지 않으면 commit
@@ -44,15 +42,15 @@ public class ConcertDaoImpl implements ConcertDao {
 	// return sqlSession.selectList("concert.concert_list");
 	// }
 
-	
-
 	@Override
+	@Transactional
 	public int getConcertListCount() {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
+	@Transactional
 	public ConcertBean getConcertDetail(int detail_num) {
 		// TODO Auto-generated method stub
 
@@ -71,6 +69,19 @@ public class ConcertDaoImpl implements ConcertDao {
 			return list.get(0);
 		// }
 
+	}
+
+	@Override
+	@Transactional
+	public boolean deleteConcert(int num) {
+		// TODO Auto-generated method stub
+
+		System.out.println("들어옴3");
+		int r = sqlSession.delete("concert.concert_delete", num);
+		if (r > 0)
+			return true;
+		else
+			return false;
 	}
 
 }
