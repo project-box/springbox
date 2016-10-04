@@ -27,12 +27,12 @@ public class PreferenceAction {
 
 	// 추천곡 목록을 가져오는 메서드(예정)
 	public List<MusicBean> suggestMusic(String userId) {
-		throw new UnsupportedOperationException();
+		return getMusicList(10);
 	}
 
 	// 추천공연 목록을 가져오는 메서드(예정)
 	public List<ConcertBean> suggestConcert(String userId) {
-		throw new UnsupportedOperationException();
+		return getConcertList(10);
 	}
 	
 	// ToDo: try~catch 밑에 null을 리턴하는게 맞는가?
