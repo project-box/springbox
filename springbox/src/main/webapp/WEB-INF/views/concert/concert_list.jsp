@@ -18,9 +18,8 @@
 	<a href="concert_write.box">클릭 하면 글쓰기</a>
 
 	<br>
-	<table cellpadding="15" cellspacing="15">
+	<table cellpadding="15px" cellspacing="15px">
 		<tr>
-
 			<c:forEach var="b" items="${concertlist}">
 
 				<c:set var="i" value="${i+1}" />
