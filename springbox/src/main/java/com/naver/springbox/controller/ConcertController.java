@@ -11,18 +11,43 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.naver.springbox.dao.ConcertDao;
 import com.naver.springbox.dto.ConcertBean;
 import com.naver.springbox.service.ConcertAction;
-
-
 
 @Controller
 public class ConcertController {
 
 	@Autowired
 	private ConcertAction concertAction;
+	
+	
+	/*--------------------글쓰기(관리자)-----------------------*/
+	
+	@RequestMapping(value = "/concert_write.box", method = RequestMethod.GET)
+	public String concertWrite(Locale locale, Model model) {
+
+		return "concert/concert_write";
+	}
+	
+/*--------------------추천공연 등록---------------------*/
+
+	@RequestMapping("concert_add.box")
+	public ModelAndView writeBoard(ConcertBean dto, HttpServletRequest request) {
+		ModelAndView mav = new ModelAndView();
+		boolean r = concertAction.add(dto, request);
+		if (r) {
+			// 목록보기로 리다이렉트
+			mav.setViewName("redirect:concert_list.box");
+		} else {
+			// 글쓰기 페이지로 포워딩
+			mav.setViewName("concert/concert_write");
+		}
+		return mav;
+	}
 	
 	
 //	@RequestMapping(value = "/concert_list.box", method = RequestMethod.GET)
@@ -82,13 +107,23 @@ public class ConcertController {
 		return mav;
 	}
 	
+	/*----------------------------목록 삭제(관리자)-------------------------*/
 	
-	
-	
-	
-	
-	
-	
+	@RequestMapping("/concert_delete.box")
+	public ModelAndView getConcertDelete(@RequestParam("num") int num,
+			HttpSession session) {
+		ModelAndView mav = new ModelAndView();		
+		
+		boolean r = (concertAction).concertDelete(num);
+		System.out.println("들어옴");
+		if (r) {
+			mav.setViewName("redirect:concert_list.box");
+		} else {
+			mav.setViewName("index");
+		}
+		
+		return mav;
+	}
 	
 	
 	

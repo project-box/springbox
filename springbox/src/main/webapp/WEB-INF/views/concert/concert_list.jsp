@@ -14,17 +14,19 @@
 <body>
 
 	추천공연 게시판 리스트
+	
+	<a href="concert_write.box">클릭 하면 글쓰기</a>
 
 	<br>
-	<table>
+	<table cellpadding="15px" cellspacing="15px">
 		<tr>
-
 			<c:forEach var="b" items="${concertlist}">
 
 				<c:set var="i" value="${i+1}" />
 
-				<td><a href="concert_detail.box?concert_num=${b.concert_num}"> 
-				<img src="<c:url value='/img/${b.posterfilepath}'/>" alt=""></a> <br>
+				<td width="250" height="500" valign="top" >
+				<a href="concert_detail.box?concert_num=${b.concert_num}"> 
+				<img width="250" src="<c:url value='/img/${b.posterfilepath}'/>" alt=""></a> <br><br>
 					<c:out value="${b.concert_title}" /> <br></td>
 
 				<c:if test="${i % 4 == 0}">

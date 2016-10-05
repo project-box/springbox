@@ -5,14 +5,15 @@ import java.util.Date;
 public class ConcertBean {
 	private int concert_num;
 	private String concert_place;
-	private Date startdate;
-	private Date enddate;
-	private String showtime;
+	private Date concert_startdate;
+	private Date concert_enddate;
 	private String concert_title;
 	private String posterfilepath;
 	private String concert_artist;
 	private float locationx;
 	private float locationy;
+	private String concert_price;
+	
 	
 	public int getConcert_num() {
 		return concert_num;
@@ -26,23 +27,17 @@ public class ConcertBean {
 	public void setConcert_place(String concert_place) {
 		this.concert_place = concert_place;
 	}
-	public Date getStartdate() {
-		return startdate;
+	public Date getConcert_startdate() {
+		return concert_startdate;
 	}
-	public void setStartdate(Date startdate) {
-		this.startdate = startdate;
+	public void setConcert_startdate(Date concert_startdate) {
+		this.concert_startdate = concert_startdate;
 	}
-	public Date getEnddate() {
-		return enddate;
+	public Date getConcert_enddate() {
+		return concert_enddate;
 	}
-	public void setEnddate(Date enddate) {
-		this.enddate = enddate;
-	}
-	public String getShowtime() {
-		return showtime;
-	}
-	public void setShowtime(String showtime) {
-		this.showtime = showtime;
+	public void setConcert_enddate(Date concert_enddate) {
+		this.concert_enddate = concert_enddate;
 	}
 	public String getConcert_title() {
 		return concert_title;
@@ -74,6 +69,14 @@ public class ConcertBean {
 	public void setLocationy(float locationy) {
 		this.locationy = locationy;
 	}
+	public String getConcert_price() {
+		return concert_price;
+	}
+	public void setConcert_price(String concert_price) {
+		this.concert_price = concert_price;
+	}
+	
+	
 	
 	
 }

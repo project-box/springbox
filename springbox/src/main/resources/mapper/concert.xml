@@ -5,15 +5,25 @@
 
 <mapper namespace="concert">
 
+	<!-- 공연목록 등록 -->
+	
+	<insert id="concert_add" parameterType="com.naver.springbox.dto.ConcertBean">
+		insert into concert
+		values(concert_seq.nextval,#{concert_place},
+		#{concert_startdate},#{concert_enddate},#{concert_title},
+		#{posterfilepath},#{concert_artist},#{locationx},#{locationy},#{concert_price})
+	</insert> 
+
+
 	<!-- 콘서트 리스트 -->
 	<select id="concert_list" resultType="com.naver.springbox.dto.ConcertBean">
 	    <![CDATA[
 			select * from concert
 		]]>
 	</select>
-	
+
 	<!-- 정수 1개를 받아서 concert 테이블에서 concert_num과 일치하는 데이터를 찾아서 모든 컬럼을 ConcertBean 
-		타입으로 리턴하는 sql -->		
+		타입으로 리턴하는 sql -->
 	<select id="concert_detail" parameterType="Integer"
 		resultType="com.naver.springbox.dto.ConcertBean">
 		<![CDATA[
@@ -21,4 +31,13 @@
 		]]>
 	</select>
 	
+	
+	<!-- 게시물 삭제 -->
+	<delete id="concert_delete" parameterType="int">
+		delete from concert where
+		concert_num=#{concert_num}
+	</delete>
+	
+	
+
 </mapper>
