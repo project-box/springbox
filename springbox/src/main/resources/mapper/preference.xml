@@ -34,4 +34,40 @@
 		]]>
 	</select>
 	
+	
+	
+	<!-- 선호도(추천) 곡, 공연 관련 SQL 들...  -->
+	
+	<!-- 선호도 곡 목록의 데이터 개수를 리턴해주는 sql -->
+	<select id="count_preference_music_list" resultType="Integer">
+		select count(*)	from music
+	</select>
+	
+	<!-- 선호도 공연 목록의 데이터 개수를 리턴해주는 sql -->
+	<select id="count_preference_concert_list" resultType="Integer">
+		select count(*)	from concert
+	</select>
+	
+	<!-- 선호도 곡 목록-->
+	<select id="preference_music_list" parameterType="java.util.Map" resultType="com.naver.springbox.dto.MusicBean">
+	    <![CDATA[
+		select * from 
+		  (select rownum rnum,music_num,music_genre,music_artist,
+		  music_title,music_album,music_publishdate,albumcoverfilepath,music_lyrics
+		  from (select * from music order by music_publishdate desc))
+		  where rnum >= #{start} and rnum <= #{end} 
+		]]>
+	</select>
+	
+	<!-- 선호도 공연 목록 -->
+	<select id="preference_concert_list" parameterType="java.util.Map" resultType="com.naver.springbox.dto.ConcertBean">
+		<![CDATA[
+		select * from 
+			(select rownum rnum,concert_num,concert_title,concert_place,concert_startdate,concert_enddate,
+					  posterfilepath,concert_artist,locationx,locationy,concert_price
+					  from (select * from concert order by concert_startdate desc))
+		      where rnum >= #{start} and rnum <= #{end}
+		]]>
+	</select>
+	
 </mapper>
