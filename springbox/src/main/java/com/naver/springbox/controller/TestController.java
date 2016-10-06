@@ -1,5 +1,10 @@
 package com.naver.springbox.controller;
 
+import static org.junit.Assert.assertEquals;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.junit.Test;
@@ -8,8 +13,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import static org.junit.Assert.assertEquals;
 
+import com.naver.springbox.dao.PreferenceDao;
+import com.naver.springbox.dto.MemberBean;
+import com.naver.springbox.dto.MusicBean;
 import com.naver.springbox.service.PreferenceAction;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -20,6 +27,9 @@ public class TestController {
 	@Autowired
 	private PreferenceAction preferenceAction;
 	
+	@Autowired
+	private PreferenceDao preferenceDao;
+	
 	@Test
     public void test(){
 		
@@ -28,6 +38,37 @@ public class TestController {
 		
 		Map map = preferenceAction.suggestMusic("abraham", request);
 		
-		assertEquals(map, 1);
+		//assertEquals(map, 1);
+		
+		List<MusicBean> list = (List<MusicBean>)map.get("musiclist");
+		
+		for(MusicBean music : list){
+			System.out.println(music.getMusic_title());
+		}
     }
+	
+	//@Test
+	public void testPreferenceMusic(){
+		List<MemberBean> list = preferenceDao.getPreferenceMemberList("abraham");
+		List<String> userList = new ArrayList<String>();
+		
+		for(MemberBean member : list){
+			System.out.println(member.getUser_id());
+			userList.add(member.getUser_id());
+		}
+		
+		Map map = new HashMap<String, Object>();
+		map.put("userList", userList);
+		map.put("start", 1);
+		map.put("end", 10);
+		
+		List<MusicBean> musicList = preferenceDao.getPreferenceMusicList2(map);
+		
+		for(MusicBean music : musicList){
+			System.out.println(music.getMusic_title());
+		}
+		
+		int count = preferenceDao.getPreferenceMusicCount(map);
+		System.out.println("추천곡 카운트: " + count);
+	}
 }

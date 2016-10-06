@@ -1,5 +1,6 @@
 package com.naver.springbox.service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import com.naver.springbox.dao.PreferenceDao;
 import com.naver.springbox.dto.ConcertBean;
+import com.naver.springbox.dto.MemberBean;
 import com.naver.springbox.dto.MusicBean;
 import com.naver.springbox.dto.PreferenceBean;
 
@@ -29,7 +31,7 @@ public class PreferenceAction {
 		}
 	}
 
-	// 추천곡 목록을 가져오는 메서드(추천 알고리즘 변경 예정)
+	// 추천곡 목록을 가져오는 메서드
 	public Map<String, Object> suggestMusic(String userId, HttpServletRequest request) {
 		
 		// 기본적으로 사용할 페이지 번호 설정
@@ -45,18 +47,35 @@ public class PreferenceAction {
 		// page와 limit을 이용해서 시작하는 데이터 번호와
 		// 끝나는 번호를 계산
 		// page=1 start=01, page=2 start=11, page=3 start=21
+		
 		int start = (page - 1) * limit + 1;
 		int end = start + limit - 1;
 		// 위 2개의 값을 Map을 생성해서 start와 end라는
 		// 키로 저장
 		Map<String, Object> map = new HashMap<String, Object>();
+
+		// 로그인 사용자에 따른 추천곡을 가져오기 위한 코드
+		// 1. 로그인 사용자와 취향이 유사한 사용자들을 조회한다. 
+		List<MemberBean> memberList = preferenceDao.getPreferenceMemberList(userId);
+		List<String> userList = new ArrayList<String>();
+		
+		for(MemberBean member : memberList){
+			userList.add(member.getUser_id());
+		}
+		
+		map.put("userList", userList);
 		map.put("start", start);
 		map.put("end", end);
-
+		
+		// 2. 사용자들을 통해 선호도가 높은 곡들을 가져온다.
+		List<MusicBean> list = preferenceDao.getPreferenceMusicList2(map);
+		
 		// 데이터 가져오기
-		List<MusicBean> list = preferenceDao.getPreferenceMusicList(map);
+		//List<MusicBean> list = preferenceDao.getPreferenceMusicList(map);
+		
 		// 전체 데이터 개수 가져오기
-		int listcount = preferenceDao.getPreferenceMusicCount();
+		//int listcount = preferenceDao.getPreferenceMusicCount();
+		int listcount = preferenceDao.getPreferenceMusicCount(map);
 
 		// 가장 큰 페이지 번호 계산
 		int maxpage = (int) ((double) listcount / limit + 0.95);

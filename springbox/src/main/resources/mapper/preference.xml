@@ -70,4 +70,66 @@
 		]]>
 	</select>
 	
+	<!-- 가장 취향이 비슷한 사람을 줄 세우는 쿼리 -->
+	<select id="preference_member_list" parameterType="String" resultType="com.naver.springbox.dto.MemberBean">
+		<![CDATA[
+		select user_id, music_count from(
+			select user_id, music_count, rownum rnum from( -- 카운트
+			select user_id, count(music_num) as music_count -- 통계
+			from preference 
+			  where music_num in 
+			  (select music_num from preference where user_id = #{userId} and rate >= 3.5)
+			  and user_id != #{userId}
+			group by user_id
+			order by music_count desc)
+			) where rnum <= 3
+		]]>
+	</select>
+	
+	<!-- 사용자 선호도에 따른 음악 검색 -->
+	<select id="preference_music_list2" parameterType="java.util.Map" resultType="com.naver.springbox.dto.MusicBean">
+		<![CDATA[
+		select * from 
+			(select rownum rnum,music_num,music_genre,music_artist,
+			music_title,music_album,music_publishdate,albumcoverfilepath,music_lyrics from
+				(select distinct music.music_num,music_genre,music_artist,
+				music_title,music_album,music_publishdate,albumcoverfilepath,music_lyrics,rate
+				from preference, music
+				where preference.music_num = music.music_num
+				and user_id in
+				]]> 
+				<foreach collection="userList" item="item" open="(" separator="," close=")">
+		            #{item}
+		        </foreach>
+				
+				<![CDATA[
+				and rate >= 3.5
+				)
+			)
+			where rnum >= #{start} and rnum <= #{end}
+		]]>
+	</select>
+	
+	<!-- 사용자 선호도에 따른 음악 검색(카운트) -->
+	<select id="preference_music_count" parameterType="java.util.Map" resultType="Integer">
+		<![CDATA[
+		select count(*) from 
+			(select rownum rnum,music_num,music_genre,music_artist,
+			music_title,music_album,music_publishdate,albumcoverfilepath,music_lyrics from
+				(select distinct music.music_num,music_genre,music_artist,
+				music_title,music_album,music_publishdate,albumcoverfilepath,music_lyrics,rate
+				from preference, music
+				where preference.music_num = music.music_num
+				and user_id in
+				]]> 
+				<foreach collection="userList" item="item" open="(" separator="," close=")">
+		            #{item}
+		        </foreach>
+				
+				<![CDATA[
+				and rate >= 3.5
+				)
+			)
+		]]>
+	</select>
 </mapper>
