@@ -89,22 +89,25 @@
 	<!-- 사용자 선호도에 따른 음악 검색 -->
 	<select id="preference_music_list2" parameterType="java.util.Map" resultType="com.naver.springbox.dto.MusicBean">
 		<![CDATA[
-		select * from 
-			(select rownum rnum,music_num,music_genre,music_artist,
-			music_title,music_album,music_publishdate,albumcoverfilepath,music_lyrics from
-				(select distinct music.music_num,music_genre,music_artist,
-				music_title,music_album,music_publishdate,albumcoverfilepath,music_lyrics,rate
-				from preference, music
-				where preference.music_num = music.music_num
-				and user_id in
-				]]> 
+			select * from 
+			(select rownum rnum, music_num,music_genre,music_artist,
+			music_title,music_album,music_publishdate,albumcoverfilepath,music_lyrics from 
+			  (select music.music_num,music_genre,music_artist,
+			  music_title,music_album,music_publishdate,albumcoverfilepath,music_lyrics
+			  from 
+			  ( -- 음악과 선호도를 조인하면 중복 튜플이 생기므로 조인하기 전에 선호도를 그룹핑한다
+			    select music_num from preference
+			    where user_id in 
+			    ]]> 
 				<foreach collection="userList" item="item" open="(" separator="," close=")">
 		            #{item}
 		        </foreach>
-				
-				<![CDATA[
-				and rate >= 3.5
-				)
+				<![CDATA[ 
+			    and rate >= 3.5
+			    group by music_num
+			  )P, music
+			  where P.music_num = music.music_num
+			  )
 			)
 			where rnum >= #{start} and rnum <= #{end}
 		]]>
@@ -113,22 +116,25 @@
 	<!-- 사용자 선호도에 따른 음악 검색(카운트) -->
 	<select id="preference_music_count" parameterType="java.util.Map" resultType="Integer">
 		<![CDATA[
-		select count(*) from 
-			(select rownum rnum,music_num,music_genre,music_artist,
-			music_title,music_album,music_publishdate,albumcoverfilepath,music_lyrics from
-				(select distinct music.music_num,music_genre,music_artist,
-				music_title,music_album,music_publishdate,albumcoverfilepath,music_lyrics,rate
-				from preference, music
-				where preference.music_num = music.music_num
-				and user_id in
-				]]> 
+			select count(*) from 
+			(select rownum rnum, music_num,music_genre,music_artist,
+			music_title,music_album,music_publishdate,albumcoverfilepath,music_lyrics from 
+			  (select music.music_num,music_genre,music_artist,
+			  music_title,music_album,music_publishdate,albumcoverfilepath,music_lyrics
+			  from 
+			  ( -- 음악과 선호도를 조인하면 중복 튜플이 생기므로 조인하기 전에 선호도를 그룹핑한다
+			    select music_num from preference
+			    where user_id in 
+			    ]]> 
 				<foreach collection="userList" item="item" open="(" separator="," close=")">
 		            #{item}
 		        </foreach>
-				
-				<![CDATA[
-				and rate >= 3.5
-				)
+				<![CDATA[ 
+			    and rate >= 3.5
+			    group by music_num
+			  )P, music
+			  where P.music_num = music.music_num
+			  )
 			)
 		]]>
 	</select>
