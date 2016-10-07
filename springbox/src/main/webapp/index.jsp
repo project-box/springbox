@@ -9,7 +9,7 @@
 </head>
 <body>
 	<h1>샘플페이지</h1>
-	<a href="music_sample.box">음악</a>
+	<a href="music_list.box">음악</a>
 	<a href="concert_list.box">콘서트</a>
 	<a href="theme_sample.box">테마곡</a>
 	<a href="member_sample.box">멤버</a>
