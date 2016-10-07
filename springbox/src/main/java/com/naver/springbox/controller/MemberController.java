@@ -91,4 +91,9 @@ public class MemberController {
 		
 		return "redirect:main.box";
 	}
+	
+	@RequestMapping(value = "/mypage.box")
+	public String myPage(){
+		return "member/mypage";
+	}
 }
