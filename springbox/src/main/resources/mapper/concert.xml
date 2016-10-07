@@ -38,6 +38,12 @@
 		concert_num=#{concert_num}
 	</delete>
 	
+	<!-- 후기 등록 -->
 	
+	<insert id="concertboard_add" parameterType="com.naver.springbox.dto.ConcertBoardBean">
+		insert into concertboard
+		values(concertboard_seq.nextval,#{concert_num},
+		#{concertboard_content},#{user_id},sysdate)
+	</insert> 
 
 </mapper>

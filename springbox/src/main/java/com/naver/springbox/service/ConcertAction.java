@@ -1,6 +1,5 @@
 package com.naver.springbox.service;
 
-import java.io.File;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -9,12 +8,17 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.naver.springbox.dao.ConcertDao;
 import com.naver.springbox.dto.ConcertBean;
+import com.naver.springbox.dto.ConcertBoardBean;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
@@ -154,8 +158,25 @@ public class ConcertAction {
 	}
 	
 	
+	/*--------------후기 등록--------------------------------------*/
 	
-	
-	
+	public boolean concertboardadd(HttpServletRequest request) {
+		// 파라미터 가져오기
+		int num = Integer.parseInt(request.getParameter("concert_num"));
+		String content = request.getParameter("concertboard_content");
+		// 세션 가져오기
+		HttpSession session = request.getSession();
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		map.put("concert_num", num);
+		map.put("user_id", session);
+		map.put("concertboard_content", content);		
+		
+		return concertDao.insertConcertBoard(map);
+		
+	}
 
+	
+	
 }

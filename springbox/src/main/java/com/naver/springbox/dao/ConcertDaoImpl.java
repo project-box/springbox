@@ -26,6 +26,7 @@ public class ConcertDaoImpl implements ConcertDao {
 			return false;
 	}
 
+	
 	@Override
 	@Transactional // 메소드 수행 중에 예외가 발생하면 rollback 그렇지 않으면 commit
 	public List<ConcertBean> getConcertList(Map<String, Object> map) {
@@ -83,5 +84,20 @@ public class ConcertDaoImpl implements ConcertDao {
 		else
 			return false;
 	}
+	
+	@Override
+	@Transactional
+	public boolean insertConcertBoard(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		
+		int r = sqlSession.insert("concert.concertboard_add", map);
+		
+		if (r > 0)
+			return true;
+		else
+			return false;
+	}
 
+	
+	
 }

@@ -1,5 +1,6 @@
 package com.naver.springbox.controller;
 
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
@@ -14,8 +15,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.naver.springbox.dao.ConcertDao;
 import com.naver.springbox.dto.ConcertBean;
+import com.naver.springbox.dto.ConcertBoardBean;
 import com.naver.springbox.service.ConcertAction;
 
 @Controller
@@ -139,5 +140,29 @@ public class ConcertController {
 
 		return "concert/book_list";
 	}
+	
+	
+	/*-----------------------후기 등록-----------------------------------*/
+	
+	@RequestMapping("/concertboard_add.box")
+	public ModelAndView getConcertBoardAdd(HttpServletRequest request) {
+		ModelAndView mav = new ModelAndView();
+		
+			// 데이터 삽입
+	        	concertAction.concertboardadd(request);
+			// 삽입에 실패했을 때 목록보기로 이동
+			
+				// 상세보기 수행
+				// 글번호가져오기
+				int num = Integer.parseInt(request.getParameter("concert_num"));
+				// redirect 할 때는 출력할 파일이름을
+				// 직접 사용하지 않고 요청 주소를 이용합니다.
+				mav.setViewName("redirect:concert_detail.box?concert_num="+num);
+
+			
+	
+		return mav;
+	}
+	
 
 }

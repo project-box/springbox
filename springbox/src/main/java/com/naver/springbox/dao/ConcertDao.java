@@ -26,13 +26,15 @@ public interface ConcertDao {
 //		
 	// 데이터를 삽입하는 메소드
 	public boolean insertConcert(ConcertBean dto);
-	
+
 	/*
 	// 데이터를 갱신하는 메소드
 	public boolean updateConcert(Map<String, Object> map);*/
 
 	// 정수 1개를 받아서 데이터를 삭제하는 메소드
 	public boolean deleteConcert(int num);
+	
+	public boolean insertConcertBoard(Map<String, Object> map);
 
 
 }

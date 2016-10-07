@@ -108,7 +108,7 @@
 		<br> <b>관람후기 보기</b><br> <br>
 		<form action="./concertboard_add.box" method="post" name="concertboardform">
         <input type="hidden" name="concert_num" value="${concertdata.concert_num}"/>
-        <input type="hidden" name="user_id" value="${sessionScope.loginId}" />
+        <%-- <input type="hidden" name="user_id" value="${sessionScope.loginId}" /> --%>
         <table align="center" border="0" width="550">
         <tr>
         <td>
