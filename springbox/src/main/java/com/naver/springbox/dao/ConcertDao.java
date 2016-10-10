@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.naver.springbox.dto.ConcertBean;
+import com.naver.springbox.dto.ConcertBoardBean;
 
 
 public interface ConcertDao {
@@ -33,8 +34,15 @@ public interface ConcertDao {
 
 	// 정수 1개를 받아서 데이터를 삭제하는 메소드
 	public boolean deleteConcert(int num);
+
+	public boolean insertConcertboard(ConcertBoardBean dto);
+
+	public List<ConcertBoardBean> getConcertBoardList(int num);
+
 	
-	public boolean insertConcertBoard(Map<String, Object> map);
+	
+	
+	
 
 
 }

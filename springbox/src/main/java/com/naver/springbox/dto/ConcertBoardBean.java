@@ -4,7 +4,7 @@ import java.util.Date;
 
 public class ConcertBoardBean {
 	private int concertboard_num;
-	private String concert_num;
+	private int concert_num;
 	private String concertboard_content;
 	private String user_id;
 	private Date concertboard_registerdate;
@@ -16,10 +16,10 @@ public class ConcertBoardBean {
 	public void setConcertboard_num(int concertboard_num) {
 		this.concertboard_num = concertboard_num;
 	}
-	public String getConcert_num() {
+	public int getConcert_num() {
 		return concert_num;
 	}
-	public void setConcert_num(String concert_num) {
+	public void setConcert_num(int concert_num) {
 		this.concert_num = concert_num;
 	}
 	public String getConcertboard_content() {

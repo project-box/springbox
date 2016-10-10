@@ -142,7 +142,7 @@ public class PreferenceAction {
 
 				resultMap.put("page", page);
 				resultMap.put("listcount", listcount);
-				resultMap.put("musiclist", list);
+				resultMap.put("concertlist", list);
 				resultMap.put("maxpage", maxpage);
 				resultMap.put("startpage", startpage);
 				resultMap.put("endpage", endpage);

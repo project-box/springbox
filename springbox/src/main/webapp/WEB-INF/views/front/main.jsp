@@ -195,7 +195,7 @@
 					<div class="row">
 						<div class="col-lg-12">
 							<h1 class="page-header">
-								추천공연 <small> <a href="ConcertList.box" aria-label="Skip to main navigation" title="추천공연 전체 목록"> 
+								추천공연 <small> <a href="concert_list.box" aria-label="Skip to main navigation" title="추천공연 전체 목록"> 
 								<i class="fa fa-bars" aria-hidden="true"></i>
 								</a>
 								</small>

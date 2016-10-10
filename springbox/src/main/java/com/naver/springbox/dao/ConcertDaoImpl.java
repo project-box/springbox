@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.naver.springbox.dto.ConcertBean;
+import com.naver.springbox.dto.ConcertBoardBean;
 
 @Repository
 public class ConcertDaoImpl implements ConcertDao {
@@ -84,20 +85,34 @@ public class ConcertDaoImpl implements ConcertDao {
 		else
 			return false;
 	}
-	
+
+
 	@Override
 	@Transactional
-	public boolean insertConcertBoard(Map<String, Object> map) {
+	public boolean insertConcertboard(ConcertBoardBean dto) {
 		// TODO Auto-generated method stub
+
+				// 데이터 추가
+				int r = sqlSession.insert("concert.concertboard_add", dto);
+				if (r > 0)
+					return true;
+				else
+					return false;
 		
-		int r = sqlSession.insert("concert.concertboard_add", map);
-		
-		if (r > 0)
-			return true;
-		else
-			return false;
 	}
 
-	
+
+	@Override
+	@Transactional
+	public List<ConcertBoardBean> getConcertBoardList(int num) {
+		// TODO Auto-generated method stub
+		
+		List<ConcertBoardBean> list = sqlSession.selectList(
+				"concert.concertboard_list", num);
+		
+		
+		return list;
+	}
+
 	
 }
