@@ -47,9 +47,21 @@
 	<!-- 후기 목록 -->
 	<select id="concertboard_list" resultType="com.naver.springbox.dto.ConcertBoardBean">
 	    <![CDATA[
-			select * from concertboard
+			select * from concertboard where concert_num=#{num}
 		]]>
 	</select>
+	
+	
+	<!-- 후기 총수 -->
+		<select id="concertboard_count" parameterType="int" resultType="Integer">
+		select count(*)	from concertboard where concert_num=#{num}
+	</select>
+	
+	
+	<!-- 후기 삭제 -->
+	<delete id="concertboard_delete" parameterType="Integer">
+		delete from concertboard where concertboard_num=#{num}
+	</delete>
 	
 	
 

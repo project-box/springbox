@@ -39,6 +39,10 @@ public interface ConcertDao {
 
 	public List<ConcertBoardBean> getConcertBoardList(int num);
 
+	public int getConcertBoardListCount(int num);
+
+	boolean getConcertBoardDelete(int num);
+
 	
 	
 	

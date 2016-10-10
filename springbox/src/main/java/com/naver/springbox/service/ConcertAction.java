@@ -3,12 +3,9 @@ package com.naver.springbox.service;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -180,18 +177,27 @@ public class ConcertAction {
 	/*----------------------후기 목록----------------------------*/
 
 
-	public List<ConcertBoardBean> concertboardList(int num) {
-		List<ConcertBoardBean> list = concertDao.getConcertBoardList(num);
-		
-		
-		
+	public List<ConcertBoardBean> concertboardList(int concert_num) {
+		List<ConcertBoardBean> list = concertDao.getConcertBoardList(concert_num);
+				
 		return list;
 	}
 	
+	/*----------------------후기 카운트-----------------------*/
+
+	public int concertboardListCount(int concert_num) {
 	
+		int listcount = concertDao.getConcertBoardListCount(concert_num);
 	
+	  return listcount ;
+}
 	
+	/*-----------------------후기 삭제---------------------------*/
 	
+	public boolean concertboardDelete(int concertboard_num) {
+		
+	  return concertDao.getConcertBoardDelete(concertboard_num);
+}
 	
-	
+
 }

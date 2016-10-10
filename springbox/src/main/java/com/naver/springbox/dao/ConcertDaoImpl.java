@@ -108,11 +108,34 @@ public class ConcertDaoImpl implements ConcertDao {
 		// TODO Auto-generated method stub
 		
 		List<ConcertBoardBean> list = sqlSession.selectList(
-				"concert.concertboard_list", num);
-		
+				"concert.concertboard_list", num);		
 		
 		return list;
 	}
 
+
+	@Override
+	@Transactional
+	public int getConcertBoardListCount(int num) {
+		// TODO Auto-generated method stub
+				
+		int count = 0;
+		count = ((Integer) sqlSession.selectOne("concert.concertboard_count",num)).intValue();	
+		
+		return count;
+
+	}
+
+	@Override
+	@Transactional// 메소드 수행 중에 예외가 발생하면 rollback 그렇지 않으면 commit
+	public boolean getConcertBoardDelete(int num) {
+		int r = sqlSession.insert("concert.concertboard_delete", num);
+		
+		if (r > 0)
+			return true;
+		else
+			return false;
+	}
+	
 	
 }

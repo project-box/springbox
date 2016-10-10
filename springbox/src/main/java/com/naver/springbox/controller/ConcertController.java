@@ -101,16 +101,19 @@ public class ConcertController {
 	
 	
 //	@Autowired
-//	private ConcertBoardAction concertboardAction;
+//	private ConcertBoardBean concertboardDao;
 	
 	@RequestMapping("/concert_detail.box")
 	public ModelAndView getConcertDetail(int concert_num, HttpSession session) throws Exception {
 		ModelAndView mav = new ModelAndView();
 			ConcertBean dto = concertAction.concertDetail(concert_num);
 			List <ConcertBoardBean> list= concertAction.concertboardList(concert_num);
+			int listcount=concertAction.concertboardListCount(concert_num);
+			
 			// 데이터를 저장
 			mav.addObject("concertdata", dto);
 			mav.addObject("concertboarddata", list);
+			mav.addObject("concertboardlistcount",listcount);
 			// 출력할 뷰 파일 설정
 			mav.setViewName("/concert/concert_detail");
 //		}
@@ -121,7 +124,7 @@ public class ConcertController {
 	/*----------------------------목록 삭제(관리자)-------------------------*/
 	
 	@RequestMapping("/concert_delete.box")
-	public ModelAndView getConcertDelete(@RequestParam("num") int num,
+	public ModelAndView getConcertDelete(int num,
 			HttpSession session) {
 		ModelAndView mav = new ModelAndView();		
 		
@@ -169,13 +172,22 @@ public class ConcertController {
 				int num = Integer.parseInt(request.getParameter("concert_num"));
 				// redirect 할 때는 출력할 파일이름을
 				// 직접 사용하지 않고 요청 주소를 이용합니다.
-				mav.setViewName("redirect:concert_detail.box?concert_num=" + num);
+				mav.setViewName("redirect:concert_detail.box?concert_num=" + num+"&param=123");
 			
 		
 		return mav;
 	}
 	
+/*----------------------------후기 삭제(관리자)-------------------------*/
 	
+	@RequestMapping("/concertboard_delete.box")
+	public String getConcertBoardDelete(int concertboard_num, int concert_num,
+			HttpSession session) {	
+		
+		concertAction.concertboardDelete(concertboard_num);
+
+		return "redirect:concert_detail.box?concert_num=" + concert_num+"&param=123";
+	}
 	
 	
 	
