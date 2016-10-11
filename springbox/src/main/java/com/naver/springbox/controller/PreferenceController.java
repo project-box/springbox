@@ -40,4 +40,24 @@ public class PreferenceController {
 		return mav;
 		//return "front/main";
 	}
+	
+	@RequestMapping(value = "/edit_preference.box", method=RequestMethod.GET)
+	public ModelAndView editPreference(HttpServletRequest request){
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("musiclist", preferenceAction.getMusicList(50));
+		mav.setViewName("preference/preference_list");
+		return mav;
+	}
+	
+	@RequestMapping(value = "/update_preference.box", method=RequestMethod.POST)
+	public ModelAndView updatePreference(HttpServletRequest request){
+		
+		ModelAndView mav = new ModelAndView();
+		
+		System.out.println("선호도 반영!!!");
+		
+		mav.setViewName("redirect:main.box");
+		return mav;
+	}
 }
