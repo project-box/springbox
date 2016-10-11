@@ -1,12 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+<!doctype html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset=UTF-8">
 <title>Insert title here</title>
-
 
 <%@ include file="/WEB-INF/views/front/header.jsp"%>
 
@@ -103,7 +103,6 @@ font {
 	font-size: 13px;
 }
 
-
 .checkbox+label:before {
 	content: "";
 	display: inline-block;
@@ -130,6 +129,19 @@ font {
 	line-height: 12px;
 }
 </style>
+
+<script src="https://code.jquery.com/jquery-latest.js"></script>
+
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <script>
+
+  $( function() {
+	  $("#datepick").datepicker();
+  } );
+
+  </script>
+  
 
 <script language='JavaScript'>
 /* document.write('<st'+'yle>');
@@ -190,7 +202,7 @@ cnj_str+="<td align=center bgcolor='#FAC6C6'><b>" // 오늘 날짜일때 배경�
 cnj_str+="<td align=center >" // 오늘 날짜가 아닐때 배경색 지정
 }
 
-cnj_str+="<a href=http://www.홈페이지.com/link"+dayCount+".html target=_blank>" // 링크설정
+cnj_str+="<a href=# target=_self>" // 링크설정
 cnj_str+=dayCount++ // 날짜
 cnj_str+="</a>"
 
@@ -210,67 +222,84 @@ calendar.innerHTML=cnj_str
 </script>
 
 
-</head>
 <body onLoad="showCalendar(nowd,nowm,nowy)">
 
-	<h3>공연날짜 선택</h3>
-	<span id="calendar" class="cnj_input"></span>
-	<br>
+<!--
+<p>Date: <input type="date" id="datepick"></p>
+ -->
+
+	<form action="./payment.box" method="post" name="paymentform">
+
+		<h3>공연날짜 선택</h3>
+		<span id="calendar" name="payment_date" class="cnj_input"></span> <br>
+
+		
+		<select name="payment_time">
+			<h3>회차선택</h3>
+			<option value = "first">1회차</option>
+			<option value = "second">2회차</option>
+			<option value = "third">3회차</option>
+		</select>
+		
+		<h3>좌석 선택</h3>
+		<div class="a">
+
+			<c:forEach var="i" begin="1" end="50">
+				<input type="checkbox" class="checkbox" value="A구역${i}번"
+					id="A구역${i}번" name="A구역${i}번" />
+				<label for="A구역${i}번" title="A구역${i}번"></label>
+				<c:if test="${i % 5 == 0 && i != 50}">
+					<br>
+				</c:if>
+			</c:forEach>
+
+		</div>
+
+		<div class="b">
+
+			<c:forEach var="i" begin="121" end="200">
+				<input type="checkbox" class="checkbox" value="B구역${i-120}번"
+					id="B구역${i-120}번" name="B구역${i-120}번" />
+				<label for="B구역${i-120}번" title="B구역${i-120}번"></label>
+				<c:if test="${i % 8 == 0 && i != 200}">
+					<br>
+				</c:if>
+			</c:forEach>
+		</div>
+
+		<div class="c">
+			<c:forEach var="i" begin="201" end="250">
+
+				<input type="checkbox" class="checkbox" value="C구역${i-200}번"
+					id="C구역${i-200}번" name="C구역${i-200}번" />
+				<label for="C구역${i-200}번" title="C구역${i-200}번"></label>
+
+				<c:if test="${i % 5 == 0 && i != 250}">
+					<br>
+				</c:if>
+
+			</c:forEach>
+		</div>		
+
+		
+	<input type="text" id="payment_seat" name="payment_seat" placeholder="좌석을 선택해주세요">
 
 
-	<h3>좌석 선택</h3>
-
-
-	<div class="a" >
-
-		<c:forEach var="i" begin="1" end="50">
-			<input type="checkbox" class="checkbox" value="A구역${i}번"
-				id="A구역${i}번" name="A구역${i}번" />
-			<label for="A구역${i}번" title="A구역${i}번"></label>
-			<c:if test="${i % 5 == 0 && i != 50}">
-				<br>
-			</c:if>
-
-		</c:forEach>
-
-	</div>
-
-	<div class="b">
-
-		<c:forEach var="i" begin="121" end="200">
-			<input type="checkbox" class="checkbox" value="B구역${i-120}번"
-				id="B구역${i-120}번" name="B구역${i-120}번" />
-			<label for="B구역${i-120}번" title="B구역${i-120}번"></label>
-			<c:if test="${i % 8 == 0 && i != 200}">			
-				<br>
-			</c:if>
-		</c:forEach>
-	</div>
-
-	<div class="c">
-		<c:forEach var="i" begin="201" end="250">
-
-			<input type="checkbox" class="checkbox" value="C구역${i-200}번"
-				id="C구역${i-200}번" name="C구역${i-200}>번" />
-			<label for="C구역${i-200}번" title="C구역${i-200}번"></label>
-
-			<c:if test="${i % 5 == 0 && i != 250}">
-				<br>
-			</c:if>
-
-		</c:forEach>
-	</div>
-
-<script src="http://code.jquery.com/jquery-latest.js"></script>
+		<input type="submit" value="결제하기" class="btn btn-insert" />
+		
+	</form>
+	
+	<script src="http://code.jquery.com/jquery-latest.js"></script>
+	
 	<script>
 		$(document).ready(function(){
-			$(":checkbox").click(function(){
-				if($(this).is(":checked")){
-					alert($(this).val());
+		$(":checkbox").click(function(){
+				if($(this).is(":checked")){	
+					var val = $("#payment_seat").val($(this).val());
 				}	
-			});					
+			});	
+	
 		}); 
-		
 	</script>
 
 

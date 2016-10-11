@@ -154,10 +154,8 @@ public class ConcertController {
 		return "concert/book_list";
 	}
 	
-	
 	/*-----------------------후기 등록-----------------------------------*/
 	
-
 	@RequestMapping("/concertboard_add.box")
 	public ModelAndView getConcertboardAdd(ConcertBoardBean dto, HttpServletRequest request) {
 		ModelAndView mav = new ModelAndView();
@@ -189,7 +187,7 @@ public class ConcertController {
 		return "redirect:concert_detail.box?concert_num=" + concert_num+"&param=123";
 	}
 	
-	
+
 	
 
 }
