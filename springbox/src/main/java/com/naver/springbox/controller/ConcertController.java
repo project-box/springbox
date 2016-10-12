@@ -1,5 +1,6 @@
 package com.naver.springbox.controller;
 
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
@@ -14,9 +15,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.naver.springbox.dao.ConcertDao;
 import com.naver.springbox.dto.ConcertBean;
+import com.naver.springbox.dto.ConcertBoardBean;
 import com.naver.springbox.service.ConcertAction;
+import com.naver.springbox.service.PreferenceAction;
 
 @Controller
 public class ConcertController {
@@ -35,10 +37,15 @@ public class ConcertController {
 	
 /*--------------------추천공연 등록---------------------*/
 
+	
 	@RequestMapping("concert_add.box")
 	public ModelAndView writeBoard(ConcertBean dto, HttpServletRequest request) {
 		ModelAndView mav = new ModelAndView();
+		
 		boolean r = concertAction.add(dto, request);
+
+		
+		
 		if (r) {
 			// 목록보기로 리다이렉트
 			mav.setViewName("redirect:concert_list.box");
@@ -58,13 +65,19 @@ public class ConcertController {
 	
 	/*---------------------콘서트목록------------------------*/
 	
+	@Autowired
+	private PreferenceAction preferenceAction;
+	
+	
 	@RequestMapping("/concert_list.box")
 	public ModelAndView getConcertList(HttpServletRequest request) {
 		ModelAndView mav = new ModelAndView();
 		HttpSession session = request.getSession();
-		
+
+		String userId = (String) session.getAttribute("loginId");		
+	
 			// 게시물 목록 가져오기
-			Map<String, Object> map = concertAction.concertList(request);
+			Map<String, Object> map = preferenceAction.suggestConcert(userId, request);
 			// 여러 개의 데이터를 묶어서 저장할 때는
 			// addObject를 사용하지 않고 Map을 저장할 수
 			// 있습니다.
@@ -72,6 +85,8 @@ public class ConcertController {
 			// 공지사항을 다음페이지에 전달하기 위해서
 			// 저장하기
 			mav.setViewName("/concert/concert_list");
+			
+			
 		
 		return mav;
 	}
@@ -86,31 +101,30 @@ public class ConcertController {
 	
 	
 //	@Autowired
-//	private ConcertBoardAction concertboardAction;
+//	private ConcertBoardBean concertboardDao;
 	
 	@RequestMapping("/concert_detail.box")
 	public ModelAndView getConcertDetail(int concert_num, HttpSession session) throws Exception {
 		ModelAndView mav = new ModelAndView();
-//		// 로그인 정보를 확인해서 로그인 안되어
-//		// 있으면 로그인 페이지로 이동
-//		if (session.getAttribute("member") == null) {
-//			mav.setViewName("/member/login");
-//		} else {
 			ConcertBean dto = concertAction.concertDetail(concert_num);
-//			List<Map<String, Object>> list = replyListAction.getReplyList(num);
+			List <ConcertBoardBean> list= concertAction.concertboardList(concert_num);
+			int listcount=concertAction.concertboardListCount(concert_num);
+			
 			// 데이터를 저장
 			mav.addObject("concertdata", dto);
-//			mav.addObject("replydata", list);
+			mav.addObject("concertboarddata", list);
+			mav.addObject("concertboardlistcount",listcount);
 			// 출력할 뷰 파일 설정
 			mav.setViewName("/concert/concert_detail");
 //		}
+
 		return mav;
 	}
 	
 	/*----------------------------목록 삭제(관리자)-------------------------*/
 	
 	@RequestMapping("/concert_delete.box")
-	public ModelAndView getConcertDelete(@RequestParam("num") int num,
+	public ModelAndView getConcertDelete(int num,
 			HttpSession session) {
 		ModelAndView mav = new ModelAndView();		
 		
@@ -139,5 +153,41 @@ public class ConcertController {
 
 		return "concert/book_list";
 	}
+	
+	/*-----------------------후기 등록-----------------------------------*/
+	
+	@RequestMapping("/concertboard_add.box")
+	public ModelAndView getConcertboardAdd(ConcertBoardBean dto, HttpServletRequest request) {
+		ModelAndView mav = new ModelAndView();
+		// 로그인 되어 있지 않으면 로그인 페이지로 이동
+		HttpSession session = request.getSession();
+		
+			// 데이터 삽입
+			boolean r = concertAction.concertboardadd(dto, request);
+		
+				// 상세보기 수행
+				// 글번호가져오기
+				int num = Integer.parseInt(request.getParameter("concert_num"));
+				// redirect 할 때는 출력할 파일이름을
+				// 직접 사용하지 않고 요청 주소를 이용합니다.
+				mav.setViewName("redirect:concert_detail.box?concert_num=" + num+"&param=123");
+			
+		
+		return mav;
+	}
+	
+/*----------------------------후기 삭제(관리자)-------------------------*/
+	
+	@RequestMapping("/concertboard_delete.box")
+	public String getConcertBoardDelete(int concertboard_num, int concert_num,
+			HttpSession session) {	
+		
+		concertAction.concertboardDelete(concertboard_num);
+
+		return "redirect:concert_detail.box?concert_num=" + concert_num+"&param=123";
+	}
+	
+
+	
 
 }

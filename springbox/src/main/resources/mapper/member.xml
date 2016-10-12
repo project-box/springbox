@@ -9,4 +9,8 @@
 		select email, name, gubun from blogmember
 	</select>
 	
+	<select id="select_member" parameterType="String" resultType="com.naver.springbox.dto.MemberBean">
+		select * from users where user_id = #{id}
+	</select>
+	
 </mapper>

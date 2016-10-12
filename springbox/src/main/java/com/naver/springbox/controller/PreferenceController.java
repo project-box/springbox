@@ -1,6 +1,9 @@
 package com.naver.springbox.controller;
 
 import java.util.Locale;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -9,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.naver.springbox.dto.ConcertBean;
 import com.naver.springbox.service.PreferenceAction;
 
 @Controller
@@ -27,14 +29,35 @@ public class PreferenceController {
 	}
 	
 	@RequestMapping(value = "/main.box", method = RequestMethod.GET)
-	public ModelAndView mainBox(Locale locale, Model model) {
+	public ModelAndView mainBox(Locale locale, Model model, HttpServletRequest request) {
 		
 		ModelAndView mav = new ModelAndView();
 		
 		mav.addObject("musiclist", preferenceAction.getMusicList(10));
 		mav.addObject("concertlist", preferenceAction.getConcertList(5));
 		mav.setViewName("front/main");
+		
 		return mav;
 		//return "front/main";
+	}
+	
+	@RequestMapping(value = "/edit_preference.box", method=RequestMethod.GET)
+	public ModelAndView editPreference(HttpServletRequest request){
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("musiclist", preferenceAction.getMusicList(50));
+		mav.setViewName("preference/preference_list");
+		return mav;
+	}
+	
+	@RequestMapping(value = "/update_preference.box", method=RequestMethod.POST)
+	public ModelAndView updatePreference(HttpServletRequest request){
+		
+		ModelAndView mav = new ModelAndView();
+		
+		System.out.println("선호도 반영!!!");
+		
+		mav.setViewName("redirect:main.box");
+		return mav;
 	}
 }

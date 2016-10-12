@@ -195,7 +195,7 @@
 					<div class="row">
 						<div class="col-lg-12">
 							<h1 class="page-header">
-								추천공연 <small> <a href="ConcertList.box" aria-label="Skip to main navigation" title="추천공연 전체 목록"> 
+								추천공연 <small> <a href="concert_list.box" aria-label="Skip to main navigation" title="추천공연 전체 목록"> 
 								<i class="fa fa-bars" aria-hidden="true"></i>
 								</a>
 								</small>
@@ -204,7 +204,7 @@
 						
 						<c:forEach var="b" items="${concertlist}">
 							<div class="col-md-3 portfolio-item">
-								<a href="/projectbox/ConcertDetail.box?id=${b.concert_num}&page=1"> <!-- <img class="img-responsive" src="http://placehold.it/750x450" alt="" > -->
+								<a href="concert_detail.box?concert_num=${b.concert_num}"> <!-- <img class="img-responsive" src="http://placehold.it/750x450" alt="" > -->
 									<img class="img-responsive img-center"
 									src="<c:url value='/img/${b.posterfilepath}'/>" alt="">
 								</a>

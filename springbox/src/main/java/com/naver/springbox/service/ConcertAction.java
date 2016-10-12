@@ -1,20 +1,19 @@
 package com.naver.springbox.service;
 
-import java.io.File;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.naver.springbox.dao.ConcertDao;
 import com.naver.springbox.dto.ConcertBean;
+import com.naver.springbox.dto.ConcertBoardBean;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
@@ -86,7 +85,7 @@ public class ConcertAction {
 
 	// HttpServletRequest를 매개변수로 받아서
 	// 작업을 수행
-	public Map<String, Object> concertList(HttpServletRequest request) {
+	/*public Map<String, Object> concertList(HttpServletRequest request) {
 		// 기본적으로 사용할 페이지 번호 설정
 		int page = 1;
 		// 한 페이지에 출력할 데이터 개수 설정
@@ -136,7 +135,7 @@ public class ConcertAction {
 
 		return resultMap;
 
-	}
+	}*/
 
 	/*----------------디테일 서비스----------------------------*/
 	public ConcertBean concertDetail(int concert_num) throws Exception {
@@ -154,8 +153,51 @@ public class ConcertAction {
 	}
 	
 	
+	/*--------------후기 등록--------------------------------------*/
+
+	// request를 매개변수로 받아서 Dao를 호출하는 메소드
+	public boolean concertboardadd(ConcertBoardBean dto, HttpServletRequest request) {
+			
+		// 파라미터 가져오기
+		int num = Integer.parseInt(request.getParameter("concert_num"));
+		String content = request.getParameter("concertboard_content");
+		// 세션 가져오기
+		HttpSession session = request.getSession();
+		String loginId = (String) session.getAttribute("loginId");		
 	
+		dto.setConcert_num(num);
+		dto.setConcertboard_content(content);			
+		dto.setUser_id(loginId);
+		
+		boolean r = concertDao.insertConcertboard(dto);
+
+		return r;
+	}
 	
+	/*----------------------후기 목록----------------------------*/
+
+
+	public List<ConcertBoardBean> concertboardList(int concert_num) {
+		List<ConcertBoardBean> list = concertDao.getConcertBoardList(concert_num);
+				
+		return list;
+	}
+	
+	/*----------------------후기 카운트-----------------------*/
+
+	public int concertboardListCount(int concert_num) {
+	
+		int listcount = concertDao.getConcertBoardListCount(concert_num);
+	
+	  return listcount ;
+}
+	
+	/*-----------------------후기 삭제---------------------------*/
+	
+	public boolean concertboardDelete(int concertboard_num) {
+		
+	  return concertDao.getConcertBoardDelete(concertboard_num);
+}
 	
 
 }

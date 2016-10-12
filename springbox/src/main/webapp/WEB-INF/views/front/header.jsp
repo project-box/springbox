@@ -37,7 +37,11 @@
 			<ul class="nav navbar-nav">
 				<li><a href="/projectbox/NewMusicList.box">음악</a></li>
 				<li><a href="/projectbox/ConcertList.box">공연</a></li>
+<<<<<<< HEAD
 				<li><a href="/projectbox/gogaekmain.box">고객센터</a></li>
+=======
+				<li><a href="/projectbox/boardList.box">고객지원</a></li>
+>>>>>>> branch 'master' of https://github.com/project-box/springbox.git
 			</ul>
 		</div>
 
@@ -72,7 +76,7 @@
 								<li><a href="mypage.box">마이페이지</a></li>
 							</c:if>
 							<c:if test="${sessionScope.loginId != null}">
-								<li><a href="logoutAction.box">로그아웃</a></li>
+								<li><a href="logout.box">로그아웃</a></li>
 								<li><a href="mypage.box">마이페이지</a></li>
 							</c:if>
 							<%-- <li>${loginId}</li> --%>

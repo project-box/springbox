@@ -38,6 +38,32 @@
 		concert_num=#{concert_num}
 	</delete>
 	
+	<!-- <후기등록> -->
+	<insert id="concertboard_add" parameterType="com.naver.springbox.dto.ConcertBoardBean">
+		insert into	concertboard(concertboard_num,concert_num,concertboard_content,user_id,concertboard_registerdate)
+		 values(concertboard_seq.nextval,#{concert_num},#{concertboard_content},#{user_id},sysdate)	
+	</insert> 
 	
+	<!-- 후기 목록 -->
+	<select id="concertboard_list" resultType="com.naver.springbox.dto.ConcertBoardBean">
+	    <![CDATA[
+			select * from concertboard where concert_num=#{num}
+		]]>
+	</select>
+	
+	
+	<!-- 후기 총수 -->
+		<select id="concertboard_count" parameterType="int" resultType="Integer">
+		select count(*)	from concertboard where concert_num=#{num}
+	</select>
+	
+	
+	<!-- 후기 삭제 -->
+	<delete id="concertboard_delete" parameterType="Integer">
+		delete from concertboard where concertboard_num=#{num}
+	</delete>
+	
+	
+
 
 </mapper>
