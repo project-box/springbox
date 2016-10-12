@@ -72,8 +72,33 @@ font {
 	scrollbar-arrow-color: #f9f9f9;
 }
 
+
+.form-control {
+
+	width : 300px;
+	
+	
+}
+
+
+hr {
+	
+	border: solid 1px black;
+	width: 800px;
+	
+}
+
+.table-hover {
+	width: 800px;
+	margin-left: 200px;
+
+}
+
+
+
+
 /* checkbox*/
-.a {
+ .a {
 	float: left;
 	margin-right: 15px;
 }
@@ -90,20 +115,15 @@ font {
 }
 
 .checkbox {
-	display: none;
-}
-
-.checkbox+label {
 	display: inline-block;
 	cursor: pointer;
 	position: relative;
 	padding-left: 15px;
 	padding-bottom: 5px;
-	/* margin-left: 5px;  */
 	font-size: 13px;
 }
 
-.checkbox+label:before {
+.checkbox:before {
 	content: "";
 	display: inline-block;
 	width: 14px;
@@ -118,7 +138,7 @@ font {
 		rgba(255, 255, 255, .8);
 }
 
-.checkbox:checked+label:before {
+.checkbox:checked:before {
 	content: "\2713";
 	text-shadow: 1px 1px 1px rgba(0, 0, 0, .2);
 	font-size: 13px;
@@ -128,6 +148,7 @@ font {
 	text-align: center;
 	line-height: 12px;
 }
+
 </style>
 
 <script src="https://code.jquery.com/jquery-latest.js"></script>
@@ -165,9 +186,9 @@ var nowy=now.getFullYear()
 
             cnj_str+="<tr bgcolor='#323232'><td colspan=7>"
 			cnj_str+="<table border=0 cellpadding=0 cellspacing=0 align=center width=100%>"
-			cnj_str+="<td><a href='javascript:;' onClick='nowm--; if (nowm<0) { nowy--; nowm=11; } showCalendar(nowd,nowm,nowy)' title='이전 월'> <<</a></td>"
+			cnj_str+="<td><a href='javascript:;' onClick='nowm--; if (nowm<0) { nowy--; nowm=11; } showCalendar(nowd,nowm,nowy)' title='이전 월'><font color='white'> << </font></a></td>"
 			cnj_str+="<td align=center><font color='white'><b>"+nowy+"년"+" "+monthName[month].toUpperCase()+"</b></font></td>"
-			cnj_str+="<td align=right><a href='javascript:;' onClick='nowm++; if (nowm>11) { nowy++; nowm=0; } showCalendar(nowd,nowm,nowy)' title='다음 월'> >></a></td>"
+			cnj_str+="<td align=right><a href='javascript:;' onClick='nowm++; if (nowm>11) { nowy++; nowm=0; } showCalendar(nowd,nowm,nowy)' title='다음 월'><font color='white'> >> </font></a></td>"
 			cnj_str+="</tr></table>"
 			cnj_str+="</td></tr>"
 			cnj_str+="<tr align=center bgcolor='#FFFFFF'>"
@@ -193,7 +214,7 @@ var nowy=now.getFullYear()
          	     cnj_str+="<td align=center >" // 오늘 날짜가 아닐때 배경색 지정
          		}
 
-       		 cnj_str+="<a href=# target=_self id='date"+dayCount+"' onclick='Test("+dayCount+","+month+","+year+");'>" // 링크설정
+       		 cnj_str+="<a href=javascript:void(0) id='date"+dayCount+"' onclick='Test("+dayCount+","+month+","+year+");'>" // 링크설정
        		 cnj_str+=dayCount++ // 날짜
        		 cnj_str+="</a>"
 
@@ -230,7 +251,7 @@ var nowy=now.getFullYear()
 	 var date = year+"년 "+(month+1)+"월 "+dayCount+"일";
 
 	document.getElementById('payment_date').value = date
-	
+
  } 
 </script>
 <script>
@@ -252,20 +273,21 @@ var nowy=now.getFullYear()
 	</script>
 <body onLoad="showCalendar(nowd,nowm,nowy)">
 
-	<!--
-<p>Date: <input type="date" id="datepick"></p>
- -->
-
 	<form action="./payment.box" method="post" name="paymentform">
 
 		<h3>공연날짜 선택</h3>
-		<span id="calendar" class="cnj_input"></span> <br> <select
-			name="payment_time">
-			<h3>회차선택</h3>
+		<span id="calendar" class="cnj_input"></span>
+
+		
+		
+		<h3>회차선택</h3>
+		<select	name="payment_time" class="form-control">			
 			<option value="first">1회차 12:00</option>
 			<option value="second">2회차 15:30</option>
 			<option value="third">3회차 19:00</option>
 		</select>
+
+
 
 		<h3>좌석 선택</h3>
 		<div class="a">
@@ -273,7 +295,7 @@ var nowy=now.getFullYear()
 			<c:forEach var="i" begin="1" end="50">
 				<input type="checkbox" class="checkbox" value="A구역${i}번"
 					id="A구역${i}번" name="A구역${i}번" />
-				<label for="A구역${i}번" title="A구역${i}번"></label>
+				<%-- <label for="A구역${i}번" title="A구역${i}번"></label>  --%>
 				<c:if test="${i % 5 == 0 && i != 50}">
 					<br>
 				</c:if>
@@ -286,7 +308,7 @@ var nowy=now.getFullYear()
 			<c:forEach var="i" begin="121" end="200">
 				<input type="checkbox" class="checkbox" value="B구역${i-120}번"
 					id="B구역${i-120}번" name="B구역${i-120}번" />
-				<label for="B구역${i-120}번" title="B구역${i-120}번"></label>
+				<%-- <label for="B구역${i-120}번" title="B구역${i-120}번"></label> --%>
 				<c:if test="${i % 8 == 0 && i != 200}">
 					<br>
 				</c:if>
@@ -298,7 +320,7 @@ var nowy=now.getFullYear()
 
 				<input type="checkbox" class="checkbox" value="C구역${i-200}번"
 					id="C구역${i-200}번" name="C구역${i-200}번" />
-				<label for="C구역${i-200}번" title="C구역${i-200}번"></label>
+				<%-- <label for="C구역${i-200}번" title="C구역${i-200}번"></label> --%>
 
 				<c:if test="${i % 5 == 0 && i != 250}">
 					<br>
@@ -307,11 +329,26 @@ var nowy=now.getFullYear()
 			</c:forEach>
 		</div>
 
+		<hr>
+		
+		<table class="table table-hover">
+			
+	    <tr><th>선택한 날짜</th>
+	    	<th>선택한 회차</th>
+	    	<th>선택한 좌석</th>
+	    </tr>
+	    <tr>
+	    <td>
+		<input type="text" id="payment_date" name="payment_date" class="form-control" 
+		placeholder="날짜를 선택해주세요" style="font-weight: bold;" > </td>
+		<td>
+		<input type="text" id="payment_seat" name="payment_seat" class="form-control" 
+		placeholder="좌석을 선택해주세요" style="font-weight: bold;" > </td>
+		<td>
+		<input type="submit" value="결제하기" class="btn btn-insert" /> </td>
+		</tr>
+         </table>
 
-		<input type="text" id="payment_date" name="payment_date" placeholder="날짜를 선택해주세요"> 
-		<input type="text" id="payment_seat" name="payment_seat" placeholder="좌석을 선택해주세요">
-
-		<input type="submit" value="결제하기" class="btn btn-insert" />
 
 	</form>
 
