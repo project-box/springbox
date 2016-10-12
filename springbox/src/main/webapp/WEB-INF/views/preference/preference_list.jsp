@@ -14,9 +14,6 @@
 <!-- Bootstrap Core CSS -->
 <link href="css/bootstrap.min.css" rel="stylesheet">
 
-<!-- Custom CSS -->
-<link href="css/4-col-portfolio.css" rel="stylesheet">
-
 <!-- font awesome -->
 <link href="css/font-awesome.min.css" rel="stylesheet">
 
@@ -136,30 +133,54 @@
     
 	<!-- /.container --> </nav>
 	
-	<c:forEach var="b" items="${musiclist}">
-		<div class="col-md-3 portfolio-item">
-			
-			<div>
-				<img class="img-responsive img-center"
-				src="
-	                  <c:url value='/img/${b.albumcoverfilepath}'/>"
-				alt="">
-			</div>
-			
-			<div class="infoi">
-				<div class="musicrating">
-					<center class="${b.music_num}">
-						<div class='star'></div>
-					</center>
+	<div class="container">
+		<div class="row">
+			<c:forEach var="b" items="${musiclist}">
+				
+				<div class="col-xs-8 col-md-3 portfolio-item flip3d">
+				
+					<div class="positioningDiv">
+					
+						<div class="thumbnail front" id="item">
+							<img class="img-responsive img-center"
+							src="<c:url value='/img/${b.albumcoverfilepath}'/>"
+							alt="">
+							
+							<div class="well well-sm">
+								<c:out value="${b.music_title}" /> - 
+								<c:out value="${b.music_artist}" />
+							</div>
+		                </div>
+	                
+		                <div class="back thumbnail">
+							
+		                    <div>
+			                    <img class="img-responsive img-center"
+								src="<c:url value='/img/${b.albumcoverfilepath}'/>"
+								alt="">
+								
+								<div class="info-close">
+									<a href="#">
+										<i class="fa fa-times" aria-hidden="true"></i>
+									</a>
+								</div>
+								
+								<div class="musicrating">
+									<center class="${b.music_num}">
+										<div class='star'></div>
+									</center>
+								</div>
+							</div>
+							
+		                </div>
+	                
+	                </div><!-- /.thumbnail-->
+						
 				</div>
-			</div>
-			
-			<div class="well well-sm">
-				<c:out value="${b.music_title}" />
-				<br>
-			</div>
+				
+			</c:forEach>
 		</div>
-	</c:forEach>
+	</div>
 	
 	<%@ include file= "/WEB-INF/views/front/footer.jsp" %>    
 </body>
