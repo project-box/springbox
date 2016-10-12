@@ -103,20 +103,6 @@
 	<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
 	<div class="container">
 		<ul class="nav navbar-nav">
-			<li>
-				<div class="dropdown boxcenter">
-					<button class="btn btn-link dropdown-toggle" type="button"
-						data-toggle="dropdown">
-						<i class="fa fa-user" aria-hidden="true" style="font-size: 20px;"></i>
-					</button>
-					<span class="caret"></span>
-					</button>
-					<ul class="dropdown-menu">
-						<li><a href="#">등록 음악 삭제</a></li>
-						<li><a href="#">등록 음악 수정</a></li>
-					</ul>
-				</div>
-			</li>
 			<li><button type="button" onclick="initStars()" class="btn btn-default command-button">다시하기</button></li>
 		</ul>
 	
@@ -137,11 +123,11 @@
 		<div class="row">
 			<c:forEach var="b" items="${musiclist}">
 				
-				<div class="col-xs-8 col-md-3 portfolio-item flip3d">
+				<div class="col-xs-8 col-md-3 portfolio-item cover2d">
 				
 					<div class="positioningDiv">
 					
-						<div class="thumbnail front" id="item">
+						<div class="thumbnail base" id="item">
 							<img class="img-responsive img-center"
 							src="<c:url value='/img/${b.albumcoverfilepath}'/>"
 							alt="">
@@ -152,24 +138,36 @@
 							</div>
 		                </div>
 	                
-		                <div class="back thumbnail">
+		                <div class="cover thumbnail">
 							
 		                    <div>
 			                    <img class="img-responsive img-center"
 								src="<c:url value='/img/${b.albumcoverfilepath}'/>"
 								alt="">
 								
-								<div class="info-close">
-									<a href="#">
-										<i class="fa fa-times" aria-hidden="true"></i>
-									</a>
+								<!-- 흐릿한 커버 -->
+								<div class="tile-cover">
 								</div>
 								
-								<div class="musicrating">
-									<center class="${b.music_num}">
-										<div class='star'></div>
-									</center>
+								<div class="tile-cover-title">
+									<c:out value="${b.music_title}" /> - 
+									<c:out value="${b.music_artist}" />
 								</div>
+								
+								<div class="info-close">
+										<a href="#">
+											<i class="fa fa-times fa-2x" aria-hidden="true"></i>
+										</a>
+									</div>
+								
+								<div class="tile">
+									<div class="musicrating">
+										<center class="${b.music_num}">
+											<div class='star'></div>
+										</center>
+									</div>
+								</div>
+								
 							</div>
 							
 		                </div>
