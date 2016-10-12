@@ -179,14 +179,13 @@ var nowy=now.getFullYear()
 			cnj_str+="<th><font color='black'><b>금</b></font></th>"
 			cnj_str+="<th><font color='black'><b>토</b></font></th>" 
 			cnj_str+="</tr>"
-
-        var dayCount=1
-
+			
+			var dayCount=1
+			
 			cnj_str+="<tr bgcolor=white>"
 
    		for (var i=0;i<firstDay;i++) cnj_str+="<td bgcolor='#dcdcdc'> " //공백
-   		
-   		
+
  		for (var i=0;i<monthDays[month];i++) {
        		 	if(dayCount==nowd) {
         		 cnj_str+="<td align=center bgcolor='#FAC6C6'><b>" // 오늘 날짜일때 배경색 지정,글자 진하게
@@ -194,12 +193,12 @@ var nowy=now.getFullYear()
          	     cnj_str+="<td align=center >" // 오늘 날짜가 아닐때 배경색 지정
          		}
 
-			cnj_str+="<button name='payment_date' value='"+dayCount+"'>" // 링크설정
-			cnj_str+=dayCount++ // 날짜
-			cnj_str+="</button>"
-				 
+       		 cnj_str+="<a href=# target=_self id='date"+dayCount+"' onclick='Test("+dayCount+","+month+","+year+");'>" // 링크설정
+       		 cnj_str+=dayCount++ // 날짜
+       		 cnj_str+="</a>"
 
-
+          
+       		 
 			     if(dayCount==nowd) {
 				  cnj_str+="</b>" // 오늘 날짜일때 글자 진하게
 				 } else {
@@ -225,18 +224,19 @@ var nowy=now.getFullYear()
 	}
 
 
+ function Test(dayCount,month,year){
+	 
 
+	 var date = year+"년 "+(month+1)+"월 "+dayCount+"일";
+
+	document.getElementById('payment_date').value = date
+	
+ } 
 </script>
-
-
-
-
-
-<script src="http://code.jquery.com/jquery-latest.js"></script>
-
 <script>
 
 		$(document).ready(function(){
+				
 		$(":checkbox").click(function(){
 				if($(this).is(":checked")){	
 					$("#payment_seat").val($(this).val());
@@ -262,9 +262,9 @@ var nowy=now.getFullYear()
 		<span id="calendar" class="cnj_input"></span> <br> <select
 			name="payment_time">
 			<h3>회차선택</h3>
-			<option value="first">1회차</option>
-			<option value="second">2회차</option>
-			<option value="third">3회차</option>
+			<option value="first">1회차 12:00</option>
+			<option value="second">2회차 15:30</option>
+			<option value="third">3회차 19:00</option>
 		</select>
 
 		<h3>좌석 선택</h3>
@@ -308,9 +308,10 @@ var nowy=now.getFullYear()
 		</div>
 
 
-		<input type="text" id="payment_seat" name="payment_seat"
-			placeholder="좌석을 선택해주세요"> <input type="submit" value="결제하기"
-			class="btn btn-insert" />
+		<input type="text" id="payment_date" name="payment_date" placeholder="날짜를 선택해주세요"> 
+		<input type="text" id="payment_seat" name="payment_seat" placeholder="좌석을 선택해주세요">
+
+		<input type="submit" value="결제하기" class="btn btn-insert" />
 
 	</form>
 
