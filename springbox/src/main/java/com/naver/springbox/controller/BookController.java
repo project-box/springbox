@@ -21,10 +21,11 @@ public class BookController {
 		@RequestMapping(value = "/payment.box", method = RequestMethod.POST)
 		public String getPayment(Locale locale, Model model, HttpServletRequest request) {
 
-			
+			String payment_date = request.getParameter("payment_date");
 			String payment_seat = request.getParameter("payment_seat");
 			String payment_time = request.getParameter("payment_time");
 			
+			System.out.println(payment_date);
 			System.out.println(payment_seat);
 			System.out.println(payment_time);
 			

@@ -14,10 +14,9 @@
 <style>
 td {
 	font-size: 12px;
-	font-family: 굴림;
 	text-decoration: none;
-	width: 37px;
-	height: 37px;
+	width: 30px;
+	height: 30px;
 }
 
 th {
@@ -42,12 +41,11 @@ font {
 
 .cnj_input {
 	position: relative;
-	float: left;
 	margin-right: 100px;
 	margin-left: 50px;
 }
 
-.cnj_input2 {
+ .cnj_input2 {
 	border-width: 1;
 	border-color: rgb(204, 204, 204);
 	border-style: solid;
@@ -70,65 +68,113 @@ font {
 	scrollbar-darkshadow-color: #F3f3f3;
 	scrollbar-track-color: #ffffff;
 	scrollbar-arrow-color: #f9f9f9;
-}
+} 
+/* -------------------------------------- */
 
 
 .form-control {
+	width : 200px;		
+}
 
-	width : 300px;
-	
-	
+h3 {
+	margin-left: 75px;
+
 }
 
 
-hr {
-	
+hr {	
 	border: solid 1px black;
-	width: 800px;
-	
+	width: 1150px;	
+	margin-top: 50px;
 }
 
 .table-hover {
 	width: 800px;
 	margin-left: 200px;
+	font-size: 15px;
+}
+
+.timechoice{
+
+margin-left: 50px;
+
+}
+
+.date_time_choice{
+
+ float: left ;
 
 }
 
 
+.text{
 
+ margin-left: 570px;
+
+}
+
+
+.box{
+
+margin-left: 370px;
+margin-bottom: 20px;
+margin-top: 20px;
+width:500px;
+height:30px;
+background-color: #a0a0a0;
+color: white;
+
+
+
+
+}
+
+
+/* ----------------------------------------------------------- */
 
 /* checkbox*/
  .a {
-	float: left;
+  float: left;
 	margin-right: 15px;
+	margin-top: 15px;
 }
 
 .b {
-	float: left;
-	margin-left: 15px;
+ float: left;
+	margin-left: 30px;
 	margin-right: 30px;
+	margin-top: 15px;
 }
 
 .c {
-	flaot: center;
+ float: left;
 	margin-left: 15px;
+	margin-top: 15px;
 }
 
 .checkbox {
+	display: none;
+}
+
+.checkbox+label {
 	display: inline-block;
 	cursor: pointer;
 	position: relative;
 	padding-left: 15px;
 	padding-bottom: 5px;
+	margin-left: 5px;
+	margin-bottom: 15px;
 	font-size: 13px;
+	
 }
 
-.checkbox:before {
+
+.checkbox+label:before {
 	content: "";
 	display: inline-block;
-	width: 14px;
-	height: 14px;
-	margin-right: 10px;
+	width: 20px;
+	height: 20px;
+	margin-right: 50px;
 	position: absolute;
 	left: 0;
 	bottom: 1px;
@@ -138,17 +184,16 @@ hr {
 		rgba(255, 255, 255, .8);
 }
 
-.checkbox:checked:before {
+.checkbox:checked+label:before {
 	content: "\2713";
 	text-shadow: 1px 1px 1px rgba(0, 0, 0, .2);
-	font-size: 13px;
+	font-size: 17px;
 	font-weight: 800;
 	color: #fff;
 	background: #2f87c1;
 	text-align: center;
-	line-height: 12px;
+	line-height: 19px;
 }
-
 </style>
 
 <script src="https://code.jquery.com/jquery-latest.js"></script>
@@ -182,7 +227,7 @@ var nowy=now.getFullYear()
       if ((year%4==0||year%100==0)&&(year%400==0)) monthDays[1]=29; else monthDays[1]=28 //leap year test
 
         var firstDay=new Date(year,month,1).getDay()
-        var cnj_str="<table border=0 cellpadding=10 cellspacing=1 align=center bgcolor=#CCCCCC>"
+        var cnj_str="<table border=0 cellpadding=10 cellspacing=1 bgcolor=#CCCCCC>"
 
             cnj_str+="<tr bgcolor='#323232'><td colspan=7>"
 			cnj_str+="<table border=0 cellpadding=0 cellspacing=0 align=center width=100%>"
@@ -265,6 +310,14 @@ var nowy=now.getFullYear()
 					/* alert( $(this).val()); */												
 				}	
 			});	
+		
+		$("#time").click(function(){
+			
+				$("#payment_time").val($(this).val());
+		
+				/* alert( $(this).val()); */												
+				
+		});	
 
 		}); 
 
@@ -275,27 +328,59 @@ var nowy=now.getFullYear()
 
 	<form action="./payment.box" method="post" name="paymentform">
 
+
+	<div class="date_time_choice">
+	
+	
 		<h3>공연날짜 선택</h3>
-		<span id="calendar" class="cnj_input"></span>
+		<p id="calendar" class="cnj_input"></p>
 
 		
-		
+		<div class="timechoice">
+	
 		<h3>회차선택</h3>
-		<select	name="payment_time" class="form-control">			
-			<option value="first">1회차 12:00</option>
-			<option value="second">2회차 15:30</option>
-			<option value="third">3회차 19:00</option>
+		<select	id="time" class="form-control">
+		    <option>회차선택</option>			
+			<option value="1회차 12:00">1회차 12:00</option>
+			<option value="2회차 15:30">2회차 15:30</option>
+			<option value="3회차 19:00">3회차 19:00</option>
 		</select>
+	
+	</div>
+	
+	
+	</div>
+	
+	
+	<br>
+	<br>
+	
 
+<div class="seatchoice">
 
-
-		<h3>좌석 선택</h3>
+		<h3 class="text" >좌석 선택</h3>
+		
+		
+		
+		
+		
+		  <div >
+		  
+		  <table class="box">
+		  <tr align="center" ><td>무대</td></tr>
+		  </table>
+		  
+		  </div>
+		 
+				
+				
+				
 		<div class="a">
 
 			<c:forEach var="i" begin="1" end="50">
 				<input type="checkbox" class="checkbox" value="A구역${i}번"
 					id="A구역${i}번" name="A구역${i}번" />
-				<%-- <label for="A구역${i}번" title="A구역${i}번"></label>  --%>
+				<label for="A구역${i}번" title="A구역${i}번"></label>
 				<c:if test="${i % 5 == 0 && i != 50}">
 					<br>
 				</c:if>
@@ -308,7 +393,7 @@ var nowy=now.getFullYear()
 			<c:forEach var="i" begin="121" end="200">
 				<input type="checkbox" class="checkbox" value="B구역${i-120}번"
 					id="B구역${i-120}번" name="B구역${i-120}번" />
-				<%-- <label for="B구역${i-120}번" title="B구역${i-120}번"></label> --%>
+				<label for="B구역${i-120}번" title="B구역${i-120}번"></label>
 				<c:if test="${i % 8 == 0 && i != 200}">
 					<br>
 				</c:if>
@@ -320,7 +405,7 @@ var nowy=now.getFullYear()
 
 				<input type="checkbox" class="checkbox" value="C구역${i-200}번"
 					id="C구역${i-200}번" name="C구역${i-200}번" />
-				<%-- <label for="C구역${i-200}번" title="C구역${i-200}번"></label> --%>
+				<label for="C구역${i-200}번" title="C구역${i-200}번"></label>
 
 				<c:if test="${i % 5 == 0 && i != 250}">
 					<br>
@@ -328,28 +413,38 @@ var nowy=now.getFullYear()
 
 			</c:forEach>
 		</div>
-
-		<hr>
+</div>
+		
+		<br>
+		<br>
+		
+		<div class="col-sm-12">
+		
+			<hr>
 		
 		<table class="table table-hover">
 			
 	    <tr><th>선택한 날짜</th>
 	    	<th>선택한 회차</th>
 	    	<th>선택한 좌석</th>
+	    	<th></th>
 	    </tr>
 	    <tr>
 	    <td>
 		<input type="text" id="payment_date" name="payment_date" class="form-control" 
-		placeholder="날짜를 선택해주세요" style="font-weight: bold;" > </td>
+		placeholder="날짜를 선택해주세요" style="font-weight: bold; border:none; align:center;" > </td>
+		<td>
+		<input type="text" id="payment_time" name="payment_time" class="form-control" 
+		placeholder="회차를 선택해주세요" style="font-weight: bold; border:none; align:center;" > </td>
 		<td>
 		<input type="text" id="payment_seat" name="payment_seat" class="form-control" 
-		placeholder="좌석을 선택해주세요" style="font-weight: bold;" > </td>
+		placeholder="좌석을 선택해주세요" style="font-weight: bold; border:none; align:center;" ></td>
 		<td>
 		<input type="submit" value="결제하기" class="btn btn-insert" /> </td>
 		</tr>
          </table>
-
-
+</div>
+       
 	</form>
 
 
