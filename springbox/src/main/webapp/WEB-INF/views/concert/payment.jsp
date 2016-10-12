@@ -22,6 +22,10 @@
 
 <input type=radio name=payment  value="무통장입금" onclick='payment'>무통장입금
 
+  <div id="squared">
+
+
+
 
 
 </body>
