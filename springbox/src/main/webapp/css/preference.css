@@ -1,20 +1,13 @@
+a {
+  color: rgb(200,200,200);
+  text-decoration: none;
+}
+
 .container-navi {
 	/* width: 230px;
 	height: 230px; */
 	/* position: relative; */
-}
-
-.infoi {
-	width: 100%;
-	height: 100%;
-	position: absolute;
-	top: 0;
-	left: 0;
-	margin: 25px 0px;
-}
-
-.infoi {
-	z-index: 10;
+	
 }
 
 .command-button {
@@ -23,4 +16,92 @@
 
 .container {
 	/* background-color: rgb(255,255,255); */
+	
+}
+
+.info-close {
+	top: 2%;
+	left: -2%;
+	width: 100%;
+	position: absolute;
+	text-align:right;
+	/* background-color: rgb(255,255,255); */
+}
+.positioningDiv {
+	position: relative;
+}
+
+.base {
+	/* transform:perspective(600px) rotateY(0deg); */
+	opacity: 1; backface-visibility : hidden;
+	transition: transform .5s linear 0s;
+	backface-visibility: hidden;
+}
+
+.cover {
+	position: absolute;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	/* transform:perspective(600px) rotateY(180deg); */
+	opacity: 0;
+	backface-visibility: hidden;
+	transition: transform .5s linear 0s;
+	/* border:1px solid #000; */
+	background-color: rgb(200,200,200);
+}
+
+.cover2d:hover .base {
+	/* transform:perspective(600px) rotateY(-180deg); */
+	opacity: 0;
+}
+
+.cover2d:hover .cover {
+	/* transform:perspective(600px) rotateY(0deg); */
+	opacity: 1;
+}
+
+.caption span {
+	font-size: large;
+}
+
+.musicrating {
+	margin-top: 10%;
+	z-index:10;
+}
+
+.tile-cover {
+	position: absolute;
+	top: 0;
+    left: 0;
+	background-color: rgb(10,10,10);
+	opacity:0.7;
+	width: 100%;
+	height:70%;
+}
+
+.tile-cover-title {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height:70%;
+	text-align:center;
+	font-size:14px;
+	margin-top: 40%;
+	color:white;
+	/* background-color: rgb(10,10,10); */
+}
+
+.tile {
+	position: absolute;
+	bottom: 0;
+    left: 0;
+	background-color: rgb(200,200,200);
+	width: 100%;
+	height:30%;
+}
+
+.selected {
+	opacity: 1;
 }
