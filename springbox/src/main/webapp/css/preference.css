@@ -102,4 +102,6 @@ a {
 	height:30%;
 }
 
-
+.selected {
+	opacity: 1;
+}
