@@ -56,7 +56,10 @@ public class PreferenceController {
 		ModelAndView mav = new ModelAndView();
 		
 		System.out.println("선호도 반영!!!");
+		System.out.println(request.getParameter("music_num"));
+		System.out.println(request.getParameter("rate"));
 		
+		// Ajax 호출함수에서 ModelAndView를 리턴하는 의미는??
 		mav.setViewName("redirect:main.box");
 		return mav;
 	}

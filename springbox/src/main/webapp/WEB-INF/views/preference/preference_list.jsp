@@ -36,7 +36,7 @@
 		toastr.options.preventDuplicates = false;
 		toastr.options.positionClass = "toast-top-center";
 		toastr.options.timeOut = 2000;
-		
+
 		initStar($('.star'));
 	});
 
@@ -77,11 +77,25 @@
 				var num = parent.attr('class');
 				//alert(parent.attr('class'));
 
+				var items = {
+					"music_num" : num,
+					"rate" : score
+				};
+
 				//1.Ajax add/update 반영
-				//2.성공 시 뷰 반영
-				$("#" + num).attr('class', 'thumbnail cover selected');
-				
-				toastr.success('저장되었습니다.');
+				$.ajax({
+					url : "update_preference.box",
+					type : "POST",
+					data : items,
+					success : function(data, textStatus, jqXHR) {
+						//2.성공 시 뷰 반영
+						$("#" + num).attr('class', 'thumbnail cover selected');
+						toastr.success('저장되었습니다.');
+					},
+					error : function(jqXHR, textStatus, errorThrown) {
+
+					}
+				});
 			}
 		});
 	}
@@ -94,7 +108,7 @@
 
 		// 뷰 초기화
 		initStar($('.star.' + num));
-		
+
 		//toastr.info('저장되었습니다.');
 		toastr.success('저장되었습니다.');
 	}
