@@ -27,8 +27,16 @@
 <!-- base CSS -->
 <link href="css/base_layout.css" rel="stylesheet">
 
+<!-- toastr -->
+<link href="css/toastr.min.css" rel="stylesheet">
+<script src="js/toastr.js"></script>
+
 <script>
 	$(document).ready(function() {
+		toastr.options.preventDuplicates = false;
+		toastr.options.positionClass = "toast-top-center";
+		toastr.options.timeOut = 2000;
+		
 		initStar($('.star'));
 	});
 
@@ -72,6 +80,8 @@
 				//1.Ajax add/update 반영
 				//2.성공 시 뷰 반영
 				$("#" + num).attr('class', 'thumbnail cover selected');
+				
+				toastr.success('저장되었습니다.');
 			}
 		});
 	}
@@ -84,6 +94,9 @@
 
 		// 뷰 초기화
 		initStar($('.star.' + num));
+		
+		//toastr.info('저장되었습니다.');
+		toastr.success('저장되었습니다.');
 	}
 
 	// out of date
@@ -150,7 +163,7 @@
 		<div class="row">
 			<c:forEach var="b" items="${musiclist}">
 
-				<div class="col-xs-8 col-md-3 portfolio-item cover2d">
+				<div class="col-xs-12 col-md-3 portfolio-item cover2d">
 
 					<div class="positioningDiv">
 
@@ -167,34 +180,34 @@
 
 						<div class="thumbnail cover" id="${b.music_num}">
 
-							<div>
-								<img class="img-responsive img-center"
-									src="<c:url value='/img/${b.albumcoverfilepath}'/>" alt="">
 
-								<!-- 흐릿한 커버 -->
-								<div class="tile-cover"></div>
+							<img class="img-responsive img-center"
+								src="<c:url value='/img/${b.albumcoverfilepath}'/>" alt="">
 
-								<div class="tile-cover-title">
-									<c:out value="${b.music_title}" />
-									-
-									<c:out value="${b.music_artist}" />
-								</div>
+							<!-- 흐릿한 커버 -->
+							<div class="tile-cover"></div>
 
-								<div class="info-close">
-									<a href="javascript:removePreference('${b.music_num}');"> <i
-										class="fa fa-times fa-2x" aria-hidden="true"></i>
-									</a>
-								</div>
-
-								<div class="tile">
-									<div class="musicrating">
-										<center class="${b.music_num}">
-											<div class='star ${b.music_num}'></div>
-										</center>
-									</div>
-								</div>
-
+							<div class="tile-cover-title">
+								<c:out value="${b.music_title}" />
+								-
+								<c:out value="${b.music_artist}" />
 							</div>
+
+							<div class="info-close">
+								<a href="javascript:removePreference('${b.music_num}');"> <i
+									class="fa fa-times fa-2x" aria-hidden="true"></i>
+								</a>
+							</div>
+
+							<div class="tile">
+								<div class="musicrating">
+									<center class="${b.music_num}">
+										<div class='star ${b.music_num}'></div>
+									</center>
+								</div>
+							</div>
+
+
 
 						</div>
 
