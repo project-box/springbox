@@ -29,7 +29,7 @@
                         <input type="checkbox" value="remember-me"> Remember me
                     </label>
                 </div>
-                <button class="btn btn-lg btn-primary btn-block btn-signin" type="submit">로그인</button>
+                <button class="btn btn-lg btn-primary btn-block btn-signin" type="submit"> 로그인</button>
             </form><!-- /form -->
             <a href="#" class="forgot-password">
                 패스워드를 잃어버렸습니까?
