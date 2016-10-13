@@ -10,6 +10,9 @@
 
 	<title>b o x</title>
 
+	<!-- base CSS -->
+    <link href="css/base_layout.css" rel="stylesheet">
+
  	<!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
 

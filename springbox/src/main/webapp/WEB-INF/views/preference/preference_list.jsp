@@ -21,6 +21,9 @@
 <script src="raty/jquery.raty.js" type="text/javascript"></script>
 
 <link href="css/preference.css" rel="stylesheet">
+
+<!-- base CSS -->
+<link href="css/base_layout.css" rel="stylesheet">
     
 <script>
 	$(document).ready(function() {
