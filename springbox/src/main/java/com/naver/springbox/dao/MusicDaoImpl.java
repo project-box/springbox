@@ -17,10 +17,13 @@ public class MusicDaoImpl implements MusicDao{
 	@Autowired
 	private SqlSession sqlSession;
 	
-	@Override
 	@Transactional
+	@Override
 	public boolean insertMusic(MusicBean dto){
+		System.out.println("DaoImpl추가");
+		
 		int r = sqlSession.insert("music.music_add", dto);
+		
 		if (r>0)
 			return true;
 		else
@@ -79,4 +82,5 @@ public class MusicDaoImpl implements MusicDao{
 		 return false;
 	 
 	}
+
 }

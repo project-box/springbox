@@ -23,53 +23,22 @@ import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 @Service
 public class MusicAction {
 	
-	private static final ServletRequest request = null;
-	
 	@Autowired
 	private MusicDao musicDao;
-	private MusicBean musicdata;
 
-	/*-----------------------음악 추가----------------------------------------*/
-	public boolean add(MusicBean dto, HttpServletRequest request) {
-		
-		String realFolder = request.getSession().getServletContext()
-				.getRealPath("img");
-		
-		int fileSize = 5 * 1024 * 1024;
-
-		try {
-			
-			MultipartRequest multi = null;
+	/*-----------------------음악 추가(관리자)----------------------------------*/
+	public boolean add(MusicBean dto) {
+				
+				System.out.println("addAction");
 	
-		multi = new MultipartRequest(request, realFolder, fileSize, "utf-8", new DefaultFileRenamePolicy());
-
-		DateFormat sdFormat = new SimpleDateFormat("MM/dd/yyyy");
-		String d = multi.getParameter("publishdate").trim();
-		Date pDate = sdFormat.parse(d);
-		
-		dto.setMusic_title(multi.getParameter("title").trim());
-		dto.setMusic_artist(multi.getParameter("artist").trim());
-		dto.setMusic_genre(multi.getParameter("genre").trim());
-		dto.setMusic_publishdate(pDate);
-		dto.setMusic_lyrics(multi.getParameter("lyrics").trim());
-		dto.setMusic_album(multi.getParameter("album").trim());
-		dto.setAlbumcoverfilepath(multi.getFilesystemName((String) multi.getFileNames().nextElement()));
-		
-		
-		} catch (Exception ex) {
-			ex.printStackTrace();
-		}	
-
 		boolean r = musicDao.insertMusic(dto);
 		return r;
 	}
-	
 	
  /* ----------------------음악 목록----------------------------------------------------*/
 	
 	public Map<String, Object> musicList(HttpServletRequest request){
 		 
-		
 		int page =1 ;
 		 
 		int limit = 10;
@@ -111,7 +80,6 @@ public class MusicAction {
 		 return resultMap;
 	}
 	
-	
 /*----------------------음악 상세-------------------------------------------*/
 	
 	public MusicBean musicDetail(int num) {
@@ -122,7 +90,6 @@ public class MusicAction {
 
 		return dto;
 	}
-
 	
 	/*-----------------------음악 삭제-----------------------------------------------------*/
 	

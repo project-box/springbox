@@ -44,7 +44,7 @@
 		<div class="row">
 			<div class="col-lg-12">
 				<h1 class="page-header">
-					최신곡 <small> <a href="NewMusicList.box" aria-label="Skip to main navigation" title="최신곡 전체 목록">
+					최신곡 <small> <a href="music_list.box" aria-label="Skip to main navigation" title="최신곡 전체 목록">
 					<i class="fa fa-bars" aria-hidden="true"></i>
 					</a>
 					</small>
@@ -53,7 +53,7 @@
 
 			<c:forEach var="b" items="${musiclist}">
 				<div class="col-md-3 portfolio-item">
-					<a href="NewmusicDetailAction.box?num=${b.music_num}&page=${page}">
+					<a href="music_detail.box?num=${b.music_num}&page=${page}">
 						<img class="img-responsive img-center"
 						src="
 	                    <c:url value='/img/${b.albumcoverfilepath}'/>"
