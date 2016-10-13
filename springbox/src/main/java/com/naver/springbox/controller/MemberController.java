@@ -44,15 +44,15 @@ public class MemberController {
 			String userPassword = request.getParameter("inputPassword");
 			HttpSession session =request.getSession();
 
-			MemberBean user = memberDao.getMemberInfo(userId);
+			MemberBean users = memberDao.getMemberInfo(userId);
 
-			if (user != null) {
-				if (user.getPassword().equals(userPassword)) {
+			if (users != null) {
+				if (users.getPassword().equals(userPassword)) {
 					// 로그인 성공
 					
-				    session.setAttribute("user", user);
-					session.setAttribute("loginId", user.getUser_id());
-					session.setAttribute("loginName", user.getName());
+				    session.setAttribute("users", users);
+					session.setAttribute("loginId", users.getUser_id());
+					session.setAttribute("loginName", users.getName());
 
 				} else {
 					// 패스워드 틀림
