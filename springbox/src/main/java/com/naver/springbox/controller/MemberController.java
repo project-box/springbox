@@ -48,6 +48,7 @@ public class MemberController {
 				if (user.getPassword().equals(userPassword)) {
 					// 로그인 성공
 					HttpSession session = request.getSession();
+				    session.setAttribute("user", user);
 					session.setAttribute("loginId", user.getUser_id());
 					session.setAttribute("loginName", user.getName());
 
