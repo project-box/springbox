@@ -11,28 +11,28 @@
 <script>
 	function Payment(pay_choice) {
 
-		if (pay_choice == "pay1") {
-			  $('#pay1').css('display', 'block');
-			  $('#pay2').css('display', 'none');
-			  $('#pay3').css('display', 'none');
+		if(pay_choice == "pay1"){
+			
+		document.getElementById("pay1").style.display = ""; 
+		document.getElementById("pay2").style.display = "none";
+		document.getElementById("pay3").style.display = "none"; 
 		
-		} else if (pay_choice == "pay1") {
-			  $('#pay1').css('display', 'none');
-			  $('#pay2').css('display', 'block');
-			  $('#pay3').css('display', 'none');
-		
-		} else if (pay_choice == "pay1") {
-			  $('#pay1').css('display', 'none');
-			  $('#pay2').css('display', 'none');
-			  $('#pay3').css('display', 'block');
-		
-		} else {
-			$('#pay1').css('display', 'none');
-			  $('#pay2').css('display', 'none');
-			  $('#pay3').css('display', 'none');
+		}else if(pay_choice == "pay2"){
+			
+			document.getElementById("pay1").style.display = "none"; 
+			document.getElementById("pay2").style.display = "";
+			document.getElementById("pay3").style.display = "none"; 
+			
+		}else if(pay_choice == "pay3"){
+			
+			document.getElementById("pay1").style.display = "none"; 
+			document.getElementById("pay2").style.display = "none";
+			document.getElementById("pay3").style.display = ""; 
+			
 			
 		}
 	}
+
 </script>
 </head>
 <body>
@@ -42,13 +42,14 @@
 	<br> 3. 결제수단
 	<br>
 
-	<input type=radio name=payment value="신용카드" onclick='Payment(pay1);'>신용카드
+	<input type=radio name=payment value="신용카드"  onclick="Payment('pay1');">신용카드
+	
+	<input type=radio name=payment value="계좌이체" onclick="Payment('pay2');">계좌이체
+	
+	<input type=radio name=payment value="무통장입금" onclick="Payment('pay3');">무통장입금
+	
 	<div id="pay1" style="display: none;">신용카드 정보입니다.</div>
-
-	<input type=radio name=payment value="계좌이체" onclick='Payment(pay2);'>계좌이체
 	<div id="pay2" style="display: none;">계좌이체 정보입니다.</div>
-
-	<input type=radio name=payment value="무통장입금" onclick='Payment(pay3);'>무통장입금
 	<div id="pay3" style="display: none;">무통장입금 정보입니다.</div>
 
 
