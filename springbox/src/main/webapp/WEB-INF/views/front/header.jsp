@@ -10,6 +10,9 @@
 
 	<title>b o x</title>
 
+	<!-- base CSS -->
+    <link href="css/base_layout.css" rel="stylesheet">
+
  	<!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
 
@@ -37,9 +40,13 @@
 			<ul class="nav navbar-nav">
 				<li><a href="/projectbox/NewMusicList.box">음악</a></li>
 				<li><a href="/projectbox/ConcertList.box">공연</a></li>
+
 				<li><a href="Gogaekmain.box">고객센터</a></li>
 
 				
+
+				<li><a href="/projectbox/gogaekmain.box">고객센터</a></li>
+
 			</ul>
 		</div>
 

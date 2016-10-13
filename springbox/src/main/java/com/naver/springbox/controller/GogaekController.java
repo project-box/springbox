@@ -16,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.naver.springbox.dto.FaqBean;
 import com.naver.springbox.dto.FormBoardDto;
+import com.naver.springbox.dto.MemberBean;
 import com.naver.springbox.dto.SboardDto;
 import com.naver.springbox.service.FaqDetailAction;
 import com.naver.springbox.service.FaqListAction;
@@ -186,10 +187,11 @@ public class GogaekController {
 	// session에 로그인 정보가 없으면
 	// member/login.jsp로 이동
 	@RequestMapping("/SboardWrite.box")
-	public ModelAndView writeView(HttpServletRequest request, HttpSession session) {
+	public ModelAndView writeView(HttpSession session) {
 		ModelAndView mav = new ModelAndView();
-		if (session.getAttribute("user") == null) {			
-			mav.setViewName("/member/login");
+		
+		if (session.getAttribute("user") == null) {			            
+	        	mav.setViewName("/member/login");
 		} else {
 			mav.setViewName("/gogaek/sboardwrite");
 		}

@@ -49,7 +49,7 @@
 				    <li><a href="SboardList.box">서비스 문의 리스트</a></li>	
 			</c:if>
 			<!-- 관리자로 로그인 했을 때 -->
-			<c:if test="${suser!=null and user.status==1}">
+			<c:if test="${user!=null and user.status==1}">
 				<li><a href="FaqList.box">도움말</a></li>
 				<li><a href="FaqWrite.box">도움말 작성</a></li>
 				<li><a href="SboardList.box">서비스 문의 리스트</a></li>	
