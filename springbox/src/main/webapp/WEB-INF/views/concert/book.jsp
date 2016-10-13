@@ -9,7 +9,7 @@
 <title>Insert title here</title>
 
 <%@ include file="/WEB-INF/views/front/header.jsp"%>
-
+<script src="https://code.jquery.com/jquery-latest.js"></script>
 
 <style>
 td {
@@ -196,18 +196,7 @@ color: white;
 }
 </style>
 
-<script src="https://code.jquery.com/jquery-latest.js"></script>
 
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<link rel="stylesheet"
-	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-<script>
-
-  $( function() {
-	  $("#datepick").datepicker();
-  } );
-
-  </script>
 
 
 <script language='JavaScript'>
@@ -301,10 +290,13 @@ var nowy=now.getFullYear()
 </script>
 <script>
 
+
 		$(document).ready(function(){
 				
 		$(":checkbox").click(function(){
-				if($(this).is(":checked")){	
+				if($(this).is(":checked")){
+	
+					
 					$("#payment_seat").val($(this).val());
 			
 					/* alert( $(this).val()); */												
@@ -442,7 +434,8 @@ var nowy=now.getFullYear()
 		<td>
 		<input type="submit" value="결제하기" class="btn btn-insert" /> </td>
 		</tr>
-         </table>
+		
+</table>
 </div>
        
 	</form>
