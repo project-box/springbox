@@ -24,4 +24,7 @@ public interface PreferenceDao {
 	public List<MemberBean> getPreferenceMemberList(String loginId);
 	public List<MusicBean> getPreferenceMusicList2(Map<String, Object> map);
 	public int getPreferenceMusicCount(Map<String, Object> map);
+	
+	//test
+	public List<PreferenceBean> getPreferenceMusicList();
 }

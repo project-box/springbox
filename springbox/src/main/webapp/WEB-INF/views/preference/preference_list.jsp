@@ -37,6 +37,9 @@
 		toastr.options.positionClass = "toast-top-center";
 		toastr.options.timeOut = 2000;
 
+		
+		// 여기서 리스트&리스트 매칭을 시켜야 하는데..
+		
 		initStar($('.star'));
 	});
 
@@ -66,6 +69,7 @@
 
 	function initStar(star) {
 		star.raty({
+			//score : 0,
 			half : true,
 			starOff : 'raty/images/star-off.png',
 			starOn : 'raty/images/star-on.png',
@@ -90,7 +94,7 @@
 					success : function(data, textStatus, jqXHR) {
 						//2.성공 시 뷰 반영
 						$("#" + num).attr('class', 'thumbnail cover selected');
-						toastr.success('저장되었습니다.');
+						toastr.success('평가가 저장되었습니다.');
 					},
 					error : function(jqXHR, textStatus, errorThrown) {
 
@@ -110,7 +114,7 @@
 		initStar($('.star.' + num));
 
 		//toastr.info('저장되었습니다.');
-		toastr.success('저장되었습니다.');
+		toastr.success('평가가 삭제되었습니다.');
 	}
 
 	// out of date

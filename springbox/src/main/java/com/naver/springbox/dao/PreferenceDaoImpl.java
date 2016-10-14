@@ -80,4 +80,10 @@ public class PreferenceDaoImpl implements PreferenceDao {
 	public int getPreferenceMusicCount(Map<String, Object> map) {
 		return Integer.parseInt(sqlSession.selectOne("preference.preference_music_count", map).toString());
 	}
+	
+	@Override
+	public List<PreferenceBean> getPreferenceMusicList(){
+		List<PreferenceBean> list = sqlSession.selectList("preference.preference_music");
+		return list;
+	}
 }
