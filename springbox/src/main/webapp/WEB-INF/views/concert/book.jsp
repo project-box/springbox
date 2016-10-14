@@ -45,7 +45,7 @@ font {
 	margin-left: 50px;
 }
 
- .cnj_input2 {
+.cnj_input2 {
 	border-width: 1;
 	border-color: rgb(204, 204, 204);
 	border-style: solid;
@@ -68,23 +68,19 @@ font {
 	scrollbar-darkshadow-color: #F3f3f3;
 	scrollbar-track-color: #ffffff;
 	scrollbar-arrow-color: #f9f9f9;
-} 
+}
 /* -------------------------------------- */
-
-
 .form-control {
-	width : 200px;		
+	width: 200px;
 }
 
 h3 {
 	margin-left: 75px;
-
 }
 
-
-hr {	
+hr {
 	border: solid 1px black;
-	width: 1150px;	
+	width: 1150px;
 	margin-top: 50px;
 }
 
@@ -94,60 +90,46 @@ hr {
 	font-size: 15px;
 }
 
-.timechoice{
-
-margin-left: 50px;
-
+.timechoice {
+	margin-left: 50px;
 }
 
-.date_time_choice{
-
- float: left ;
-
+.date_time_choice {
+	float: left;
 }
 
-
-.text{
-
- margin-left: 570px;
-
+.text {
+	margin-left: 570px;
 }
 
-
-.box{
-
-margin-left: 370px;
-margin-bottom: 20px;
-margin-top: 20px;
-width:500px;
-height:30px;
-background-color: #a0a0a0;
-color: white;
-
-
-
-
+.box {
+	margin-left: 370px;
+	margin-bottom: 20px;
+	margin-top: 20px;
+	width: 500px;
+	height: 30px;
+	background-color: #a0a0a0;
+	color: white;
 }
-
 
 /* ----------------------------------------------------------- */
 
 /* checkbox*/
- .a {
-  float: left;
+.a {
+	float: left;
 	margin-right: 15px;
 	margin-top: 15px;
 }
 
 .b {
- float: left;
+	float: left;
 	margin-left: 30px;
 	margin-right: 30px;
 	margin-top: 15px;
 }
 
 .c {
- float: left;
+	float: left;
 	margin-left: 15px;
 	margin-top: 15px;
 }
@@ -165,9 +147,7 @@ color: white;
 	margin-left: 5px;
 	margin-bottom: 15px;
 	font-size: 13px;
-	
 }
-
 
 .checkbox+label:before {
 	content: "";
@@ -321,123 +301,116 @@ var nowy=now.getFullYear()
 	<form action="./payment.box" method="post" name="paymentform">
 
 
-	<div class="date_time_choice">
-	
-	
-		<h3>공연날짜 선택</h3>
-		<p id="calendar" class="cnj_input"></p>
+		<div class="date_time_choice">
 
-		
-		<div class="timechoice">
-	
-		<h3>회차선택</h3>
-		<select	id="time" class="form-control">
-		    <option>회차선택</option>			
-			<option value="1회차 12:00">1회차 12:00</option>
-			<option value="2회차 15:30">2회차 15:30</option>
-			<option value="3회차 19:00">3회차 19:00</option>
-		</select>
-	
-	</div>
-	
-	
-	</div>
-	
-	
-	<br>
-	<br>
-	
 
-<div class="seatchoice">
+			<h3>공연날짜 선택</h3>
+			<p id="calendar" class="cnj_input"></p>
 
-		<h3 class="text" >좌석 선택</h3>
-		
-		
-		
-		
-		
-		  <div >
-		  
-		  <table class="box">
-		  <tr align="center" ><td>무대</td></tr>
-		  </table>
-		  
-		  </div>
-		 
-				
-				
-				
-		<div class="a">
 
-			<c:forEach var="i" begin="1" end="50">
-				<input type="checkbox" class="checkbox" value="A구역${i}번"
-					id="A구역${i}번" name="A구역${i}번" />
-				<label for="A구역${i}번" title="A구역${i}번"></label>
-				<c:if test="${i % 5 == 0 && i != 50}">
-					<br>
-				</c:if>
-			</c:forEach>
+			<div class="timechoice">
 
+				<h3>회차선택</h3>
+				<select id="time" class="form-control">
+					<option>회차선택</option>
+					<option value="1회차 12:00">1회차 12:00</option>
+					<option value="2회차 15:30">2회차 15:30</option>
+					<option value="3회차 19:00">3회차 19:00</option>
+				</select>
+			</div>
 		</div>
 
-		<div class="b">
-
-			<c:forEach var="i" begin="121" end="200">
-				<input type="checkbox" class="checkbox" value="B구역${i-120}번"
-					id="B구역${i-120}번" name="B구역${i-120}번" />
-				<label for="B구역${i-120}번" title="B구역${i-120}번"></label>
-				<c:if test="${i % 8 == 0 && i != 200}">
-					<br>
-				</c:if>
-			</c:forEach>
-		</div>
-
-		<div class="c">
-			<c:forEach var="i" begin="201" end="250">
-
-				<input type="checkbox" class="checkbox" value="C구역${i-200}번"
-					id="C구역${i-200}번" name="C구역${i-200}번" />
-				<label for="C구역${i-200}번" title="C구역${i-200}번"></label>
-
-				<c:if test="${i % 5 == 0 && i != 250}">
-					<br>
-				</c:if>
-
-			</c:forEach>
-		</div>
-</div>
-		
 		<br>
-		<br>
-		
-		<div class="col-sm-12">
-		
-			<hr>
-		
-		<table class="table table-hover">
+
+		<div class="seatchoice">
+			<h3 class="text">좌석 선택</h3>
+			<div>
+
+				<table class="box">
+					<tr align="center">
+						<td>무대</td>
+					</tr>
+				</table>
+
+			</div>
 			
-	    <tr><th>선택한 날짜</th>
-	    	<th>선택한 회차</th>
-	    	<th>선택한 좌석</th>
-	    	<th></th>
-	    </tr>
-	    <tr>
-	    <td>
-		<input type="text" id="payment_date" name="payment_date" class="form-control" 
-		placeholder="날짜를 선택해주세요" style="font-weight: bold; border:none; align:center;" > </td>
-		<td>
-		<input type="text" id="payment_time" name="payment_time" class="form-control" 
-		placeholder="회차를 선택해주세요" style="font-weight: bold; border:none; align:center;" > </td>
-		<td>
-		<input type="text" id="payment_seat" name="payment_seat" class="form-control" 
-		placeholder="좌석을 선택해주세요" style="font-weight: bold; border:none; align:center;" ></td>
-		<td>
-		<input type="submit" value="결제하기" class="btn btn-insert" /> </td>
-		</tr>
-		
-</table>
-</div>
-       
+			
+			
+			<div class="a">
+
+				<c:forEach var="i" begin="1" end="50">
+					<input type="checkbox" class="checkbox" value="A구역${i}번"
+						id="A구역${i}번" name="A구역${i}번" />
+					<label for="A구역${i}번" title="A구역${i}번"></label>
+					<c:if test="${i % 5 == 0 && i != 50}">
+						<br>
+					</c:if>
+				</c:forEach>
+
+			</div>
+
+
+			<div class="b">
+
+				<c:forEach var="i" begin="121" end="200">
+					<input type="checkbox" class="checkbox" value="B구역${i-120}번"
+						id="B구역${i-120}번" name="B구역${i-120}번" />
+					<label for="B구역${i-120}번" title="B구역${i-120}번"></label>
+					<c:if test="${i % 8 == 0 && i != 200}">
+						<br>
+					</c:if>
+				</c:forEach>
+			</div>
+
+
+			<div class="c">
+				<c:forEach var="i" begin="201" end="250">
+
+					<input type="checkbox" class="checkbox" value="C구역${i-200}번"
+						id="C구역${i-200}번" name="C구역${i-200}번" />
+					<label for="C구역${i-200}번" title="C구역${i-200}번"></label>
+
+					<c:if test="${i % 5 == 0 && i != 250}">
+						<br>
+					</c:if>
+
+				</c:forEach>
+			</div>
+		</div>
+
+		<br> <br>
+
+		<div class="col-sm-12">
+
+			<hr>
+
+			<table class="table table-hover">
+
+				<tr>
+					<th>선택한 날짜</th>
+					<th>선택한 회차</th>
+					<th>선택한 좌석</th>
+					<th></th>
+				</tr>
+				<tr>
+					<td><input type="text" id="payment_date" name="payment_date"
+						class="form-control" placeholder="날짜를 선택해주세요"
+						style="font-weight: bold; border: none; align: center;">
+					</td>
+					<td><input type="text" id="payment_time" name="payment_time"
+						class="form-control" placeholder="회차를 선택해주세요"
+						style="font-weight: bold; border: none; align: center;">
+					</td>
+					<td><input type="text" id="payment_seat" name="payment_seat"
+						class="form-control" placeholder="좌석을 선택해주세요"
+						style="font-weight: bold; border: none; align: center;"></td>
+					<td><input type="submit" value="결제하기" class="btn btn-insert" />
+					</td>
+				</tr>
+
+			</table>
+		</div>
+
 	</form>
 
 

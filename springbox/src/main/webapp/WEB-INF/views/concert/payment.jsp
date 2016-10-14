@@ -6,6 +6,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 
+<%@ include file="/WEB-INF/views/front/header.jsp"%>
+
 
 <script src="https://code.jquery.com/jquery-latest.js"></script>
 <script>
@@ -32,28 +34,277 @@
 			
 		}
 	}
+	
+	function Text(b) {
+
+		if(b == "B"){
+			
+		document.getElementById("A").style.display = "none"; 
+		document.getElementById("B").style.display = "";
+		
+		} else if(b == "A"){
+			
+			document.getElementById("A").style.display = ""; 
+			document.getElementById("B").style.display = "none";
+
+		}
+		
+	}
+</script>
+
+<script>
+
+/* $(document).ready(function(){
+	
+	$(":text").click(function(){
+		
+    	$(this).css("border",none);
+		
+		
+	});
+	
+	
+}); */
 
 </script>
+
+
+
+<style>
+
+table{
+
+border: 1px solid #bcbcbc;
+width:400px;
+height:50px;
+text-align: center;
+
+}
+
+.title{
+
+background-color: #FF0000;
+color:white;
+font-weight: bold;
+
+}
+
+input:focus{
+
+outline: none;
+}
+
+
+</style>
+
+
+
 </head>
 <body>
 
-	1. 할인적용
-	<br> 2. 티켓수령
-	<br> 3. 결제수단
+<div class="contents">
+
+	<h4>1. 티켓정보</h4>
+	<br><br>
+	
+	<table border=1;>
+	
+	<tr class="title" >
+	<td> 날짜 </td>
+	<td> 회차 </td>
+	<td> 좌석 </td>
+	</tr>
+	
+	<tr>
+	<td>정보</td>
+	<td>정보</td>
+	<td>정보</td>
+	</tr>
+		
+	</table>
+	
+	<br>
 	<br>
 
-	<input type=radio name=payment value="신용카드"  onclick="Payment('pay1');">신용카드
+	<h4>2. 결제정보</h4>
+	<br>
+	 
+	<table border=1;>
 	
-	<input type=radio name=payment value="계좌이체" onclick="Payment('pay2');">계좌이체
+	<tr class="title" >
+	<td></td>
+	<td> 티켓금액 </td>
+	<td> 예매수수료 </td>
+	<td> 배송비 </td>
+	<td></td>
+	</tr>
 	
+	<tr>
+	<td></td>
+	<td>정보</td>
+	<td>정보</td>
+	<td>정보</td>
+	<td>정보</td>
+	</tr>
+	</table>
+	
+	<br>
+	<br>
+	
+	<table  border=1;>	
+	<tr class="title" >
+	<td></td>
+	<td>할인금액</td>
+	<td>쿠폰/예매권</td>
+	<td>포인트</td>
+	<td></td>
+	</tr>
+	
+	<tr>
+	<td></td>
+	<td>정보</td>
+	<td>정보</td>
+	<td>정보</td>
+	<td>정보</td>
+	</tr>
+	</table>	
+		
+		<br><br>
+		
+	<table  border=1;>	
+	<tr class="title" >
+	<td>총 결제금액</td>
+	
+	<tr>
+	<td colspan="4">정보</td>	
+	</tr>
+		
+	</table>
+	
+	
+	<h4>3. 티켓수령</h4>
+	
+	<input type=radio name=text value="A"  onclick="Text('A');" checked="checked" >
+	회원정보에 등록된 주소	
+	<input type=radio name=text value="B"  onclick="Text('B');" >
+	주소 새로 작성하기	
+	
+	<br>
+	
+	
+	<div id="A" style="display:">
+	
+	<table border=1;>
+	
+	<tr class="title" >
+	<td colspan="2"> 주문자정보 </td>
+	</tr>
+	
+	<tr>
+	<td width="100px"> 받으시는 분   </td>
+	<td> 정보</td>
+	</tr>
+	
+		<tr>
+	<td> 주소   </td>
+	<td> 정보</td>
+	</tr>
+	
+		<tr>
+	<td> 휴대번호  </td>
+	<td> 정보</td>
+	</tr>	
+	
+	</table> 
+	
+	</div>
+	
+	<div id="B" style="display: none;" >
+	
+	<table border=1;>
+	
+	<tr class="title" >
+	<td colspan="2"> 주문자정보 </td>
+	</tr>
+	
+	<tr>
+	<td width="100px"> 받으시는 분   </td>
+	<td><input type="text" style="border:none;" size="35"> </td>
+	</tr>
+	
+		<tr>
+	<td> 주소   </td>
+	<td><input type="text" style="border:none; " size="35"> </td>
+	</tr>
+	
+		<tr>
+	<td> 휴대번호  </td>
+	<td><input type="text" style="border:none;" size="35"> </td>
+	</tr>	
+	
+	</table> 
+	
+	</div>	
+	
+	
+	<h4>4. 결제수단</h4>
+	<br>
+
+	<input type=radio name=payment value="신용카드"  onclick="Payment('pay1');">신용카드	
+	<input type=radio name=payment value="계좌이체" onclick="Payment('pay2');">계좌이체	
 	<input type=radio name=payment value="무통장입금" onclick="Payment('pay3');">무통장입금
 	
-	<div id="pay1" style="display: none;">신용카드 정보입니다.</div>
-	<div id="pay2" style="display: none;">계좌이체 정보입니다.</div>
-	<div id="pay3" style="display: none;">무통장입금 정보입니다.</div>
+	<div id="pay1" style="display: none;"><table border=1;>
+	
+	<tr class="title" >
+	<td> 날짜 </td>
+	<td> 회차 </td>
+	<td> 좌석 </td>
+	</tr>
+	
+	<tr>
+	<td>정보</td>
+	<td>정보</td>
+	<td>정보</td>
+	</tr>
+		
+	</table></div>
+	<div id="pay2" style="display: none;"><table border=1;>
+	
+	<tr class="title" >
+	<td> 날짜 </td>
+	<td> 회차 </td>
+	<td> 좌석 </td>
+	</tr>
+	
+	<tr>
+	<td>정보</td>
+	<td>정보</td>
+	<td>정보</td>
+	</tr>
+		
+	</table></div>
+	
+	
+	<div id="pay3" style="display: none;"><table border=1;>
+	
+	<tr class="title" >
+	<td> 날짜 </td>
+	<td> 회차 </td>
+	<td> 좌석 </td>
+	</tr>
+	
+	<tr>
+	<td>정보</td>
+	<td>정보</td>
+	<td>정보</td>
+	</tr>
+		
+	</table></div>
 
+</div>
 
-
+<%@ include file="/WEB-INF/views/front/footer.jsp"%>
 
 </body>
 </html>
