@@ -158,17 +158,17 @@
 	<!-- Navigation -->
 	<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
 	<div class="container">
-		<ul class="nav navbar-nav">
+		<!-- <ul class="nav navbar-nav">
 			<li><button type="button" onclick="initStars()"
 					class="btn btn-default command-button">다시하기</button></li>
-		</ul>
+		</ul> -->
 
 		<ul class="nav navbar-nav navbar-right">
 			<li><button type="button"
 					onclick="window.location='./main.box';"
-					class="btn btn-default command-button">취소</button></li>
-			<li><button type="button" onClick="getStars()"
-					class="btn btn-warning command-button">추천받기</button></li>
+					class="btn btn-warning command-button">확인</button></li>
+			<!-- <li><button type="button" onClick="getStars()"
+					class="btn btn-warning command-button">추천받기</button></li> -->
 		</ul>
 	</div>
 

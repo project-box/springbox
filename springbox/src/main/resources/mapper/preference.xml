@@ -161,10 +161,10 @@
 	
 	<select id="preference_music" resultMap="preferenceResultMap" resultType="com.naver.springbox.dto.PreferenceBean">
 		<![CDATA[
-			select p.PREFERENCE_NUM, p.USER_ID, p.RATE, m.MUSIC_NUM, m.MUSIC_GENRE , m.MUSIC_ARTIST, m.MUSIC_TITLE
+			SELECT p.PREFERENCE_NUM, p.USER_ID, p.RATE, m.MUSIC_NUM, m.MUSIC_GENRE , m.MUSIC_ARTIST, m.MUSIC_TITLE
 				, m.MUSIC_ALBUM, m.MUSIC_PUBLISHDATE, m.ALBUMCOVERFILEPATH, m.MUSIC_LYRICS
-				from preference p join music m
-				on p.music_num = m.music_num
+				FROM PREFERENCE P JOIN MUSIC M
+				ON P.MUSIC_NUM = M.MUSIC_NUM
 		]]>
 	</select>
 </mapper>
