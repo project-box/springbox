@@ -30,7 +30,18 @@ public class TestController {
 	@Autowired
 	private PreferenceDao preferenceDao;
 
-	@Test
+	//@Test
+	public void testUpdatePreference(){
+		
+		PreferenceBean preference = new PreferenceBean();
+		preference.setUser_id("dev");
+		preference.setMusic_num(62);
+		preference.setRate((float)4.5);
+		
+		System.out.println(preferenceDao.isExistPreferenceItem(preference));	
+	}
+	
+	//@Test
 	public void testPreferenceWithMusic(){
 		List<PreferenceBean> list = preferenceDao.getPreferenceMusicList();
 		
@@ -40,13 +51,13 @@ public class TestController {
 		}
 	}
 	
-	// @Test
+	@Test
 	public void testMusic() {
 
 		MockHttpServletRequest request = new MockHttpServletRequest("POST", "");
 		request.setAttribute("page", 1);
 
-		Map map = preferenceAction.suggestConcert("abraham", request);
+		Map map = preferenceAction.suggestMusic("dev", request);
 
 		// assertEquals(map, 1);
 

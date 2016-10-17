@@ -37,9 +37,8 @@
 		toastr.options.positionClass = "toast-top-center";
 		toastr.options.timeOut = 2000;
 
-		
 		// 여기서 리스트&리스트 매칭을 시켜야 하는데..
-		
+
 		initStar($('.star'));
 	});
 
@@ -81,9 +80,11 @@
 				var num = parent.attr('class');
 				//alert(parent.attr('class'));
 
+				var rate = Math.ceil(score * 2) / 2;
+
 				var items = {
 					"music_num" : num,
-					"rate" : score
+					"rate" : rate
 				};
 
 				//1.Ajax add/update 반영
@@ -95,6 +96,9 @@
 						//2.성공 시 뷰 반영
 						$("#" + num).attr('class', 'thumbnail cover selected');
 						toastr.success('평가가 저장되었습니다.');
+						if (data == 1) {
+							addPreferenceCount();
+						}
 					},
 					error : function(jqXHR, textStatus, errorThrown) {
 
@@ -105,16 +109,34 @@
 	}
 
 	function removePreference(num) {
-		//1.Ajax remove 반영
-		//2.성공 시 뷰 반영
-		//alert(num);
-		$("#" + num).attr('class', 'thumbnail cover');
 
-		// 뷰 초기화
-		initStar($('.star.' + num));
+		if ($("#" + num).attr('class') == "thumbnail cover selected") {
+			
+			var items = {
+					"music_num" : num,
+				};
+			
+			$.ajax({
+				url : "remove_preference.box",
+				type : "POST",
+				data : items,
+				success : function(data, textStatus, jqXHR) {
 
-		//toastr.info('저장되었습니다.');
-		toastr.success('평가가 삭제되었습니다.');
+					$("#" + num).attr('class', 'thumbnail cover');
+
+					// 뷰 초기화
+					initStar($('.star.' + num));
+
+					//toastr.info('저장되었습니다.');
+					toastr.success('평가가 삭제되었습니다.');
+					removePreferenceCount();
+
+				},
+				error : function(jqXHR, textStatus, errorThrown) {
+
+				}
+			});
+		}
 	}
 
 	// out of date
@@ -150,6 +172,24 @@
 			return false;
 		}
 	}
+
+	var counter = 0;
+
+	function add() {
+		return counter += 1;
+	}
+
+	function remove() {
+		return counter -= 1;
+	}
+
+	function addPreferenceCount() {
+		document.getElementById("preferenceCount").innerHTML = add();
+	}
+
+	function removePreferenceCount() {
+		document.getElementById("preferenceCount").innerHTML = remove();
+	}
 </script>
 
 </head>
@@ -159,7 +199,7 @@
 	<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
 	<div class="container">
 		<ul class="nav navbar-nav">
-			<p id="preferenceCount">0</p>
+			<li class="vertical-li"><p id="preferenceCount">0</p></li>
 			<!-- <li><button type="button" onclick="initStars()"
 					class="btn btn-default command-button">다시하기</button></li> -->
 		</ul>
