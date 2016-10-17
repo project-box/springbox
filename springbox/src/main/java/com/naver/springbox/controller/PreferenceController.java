@@ -14,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.naver.springbox.service.PreferenceAction;
 
+// FrontController로 바꾸는게 좋지 않을까?
 @Controller
 public class PreferenceController {
 	
@@ -41,12 +42,21 @@ public class PreferenceController {
 		//return "front/main";
 	}
 	
+	@RequestMapping(value = "/make_preference.box", method=RequestMethod.GET)
+	public ModelAndView makePreference(HttpServletRequest request){
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("musiclist", preferenceAction.getMusicList(50));
+		mav.setViewName("preference/make_preference");
+		return mav;
+	}
+	
 	@RequestMapping(value = "/edit_preference.box", method=RequestMethod.GET)
 	public ModelAndView editPreference(HttpServletRequest request){
 		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("musiclist", preferenceAction.getMusicList(50));
-		mav.setViewName("preference/preference_list");
+		mav.setViewName("preference/edit_preference");
 		return mav;
 	}
 	
@@ -56,8 +66,16 @@ public class PreferenceController {
 		ModelAndView mav = new ModelAndView();
 		
 		System.out.println("선호도 반영!!!");
+		System.out.println(request.getParameter("music_num"));
+		System.out.println(request.getParameter("rate"));
 		
+		// Ajax 호출함수에서 ModelAndView를 리턴하는 의미는??
 		mav.setViewName("redirect:main.box");
 		return mav;
+	}
+	
+	@RequestMapping(value="/search_content.box")
+	public String searchContent(){
+		return "front/Search";
 	}
 }

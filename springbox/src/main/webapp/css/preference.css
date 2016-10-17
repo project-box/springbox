@@ -105,3 +105,8 @@ a {
 .selected {
 	opacity: 1;
 }
+
+#preferenceCount {
+	font-size:14px;
+	color:white;
+}

@@ -27,8 +27,19 @@
 <!-- base CSS -->
 <link href="css/base_layout.css" rel="stylesheet">
 
+<!-- toastr -->
+<link href="css/toastr.min.css" rel="stylesheet">
+<script src="js/toastr.js"></script>
+
 <script>
 	$(document).ready(function() {
+		toastr.options.preventDuplicates = false;
+		toastr.options.positionClass = "toast-top-center";
+		toastr.options.timeOut = 2000;
+
+		
+		// 여기서 리스트&리스트 매칭을 시켜야 하는데..
+		
 		initStar($('.star'));
 	});
 
@@ -58,6 +69,7 @@
 
 	function initStar(star) {
 		star.raty({
+			//score : 0,
 			half : true,
 			starOff : 'raty/images/star-off.png',
 			starOn : 'raty/images/star-on.png',
@@ -69,9 +81,25 @@
 				var num = parent.attr('class');
 				//alert(parent.attr('class'));
 
+				var items = {
+					"music_num" : num,
+					"rate" : score
+				};
+
 				//1.Ajax add/update 반영
-				//2.성공 시 뷰 반영
-				$("#" + num).attr('class', 'thumbnail cover selected');
+				$.ajax({
+					url : "update_preference.box",
+					type : "POST",
+					data : items,
+					success : function(data, textStatus, jqXHR) {
+						//2.성공 시 뷰 반영
+						$("#" + num).attr('class', 'thumbnail cover selected');
+						toastr.success('평가가 저장되었습니다.');
+					},
+					error : function(jqXHR, textStatus, errorThrown) {
+
+					}
+				});
 			}
 		});
 	}
@@ -84,6 +112,9 @@
 
 		// 뷰 초기화
 		initStar($('.star.' + num));
+
+		//toastr.info('저장되었습니다.');
+		toastr.success('평가가 삭제되었습니다.');
 	}
 
 	// out of date
@@ -127,17 +158,17 @@
 	<!-- Navigation -->
 	<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
 	<div class="container">
-		<ul class="nav navbar-nav">
+		<!-- <ul class="nav navbar-nav">
 			<li><button type="button" onclick="initStars()"
 					class="btn btn-default command-button">다시하기</button></li>
-		</ul>
+		</ul> -->
 
 		<ul class="nav navbar-nav navbar-right">
 			<li><button type="button"
 					onclick="window.location='./main.box';"
-					class="btn btn-default command-button">취소</button></li>
-			<li><button type="button" onClick="getStars()"
-					class="btn btn-warning command-button">추천받기</button></li>
+					class="btn btn-warning command-button">확인</button></li>
+			<!-- <li><button type="button" onClick="getStars()"
+					class="btn btn-warning command-button">추천받기</button></li> -->
 		</ul>
 	</div>
 
@@ -150,7 +181,7 @@
 		<div class="row">
 			<c:forEach var="b" items="${musiclist}">
 
-				<div class="col-xs-8 col-md-3 portfolio-item cover2d">
+				<div class="col-xs-12 col-md-3 portfolio-item cover2d">
 
 					<div class="positioningDiv">
 
@@ -167,34 +198,34 @@
 
 						<div class="thumbnail cover" id="${b.music_num}">
 
-							<div>
-								<img class="img-responsive img-center"
-									src="<c:url value='/img/${b.albumcoverfilepath}'/>" alt="">
 
-								<!-- 흐릿한 커버 -->
-								<div class="tile-cover"></div>
+							<img class="img-responsive img-center"
+								src="<c:url value='/img/${b.albumcoverfilepath}'/>" alt="">
 
-								<div class="tile-cover-title">
-									<c:out value="${b.music_title}" />
-									-
-									<c:out value="${b.music_artist}" />
-								</div>
+							<!-- 흐릿한 커버 -->
+							<div class="tile-cover"></div>
 
-								<div class="info-close">
-									<a href="javascript:removePreference('${b.music_num}');"> <i
-										class="fa fa-times fa-2x" aria-hidden="true"></i>
-									</a>
-								</div>
-
-								<div class="tile">
-									<div class="musicrating">
-										<center class="${b.music_num}">
-											<div class='star ${b.music_num}'></div>
-										</center>
-									</div>
-								</div>
-
+							<div class="tile-cover-title">
+								<c:out value="${b.music_title}" />
+								-
+								<c:out value="${b.music_artist}" />
 							</div>
+
+							<div class="info-close">
+								<a href="javascript:removePreference('${b.music_num}');"> <i
+									class="fa fa-times fa-2x" aria-hidden="true"></i>
+								</a>
+							</div>
+
+							<div class="tile">
+								<div class="musicrating">
+									<center class="${b.music_num}">
+										<div class='star ${b.music_num}'></div>
+									</center>
+								</div>
+							</div>
+
+
 
 						</div>
 

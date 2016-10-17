@@ -16,6 +16,7 @@ import com.naver.springbox.dao.PreferenceDao;
 import com.naver.springbox.dto.ConcertBean;
 import com.naver.springbox.dto.MemberBean;
 import com.naver.springbox.dto.MusicBean;
+import com.naver.springbox.dto.PreferenceBean;
 import com.naver.springbox.service.PreferenceAction;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -29,6 +30,16 @@ public class TestController {
 	@Autowired
 	private PreferenceDao preferenceDao;
 
+	@Test
+	public void testPreferenceWithMusic(){
+		List<PreferenceBean> list = preferenceDao.getPreferenceMusicList();
+		
+		for(PreferenceBean bean : list){
+			System.out.println(bean.getMusic().getMusic_title());
+			//System.out.println(bean.getMusic_num());
+		}
+	}
+	
 	// @Test
 	public void testMusic() {
 
@@ -46,7 +57,7 @@ public class TestController {
 		}
 	}
 
-	@Test
+	//@Test
 	public void testConcert() {
 		MockHttpServletRequest request = new MockHttpServletRequest("POST", "");
 		request.setAttribute("page", 1);
