@@ -18,13 +18,13 @@
 
 <!-- 로그인 되어 있다면 - 
 	session의 member에 로그인 정보를 저장-->
-	<c:if test="${sessionScope.loginId != null}">
-		${sessionScope.loginName}님 환영합니다.
+	<c:if test="${users != null}">
+		${users.name}님 환영합니다.
 	</c:if>
 	<div class="wrap_topbar">
 		<ul class="sf-menu">
 			<!-- 로그인 안 된 경우의 메뉴 -->
-			<c:if test="${sessionScope.loginId==null}">
+			<c:if test="${users==null}">
 				<!-- <li>
 					<a href="Login.member" class="box_layer">
 						로그인
@@ -43,13 +43,13 @@
 			
 			<!-- 일반 사용자로 로그인 한 경우 -->
 			<c:if test=
-			"${sessionScope.loginId!=null and sessionScope.loginId.dev==0}">		
+			"${users!=null and users.gubun==0}">		
 					<li><a href="FaqList.box">도움말</a></li>		
 				    <li><a href="SboardWrite.box">서비스 문의</a></li>
 				    <li><a href="SboardList.box">서비스 문의 리스트</a></li>	
 			</c:if>
 			<!-- 관리자로 로그인 했을 때 -->
-			<c:if test="${sessionScope.loginId!=null and sessionScope.loginId.dev==1}">
+			<c:if test="${users!=null and users.gubun==1}">
 				<li><a href="FaqList.box">도움말</a></li>
 				<li><a href="FaqWrite.box">도움말 작성</a></li>
 				<li><a href="SboardList.box">서비스 문의 리스트</a></li>	

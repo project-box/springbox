@@ -1,14 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!doctype html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset=UTF-8">
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 	<title>b o x</title>
+
+	<!-- base CSS -->
+    <link href="css/base_layout.css" rel="stylesheet">
 
  	<!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -35,13 +38,10 @@
 			<a class="navbar-brand" href="main.box">BOX</a>
 
 			<ul class="nav navbar-nav">
-				<li><a href="/projectbox/NewMusicList.box">음악</a></li>
-				<li><a href="/projectbox/ConcertList.box">공연</a></li>
-<<<<<<< HEAD
-				<li><a href="/projectbox/gogaekmain.box">고객센터</a></li>
-=======
-				<li><a href="/projectbox/boardList.box">고객지원</a></li>
->>>>>>> branch 'master' of https://github.com/project-box/springbox.git
+				<li><a href="music_list.box">음악</a></li>
+				<li><a href="concert_list.box">공연</a></li>
+				<li><a href="Gogaekmain.box">고객센터</a></li>
+				<li><a href="make_preference.box">신규선호도입력(임시)</a></li>
 			</ul>
 		</div>
 
@@ -49,7 +49,7 @@
 		<div class="collapse navbar-collapse"
 			id="bs-example-navbar-collapse-1">
 			<ul class="nav navbar-nav navbar-right">
-				<li><a href="#portfolio"> <i class="fa fa-search"
+				<li><a href="search_content.box"> <i class="fa fa-search"
 						aria-hidden="true" style="font-size: 20px;"></i>
 				</a></li>
 				<li>

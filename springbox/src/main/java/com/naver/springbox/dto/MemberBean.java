@@ -10,6 +10,8 @@ public class MemberBean {
 	private int age;
 	private int logincont;
 	private String status;
+	private String gubun;
+	
 	
 	public String getUser_id() {
 		return user_id;
@@ -64,6 +66,12 @@ public class MemberBean {
 	}
 	public void setStatus(String status) {
 		this.status = status;
+	}
+	public String getGubun() {
+		return gubun;
+	}
+	public void setGubun(String gubun) {
+		this.gubun = gubun;
 	}
 	
 	
