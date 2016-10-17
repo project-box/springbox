@@ -35,7 +35,7 @@
 		}
 	}
 	
-	function Text(b) {
+/* 	function Text(b) {
 
 		if(b == "B"){
 			
@@ -49,7 +49,7 @@
 
 		}
 		
-	}
+	} */
 </script>
 
 <script>
@@ -75,8 +75,8 @@
 table{
 
 border: 1px solid #bcbcbc;
-width:400px;
-height:50px;
+width:800px;
+height:70px;
 text-align: center;
 
 }
@@ -86,6 +86,7 @@ text-align: center;
 background-color: #FF0000;
 color:white;
 font-weight: bold;
+height:30px;
 
 }
 
@@ -103,7 +104,7 @@ outline: none;
 <body>
 
 <div class="contents">
-
+<!-- ----------------------------------------------------------------------------- -->
 	<h4>1. 티켓정보</h4>
 	<br><br>
 	
@@ -116,16 +117,18 @@ outline: none;
 	</tr>
 	
 	<tr>
-	<td>정보</td>
-	<td>정보</td>
-	<td>정보</td>
+	<td>${payment_date}</td>
+	<td>${payment_time}</td>
+	<td>${payment_seat}</td>
 	</tr>
 		
 	</table>
 	
 	<br>
 	<br>
-
+	<br>
+	<br>
+<!-- ----------------------------------------------------------------------------- -->
 	<h4>2. 결제정보</h4>
 	<br>
 	 
@@ -141,13 +144,15 @@ outline: none;
 	
 	<tr>
 	<td></td>
-	<td>정보</td>
-	<td>정보</td>
-	<td>정보</td>
+	<td>${concertdata.concert_price}원</td>
+	<td>1,000원</td>
+	<td>2,500원</td>
 	<td>정보</td>
 	</tr>
 	</table>
 	
+	<br>
+	<br>
 	<br>
 	<br>
 	
@@ -162,9 +167,9 @@ outline: none;
 	
 	<tr>
 	<td></td>
-	<td>정보</td>
-	<td>정보</td>
-	<td>정보</td>
+	<td>할인이 적용되지 않습니다..</td>
+	<td>쿠폰 및 예매권이 없습니다.</td>
+	<td>포인트 사용이 적용되지 않습니다.</td>
 	<td>정보</td>
 	</tr>
 	</table>	
@@ -181,9 +186,14 @@ outline: none;
 		
 	</table>
 	
+	<br>
+	<br>
+	<br>
+	<br>
 	
+	<!-- ----------------------------------------------------------------------------- -->
 	<h4>3. 티켓수령</h4>
-	
+<!-- 	
 	<input type=radio name=text value="A"  onclick="Text('A');" checked="checked" >
 	회원정보에 등록된 주소	
 	<input type=radio name=text value="B"  onclick="Text('B');" >
@@ -217,9 +227,9 @@ outline: none;
 	
 	</table> 
 	
-	</div>
+	</div> -->
 	
-	<div id="B" style="display: none;" >
+	<div>
 	
 	<table border=1;>
 	
@@ -229,24 +239,28 @@ outline: none;
 	
 	<tr>
 	<td width="100px"> 받으시는 분   </td>
-	<td><input type="text" style="border:none;" size="35"> </td>
+	<td><input type="text" style="border:none;" size="70"> </td>
 	</tr>
 	
 		<tr>
 	<td> 주소   </td>
-	<td><input type="text" style="border:none; " size="35"> </td>
+	<td><input type="text" style="border:none; " size="70"> </td>
 	</tr>
 	
 		<tr>
 	<td> 휴대번호  </td>
-	<td><input type="text" style="border:none;" size="35"> </td>
+	<td><input type="text" style="border:none;" size="70"> </td>
 	</tr>	
 	
 	</table> 
 	
 	</div>	
 	
-	
+	<br>
+	<br>
+	<br>
+	<br>
+	<!-- ----------------------------------------------------------------------------- -->
 	<h4>4. 결제수단</h4>
 	<br>
 
