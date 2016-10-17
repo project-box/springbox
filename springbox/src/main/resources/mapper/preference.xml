@@ -167,4 +167,33 @@
 				ON P.MUSIC_NUM = M.MUSIC_NUM
 		]]>
 	</select>
+	
+	<select id="preference_item_count" resultType="Integer" parameterType="com.naver.springbox.dto.PreferenceBean">
+		<![CDATA[
+			select count(*) from preference
+			where USER_ID = #{user_id} and MUSIC_NUM = #{music_num}
+		]]>
+	</select>
+	
+	<select id="add_preference_item" parameterType="com.naver.springbox.dto.PreferenceBean">
+		<![CDATA[
+			insert into preference values
+			(preference_seq.nextval, #{music_num}, #{user_id}, #{rate})
+		]]>
+	</select>
+	
+	<select id="update_preference_item" parameterType="com.naver.springbox.dto.PreferenceBean">
+		<![CDATA[
+			update preference set
+			rate = #{rate}
+			where user_id = #{user_id} and music_num = #{music_num}
+		]]>
+	</select>
+	
+	<select id="remove_preference_item" parameterType="com.naver.springbox.dto.PreferenceBean">
+		<![CDATA[
+			delete from preference
+			where user_id = #{user_id} and music_num = #{music_num}
+		]]>
+	</select>
 </mapper>

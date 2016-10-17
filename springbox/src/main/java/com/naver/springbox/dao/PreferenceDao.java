@@ -27,4 +27,13 @@ public interface PreferenceDao {
 	
 	//test
 	public List<PreferenceBean> getPreferenceMusicList();
+	
+	// 선호도 조회
+	public boolean isExistPreferenceItem(PreferenceBean preference);
+	// 선호도 추가
+	public void addPreferenceItem(PreferenceBean preference);
+	// 선호도 수정
+	public void updatePreferenceItem(PreferenceBean preference);
+	// 선호도 삭제
+	public void removePreferenceItem(PreferenceBean preference);
 }

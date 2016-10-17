@@ -1,61 +1,61 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
 <html>
 <head>
+<%@ include file="../front/header.jsp"%>
 
-<!-- <script src="http://code.jquery.com/jquery-latest.js"></script>
-<script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script> -->
+<script src="http://code.jquery.com/jquery-latest.js"></script>
+<script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" />  
 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
-<%-- <%@ include file= "/box/header.jsp" %> --%>
 
 <title>b o x</title>
+<style>
+.art {padding : 10px;}
 
+</style>
 <script>
 	$(function() {
-		$("#publishdate").datepicker();
+		$("#music_publishdate").datepicker();
 	});
 </script>
-
 <script>
 	$(document).ready(function() {
 		$("form").submit(function() {
-			if ($("#title").val() == "") {
+			if ($("#music_title").val() == "") {
 				alert("제목을 입력 하세요");
-				$("#title").focus();
+				$("#music_title").focus();
 				return false;
 			}
-			if ($("#artist").val() == "") {
+			if ($("#music_artist").val() == "") {
 				alert("아티스트를 입력 하세요");
-				$("#artist").focus();
+				$("#music_artist").focus();
 				return false;
 			}
-			if ($("similarity").val() == "") {
-				alert("유사성를 입력 하세요");
-				$("#artist").focus();
-				return false;
-			}
-			if ($("#publishdate").val() == "") {
+			if ($("#music_publishdate").val() == "") {
 				alert("발매일을 입력 하세요");
-				$("#publishdate").focus();
+				$("#music_publishdate").focus();
 				return false;
 			}
-			if ($("#genre").val() == "") {
+			if ($("#music_genre").val() == "") {
 				alert("내용을 입력 하세요");
-				$("#genre").focus();
+				$("#music_genre").focus();
 				return false;
 			}
-			if ($("#lyrics").val() == "") {
+			if ($("#music_lyrics").val() == "") {
 				alert("가사를 입력 하세요");
-				$("#lyrics").focus();
+				$("#music_lyrics").focus();
 				return false;
 			}
-			if ($("#album").val() == "") {
+			if ($("#music_album").val() == "") {
 				alert("앨범수록곡을 입력 하세요");
-				$("#album").focus();
+				$("#music_album").focus();
 				return false;
 			}
 		});
@@ -63,55 +63,46 @@
 </script>
 </head>
 <body>
+<body>
 	<div class="container">
-
-		<div class="row">
 			<div class="col-lg-12">
 				<h1 class="page-header">
 					곡 등록하기 <small> <i class="fa fa-bars" aria-hidden="true"></i>
 					</small>
 				</h1>
+				</div>
 			</div>
-			<form action="/MusicAction.box" method="post"
+			<form action="/project10_11/MusicAction.box" method="post"
 				enctype="multipart/form-data" name="musicform">
-				<table align="center">
-					<!-- <tr align="center" valign="middle">
-				<td colspan="5">곡 등록하기</td>
-			</tr> -->
+				<table align="center" width="70%">
 					<tr>
 						<td style="font-family: 돋음; font-size: 12" height="16">
-							<div align="center">제목</div> <br>
+							<div align="center" class="art">♬ 제목</div>
 						</td>
-						<td><input name="title" id="title" type="text" size="10"
+						<td><input name="music_title" id="music_title" type="text" size="10"
 							maxlength="10" value="" /></td>
 						<br>
 					</tr>
 					<tr>
 						<td style="font-family: 돋음; font-size: 12" height="16">
-							<div align="center">아티스트</div> <br>
+							<div align="center" class="art">♬ 아티스트</div>
 						</td>
-						<td><input name="artist" id="artist" type="text" size="10"
+						<td><input name="music_artist" id="music_artist" type="text" size="10"
 							maxlength="10" value="" /></td>
 						<br>
-					</tr>
+					</tr>	
 					<tr>
-						<td style="font-family: 돋음; font-size: 12" height="16">
-							<div align="center">유사성</div> <br>
+						<td style="font-family: 돋음; font-size: 12" height="18">
+							<div align="center" class="art">♬ 발매일</div>
 						</td>
-						<td><input name="similarity" id="similarity" type="test"
-							size="10" maxlength="10" value="" /><br>
-					<tr>
-						<td style="font-family: 돋음; font-size: 12" height="16">
-							<div align="center">발매일</div> <br>
-						</td>
-						<td><input name="publishdate" id="publishdate" type="text"
+						<td><input name="music_publishdate" id="music_publishdate" type="text"
 							size="10" maxlength="10" value="" /></td>
 						<br>
 					</tr>
 					<tr>
-						<td style="font-family: 돋음; font-size: 12"><br>
-							<div align="center">장르</div></td>
-						<td><select name="genre" id="genre">s
+						<td style="font-family: 돋음; font-size: 12">
+							<div align="center" class="art">♬ 장르</div></td>
+						<td><select name="music_genre" id="music_genre">
 								<option value="">---
 								<option value="발라드">발라드
 								<option value="락">락
@@ -124,21 +115,21 @@
 					</tr>
 					<tr>
 						<td style="font-family: 돋음; font-size: 12">
-							<div align="center">가사</div> <br> <br> <br> <br>
+							<div align="center" class="art">♬ 가사</div>
 						</td>
-						<td><textarea name="lyrics" id="lyrics" cols="67" rows="10"></textarea>
-						</td>
-					</tr>
-					<tr>
-						<td style="font-family: 돋음; font-size: 12">
-							<div align="center">앨범수록곡</div> <br> <br>
-						</td>
-						<td><textarea name="album" id="album" cols="67" rows="10"></textarea>
+						<td><textarea name="music_lyrics" id="music_lyrics" cols="67" rows="10"></textarea>
 						</td>
 					</tr>
 					<tr>
 						<td style="font-family: 돋음; font-size: 12">
-							<div align="center">앨범사진</div> <br> <br>
+							<div align="center" class="art">♬ 앨범수록곡</div> <br> <br>
+						</td>
+						<td><textarea name="music_album" id="music_album" cols="67" rows="10"></textarea>
+						</td>
+					</tr>
+					<tr>
+						<td style="font-family: 돋음; font-size: 12">
+							<div align="center" class="art">♬ 앨범사진</div>
 						</td>
 						<td><input name="Albumcoverfilepath" type="file" /></td>
 					</tr>
@@ -149,13 +140,12 @@
 						<td colspan="2">&nbsp;</td>
 					</tr>
 					<tr align="center" valign="middle">
-						<td colspan="5"><input type=submit value="등록"> <input
-							type=reset value="취소"
-							onclick="location.href='/MusicList.box';"></td>
+						<td colspan="5"><input type=submit value="등록"> 
+						<input type=reset value="취소"
+							onclick="location.href='./music_list.box';"></td>
 					</tr>
 				</table>
 			</form>
-
-			<%-- <%@ include file= "/box/footer.jsp" %>  --%>
+			<%@ include file="../front/footer.jsp"%>
 </body>
 </html>

@@ -22,8 +22,9 @@
 	
 	<!-- 음악 저장 -->
 	<insert id = "music_add" parameterType="com.naver.springbox.dto.MusicBean">
-		insert into	music (music_num,music_genre,music_artist,music_title,music_album,music_publishdate,albumcoverfilepath,music_lyrics)
-		values(music_seq.nextval,#{music_genre},#{music_artist},#{music_title},#{music_album},
+		<!-- insert into	music values(music_seq.nextval,#{music_genre},#{music_artist},#{music_title},#{music_album},
+		'2016/10/11',#{albumcoverfilepath,jdbcType=VARCHAR},#{music_lyrics}) -->
+		insert into	music values(music_seq.nextval,#{music_genre},#{music_artist},#{music_title},#{music_album},
 		#{music_publishdate},#{albumcoverfilepath,jdbcType=VARCHAR},#{music_lyrics})
 	</insert>
 	
