@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.naver.springbox.dto.ConcertBean;
 import com.naver.springbox.dto.ConcertBoardBean;
+import com.naver.springbox.dto.PaymentBean;
 
 @Repository
 public class ConcertDaoImpl implements ConcertDao {
@@ -136,6 +137,13 @@ public class ConcertDaoImpl implements ConcertDao {
 		else
 			return false;
 	}
-	
-	
+
+	@Override
+	@Transactional
+	public void book_list(PaymentBean pb) {
+		
+		sqlSession.insert("concert.book_list", pb);
+		
+	}
 }
+

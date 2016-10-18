@@ -86,6 +86,7 @@ function Book(){
 <input type="hidden" name="payment_date" id="payment_date"/>
 <input type="hidden" name="payment_time" id="payment_time" />
 <input type="hidden" name="payment_seat" id="payment_seat"/>
+<input type="hidden" name="payment_amount" id="payment_amount"/>
 <input type="hidden" name="concert_num"	value="${concertdata.concert_num}" />
 
 </form>

@@ -1,17 +1,22 @@
 package com.naver.springbox.controller;
 
-import java.util.List;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.naver.springbox.dto.ConcertBean;
+import com.naver.springbox.dto.PaymentBean;
+import com.naver.springbox.service.BookAction;
 import com.naver.springbox.service.ConcertAction;
 
 @Controller
@@ -24,15 +29,17 @@ public class BookController {
 		/*------------------------결제페이지로 이동-----------------*/
 		
 		@RequestMapping(value = "/payment.box",  method = RequestMethod.POST)
-		public ModelAndView getPayment(HttpServletRequest request, HttpSession session)throws Exception {
+		public ModelAndView payment(HttpServletRequest request, HttpSession session)throws Exception {
 
 			System.out.println("payment.box 들어옴");
 						
 			String payment_date = request.getParameter("payment_date");
 			String payment_seat = request.getParameter("payment_seat");
 			String payment_time = request.getParameter("payment_time");
+			int payment_amount = Integer.parseInt(request.getParameter("payment_amount"));
 			int concert_num = Integer.parseInt(request.getParameter("concert_num"));
 			
+			System.out.println(payment_amount);
 			ConcertBean dto = concertAction.concertDetail(concert_num);
 			
 			
@@ -43,6 +50,8 @@ public class BookController {
 			mav.addObject("payment_seat", payment_seat);
 			mav.addObject("payment_date", payment_date);
 			mav.addObject("payment_time", payment_time);
+			mav.addObject("payment_amount", payment_amount);
+			
 			
 			// 출력할 뷰 파일 설정
 			mav.setViewName("/concert/payment");
@@ -50,4 +59,33 @@ public class BookController {
 
 		return mav;
 	}
+		
+		
+		
+		@Autowired
+		private BookAction bookAction;
+		
+	/*----------------------결제완료 후 예매정보페이지로 이동----------------------------*/
+		
+		
+		@RequestMapping("/book_list.box")
+		public ModelAndView book_list(@ModelAttribute PaymentBean pb, HttpSession session) {
+
+			String id= (String) session.getAttribute("loginId");			
+			pb.setUser_id(id);
+			
+			bookAction.book_list(pb);
+			
+			ModelAndView mav = new ModelAndView();
+			
+			mav.addObject("paymentdata", pb);
+			mav.setViewName("/concert/book_list");
+			
+			return mav;
+			
+			
+		}
+		
+		
+		
 }

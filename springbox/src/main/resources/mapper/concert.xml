@@ -64,6 +64,18 @@
 	</delete>
 	
 	
+	<!-- <결제정보 등록> -->
+	<insert id="book_list" parameterType="com.naver.springbox.dto.PaymentBean">
+		insert into payment(
+		payment_num,concert_num,user_id,payment_check,
+		payment_amount,payment_registerdate,payment_seat,
+		payment_date,payment_time,payment_price,payment_address
+		) values(
+		payment_seq.nextval,#{concert_num},#{user_id},#{payment_check},
+		#{payment_amount},sysdate,#{payment_seat},#{payment_date},#{payment_time},
+		#{payment_price},#{payment_address})
+	</insert>
+
 
 
 </mapper>

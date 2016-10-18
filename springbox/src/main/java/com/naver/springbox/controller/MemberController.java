@@ -53,6 +53,7 @@ public class MemberController {
 				    session.setAttribute("users", users);
 					session.setAttribute("loginId", users.getUser_id());
 					session.setAttribute("loginName", users.getName());
+					session.setAttribute("loginPhone", users.getPhone());
 
 				} else {
 					// 패스워드 틀림

@@ -58,9 +58,8 @@ hr {
 }
 
 .table-hover {
-	width: 600px;
-	margin-left: 80px;
-	font-size: 15px;
+	width: 300px;
+	font-size: 13px;
 }
 
 .timechoice {
@@ -232,7 +231,7 @@ var nowy=now.getFullYear()
  function Test(dayCount,month,year){
 	 
 
-	 var date = year+"년 "+(month+1)+"월 "+dayCount+"일";
+	 var date = year+"/"+(month+1)+"/"+dayCount;
 
 	document.getElementById('payment_date').value = date
 
@@ -245,6 +244,7 @@ function Send() {
    opener.document.paymentform.payment_date.value=$("#payment_date").val();
    opener.document.paymentform.payment_time.value=$("#payment_time").val();
    opener.document.paymentform.payment_seat.value=$("#payment_seat").val();
+   opener.document.paymentform.payment_amount.value=$("#payment_amount").val();
    
     opener.location.href="javascript:Call();";
 
@@ -276,6 +276,14 @@ function Send() {
 				/* alert( $(this).val()); */												
 				
 		});	
+		
+		$("#amount").click(function(){
+			
+			$("#payment_amount").val($(this).val());
+	
+			/* alert( $(this).val()); */												
+			
+	});	
 
 		}); 
 
@@ -304,12 +312,27 @@ function Send() {
 					<option value="2회차 15:30">2회차 15:30</option>
 					<option value="3회차 19:00">3회차 19:00</option>
 				</select>
+				
 
 			</div>
 
 			<br>
 
 			<div class="seatchoice">
+			
+			
+				<h3>좌석 수 선택</h3>
+				<br> <select id="amount" class="form-control">
+					<option>좌석 수 선택</option>
+					<option value="1">1</option>
+					<option value="2">2</option>
+					<option value="3">3</option>
+					<option value="4">4</option>
+					<option value="5">5</option>
+					<option value="6">6</option>
+					<option value="7">7</option>				
+				</select>
+			
 				<h3>좌석 선택</h3>
 				<br>
 				<div>
@@ -379,6 +402,7 @@ function Send() {
 					<tr>
 						<th>선택한 날짜</th>
 						<th>선택한 회차</th>
+						<th>선택한 좌석 수</th>
 						<th>선택한 좌석</th>
 						<th></th>
 					</tr>
@@ -391,6 +415,10 @@ function Send() {
 							class="form-control" placeholder="회차를 선택해주세요"
 							style="font-weight: bold; border: none; align: center;">
 						</td>
+						<td><input type="text" id="payment_amount" name="payment_amount"
+							class="form-control" placeholder="좌석 수를 선택해주세요"
+							style="font-weight: bold; border: none; align: center;">
+						</td>						
 						<td><input type="text" id="payment_seat" name="payment_seat"
 							class="form-control" placeholder="좌석을 선택해주세요"
 							style="font-weight: bold; border: none; align: center;"></td>

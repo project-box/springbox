@@ -39,7 +39,7 @@ public class ConcertController {
 
 	
 	@RequestMapping("concert_add.box")
-	public ModelAndView writeBoard(ConcertBean dto, HttpServletRequest request) {
+	public ModelAndView concert_add(ConcertBean dto, HttpServletRequest request) {
 		ModelAndView mav = new ModelAndView();
 		
 		boolean r = concertAction.add(dto, request);
@@ -70,7 +70,7 @@ public class ConcertController {
 	
 	
 	@RequestMapping("/concert_list.box")
-	public ModelAndView getConcertList(HttpServletRequest request) {
+	public ModelAndView concert_list(HttpServletRequest request) {
 		ModelAndView mav = new ModelAndView();
 		HttpSession session = request.getSession();
 
@@ -104,11 +104,13 @@ public class ConcertController {
 //	private ConcertBoardBean concertboardDao;
 	
 	@RequestMapping("/concert_detail.box")
-	public ModelAndView getConcertDetail(int concert_num, HttpSession session) throws Exception {
+	public ModelAndView concert_detail(int concert_num, HttpSession session) throws Exception {
 		ModelAndView mav = new ModelAndView();
 			ConcertBean dto = concertAction.concertDetail(concert_num);
 			List <ConcertBoardBean> list= concertAction.concertboardList(concert_num);
 			int listcount=concertAction.concertboardListCount(concert_num);
+			
+			System.out.println("디테일 컨트롤 들어옴");
 			
 			// 데이터를 저장
 			mav.addObject("concertdata", dto);
@@ -124,7 +126,7 @@ public class ConcertController {
 	/*----------------------------목록 삭제(관리자)-------------------------*/
 	
 	@RequestMapping("/concert_delete.box")
-	public ModelAndView getConcertDelete(int num,
+	public ModelAndView concert_delete(int num,
 			HttpSession session) {
 		ModelAndView mav = new ModelAndView();		
 		
@@ -149,7 +151,7 @@ public class ConcertController {
 	}
 
 	@RequestMapping(value = "/book_list.box", method = RequestMethod.GET)
-	public String bookList(Locale locale, Model model) {
+	public String book_list(Locale locale, Model model) {
 
 		return "concert/book_list";
 	}
@@ -157,7 +159,7 @@ public class ConcertController {
 	/*-----------------------후기 등록-----------------------------------*/
 	
 	@RequestMapping("/concertboard_add.box")
-	public ModelAndView getConcertboardAdd(ConcertBoardBean dto, HttpServletRequest request) {
+	public ModelAndView concertboard_add(ConcertBoardBean dto, HttpServletRequest request) {
 		ModelAndView mav = new ModelAndView();
 		// 로그인 되어 있지 않으면 로그인 페이지로 이동
 		HttpSession session = request.getSession();
@@ -179,7 +181,7 @@ public class ConcertController {
 /*----------------------------후기 삭제(관리자)-------------------------*/
 	
 	@RequestMapping("/concertboard_delete.box")
-	public String getConcertBoardDelete(int concertboard_num, int concert_num,
+	public String concertboard_delete(int concertboard_num, int concert_num,
 			HttpSession session) {	
 		
 		concertAction.concertboardDelete(concertboard_num);
