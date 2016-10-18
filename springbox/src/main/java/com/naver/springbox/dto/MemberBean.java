@@ -10,7 +10,12 @@ public class MemberBean {
 	private int age;
 	private int logincont;
 	private String status;
+<<<<<<< HEAD
 	private String image;
+=======
+	private String gubun;
+	
+>>>>>>> branch 'master' of https://github.com/project-box/springbox.git
 	
 	public String getUser_id() {
 		return user_id;
@@ -66,11 +71,19 @@ public class MemberBean {
 	public void setStatus(String status) {
 		this.status = status;
 	}
+<<<<<<< HEAD
 	public String getImage() {
 		return image;
 	}
 	public void setImage(String image) {
 		this.image = image;
+=======
+	public String getGubun() {
+		return gubun;
+	}
+	public void setGubun(String gubun) {
+		this.gubun = gubun;
+>>>>>>> branch 'master' of https://github.com/project-box/springbox.git
 	}
 	
 	

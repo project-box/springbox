@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.naver.springbox.dao.MemberDao;
@@ -41,21 +42,32 @@ public class MemberController {
 	}
 
 	@RequestMapping(value = "/login_action.box", method = RequestMethod.POST)
-	public ModelAndView Login(HttpServletRequest request, HttpServletResponse response) {
+	public ModelAndView Login( HttpServletRequest request, HttpServletResponse response) {
 
 		try {
 			// ... 濡쒓렇�씤
 			String userId = request.getParameter("inputId");
 			String userPassword = request.getParameter("inputPassword");
+			HttpSession session =request.getSession();
 
-			MemberBean user = memberDao.getMemberInfo(userId);
+			MemberBean users = memberDao.getMemberInfo(userId);
 
+<<<<<<< HEAD
 			if (user != null) {
 				if (user.getPassword().equals(userPassword)) {
 					// 濡쒓렇�씤 �꽦怨�
 					HttpSession session = request.getSession();
 					session.setAttribute("loginId", user.getUser_id());
 					session.setAttribute("loginName", user.getName());
+=======
+			if (users != null) {
+				if (users.getPassword().equals(userPassword)) {
+					// 로그인 성공
+					
+				    session.setAttribute("users", users);
+					session.setAttribute("loginId", users.getUser_id());
+					session.setAttribute("loginName", users.getName());
+>>>>>>> branch 'master' of https://github.com/project-box/springbox.git
 
 				} else {
 					// �뙣�뒪�썙�뱶 ��由�
@@ -81,7 +93,9 @@ public class MemberController {
 			}
 
 			ModelAndView mav = new ModelAndView();
+			
 			mav.setViewName("redirect:main.box");
+			
 			return mav;
 
 		} catch (Exception e) {

@@ -5,6 +5,7 @@ public class PreferenceBean {
 	private int music_num;
 	private String user_id;
 	private float rate;
+	private MusicBean music;
 	
 	public int getPreference_num() {
 		return preference_num;
@@ -29,5 +30,11 @@ public class PreferenceBean {
 	}
 	public void setRate(float rate) {
 		this.rate = rate;
+	}
+	public MusicBean getMusic() {
+		return music;
+	}
+	public void setRate(MusicBean music) {
+		this.music = music;
 	}
 }
