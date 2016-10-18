@@ -176,16 +176,13 @@ public class PreferenceAction {
 		preference.setUser_id(loginId);
 		preference.setMusic_num(musicNum);
 		preference.setRate(rate);
-		System.out.println("0");
 
 		if (preferenceDao.isExistPreferenceItem(preference)) {
-			System.out.println("1");
 			// update
 			preferenceDao.updatePreferenceItem(preference);
 			return 0;
 
 		} else {
-			System.out.println("2");
 			// insert
 			preferenceDao.addPreferenceItem(preference);
 			return 1;
@@ -199,5 +196,23 @@ public class PreferenceAction {
 		preference.setMusic_num(musicNum);
 
 		preferenceDao.removePreferenceItem(preference);
+	}
+	
+	public List<MusicBean> getSubjectMusicList(String loginId, int count) {
+		try {
+			
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("userId", loginId);
+			map.put("count", count);
+			
+			return preferenceDao.getSubjectMusicList(map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	public List<PreferenceBean> getPreferenceMusic(String loginId){
+		return preferenceDao.getPreferenceMusicList(loginId);
 	}
 }

@@ -13,12 +13,29 @@
 	</select>
 	
 	<!-- 최신 곡 목록-->
-	<select id="recent_music_list" parameterType="int" resultType="com.naver.springbox.dto.MusicBean">
+	<select id="recent_music_list" parameterType="Integer" resultType="com.naver.springbox.dto.MusicBean">
 	    <![CDATA[
 		select * from 
 		  (select rownum rnum,music_num,music_genre,music_artist,
 		  music_title,music_album,music_publishdate,albumcoverfilepath,music_lyrics
 		  from (select * from music order by music_publishdate desc))
+		  where rnum <= #{count}
+		]]>
+	</select>
+	
+	<!-- 추천 대상 곡 목록-->
+	<select id="subject_music_list" parameterType="java.util.Map" resultType="com.naver.springbox.dto.MusicBean">
+	    <![CDATA[
+		select * from 
+		  (select rownum rnum,music_num,music_genre,music_artist,
+		  music_title,music_album,music_publishdate,albumcoverfilepath,music_lyrics
+		  from (
+          select music_num,music_genre,music_artist,music_title,music_album,music_publishdate,albumcoverfilepath,music_lyrics from music
+          minus
+          select preference.music_num,music_genre,music_artist,music_title,music_album,music_publishdate,albumcoverfilepath,music_lyrics from preference, music
+          where preference.music_num=music.music_num and preference.user_id = #{userId}
+          order by music_publishdate desc
+      	  ))
 		  where rnum <= #{count}
 		]]>
 	</select>
@@ -159,12 +176,13 @@
 		<association property="music" resultMap="musicResultMap" />
 	</resultMap>
 	
-	<select id="preference_music" resultMap="preferenceResultMap" resultType="com.naver.springbox.dto.PreferenceBean">
+	<select id="preference_music" resultMap="preferenceResultMap" resultType="com.naver.springbox.dto.PreferenceBean" parameterType="String">
 		<![CDATA[
 			SELECT p.PREFERENCE_NUM, p.USER_ID, p.RATE, m.MUSIC_NUM, m.MUSIC_GENRE , m.MUSIC_ARTIST, m.MUSIC_TITLE
 				, m.MUSIC_ALBUM, m.MUSIC_PUBLISHDATE, m.ALBUMCOVERFILEPATH, m.MUSIC_LYRICS
 				FROM PREFERENCE P JOIN MUSIC M
 				ON P.MUSIC_NUM = M.MUSIC_NUM
+				WHERE USER_ID = #{userId}
 		]]>
 	</select>
 	

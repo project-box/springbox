@@ -37,8 +37,6 @@
 		toastr.options.positionClass = "toast-top-center";
 		toastr.options.timeOut = 2000;
 
-		// 여기서 리스트&리스트 매칭을 시켜야 하는데..
-
 		initStar($('.star'));
 	});
 
@@ -128,7 +126,7 @@
 					initStar($('.star.' + num));
 
 					//toastr.info('저장되었습니다.');
-					toastr.success('평가가 삭제되었습니다.');
+					toastr.info('평가가 삭제되었습니다.');
 					removePreferenceCount();
 
 				},

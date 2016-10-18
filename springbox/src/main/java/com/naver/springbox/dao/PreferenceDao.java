@@ -12,12 +12,13 @@ import com.naver.springbox.dto.PreferenceBean;
 public interface PreferenceDao {
 	public List<PreferenceBean> getPreferenceList();
 	public List<MusicBean> getRecentMusicList(int count) throws SQLException;
+	public List<MusicBean> getSubjectMusicList(Map<String, Object> map) throws SQLException;
 	public List<ConcertBean> getRecentConcertList(int count) throws SQLException;
 	
 	public int getPreferenceMusicCount();
 	public int getPreferenceConcertCount();
 	
-	public List<MusicBean> getPreferenceMusicList(Map<String, Object> map);
+	//public List<MusicBean> getPreferenceMusicList(Map<String, Object> map);
 	public List<ConcertBean> getPreferenceConcertList(Map<String, Object> map);
 	
 	// 추천곡
@@ -25,8 +26,8 @@ public interface PreferenceDao {
 	public List<MusicBean> getPreferenceMusicList2(Map<String, Object> map);
 	public int getPreferenceMusicCount(Map<String, Object> map);
 	
-	//test
-	public List<PreferenceBean> getPreferenceMusicList();
+	// 로그인한 사용자의 선호도 수정 시 초기 로드에 사용.
+	public List<PreferenceBean> getPreferenceMusicList(String userId);
 	
 	// 선호도 조회
 	public boolean isExistPreferenceItem(PreferenceBean preference);

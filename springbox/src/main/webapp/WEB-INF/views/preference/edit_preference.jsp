@@ -36,11 +36,17 @@
 		toastr.options.preventDuplicates = false;
 		toastr.options.positionClass = "toast-top-center";
 		toastr.options.timeOut = 2000;
-
 		
-		// 여기서 리스트&리스트 매칭을 시켜야 하는데..
-		
+		// rating 세팅
 		initStar($('.star'));
+		
+		// rating 값 세팅
+		$('.star').each(function(){
+			var parent = $(this).parent();
+			var num = parent.attr('class');
+			$("#" + num).attr('class', 'thumbnail cover selected');
+			$(this).raty('score', $(this).prev().val());
+		});
 	});
 
 	function post(path, params, method) {
@@ -80,10 +86,12 @@
 				var parent = $(this).parent();
 				var num = parent.attr('class');
 				//alert(parent.attr('class'));
+				
+				var rate = Math.ceil(score * 2) / 2;
 
 				var items = {
 					"music_num" : num,
-					"rate" : score
+					"rate" : rate
 				};
 
 				//1.Ajax add/update 반영
@@ -95,6 +103,9 @@
 						//2.성공 시 뷰 반영
 						$("#" + num).attr('class', 'thumbnail cover selected');
 						toastr.success('평가가 저장되었습니다.');
+						if (data == 1) {
+							addPreferenceCount();
+						}
 					},
 					error : function(jqXHR, textStatus, errorThrown) {
 
@@ -105,16 +116,33 @@
 	}
 
 	function removePreference(num) {
-		//1.Ajax remove 반영
-		//2.성공 시 뷰 반영
-		//alert(num);
-		$("#" + num).attr('class', 'thumbnail cover');
+		if ($("#" + num).attr('class') == "thumbnail cover selected") {
+			
+			var items = {
+					"music_num" : num,
+				};
+			
+			$.ajax({
+				url : "remove_preference.box",
+				type : "POST",
+				data : items,
+				success : function(data, textStatus, jqXHR) {
 
-		// 뷰 초기화
-		initStar($('.star.' + num));
+					$("#" + num).attr('class', 'thumbnail cover');
 
-		//toastr.info('저장되었습니다.');
-		toastr.success('평가가 삭제되었습니다.');
+					// 뷰 초기화
+					initStar($('.star.' + num));
+
+					//toastr.info('저장되었습니다.');
+					toastr.info('평가가 삭제되었습니다.');
+					removePreferenceCount();
+
+				},
+				error : function(jqXHR, textStatus, errorThrown) {
+
+				}
+			});
+		}
 	}
 
 	// out of date
@@ -179,7 +207,7 @@
 
 	<div class="container">
 		<div class="row">
-			<c:forEach var="b" items="${musiclist}">
+			<c:forEach var="b" items="${preferenceList}">
 
 				<div class="col-xs-12 col-md-3 portfolio-item cover2d">
 
@@ -187,45 +215,44 @@
 
 						<div class="thumbnail base" id="item">
 							<img class="img-responsive img-center"
-								src="<c:url value='/img/${b.albumcoverfilepath}'/>" alt="">
+								src="<c:url value='/img/${b.music.albumcoverfilepath}'/>" alt="">
 
 							<div class="well well-sm">
-								<c:out value="${b.music_title}" />
+								<c:out value="${b.music.music_title}" />
 								-
-								<c:out value="${b.music_artist}" />
+								<c:out value="${b.music.music_artist}" />
 							</div>
 						</div>
 
-						<div class="thumbnail cover" id="${b.music_num}">
+						<div class="thumbnail cover" id="${b.music.music_num}">
 
 
 							<img class="img-responsive img-center"
-								src="<c:url value='/img/${b.albumcoverfilepath}'/>" alt="">
+								src="<c:url value='/img/${b.music.albumcoverfilepath}'/>" alt="">
 
 							<!-- 흐릿한 커버 -->
 							<div class="tile-cover"></div>
 
 							<div class="tile-cover-title">
-								<c:out value="${b.music_title}" />
+								<c:out value="${b.music.music_title}" />
 								-
-								<c:out value="${b.music_artist}" />
+								<c:out value="${b.music.music_artist}" />
 							</div>
 
 							<div class="info-close">
-								<a href="javascript:removePreference('${b.music_num}');"> <i
+								<a href="javascript:removePreference('${b.music.music_num}');"> <i
 									class="fa fa-times fa-2x" aria-hidden="true"></i>
 								</a>
 							</div>
 
 							<div class="tile">
 								<div class="musicrating">
-									<center class="${b.music_num}">
-										<div class='star ${b.music_num}'></div>
+									<center class="${b.music.music_num}">
+										<input type="hidden" id="preference+${b.music.music_num}" value="${b.rate}"/>
+										<div class='star ${b.music.music_num}'></div>
 									</center>
 								</div>
 							</div>
-
-
 
 						</div>
 
