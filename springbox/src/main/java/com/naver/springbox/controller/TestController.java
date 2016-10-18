@@ -16,6 +16,7 @@ import com.naver.springbox.dao.PreferenceDao;
 import com.naver.springbox.dto.ConcertBean;
 import com.naver.springbox.dto.MemberBean;
 import com.naver.springbox.dto.MusicBean;
+import com.naver.springbox.dto.PreferenceBean;
 import com.naver.springbox.service.PreferenceAction;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -29,13 +30,34 @@ public class TestController {
 	@Autowired
 	private PreferenceDao preferenceDao;
 
-	// @Test
+	//@Test
+	public void testUpdatePreference(){
+		
+		PreferenceBean preference = new PreferenceBean();
+		preference.setUser_id("dev");
+		preference.setMusic_num(62);
+		preference.setRate((float)4.5);
+		
+		System.out.println(preferenceDao.isExistPreferenceItem(preference));	
+	}
+	
+	@Test
+	public void testPreferenceWithMusic(){
+		List<PreferenceBean> list = preferenceAction.getPreferenceMusic("dev");
+		
+		for(PreferenceBean bean : list){
+			System.out.println(bean.getMusic().getMusic_title());
+			//System.out.println(bean.getMusic_num());
+		}
+	}
+	
+	//@Test
 	public void testMusic() {
 
 		MockHttpServletRequest request = new MockHttpServletRequest("POST", "");
 		request.setAttribute("page", 1);
 
-		Map map = preferenceAction.suggestConcert("abraham", request);
+		Map map = preferenceAction.suggestMusic("dev", request);
 
 		// assertEquals(map, 1);
 
@@ -46,7 +68,7 @@ public class TestController {
 		}
 	}
 
-	@Test
+	//@Test
 	public void testConcert() {
 		MockHttpServletRequest request = new MockHttpServletRequest("POST", "");
 		request.setAttribute("page", 1);

@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -18,7 +18,18 @@
 #img {
 	padding: 8px;
 }
+
+#button {
+	
+	font-family: Tahoma;
+	font-size: 12px;
+	color: #ffffff;
+	padding: 5px 6px;
+	background: #000000;
+	border: #000000;
+}
 </style>
+
 <title>b o x</title>
 </head>
 <body>
@@ -28,17 +39,25 @@
 		<div class="row" padding="50px">
 			<div class="col-lg-12">
 				<h1 class="page-header">
-					최신곡 <small> <a href="music_list.box"
-						aria-label="Skip to main navigation"> <i class="fa fa-bars"
-							aria-hidden="true"></i>
-					</a>
+					최신곡<small> 
+					<a href="music_list.box"
+						aria-label="Skip to main navigation"> 
+						<i class="fa fa-bars" aria-hidden="true"></i></a>
+				
+				<c:if test="${sessionScope.loginId == 'dev'}">
+					<input id="button" type=button 
+						onclick="location.href ='./music_write.box' " value="글쓰기">  &nbsp;&nbsp;&nbsp;
+					<input id="button" type=button 
+						onclick="location.href ='/boxproject10_12/MusicAction.box'" value="&nbsp;&nbsp;삭제&nbsp;&nbsp;">
+				</c:if> 
+				
+					
 					</small>
 				</h1>
+				</div>
 			</div>
 			<table>
-				
 				<!-- 레코드가 있으면 -->
-
 				<c:if test="${listcount > 0 }">
 					<tr id="menu" align="center" valign="top" bordercolor="#333333"
 						style="font-weight: bold;">
@@ -71,14 +90,13 @@
 							<tr id="over" align="center" valign="middle"
 								bordercolor="#333333"
 								onclick="location.href='./music_detail.box?num=${b.music_num}&page=${page}';"
-								onmouseover="this.style.backgroundColor='F8F8F8'" 
+								onmouseover="this.style.backgroundColor='F8F8F8'"
 								onmouseout="this.style.backgroundColor=''">
-								
+
 								<td height="23" style="font-family: Tahoma; font-size: 10pt;">
 
-									<!-- 번호 출력 부분 --> 
-									<c:out value="${b.music_num}" /> 
-									<c:set var="num" value="${num-1}" />
+									<!-- 번호 출력 부분 --> <c:out value="${b.music_num}" /> <c:set
+										var="num" value="${num-1}" />
 								</td>
 								<td style="font-family: Tahoma; font-size: 10pt;">
 									<div id="img" align="left">
@@ -143,12 +161,8 @@
 				<%
 					//	}
 				%>
-				<c:if test="${sessionScope.loginId == 'dev'}">
-					<tr align="right">
-						<td colspan="6"><a href="./music_write.box">[글쓰기]</a></td>
-					</tr>
-				</c:if>
 			</table>
+
 			<%@ include file="../front/footer.jsp"%>
 </body>
 </html>

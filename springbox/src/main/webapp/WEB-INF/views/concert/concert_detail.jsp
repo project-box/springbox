@@ -3,10 +3,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!doctype html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset=UTF-8">
 
 <%@ include file="/WEB-INF/views/front/header.jsp"%>
 <title>b o x</title>
@@ -56,6 +56,22 @@ $(document).ready(function() {
 	  
 	  });
 
+/* -----------------------팝업창에서 값 받기------------------------------ */
+
+function Book(){
+    window.name="Info"
+    window.open('book.box', '_blank', 'width=970, height=600,toolbars=yes');
+
+}
+
+    function Call(){
+    	
+        /* 	location.href="/springbox/payment.box?payment_date="+
+		$("#payment_date").val()+"&payment_time="+$("#payment_time").val()+
+	"&payment_seat="+$("#payment_seat").val() */
+
+			paymentform.submit();
+	} 
 
 </script>
 
@@ -64,6 +80,16 @@ $(document).ready(function() {
 </head>
 
 <body>
+
+
+<form name="paymentform" action="payment.box" method="post">
+<input type="hidden" name="payment_date" id="payment_date"/>
+<input type="hidden" name="payment_time" id="payment_time" />
+<input type="hidden" name="payment_seat" id="payment_seat"/>
+<input type="hidden" name="concert_num"	value="${concertdata.concert_num}" />
+
+</form>
+
 
 
 	<h3>
@@ -87,7 +113,11 @@ $(document).ready(function() {
 			pattern="yyyy-MM-dd" />
 		<br> <br> <b>가격</b>
 		&nbsp;&nbsp;&nbsp;&nbsp;${concertdata.concert_price}<br>
-		<br> <a href="book.box"><button type="button">예매하기</button></a> <a
+		
+		<br><a href=# onclick="Book();">
+		<button type="button">예매하기</button></a> 
+		
+		<a	
 			href="concert_list.box">클릭 하면 리스트로</a> <br>
 		<br>관리자만 보입니다. <a
 			href="concert_delete.box?num=${concertdata.concert_num}">[삭제]</a>

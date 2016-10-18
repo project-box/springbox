@@ -1,6 +1,7 @@
 package com.naver.springbox.dao;
 
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -16,7 +17,7 @@ import com.naver.springbox.dto.PreferenceBean;
 
 @Repository
 public class PreferenceDaoImpl implements PreferenceDao {
-	
+
 	@Autowired
 	private SqlSession sqlSession;
 
@@ -34,6 +35,13 @@ public class PreferenceDaoImpl implements PreferenceDao {
 		return list;
 	}
 	
+	@Override
+	@Transactional
+	public List<MusicBean> getSubjectMusicList(Map<String, Object> map) throws SQLException {
+		List<MusicBean> list = sqlSession.selectList("preference.subject_music_list", map);
+		return list;
+	}
+
 	/* 공연 목록 */
 	@Override
 	@Transactional
@@ -43,20 +51,25 @@ public class PreferenceDaoImpl implements PreferenceDao {
 	}
 
 	@Override
-	public int getPreferenceMusicCount() {
+	public int countPreferenceMusic() {
 		return Integer.parseInt(sqlSession.selectOne("preference.count_preference_music_list").toString());
 	}
 
 	@Override
-	public int getPreferenceConcertCount() {
+	public int countPreferenceConcert() {
 		return Integer.parseInt(sqlSession.selectOne("preference.count_preference_concert_list").toString());
 	}
-
+	
 	@Override
+	public int countPreferenceByUser(String userId){
+		return Integer.parseInt(sqlSession.selectOne("preference.count_preference_music_by_user", userId).toString());
+	}
+
+	/*@Override
 	public List<MusicBean> getPreferenceMusicList(Map<String, Object> map) {
 		List<MusicBean> list = sqlSession.selectList("preference.preference_music_list", map);
 		return list;
-	}
+	}*/
 
 	@Override
 	public List<ConcertBean> getPreferenceConcertList(Map<String, Object> map) {
@@ -69,15 +82,47 @@ public class PreferenceDaoImpl implements PreferenceDao {
 		List<MemberBean> list = sqlSession.selectList("preference.preference_member_list", loginId);
 		return list;
 	}
-	
+
 	@Override
-	public List<MusicBean> getPreferenceMusicList2(Map<String, Object> map){
+	public List<MusicBean> getPreferenceMusicList2(Map<String, Object> map) {
 		List<MusicBean> list = sqlSession.selectList("preference.preference_music_list2", map);
 		return list;
 	}
-	
+
 	@Override
 	public int getPreferenceMusicCount(Map<String, Object> map) {
-		return Integer.parseInt(sqlSession.selectOne("preference.preference_music_count", map).toString());
+		return Integer.parseInt(sqlSession.selectOne("preference.count_preference_music", map).toString());
+	}
+
+	@Override
+	public List<PreferenceBean> getPreferenceMusicList(String userId) {
+		List<PreferenceBean> list = sqlSession.selectList("preference.preference_music", userId);
+		return list;
+	}
+
+	@Override
+	public boolean isExistPreferenceItem(PreferenceBean preference) {
+
+		int count = sqlSession.selectOne("preference.count_preference_music", preference);
+
+		if (count == 0)
+			return false;
+		else
+			return true;
+	}
+
+	@Override
+	public void addPreferenceItem(PreferenceBean preference) {
+		sqlSession.insert("preference.add_preference_item", preference);
+	}
+
+	@Override
+	public void updatePreferenceItem(PreferenceBean preference) {
+		sqlSession.update("preference.update_preference_item", preference);
+	}
+
+	@Override
+	public void removePreferenceItem(PreferenceBean preference) {
+		sqlSession.delete("preference.remove_preference_item", preference);
 	}
 }
