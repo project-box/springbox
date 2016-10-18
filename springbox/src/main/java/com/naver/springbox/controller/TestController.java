@@ -41,9 +41,9 @@ public class TestController {
 		System.out.println(preferenceDao.isExistPreferenceItem(preference));	
 	}
 	
-	//@Test
+	@Test
 	public void testPreferenceWithMusic(){
-		List<PreferenceBean> list = preferenceDao.getPreferenceMusicList();
+		List<PreferenceBean> list = preferenceAction.getPreferenceMusic("dev");
 		
 		for(PreferenceBean bean : list){
 			System.out.println(bean.getMusic().getMusic_title());
@@ -51,7 +51,7 @@ public class TestController {
 		}
 	}
 	
-	@Test
+	//@Test
 	public void testMusic() {
 
 		MockHttpServletRequest request = new MockHttpServletRequest("POST", "");

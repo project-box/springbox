@@ -1,4 +1,4 @@
-package com.naver.springbox.dto;
+/*package com.naver.springbox.dto;
 
 public class SreplyDto {
 	
@@ -63,3 +63,4 @@ public class SreplyDto {
 	
 
 }
+*/

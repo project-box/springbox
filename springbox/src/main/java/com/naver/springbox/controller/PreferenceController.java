@@ -1,5 +1,6 @@
 package com.naver.springbox.controller;
 
+import java.util.List;
 import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.naver.springbox.dto.PreferenceBean;
 import com.naver.springbox.service.PreferenceAction;
 
 // FrontController로 바꾸는게 좋지 않을까?
@@ -45,9 +47,14 @@ public class PreferenceController {
 
 	@RequestMapping(value = "/make_preference.box", method = RequestMethod.GET)
 	public ModelAndView makePreference(HttpServletRequest request) {
-
+		
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("musiclist", preferenceAction.getMusicList(50));
+		
+		HttpSession session = request.getSession();
+		String loginId = (String) session.getAttribute("loginId");
+		
+		mav.addObject("musiclist", preferenceAction.getSubjectMusicList(loginId, 50));
+		mav.addObject("preferenceCount", preferenceAction.getPreferenceCountByUser(loginId));
 		mav.setViewName("preference/make_preference");
 		return mav;
 	}
@@ -56,7 +63,12 @@ public class PreferenceController {
 	public ModelAndView editPreference(HttpServletRequest request) {
 
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("musiclist", preferenceAction.getMusicList(50));
+		
+		HttpSession session = request.getSession();
+		String loginId = (String) session.getAttribute("loginId");
+		
+		mav.addObject("preferenceList", preferenceAction.getPreferenceMusic(loginId));
+		mav.addObject("preferenceCount", preferenceAction.getPreferenceCountByUser(loginId));
 		mav.setViewName("preference/edit_preference");
 		return mav;
 	}

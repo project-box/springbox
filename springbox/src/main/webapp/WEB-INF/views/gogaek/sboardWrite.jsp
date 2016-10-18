@@ -18,8 +18,7 @@ enctype을 반드시 변경해 주어야 합니다. 그렇지 않으면 파일�
 		enctype="multipart/form-data" name="sboardform">
 
 		<!-- id를 입력받지 않고 다음 요청으로 전송하기 위해서 hidden을 생성 -->
-		<input type="hidden" name="user_id" value="${member.user_id}">
-
+		<input type="hidden" name="user_id" value="${users.user_id}">
 		<table>
 			<tr align="center" valign="middle">
 				<td colspan="5">서비스 문의 </td>
@@ -28,7 +27,7 @@ enctype을 반드시 변경해 주어야 합니다. 그렇지 않으면 파일�
 				<td style="font-family: 돋음; font-size: 12" height="16">
 					<div align="center">글쓴이</div>
 				</td>
-				<td>${member.name}</td>
+				<td>${users.user_id}</td>
 			</tr>
 
 
