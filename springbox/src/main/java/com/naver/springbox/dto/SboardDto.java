@@ -119,8 +119,8 @@ public class SboardDto {
 		return s_readcount;
 	}
 
-	public void setS_readcount(int s_readCount) {
-		this.s_readcount = s_readCount;
+	public void setS_readcount(int s_readcount) {
+		this.s_readcount = s_readcount;
 	}
 
 	public Date getS_date() {

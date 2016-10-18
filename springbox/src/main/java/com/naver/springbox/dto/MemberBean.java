@@ -14,6 +14,7 @@ public class MemberBean {
 	private String image;
 =======
 	private String gubun;
+	private String image;
 	
 >>>>>>> branch 'master' of https://github.com/project-box/springbox.git
 	
@@ -84,6 +85,12 @@ public class MemberBean {
 	public void setGubun(String gubun) {
 		this.gubun = gubun;
 >>>>>>> branch 'master' of https://github.com/project-box/springbox.git
+	}
+	public String getImage() {
+		return image;
+	}
+	public void setImage(String image) {
+		this.image = image;
 	}
 	
 	

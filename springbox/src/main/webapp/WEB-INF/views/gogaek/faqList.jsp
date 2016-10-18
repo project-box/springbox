@@ -33,7 +33,7 @@ uri = "http://java.sun.com/jsp/jstl/core" %>
 				</tr>
 			</c:forEach>
 			<tr>
-				<td colspan="4" align="center"><a href="gogaekmain.jsp">[초기화면]</a></td>
+				<td colspan="4" align="center"><a href="Gogaekmain.box">[초기화면]</a></td>
 			</tr>	
 			
 		</table>

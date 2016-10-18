@@ -37,7 +37,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
 				<!-- 현재 page가 1이 아니면 이전 페이지로
 				이동할 수 있는 [이전] 링크 만들기 -->
 				<c:if test = "${page>1} ">
-					<a href="SboardList.box?page=${page-1}">[이전]	</a>
+					<a href="SboardList.box?page=${page-1}">[이전]</a>
 				</c:if>
 				<!-- 페이지 번호 목록 출력 -->
 				<c:forEach var="a" begin="${startpage}" end="${endpage}">
@@ -56,7 +56,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
 				
 				<tr>
 					<td colspan="4" align="center">
-						<a href="./gogaekmain.jsp">[메인으로]</a>
+						<a href="./Gogaekmain.box">[메인으로]</a>
 						<a href="SboardWrite.box">[게시글 작성]</a>
 					</td>
 				</tr>		
