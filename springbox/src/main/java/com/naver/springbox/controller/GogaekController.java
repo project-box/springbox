@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +17,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.naver.springbox.dto.FaqBean;
 import com.naver.springbox.dto.FormBoardDto;
-import com.naver.springbox.dto.MemberBean;
 import com.naver.springbox.dto.SboardDto;
 import com.naver.springbox.service.FaqDetailAction;
 import com.naver.springbox.service.FaqListAction;
@@ -33,8 +33,6 @@ import com.naver.springbox.service.SboardUpdateAction;
 
 @Controller
 public class GogaekController {
-	
-	
 	
 	
 	@RequestMapping("/Gogaekmain.box")
@@ -94,6 +92,8 @@ public class GogaekController {
 		boolean r = faqWriteAction.execute(dto);
 		if (r) {
 			// 목록보기로 redirect
+			
+			mav.addObject("result", dto);
 			mav.setViewName("redirect:FaqList.box");
 
 		} else {
@@ -137,6 +137,7 @@ public class GogaekController {
 		
 			SboardDto dto = sboardDetailAction.execute(num);
 			List<Map<String, Object>> list = replyListAction.getReplyList(num);
+		
 			// 데이터를 저장
 			mav.addObject("sboarddata", dto);			
 			mav.addObject("replydata", list);
@@ -155,7 +156,7 @@ public class GogaekController {
 		ModelAndView mav = new ModelAndView();
 		// 로그인 되어 있지 않으면 로그인 페이지로 이동
 		HttpSession session = request.getSession();
-		if (session.getAttribute("user") == null) {
+		if (session.getAttribute("users") == null) {
 			mav.setViewName("/member/login");
 		} else {
 			// 데이터 삽입
@@ -186,14 +187,19 @@ public class GogaekController {
 	// 요청을 처리하는 메소드
 	// session에 로그인 정보가 없으면
 	// member/login.jsp로 이동
+	
 	@RequestMapping("/SboardWrite.box")
-	public ModelAndView writeView(HttpSession session) {
+	public ModelAndView writeView(HttpServletRequest request) {
 		ModelAndView mav = new ModelAndView();
+		HttpSession session = request.getSession();
 		
-		if (session.getAttribute("user") == null) {			            
+				
+		if (session.getAttribute("users") == null) {			            
 	        	mav.setViewName("/member/login");
 		} else {
-			mav.setViewName("/gogaek/sboardwrite");
+			System.out.println("서비스 문의 컨트롤러");
+			
+			mav.setViewName("/gogaek/sboardWrite");
 		}
 		return mav;
 	}
@@ -203,9 +209,17 @@ public class GogaekController {
 	private SboardInsertAction sboardInsertAction;
 
 	@RequestMapping("SboardAddAction.box")
-	public ModelAndView writeBoard(FormBoardDto dto, HttpServletRequest request) {
+	public ModelAndView writeBoard(HttpServletRequest request, HttpServletResponse response) {
 		ModelAndView mav = new ModelAndView();
-		boolean r = sboardInsertAction.execute(dto, request);
+		System.out.println("들어옴");
+		
+		boolean r = false;
+		try {
+			r = sboardInsertAction.execute(request, response);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		if (r) {
 			// 목록보기로 리다이렉트
 			mav.setViewName("redirect:SboardList.box");
@@ -226,7 +240,7 @@ public class GogaekController {
 		ModelAndView mav = new ModelAndView();
 		// 로그인 되어 있지 않으면 로그인페이지로
 		// 이동하도록 설정
-		if (session.getAttribute("user") == null) {
+		if (session.getAttribute("users") == null) {
 			mav.setViewName("/member/login");
 		}
 		// 로그인 되어 있으면 서비스를 수행
@@ -243,15 +257,16 @@ public class GogaekController {
 	private SboardUpdateAction sboardUpdateAction;
 
 	@RequestMapping("/SboardModifyAction.box")
-	public ModelAndView updateBoard(FormBoardDto formBoardDto, HttpServletRequest request) {
+	public ModelAndView updateBoard( HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
 		ModelAndView mav = new ModelAndView();
 
 		// 로그인 한 상태가 아니면 로그인 페이지로 이동
 		HttpSession session = request.getSession();
-		if (session.getAttribute("user") == null) {
+		if (session.getAttribute("users") == null) {
 			mav.setViewName("/member/login");
 		} else {
-			boolean r = sboardUpdateAction.execute(formBoardDto, request);
+			boolean r = sboardUpdateAction.execute(request,response);
 			if (r) {
 				// 목록보기로 리다이렉트
 				mav.setViewName("redirect:SboardList.box");
@@ -272,7 +287,7 @@ public class GogaekController {
 	public ModelAndView deleteSboard(@RequestParam("num") int num, HttpSession session) {
 		ModelAndView mav = new ModelAndView();
 		// 로그인 되어 있지 않으면 로그인 페이지로 이동
-		if (session.getAttribute("user") == null) {
+		if (session.getAttribute("users") == null) {
 			mav.setViewName("/member/login");
 		} else {
 			boolean r = sboardDeleteAction.execute(num);

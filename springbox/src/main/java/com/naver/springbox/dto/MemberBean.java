@@ -11,6 +11,7 @@ public class MemberBean {
 	private int logincont;
 	private String status;
 	private String gubun;
+	private String image;
 	
 	
 	public String getUser_id() {
@@ -72,6 +73,12 @@ public class MemberBean {
 	}
 	public void setGubun(String gubun) {
 		this.gubun = gubun;
+	}
+	public String getImage() {
+		return image;
+	}
+	public void setImage(String image) {
+		this.image = image;
 	}
 	
 	
