@@ -47,13 +47,14 @@ public class PreferenceController {
 
 	@RequestMapping(value = "/make_preference.box", method = RequestMethod.GET)
 	public ModelAndView makePreference(HttpServletRequest request) {
-
+		
 		ModelAndView mav = new ModelAndView();
 		
 		HttpSession session = request.getSession();
 		String loginId = (String) session.getAttribute("loginId");
 		
 		mav.addObject("musiclist", preferenceAction.getSubjectMusicList(loginId, 50));
+		mav.addObject("preferenceCount", preferenceAction.getPreferenceCountByUser(loginId));
 		mav.setViewName("preference/make_preference");
 		return mav;
 	}
@@ -61,11 +62,13 @@ public class PreferenceController {
 	@RequestMapping(value = "/edit_preference.box", method = RequestMethod.GET)
 	public ModelAndView editPreference(HttpServletRequest request) {
 
+		ModelAndView mav = new ModelAndView();
+		
 		HttpSession session = request.getSession();
 		String loginId = (String) session.getAttribute("loginId");
 		
-		ModelAndView mav = new ModelAndView();
 		mav.addObject("preferenceList", preferenceAction.getPreferenceMusic(loginId));
+		mav.addObject("preferenceCount", preferenceAction.getPreferenceCountByUser(loginId));
 		mav.setViewName("preference/edit_preference");
 		return mav;
 	}

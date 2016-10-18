@@ -51,13 +51,18 @@ public class PreferenceDaoImpl implements PreferenceDao {
 	}
 
 	@Override
-	public int getPreferenceMusicCount() {
+	public int countPreferenceMusic() {
 		return Integer.parseInt(sqlSession.selectOne("preference.count_preference_music_list").toString());
 	}
 
 	@Override
-	public int getPreferenceConcertCount() {
+	public int countPreferenceConcert() {
 		return Integer.parseInt(sqlSession.selectOne("preference.count_preference_concert_list").toString());
+	}
+	
+	@Override
+	public int countPreferenceByUser(String userId){
+		return Integer.parseInt(sqlSession.selectOne("preference.count_preference_music_by_user", userId).toString());
 	}
 
 	/*@Override
@@ -86,7 +91,7 @@ public class PreferenceDaoImpl implements PreferenceDao {
 
 	@Override
 	public int getPreferenceMusicCount(Map<String, Object> map) {
-		return Integer.parseInt(sqlSession.selectOne("preference.preference_music_count", map).toString());
+		return Integer.parseInt(sqlSession.selectOne("preference.count_preference_music", map).toString());
 	}
 
 	@Override
@@ -98,7 +103,7 @@ public class PreferenceDaoImpl implements PreferenceDao {
 	@Override
 	public boolean isExistPreferenceItem(PreferenceBean preference) {
 
-		int count = sqlSession.selectOne("preference.preference_item_count", preference);
+		int count = sqlSession.selectOne("preference.count_preference_music", preference);
 
 		if (count == 0)
 			return false;

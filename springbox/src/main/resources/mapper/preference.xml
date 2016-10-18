@@ -186,10 +186,17 @@
 		]]>
 	</select>
 	
-	<select id="preference_item_count" resultType="Integer" parameterType="com.naver.springbox.dto.PreferenceBean">
+	<select id="count_preference_music" resultType="Integer" parameterType="com.naver.springbox.dto.PreferenceBean">
 		<![CDATA[
 			select count(*) from preference
 			where USER_ID = #{user_id} and MUSIC_NUM = #{music_num}
+		]]>
+	</select>
+	
+	<select id="count_preference_music_by_user" resultType="Integer" parameterType="String">
+		<![CDATA[
+			select count(*) from preference
+			where USER_ID = #{userId}
 		]]>
 	</select>
 	

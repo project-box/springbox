@@ -126,7 +126,7 @@ public class PreferenceAction {
 		// 데이터 가져오기
 		List<ConcertBean> list = preferenceDao.getPreferenceConcertList(map);
 		// 전체 데이터 개수 가져오기
-		int listcount = preferenceDao.getPreferenceConcertCount();
+		int listcount = preferenceDao.countPreferenceConcert();
 
 		// 가장 큰 페이지 번호 계산
 		int maxpage = (int) ((double) listcount / limit + 0.95);
@@ -214,5 +214,9 @@ public class PreferenceAction {
 	
 	public List<PreferenceBean> getPreferenceMusic(String loginId){
 		return preferenceDao.getPreferenceMusicList(loginId);
+	}
+	
+	public int getPreferenceCountByUser(String userId){
+		return preferenceDao.countPreferenceByUser(userId);
 	}
 }

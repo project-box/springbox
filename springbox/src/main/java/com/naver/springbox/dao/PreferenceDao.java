@@ -15,8 +15,9 @@ public interface PreferenceDao {
 	public List<MusicBean> getSubjectMusicList(Map<String, Object> map) throws SQLException;
 	public List<ConcertBean> getRecentConcertList(int count) throws SQLException;
 	
-	public int getPreferenceMusicCount();
-	public int getPreferenceConcertCount();
+	public int countPreferenceMusic();
+	public int countPreferenceConcert();
+	public int countPreferenceByUser(String userId);
 	
 	//public List<MusicBean> getPreferenceMusicList(Map<String, Object> map);
 	public List<ConcertBean> getPreferenceConcertList(Map<String, Object> map);

@@ -33,21 +33,21 @@
                 <!-- <div class="fill" style="background-image:url('http://placehold.it/1900x1080&text=Slide One');"></div> -->
                 <div class="fill" style="background-image:url('img/bobdylan.jpg');"></div>
                 <div class="carousel-caption">
-                    <h2>음악. 우리에게 특별한 영감을 주는.</h2>
+                    <h2>밥딜런. 문학과 음악의 경계를 넘나들다.</h2>
                 </div>
             </div>
             <div class="item">
                 <!-- Set the second background image using inline CSS below. -->
                 <div class="fill" style="background-image:url('http://placehold.it/1900x1080&text=Slide Two');"></div>
                 <div class="carousel-caption">
-                    <h2>이미지 편집, 레이아웃 정말 귀찮아!!! 디자이너가 필요해!! 우오오!</h2>
+                    <h2>여기에 들어갈 멋진 사진 이미지 찾아요!</h2>
                 </div>
             </div>
             <div class="item">
                 <!-- Set the third background image using inline CSS below. -->
                 <div class="fill" style="background-image:url('http://placehold.it/1900x1080&text=Slide Three');"></div>
                 <div class="carousel-caption">
-                    <h2>그나저나 모두들 잘 되고 있는거죠? ㅎㅎㅎ</h2>
+                    <h2>여기도요! 그나저나 모두들 잘 되고 있죠? ㅎㅎㅎ</h2>
                 </div>
             </div>
         </div>
