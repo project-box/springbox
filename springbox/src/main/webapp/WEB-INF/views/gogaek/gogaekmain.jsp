@@ -27,7 +27,7 @@
 		
 		
 			<c:if test="${member==null}">
-				<ul>
+				<ul class ="button">
 				<li><a href="login.box">로그인</a></li>	
 				<li><a href="/springbox/FaqList.box">도움말</a></li>
 				<li><a href="SboardWrite.box">서비스 문의</a></li>
