@@ -10,6 +10,7 @@ public class MemberBean {
 	private int age;
 	private int logincont;
 	private String status;
+	private String image;
 	
 	public String getUser_id() {
 		return user_id;
@@ -64,6 +65,12 @@ public class MemberBean {
 	}
 	public void setStatus(String status) {
 		this.status = status;
+	}
+	public String getImage() {
+		return image;
+	}
+	public void setImage(String image) {
+		this.image = image;
 	}
 	
 	
