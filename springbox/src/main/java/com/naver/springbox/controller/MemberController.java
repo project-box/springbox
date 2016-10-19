@@ -52,14 +52,6 @@ public class MemberController {
 
 			MemberBean users = memberDao.getMemberInfo(userId);
 
-<<<<<<< HEAD
-			if (user != null) {
-				if (user.getPassword().equals(userPassword)) {
-					// 濡쒓렇�씤 �꽦怨�
-					HttpSession session = request.getSession();
-					session.setAttribute("loginId", user.getUser_id());
-					session.setAttribute("loginName", user.getName());
-=======
 			if (users != null) {
 				if (users.getPassword().equals(userPassword)) {
 					// 로그인 성공
@@ -67,11 +59,8 @@ public class MemberController {
 				    session.setAttribute("users", users);
 					session.setAttribute("loginId", users.getUser_id());
 					session.setAttribute("loginName", users.getName());
-<<<<<<< HEAD
 					session.setAttribute("loginPhone", users.getPhone());
-=======
->>>>>>> branch 'master' of https://github.com/project-box/springbox.git
->>>>>>> branch 'master' of https://github.com/project-box/springbox.git
+
 
 				} else {
 					// �뙣�뒪�썙�뱶 ��由�
