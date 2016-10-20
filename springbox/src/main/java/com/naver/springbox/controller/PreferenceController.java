@@ -79,8 +79,6 @@ public class PreferenceController {
 		HttpSession session = request.getSession();
 		String loginId = (String) session.getAttribute("loginId");
 
-		System.out.println("선호도 반영!!!");
-
 		int musicNum = Integer.parseInt(request.getParameter("music_num").toString());
 		float rate = Float.parseFloat(request.getParameter("rate").toString());
 
@@ -92,8 +90,6 @@ public class PreferenceController {
 	public int removePreference(HttpServletRequest request) {
 		HttpSession session = request.getSession();
 		String loginId = (String) session.getAttribute("loginId");
-
-		System.out.println("선호도 삭제!!!");
 		
 		int musicNum = Integer.parseInt(request.getParameter("music_num").toString());
 		
@@ -103,8 +99,16 @@ public class PreferenceController {
 	}
 
 	@RequestMapping(value = "/search_content.box")
-	public String searchContent() {
-		return "front/Search";
+	public ModelAndView searchContent(HttpServletRequest request) {
+		
+		ModelAndView mav = new ModelAndView();
+		String keyword = request.getParameter("keyword");
+		
+		if(keyword != null){
+			mav.addAllObjects(preferenceAction.searchContent(keyword));
+		}
+		mav.setViewName("front/Search");
+		return mav;
 	}
 	
 	@RequestMapping(value="/get_keyword.box")
