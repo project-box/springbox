@@ -38,7 +38,7 @@ public interface ConcertDao {
 	void book_add(PaymentBean pb);
 //	public boolean insertPayment(PaymentBean dto);
 	
-	public List<PaymentBean> book_list(int num);
+	public List<PaymentBean> book_list(String user_id);
 	
 	public PaymentBean book_detail(int payment_num);
 

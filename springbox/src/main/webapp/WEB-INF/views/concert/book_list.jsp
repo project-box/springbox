@@ -15,7 +15,7 @@
 
 function Ok(payment_num, concert_num) {
 	
-	window.open('book_detail.box?payment_num='+payment_num+'&concert_num='+concert_num, '_blank', 'width=970, height=600,toolbars=yes');
+	window.open('book_detail.box?payment_num='+payment_num, '_blank', 'width=970, height=600,toolbars=yes');
 
 	
 	/* 
@@ -67,15 +67,16 @@ function Ok(payment_num, concert_num) {
 				<%-- 	<input type="hidden" name="concert_num" value="${p.concert_num}">
 					<input type="hidden" name="payment_num" value="${p.payment_num}"> --%>
 						<td>${p.payment_date}<br>
-						<input type="button" value="상세보기" onclick="Ok(${p.payment_num},${p.concert_num});"></td>												
+						<input type="button" value="상세보기" onclick="Ok(${p.payment_num});"></td>												
 				<td><br><a href="concert_detail.box?concert_num=${p.concert_num}">
-				<img src="./img/${concertdata.posterfilepath}" width="100" height="140" alt="title"/></a>				
+				<img src="/springbox/img/${p.payment_poster}" width="100" height="140" alt="title"/>
+				</a>				
 			<br><br><a href="concert_detail.box?concert_num=${p.concert_num}">
-			${concertdata.concert_title}</a><br><br></td>			
+			${p.payment_title}</a><br><br></td>			
 						<td>${p.payment_amount}</td>
 						<td>${p.payment_price}</td>
-						<td>${p.payment_check}
-						<c:if test="${p.payment_check == '결제대기'}">						
+						<td><c:if test="${p.payment_check == '신용카드'}">	결제완료</c:if>
+						<c:if test="${p.payment_check == '무통장입금'}">결제대기 <br>					
 						<input type="button" value="결제하기"></c:if>
 						</td>
 						</tr>

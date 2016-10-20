@@ -68,25 +68,22 @@ public class BookController {
 		
 		
 		@RequestMapping("/book_add.box")
-		public ModelAndView book_list(@ModelAttribute PaymentBean pb, HttpSession session) {
+		public ModelAndView book_list(@ModelAttribute PaymentBean pb, HttpSession session) throws Exception {
 			
 			String id= (String) session.getAttribute("loginId");			
 			pb.setUser_id(id);	
 			
-			String check = pb.getPayment_check(); 
+			int concert_num=pb.getConcert_num();			
+			ConcertBean cb = concertAction.concertDetail(concert_num);
 			
-			if(check.equals("신용카드") || check.equals("실시간계좌이체")){
-				
-				pb.setPayment_check("결제완료");
-				
-			}else if(check.equals("무통장입금")){
-				
-				pb.setPayment_check("결제대기");
-			}
+			System.out.println("타이틀"+cb.getConcert_title());
+			System.out.println("파일명"+cb.getPosterfilepath());
+			
+			pb.setPayment_title(cb.getConcert_title());
+			pb.setPayment_poster(cb.getPosterfilepath());
+			pb.setCancel("0");
 			
 			bookAction.book_add(pb);
-			
-			int concert_num=pb.getConcert_num();
 			
 			ModelAndView mav = new ModelAndView();
 
@@ -98,15 +95,14 @@ public class BookController {
 		/*-------------------------------예매내역------------------------------*/
 		
 		@RequestMapping("/book_list.box")
-		public ModelAndView book_list(int concert_num, HttpServletRequest request) throws Exception {
-
+		public ModelAndView book_list(int concert_num, HttpSession session) throws Exception {
 			
-				// 게시물 목록 가져오기		
-			ConcertBean dto = concertAction.concertDetail(concert_num);
-			List <PaymentBean> list= bookAction.book_list(concert_num);
+			String user_id= (String) session.getAttribute("loginId");	
+			
+				// 게시물 목록 가져오기			
+			List <PaymentBean> list= bookAction.book_list(user_id);
 			
 			ModelAndView mav = new ModelAndView();
-			mav.addObject("concertdata", dto);
 			mav.addObject("paymentdata", list);
 			mav.setViewName("/concert/book_list");
 				
@@ -118,18 +114,16 @@ public class BookController {
 		/*------------------------예매상세보기-------------------------------*/
 		
 		@RequestMapping(value = "/book_detail.box")
-		public ModelAndView book_detail(int payment_num, int concert_num, HttpServletRequest request) throws Exception {
+		public ModelAndView book_detail(int payment_num, HttpServletRequest request) throws Exception {
 			
 			
 			System.out.println("디테일 페이지 컨트롤");
 			
 			
 			PaymentBean pb = bookAction.book_detail(payment_num);
-			ConcertBean cb = concertAction.concertDetail(concert_num);
 			
 			ModelAndView mav = new ModelAndView();
 			// 데이터를 저장
-			mav.addObject("concertdata", cb);
 			mav.addObject("paymentdata", pb);
 			// 출력할 뷰 파일 설정
 			mav.setViewName("/concert/book_detail");

@@ -36,8 +36,8 @@ public class BookAction {
 	
 	/*-------------------예매내역----------------------------------*/
 	
-	public List<PaymentBean> book_list(int concert_num) {
-		List<PaymentBean> list = concertDao.book_list(concert_num);
+	public List<PaymentBean> book_list(String user_id) {
+		List<PaymentBean> list = concertDao.book_list(user_id);
 
 		return list;
 	}

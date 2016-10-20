@@ -13,7 +13,10 @@ public class PaymentBean {
 	private String payment_date;
 	private String payment_time;
 	private String payment_price;
-	private String payment_address;
+	private String payment_address;		
+	private String payment_title;
+	private String cancel;
+	private String payment_poster;
 	
 	
 	public int getPayment_num() {
@@ -81,7 +84,26 @@ public class PaymentBean {
 	}
 	public void setPayment_address(String payment_address) {
 		this.payment_address = payment_address;
+	}	
+	public String getPayment_title() {
+		return payment_title;
 	}
+	public void setPayment_title(String payment_title) {
+		this.payment_title = payment_title;
+	}
+	public String getCancel() {
+		return cancel;
+	}
+	public void setCancel(String cancel) {
+		this.cancel = cancel;
+	}
+	public String getPayment_poster() {
+		return payment_poster;
+	}
+	public void setPayment_poster(String payment_poster) {
+		this.payment_poster = payment_poster;
+	}
+	
 	
 
 	
