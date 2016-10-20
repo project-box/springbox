@@ -65,17 +65,32 @@
 	
 	
 	<!-- <결제정보 등록> -->
-	<insert id="book_list" parameterType="com.naver.springbox.dto.PaymentBean">
+	<insert id="book_add" parameterType="com.naver.springbox.dto.PaymentBean">
 		insert into payment(
 		payment_num,concert_num,user_id,payment_check,
 		payment_amount,payment_registerdate,payment_seat,
-		payment_date,payment_time,payment_price,payment_address
-		) values(
+		payment_date,payment_time,payment_price,payment_address,
+		payment_title,cancel,payment_poster) values(
 		payment_seq.nextval,#{concert_num},#{user_id},#{payment_check},
 		#{payment_amount},sysdate,#{payment_seat},#{payment_date},#{payment_time},
-		#{payment_price},#{payment_address})
+		#{payment_price},#{payment_address},#{payment_title},#{cancel},#{payment_poster})
 	</insert>
-
+	
+	
+	<!-- 예매내역 -->
+	<select id="book_list" resultType="com.naver.springbox.dto.PaymentBean">
+	    <![CDATA[
+			select * from payment where user_id=#{user_id}
+		]]>
+	</select>
+	
+	<!-- 예매디테일 -->
+	<select id="book_detail" parameterType="Integer"
+		resultType="com.naver.springbox.dto.PaymentBean">
+		<![CDATA[
+		select * from payment where payment_num=#{payment_num}
+		]]>
+	</select>
 
 
 </mapper>

@@ -206,26 +206,51 @@ public class PreferenceAction {
 
 		preferenceDao.removePreferenceItem(preference);
 	}
-	
+
 	public List<MusicBean> getSubjectMusicList(String loginId, int count) {
 		try {
-			
+
 			Map<String, Object> map = new HashMap<String, Object>();
 			map.put("userId", loginId);
 			map.put("count", count);
-			
+
 			return preferenceDao.getSubjectMusicList(map);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return null;
 	}
-	
-	public List<PreferenceBean> getPreferenceMusic(String loginId){
+
+	public List<PreferenceBean> getPreferenceMusic(String loginId) {
 		return preferenceDao.getPreferenceMusicList(loginId);
 	}
-	
-	public int getPreferenceCountByUser(String userId){
+
+	public int getPreferenceCountByUser(String userId) {
 		return preferenceDao.countPreferenceByUser(userId);
+	}
+
+	public ArrayList<Map<String, String>> searchKeyword(String keyword) {
+
+		List<String> results = preferenceDao.searchKeyword(keyword);
+
+		Map<String, String> jsonSubObject = null;
+		ArrayList<Map<String, String>> jsonList = new ArrayList<Map<String, String>>();
+
+		for (String result : results) {
+			jsonSubObject = new HashMap<String, String>();
+			jsonSubObject.put("keyword", result);
+			jsonList.add(jsonSubObject);
+		}
+
+		return jsonList;
+	}
+	
+	public Map<String, Object> searchContent(String keyword) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		map.put("resultMusic", preferenceDao.searchMusic(keyword));
+		map.put("resultConcert", preferenceDao.searchConcert(keyword));
+		
+		return map;
 	}
 }

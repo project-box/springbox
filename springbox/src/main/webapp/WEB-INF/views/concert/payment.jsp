@@ -192,7 +192,7 @@ background-color: red;
 
 	<div class="container">
 	
-	<form name="payform" action="/springbox/book_list.box" method="post">
+	<form name="payform" action="/springbox/book_add.box" method="post">
 	<input type="hidden" name="concert_num" value="${concertdata.concert_num}">
 	<input type="hidden" name="payment_date" value="${payment_date}">
 	<input type="hidden" name="payment_time" value="${payment_time}">

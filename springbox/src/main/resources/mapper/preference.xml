@@ -222,4 +222,32 @@
 			where user_id = #{user_id} and music_num = #{music_num}
 		]]>
 	</select>
+	
+	<select id="search_content_title" resultType="String" parameterType="String">
+		<![CDATA[
+			select title from(
+				select music_title as title from music
+				union
+				select music_artist as title from music
+				union
+				select concert_title as title from concert
+			)
+			where LOWER(title) like LOWER(#{keyword})
+		]]>
+	</select>
+	
+	<select id="search_content_music" resultType="com.naver.springbox.dto.MusicBean" parameterType="String">
+		<![CDATA[
+			select * from music
+			where LOWER(music_title) like LOWER('%' || #{keyword} || '%')
+			OR LOWER(music_artist) like LOWER('%' || #{keyword} || '%')
+		]]>
+	</select>
+	
+	<select id="search_content_concert" resultType="com.naver.springbox.dto.ConcertBean" parameterType="String">
+		<![CDATA[
+			select * from concert
+			where LOWER(concert_title) like LOWER('%' || #{keyword} || '%')
+		]]>
+	</select>
 </mapper>

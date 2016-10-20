@@ -1,7 +1,6 @@
 package com.naver.springbox.dao;
 
 import java.sql.SQLException;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -124,5 +123,25 @@ public class PreferenceDaoImpl implements PreferenceDao {
 	@Override
 	public void removePreferenceItem(PreferenceBean preference) {
 		sqlSession.delete("preference.remove_preference_item", preference);
+	}
+	
+	@Override
+	public List<String> searchKeyword(String keyword){
+		// 한쪽에 % 기호를 마이바티스에서 넣는 방법을 찾지 못해 호출 할 때 % 넣어줌.
+		// searchMusic, searchConcert에서는 마이바티스 xml 에서 처리
+		List<String> list = sqlSession.selectList("search_content_title", keyword + "%");
+		return list;
+	}
+	
+	@Override
+	public List<MusicBean> searchMusic(String keyword){
+		List<MusicBean> list = sqlSession.selectList("search_content_music", keyword);
+		return list;
+	}
+	
+	@Override
+	public List<ConcertBean> searchConcert(String keyword){
+		List<ConcertBean> list = sqlSession.selectList("search_content_concert", keyword);
+		return list;
 	}
 }
