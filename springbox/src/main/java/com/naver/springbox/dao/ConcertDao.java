@@ -35,12 +35,12 @@ public interface ConcertDao {
 
 	boolean getConcertBoardDelete(int num);
 
-	void book_list(PaymentBean pb);
+	void book_add(PaymentBean pb);
 //	public boolean insertPayment(PaymentBean dto);
 	
+	public List<PaymentBean> book_list(int num);
 	
-	
-	
+	public PaymentBean book_detail(int payment_num);
 
 
 }

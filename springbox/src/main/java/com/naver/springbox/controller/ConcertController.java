@@ -150,12 +150,6 @@ public class ConcertController {
 		return "concert/book";
 	}
 
-	@RequestMapping(value = "/book_list.box", method = RequestMethod.GET)
-	public String book_list(Locale locale, Model model) {
-
-		return "concert/book_list";
-	}
-	
 	/*-----------------------후기 등록-----------------------------------*/
 	
 	@RequestMapping("/concertboard_add.box")
@@ -189,7 +183,7 @@ public class ConcertController {
 		return "redirect:concert_detail.box?concert_num=" + concert_num+"&param=123";
 	}
 	
-
 	
+
 
 }

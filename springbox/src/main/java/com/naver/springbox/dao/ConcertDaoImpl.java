@@ -140,10 +140,34 @@ public class ConcertDaoImpl implements ConcertDao {
 
 	@Override
 	@Transactional
-	public void book_list(PaymentBean pb) {
+	public void book_add(PaymentBean pb) {
 		
-		sqlSession.insert("concert.book_list", pb);
+		sqlSession.insert("concert.book_add", pb);
 		
 	}
+	
+	
+	@Override
+	@Transactional
+	public List<PaymentBean> book_list(int num) {
+		// TODO Auto-generated method stub
+		
+		List<PaymentBean> list = sqlSession.selectList("concert.book_list", num);					
+		
+		return list;
+	}
+	
+	public PaymentBean book_detail(int payment_num){
+		
+		List<PaymentBean> list = sqlSession.selectList("concert.book_detail", payment_num);
+		
+		if (list == null || list.size() < 1)
+			return null;
+		else
+			return list.get(0);
+	}
+	
+	
+	
 }
 
