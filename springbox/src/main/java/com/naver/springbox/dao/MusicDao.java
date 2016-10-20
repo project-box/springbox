@@ -25,5 +25,8 @@ public interface MusicDao {
 	
 	//데이터를 삭제하는 메소드
 	public boolean deleteMusic(int num);
+	
+	//하나의 데이터를 가져오는 메소드(팝업창)
+	public MusicBean getMusicPop(int num);
 
 }

@@ -216,7 +216,7 @@
 					<div class="row">
 						<div class="col-lg-12">
 							<h1 class="page-header">
-								추천곡 <small> <a href="recommendMusicList.box" aria-label="Skip to main navigation" title="추천곡 전체 목록">
+								추천곡 <small> <a href="./recommend_music_list.box" aria-label="Skip to main navigation" title="추천곡 전체 목록">
 								<i class="fa fa-bars" aria-hidden="true"></i>
 								</a>
 								</small>
