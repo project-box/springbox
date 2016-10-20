@@ -353,7 +353,7 @@ background-color: red;
 			<label><input type=radio name=payment_check value="신용카드" onclick="Payment('pay1');"> 
 			<font size=4px>신용카드</font></label> 
 			<label><input type=radio name=payment_check value="실시간계좌이체" onclick="Payment('pay2');">	
-			<font size=4px>계좌이체</font></label> 
+			<font size=4px>실시간계좌이체</font></label> 
 			<label><input type=radio name=payment_check value="무통장입금" onclick="Payment('pay3');"> 
 			<font size=4px>무통장입금</font></label>
 
