@@ -49,6 +49,9 @@ font {
 /* -------------------------------------- */
 .form-control {
 	width: 200px;
+	font-weight: bold;
+	border: none;
+	align: center;
 }
 
 hr {
@@ -255,19 +258,42 @@ function Send() {
  
 </script>
 <script>
-
+var num=0;
+var seat_info=null;
+var x=null;
 
 		$(document).ready(function(){
-				
-		$(":checkbox").click(function(){
-				if($(this).is(":checked")){
-	
-					
-					$("#payment_seat").val($(this).val());
+		
+		$(":checkbox").click(function(){			
 			
-					/* alert( $(this).val()); */												
+				if($(this).is(":checked")){		
+					
+					num++;
+					
+					x=$(this).val();
+				
+					if(num == 1){	
+						
+	seat_info="<input type='text' id='payment_seat"+num+"' name='payment_seat' class='form-control' placeholder='좌석을 선택해주세요'>"	
+					
+				seat.innerHTML=seat_info
+						
+				$("#payment_seat"+num).val(x);
+	
+	
+			}else if(num > 1){
+						
+				
+	seat_info+="<input type='text' id='payment_seat"+num+"' name='payment_seat' class='form-control' placeholder='좌석을 선택해주세요'>"	
+							
+			seat.innerHTML=seat_info
+									
+			$("#payment_seat"+num).val(x);
+					
+			}				
 				}	
 			});	
+		
 		
 		$("#time").click(function(){
 			
@@ -312,15 +338,15 @@ function Send() {
 					<option value="2회차 15:30">2회차 15:30</option>
 					<option value="3회차 19:00">3회차 19:00</option>
 				</select>
-				
+
 
 			</div>
 
 			<br>
 
 			<div class="seatchoice">
-			
-			
+
+
 				<h3>좌석 수 선택</h3>
 				<br> <select id="amount" class="form-control">
 					<option>좌석 수 선택</option>
@@ -330,9 +356,9 @@ function Send() {
 					<option value="4">4</option>
 					<option value="5">5</option>
 					<option value="6">6</option>
-					<option value="7">7</option>				
+					<option value="7">7</option>
 				</select>
-			
+
 				<h3>좌석 선택</h3>
 				<br>
 				<div>
@@ -351,7 +377,7 @@ function Send() {
 
 						<c:forEach var="i" begin="1" end="50">
 							<input type="checkbox" class="checkbox" value="A구역${i}번"
-								id="A구역${i}번"/>
+								id="A구역${i}번" />
 							<label for="A구역${i}번" title="A구역${i}번"></label>
 							<c:if test="${i % 5 == 0 && i != 50}">
 								<br>
@@ -378,7 +404,7 @@ function Send() {
 						<c:forEach var="i" begin="201" end="250">
 
 							<input type="checkbox" class="checkbox" value="C구역${i-200}번"
-								id="C구역${i-200}번"/>
+								id="C구역${i-200}번" />
 							<label for="C구역${i-200}번" title="C구역${i-200}번"></label>
 
 							<c:if test="${i % 5 == 0 && i != 250}">
@@ -408,26 +434,17 @@ function Send() {
 					</tr>
 					<tr>
 						<td><input type="text" id="payment_date" name="payment_date"
-							class="form-control" placeholder="날짜를 선택해주세요"
-							style="font-weight: bold; border: none; align: center;">
-						</td>
+							class="form-control" placeholder="날짜를 선택해주세요"></td>
 						<td><input type="text" id="payment_time" name="payment_time"
-							class="form-control" placeholder="회차를 선택해주세요"
-							style="font-weight: bold; border: none; align: center;">
-						</td>
-						<td><input type="text" id="payment_amount" name="payment_amount"
-							class="form-control" placeholder="좌석 수를 선택해주세요"
-							style="font-weight: bold; border: none; align: center;">
-						</td>						
-						<td><input type="text" id="payment_seat" name="payment_seat"
-							class="form-control" placeholder="좌석을 선택해주세요"
-							style="font-weight: bold; border: none; align: center;"></td>
-							
-						<td><input type="button" onclick="Send();" value="결제하기" class="btn btn-insert" />
-						</td>
+							class="form-control" placeholder="회차를 선택해주세요"></td>
+						<td><input type="text" id="payment_amount"
+							name="payment_amount" class="form-control"
+							placeholder="좌석 수를 선택해주세요"></td>
+						<td width=200px;><p id="seat"></p></td>
 					</tr>
-
 				</table>
+				<input type="button" onclick="Send();" value="결제하기"
+					class="btn btn-insert" style="margin-left: 37%; width: 200px" />
 			</div>
 
 		</form>
