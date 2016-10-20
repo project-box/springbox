@@ -221,4 +221,17 @@
 			where user_id = #{user_id} and music_num = #{music_num}
 		]]>
 	</select>
+	
+	<select id="search_content_title" resultType="String" parameterType="String">
+		<![CDATA[
+			select title from(
+				select music_title as title from music
+				union
+				select music_artist as title from music
+				union
+				select concert_title as title from concert
+			)
+			where LOWER(title) like LOWER('%' || #{keyword} || '%')
+		]]>
+	</select>
 </mapper>
