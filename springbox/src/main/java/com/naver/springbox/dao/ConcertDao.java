@@ -5,6 +5,7 @@ import java.util.Map;
 
 import com.naver.springbox.dto.ConcertBean;
 import com.naver.springbox.dto.ConcertBoardBean;
+import com.naver.springbox.dto.PaymentBean;
 
 
 public interface ConcertDao {
@@ -34,6 +35,8 @@ public interface ConcertDao {
 
 	boolean getConcertBoardDelete(int num);
 
+	void book_list(PaymentBean pb);
+//	public boolean insertPayment(PaymentBean dto);
 	
 	
 	

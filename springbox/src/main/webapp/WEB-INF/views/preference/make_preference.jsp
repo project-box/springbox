@@ -32,14 +32,17 @@
 <script src="js/toastr.js"></script>
 
 <script>
+	var counter = 0;
+
 	$(document).ready(function() {
 		toastr.options.preventDuplicates = false;
 		toastr.options.positionClass = "toast-top-center";
 		toastr.options.timeOut = 2000;
 
-		// 여기서 리스트&리스트 매칭을 시켜야 하는데..
-
 		initStar($('.star'));
+		
+		counter = document.getElementById("preferenceCount").innerHTML;
+		counter *= 1;
 	});
 
 	function post(path, params, method) {
@@ -128,7 +131,7 @@
 					initStar($('.star.' + num));
 
 					//toastr.info('저장되었습니다.');
-					toastr.success('평가가 삭제되었습니다.');
+					toastr.info('평가가 삭제되었습니다.');
 					removePreferenceCount();
 
 				},
@@ -173,8 +176,6 @@
 		}
 	}
 
-	var counter = 0;
-
 	function add() {
 		return counter += 1;
 	}
@@ -199,9 +200,9 @@
 	<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
 	<div class="container">
 		<ul class="nav navbar-nav">
-			<li class="vertical-li"><p id="preferenceCount">0</p></li>
-			<!-- <li><button type="button" onclick="initStars()"
-					class="btn btn-default command-button">다시하기</button></li> -->
+			<li class="preferenceCountTitle">평가한 항목 수:</li>
+			<li class="vertical-li"><p id="preferenceCount"><c:out value="${preferenceCount}"></c:out></p></li>
+			<li><p>평가를 많이 할수록 더 정확하게 취향저격 당할 수 있습니다! 고고!</p></li>
 		</ul>
 
 		<ul class="nav navbar-nav navbar-right">

@@ -41,9 +41,9 @@ uri="http://java.sun.com/jsp/jstl/core" %>
 			<c:if test="${replydata != null }">
 				<c:forEach var="re" items="${replydata}">
 					<tr>
-						<td><img width="50" height="50" src="./image/${re.IMAGE }" /></td>
+						<td><img width="50" height="50" src="./image/${re.IMAGE}" /></td>
 						<td>
-							${re.NAME }:${re.sr_CONTENT }
+							${re.NAME}:${re.SR_CONTENT }
 						</td>
 					</tr>	
 				</c:forEach>

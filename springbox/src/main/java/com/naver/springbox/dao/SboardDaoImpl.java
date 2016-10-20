@@ -90,7 +90,7 @@ public class SboardDaoImpl implements SboardDao {
 
 	@Override
 	public boolean deleteSboard(int num) {
-		int r = sqlSession.insert("sboard.deleteSboard", num);
+		int r = sqlSession.insert("gogaek.deleteSboard", num);
 		if (r > 0)
 			return true;
 		else

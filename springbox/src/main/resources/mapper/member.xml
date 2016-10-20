@@ -13,4 +13,14 @@
 		select * from users where user_id = #{id}
 	</select>
 	
+	<!-- 회원가입시 email check를 처리해주는 sql -->
+	<select id="email_check" parameterType="String" resultType="com.naver.springbox.dto.MemberBean">
+		select * from users where email = #{email}
+	</select>	
+	<!-- 회원가입을 처리해주는 sql -->
+	<insert id="join_process" parameterType="com.naver.springbox.dto.MemberBean">
+		insert into users(user_id, password, name, email, gender, phone, age, logincont, status, gubun, image)
+		 values(#{user_id}, #{password}, #{name}, #{email}, #{gender}, #{phone}, #{age}, 0, '0', '0', #{image,jdbcType=VARCHAR})
+	</insert>
+	
 </mapper>

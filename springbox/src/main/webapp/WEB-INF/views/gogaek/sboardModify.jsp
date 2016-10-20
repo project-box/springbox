@@ -34,7 +34,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
 	<input type="hidden" name="s_num"
 	value="${sboarddata.s_num }"/>
 	<input type="hidden" name="user_id"
-	value="${member.user_id }" />
+	value="${sboarddata.user_id }" />
 	<input type="hidden" name="s_oldfile"
 	value="${sboarddata.s_file }"/>
 	
