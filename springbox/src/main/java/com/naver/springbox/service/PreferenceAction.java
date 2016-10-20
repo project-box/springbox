@@ -84,7 +84,8 @@ public class PreferenceAction {
 		// 전체 데이터 개수 가져오기
 		// int listcount = preferenceDao.getPreferenceMusicCount();
 		int listcount = preferenceDao.getPreferenceMusicCount(map);
-
+		System.out.println("listcount="+listcount);
+		
 		// 가장 큰 페이지 번호 계산
 		int maxpage = (int) ((double) listcount / limit + 0.95);
 		// 시작하는 페이지 번호 계산

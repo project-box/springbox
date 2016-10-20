@@ -1,17 +1,53 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 
+<!-- <link rel="stylesheet" type="text/css" href="style.css" /> -->
+
+<style>
+table, tr, td {
+	border: 1px solid black;
+}
+</style>
+
 </head>
 <body>
+	<table width="470" height="380">
+		<tr>
+			<td width="470" height="50" colspan="2">Title: ${music.music_title} / Artist: ${music.music_artist}</td>
+		</tr>
+		<tr>
+			<td align="center">
+				<img  width="250" height="250" src="<c:url value='/img/${music.albumcoverfilepath}'/>" alt="">
+			</td>
+			<td rowspan="2">가사
+				<!-- style="font-family: Tahoma; font-size: 9pt; overflow: auto;" -->
+				<%-- ${music.music_lyrics} --%>
+			</td>
+		</tr>
+		<tr>
+		<td width="200" height="40"><audio controls="controls">
+				<source src="song/Hello.mp3" type="audio/mp3" />
+				</audio></td></tr>
+		<%-- <tr >
+			<td>
+				<audio controls="controls">
+				<source src="10_20springbox/song/${b.music_mp3}" type="audio/mp3" />
+				</audio>
+			
+			</td>
+			<td></td>
+		</tr> --%>
+	</table>
 
-	<c:out value="${music.music_title}"></c:out><br>
 
-<%-- 
+
+	<%-- 	<c:out value="${music.music_title}"></c:out> --%>
+	<%-- 
 
 			<div class="image">
 				<img class="img-responsive img-center" width="350" height="400"

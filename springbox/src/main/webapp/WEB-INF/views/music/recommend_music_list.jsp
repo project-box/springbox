@@ -33,9 +33,9 @@
 </style>
 
 <script>
-	function myFunction() {
-		window.open("/springbox/music_pop.box","window팝업",
-				"width=500, height=400, menubar=no, status=no, toolbar=no, left=100, top=100");
+	function myFunction(num) {
+		var ref="/springbox/music_pop.box?num="+num
+		window.open(ref,"","width=500, height=400,left=100, top=100,");
 		 if (!e)
 			var e = window.event; // Get the window event
 		e.cancelBubble = true; // IE Stop propagation
@@ -133,8 +133,8 @@
 							<div align="center">${b.music_genre}</div>
 						</td>
 						<td style="font-family: Tahoma; font-size: 10pt;">
-							<img class="player" src="img/play.jpg" height="20" onclick="myFunction()">
-							<img class="player" src="img/pause.jpg" height="20" onclick="myFunction()">
+							<img class="player" src="img/play.jpg" height="20" onclick="myFunction('${b.music_num}')">
+							<img class="player" src="img/pause.jpg" height="20" onclick="myFunction('${b.music_num}')">
 							</td>
 							
 				</div>
