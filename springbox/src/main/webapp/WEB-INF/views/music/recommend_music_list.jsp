@@ -28,7 +28,7 @@
 	padding: 5px 6px;
 	background: #000000;
 	border: #000000;
-}
+
 
 </style>
 
@@ -43,25 +43,15 @@
 			e.stopPropagation(); // Other Broswers
 		console.log('td clicked'); 
 	};
-	
-	/* function tdclick(e) {
-		if (!e)
-			var e = window.event; // Get the window event
-		e.cancelBubble = true; // IE Stop propagation
-		if (e.stopPropagation)
-			e.stopPropagation(); // Other Broswers
-		console.log('td clicked');
 
-		alert("야호");
-	}; */
 </script>
 <body>
+<div class="container">
 	<!--추천곡 -->
 	<div class="row" padding="50px">
 		<div class="col-lg-12">
 			<h1 class="page-header">
-				추천곡<small> <a href="music_list.box"
-					aria-label="Skip to main navigation"> <i class="fa fa-bars"
+				추천곡<small> <a aria-label="Skip to main navigation"> <i class="fa fa-bars"
 						aria-hidden="true"></i></a>
 				</small>
 			</h1>
@@ -113,10 +103,8 @@
 								<img class="img-responsive img-center"
 									src="
 							<c:url value='/img/${b.albumcoverfilepath}'/>"
-									alt="">
-							</div>
+									alt=""></div>
 						</td>
-
 						<td style="font-family: Tahoma; font-size: 10pt;">
 							<div align="center">${b.music_title}</div>
 						</td>
@@ -136,11 +124,9 @@
 							<img class="player" src="img/play.jpg" height="20" onclick="myFunction('${b.music_num}')">
 							<img class="player" src="img/pause.jpg" height="20" onclick="myFunction('${b.music_num}')">
 							</td>
-							
-				</div>
-				</td>
-				</tr>
-				</div>
+		</tr>
+		</div>
+				
 
 			</c:forEach>
 			<%
@@ -165,9 +151,7 @@
 			</tr>
 
 		</c:if>
-		<%
-			//}else{
-		%>
+		
 		<!-- 레코드가 없으면 -->
 		<c:if test="${listcount == 0 }">
 			<tr align="center" valign="middle">
@@ -175,9 +159,7 @@
 				<td align="right"><font size=2>추천곡이 없습니다.</font></td>
 			</tr>
 		</c:if>
-		<%
-			//	}
-		%>
+		
 	</table>
 
 		<%@ include file="../front/footer.jsp"%>
