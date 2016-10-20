@@ -235,4 +235,13 @@ public class PreferenceAction {
 
 		return jsonList;
 	}
+	
+	public Map<String, Object> searchContent(String keyword) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		map.put("resultMusic", preferenceDao.searchMusic(keyword));
+		map.put("resultConcert", preferenceDao.searchConcert(keyword));
+		
+		return map;
+	}
 }
