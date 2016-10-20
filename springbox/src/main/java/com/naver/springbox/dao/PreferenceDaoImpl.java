@@ -125,4 +125,10 @@ public class PreferenceDaoImpl implements PreferenceDao {
 	public void removePreferenceItem(PreferenceBean preference) {
 		sqlSession.delete("preference.remove_preference_item", preference);
 	}
+	
+	@Override
+	public List<String> searchKeyword(String keyword){
+		List<String> list = sqlSession.selectList("search_content_title", keyword);
+		return list;
+	}
 }

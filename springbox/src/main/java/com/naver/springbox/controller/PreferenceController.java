@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.naver.springbox.dto.PreferenceBean;
 import com.naver.springbox.service.PreferenceAction;
 
 // FrontController로 바꾸는게 좋지 않을까?
@@ -106,5 +105,12 @@ public class PreferenceController {
 	@RequestMapping(value = "/search_content.box")
 	public String searchContent() {
 		return "front/Search";
+	}
+	
+	@RequestMapping(value="/get_keyword.box")
+	@ResponseBody
+	public List getKeyword(HttpServletRequest request){
+		String keyword = request.getParameter("query");
+		return preferenceAction.searchKeyword(keyword);
 	}
 }
