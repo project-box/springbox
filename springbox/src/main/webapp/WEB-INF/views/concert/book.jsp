@@ -255,26 +255,37 @@ function Send() {
     
 }
 /* --------------------------제이쿼리------------------------------- */
-var num=0;
-var seat_info=null;
-var x=null;
-var y=null;
+var num=0; //선택한 개수
+var seat_info=null; // 선택한 체크박스의 값
+var y=null;  /// 좌석 수
 var oTbl;
+var max=5;   //선택가능 갯수
+var checked;
+var x=null;
+var z=null;
 
 		$(document).ready(function(){		
-		$(":checkbox").click(function(){			
-			
-				if($(this).is(":checked")==true){		
+		$(":checkbox").click(function(){				
+          		
+			checked = $(this);
+          	      x = checked.val();
+          	    num =  $(":checkbox:checked").length;
+ 
+          	    
+				if(checked.is(":checked")==true){	
+					/*num++; */		
+					/* 
+					Seat_num(x,num,checked); */
 					
-					num++;
-					x=$(this).val();
-					Seat_num(x,num);	
+					$("#payment_seat"+num).val(x);
 					
-				}if($(this).is(":checked")==false){
+				}if(checked.is(":checked")==false){	
+					 
+					removeRow(x,num);
 					
-					removeRow();
 				}				
 			});			
+		
 		
 		$("#time").click(function(){			
 				$("#payment_time").val($(this).val());		
@@ -295,59 +306,90 @@ var oTbl;
 	});	
 
 		}); 
-
+		/* 
 function Seat_num(){	
-
-	if(num == 1){		
-		
-	$("#payment_seat").val(x);
+ 	   if(num == 1){	
+ 
+	      $("#payment_seat1").val(x);
+	      
+	      z = document.getElementById("payment_seat1").value;			
 	
-	}else if(num > 1){	
+	   }else if(num > 1){	
 	  
 		oTbl = document.getElementById("addTable");
-		  var oRow = oTbl.insertRow(-1);
-/* 	 	 oRow.onmouseover=function(){oTbl.clickedRowIndex=this.rowIndex};//clickedRowIndex - 클릭한 Row의 위치를 확인;
- */		  var oCell1 = oRow.insertCell(0);
+		  var oRow = oTbl.insertRow(-1); 
+	 	 var oCell1 = oRow.insertCell(0);
 		  var oCell2 = oRow.insertCell(1);
 		  var oCell3 = oRow.insertCell(2);
 		  var oCell4 = oRow.insertCell(3);
 		
-      oCell1.innerHTML ="";
-	  oCell2.innerHTML ="";
-	  oCell3.innerHTML ="";
-	  oCell4.innerHTML ="<input type='text' id='payment_seat' name='payment_seat' class='form-control' value='"+x+"' placeholder='좌석을 선택해주세요'>";
-	}
-	
-	}
-	
-function removeRow() {
-	
-	if(num == 1){
-		
-		$("#payment_seat").val("");
+            oCell1.innerHTML ="";
+	        oCell2.innerHTML ="";
+	        oCell3.innerHTML ="";
+	        oCell4.innerHTML ="<input type='text' id='payment_seat"+num+"' name='payment_seat' class='form-control' value='"+x+"' placeholder='좌석을 선택해주세요'>";
 
+	    } 	  	  
+
+     if (num > max) {
+            alert ("좌석수를 다시 설정해주세요.");
+            checked.prop("checked", false);
+        
+        }
+	
+	}*/  
+        
+	
+ function removeRow() {		 	 
+	 
+	if(num == 0){		
 		
-	}else{
-	
-	  oTbl.deleteRow(-1);
-	
+		$("#payment_seat1").val("");
+		
+	}else if(num >= 1){	
+		
+/* 	oTbl = document.getElementById("addTable"); 
+	 oTbl.deleteRow(-1);	*/
 	  
-	}
-	
-	num--;
-	}
+ 	  z = document.getElementById("payment_seat"+num).value;
 
+		  $("#payment_seat"+num).val("");
+	 
+		 alert(x);
+	  
+	}	
+	
+	} 
 
-function Amount(){
+	  
+ function Amount(){
+
+	 oTbl = document.getElementById("addTable");	 	 
+	 
+	 for(var i=2; i <= y; i++){
+		 
+		 var oRow = oTbl.insertRow(-1);
+		 var oCell1 = oRow.insertCell(0);
+		 var oCell2 = oRow.insertCell(1);
+		 var oCell3 = oRow.insertCell(2);
+		 var oCell4 = oRow.insertCell(3);
+		 
+	oCell1.innerHTML ="";
+	oCell2.innerHTML ="";
+	oCell3.innerHTML ="";
+	oCell4.innerHTML ="<input type='text' id='payment_seat"+i+"' name='payment_seat' class='form-control' placeholder='좌석을 선택해주세요'>";
+		 
+	 } 
+ }
+ 
+ 
+ 
 	
-	/* for(num=1; num>; num++)
-	if(y == 1)
-	 */
-	
-	
+	 
+/* 
+function ResetCount(){
+    totalChecked = 0;
 }
-
-
+ */
 
 		
 	</script>
@@ -384,7 +426,7 @@ function Amount(){
 
 				<h3>좌석 수 선택</h3>
 				<br> <select id="amount" class="form-control">
-					<option >좌석 수 선택</option>
+					<option>좌석 수 선택</option>
 					<option value="1">1</option>
 					<option value="2">2</option>
 					<option value="3">3</option>
@@ -475,21 +517,21 @@ function Amount(){
 						<td><input type="text" id="payment_amount"
 							name="payment_amount" class="form-control"
 							placeholder="좌석 수를 선택해주세요"></td>
-						<td><input type='text' id="payment_seat" name="payment_seat"
-						class='form-control' placeholder='좌석을 선택해주세요'></td>			
+						<td><input type='text' id="payment_seat1" name="payment_seat1"
+							class='form-control' placeholder='좌석을 선택해주세요'></td>
 					</tr>
 				</table>
-				
+
 				<input type="button" onclick="Send();" value="결제하기"
 					class="btn btn-insert" style="margin-left: 37%; width: 200px" />
 			</div>
 
 		</form>
 
- 
 
-		
-		
+
+
+
 
 	</div>
 
