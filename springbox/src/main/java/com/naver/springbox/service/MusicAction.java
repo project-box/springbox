@@ -97,5 +97,16 @@ public class MusicAction {
 		// TODO Auto-generated method stub
 		return false;
 	}
+	
+	/*------------------------팝업창--------------------------------------------------------*/
+
+	public MusicBean musicPop(int num) {
+
+		System.out.println("팝업Action");
+			
+		MusicBean dto = musicDao.getMusicPop(num);
+
+		return dto;
+	}
 
 }

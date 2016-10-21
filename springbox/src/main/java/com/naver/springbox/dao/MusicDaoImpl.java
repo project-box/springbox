@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.naver.springbox.dto.ConcertBean;
 import com.naver.springbox.dto.MusicBean;
 
 @Repository
@@ -17,6 +16,7 @@ public class MusicDaoImpl implements MusicDao{
 	@Autowired
 	private SqlSession sqlSession;
 	
+	/*-------------------음악 추가------------------*/
 	@Transactional
 	@Override
 	public boolean insertMusic(MusicBean dto){
@@ -30,6 +30,7 @@ public class MusicDaoImpl implements MusicDao{
 			return false;
 	}
 	
+	/*-------------------음악 개수------------------*/
 	@Transactional
 	@Override
 	public int getMusicListCount() {
@@ -42,6 +43,7 @@ public class MusicDaoImpl implements MusicDao{
 			return count;
 	}
 	
+	/*-------------------최신곡 목록------------------*/
 	@Transactional
 	@Override
 	public List<MusicBean> getMusicList(Map<String, Object> map) {
@@ -57,6 +59,7 @@ public class MusicDaoImpl implements MusicDao{
 			return list;
 	}
 	
+	/*------------------- 디테일 ------------------*/
 	@Transactional
 	@Override
 	public MusicBean getMusicDetail(int num) {
@@ -71,6 +74,7 @@ public class MusicDaoImpl implements MusicDao{
 		return list.get(0);
 	}
 	
+	/*------------------- 음악 삭제 ------------------*/
 	@Override
 	public boolean deleteMusic(int num) {
 	 System.out.println("3333");
@@ -80,7 +84,36 @@ public class MusicDaoImpl implements MusicDao{
 		return true;
 	 else
 		 return false;
-	 
+	}
+	
+	/*------------------- 팝업창 ------------------*/
+	@Transactional
+	@Override
+	public MusicBean getMusicPop(int num) {
+	
+		List<MusicBean>list = sqlSession.selectList("music.music_detail", num);
+	
+		System.out.println("DaoImpl팝업창");
+		System.out.println("list="+list);
+	
+	if (list == null || list.size() <1	)
+		return null;
+	else
+		return list.get(0);
 	}
 
+	/*-------------------추천곡 목록------------------*/
+	
+	public List<MusicBean> getPreferenceMusicList(Map<String, Object> map) {
+
+		List<MusicBean>  list = sqlSession.selectList("preference.preference_music_list",map);
+		
+		System.out.println("DaoImpl추천곡리스트");
+		System.out.println("list="+list);
+		
+		if (list == null || list.size() == 0)
+			return null;
+		else
+			return list;
+	}
 }
