@@ -258,6 +258,7 @@ function Send() {
  
 </script>
 <script>
+
 var num=0;
 var seat_info=null;
 var x=null;
@@ -267,31 +268,11 @@ var x=null;
 		$(":checkbox").click(function(){			
 			
 				if($(this).is(":checked")){		
-					
-					num++;
-					
+				
 					x=$(this).val();
-				
-					if(num == 1){	
-						
-	seat_info="<input type='text' id='payment_seat"+num+"' name='payment_seat' class='form-control' placeholder='좌석을 선택해주세요'>"	
+					Seat_num(x);
 					
-				seat.innerHTML=seat_info
-						
-				$("#payment_seat"+num).val(x);
-	
-	
-			}else if(num > 1){
-						
-				
-	seat_info+="<input type='text' id='payment_seat"+num+"' name='payment_seat' class='form-control' placeholder='좌석을 선택해주세요'>"	
-							
-			seat.innerHTML=seat_info
-									
-			$("#payment_seat"+num).val(x);
-					
-			}				
-				}	
+				}
 			});	
 		
 		
@@ -312,6 +293,36 @@ var x=null;
 	});	
 
 		}); 
+		
+
+		
+function Seat_num(){
+	alert("호출");
+	num++;
+	
+	alert("좌석번호"+x);
+	
+		if(num == 1){	
+				
+seat_info="<input type='text' id='payment_seat"+num+"' name='payment_seat' class='form-control' placeholder='좌석을 선택해주세요'>"	
+			
+		seat.innerHTML=seat_info
+				
+		$("#payment_seat"+num).val(x);
+
+
+	}else if(num > 1){
+				
+		
+seat_info+="<input type='text' id='payment_seat"+num+"' name='payment_seat' class='form-control' placeholder='좌석을 선택해주세요'>"	
+					
+	seat.innerHTML=seat_info
+							
+	$("#payment_seat"+num).val(x);
+			
+	}				
+		}	
+			
 
 		
 		
