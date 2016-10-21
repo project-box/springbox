@@ -51,7 +51,7 @@ font {
 	width: 200px;
 	font-weight: bold;
 	border: none;
-	align: center;
+	text-align: center;
 }
 
 hr {
@@ -262,15 +262,18 @@ function Send() {
 var num=0;
 var seat_info=null;
 var x=null;
+var oTbl;
 
 		$(document).ready(function(){
 		
 		$(":checkbox").click(function(){			
 			
 				if($(this).is(":checked")){		
-				
+					
+					num++;
 					x=$(this).val();
-					Seat_num(x);
+					Seat_num(x,num);				
+					
 					
 				}
 			});	
@@ -293,38 +296,39 @@ var x=null;
 	});	
 
 		}); 
-		
 
-		
-function Seat_num(){
-	alert("호출");
-	num++;
+function Seat_num(){	
 	
-	alert("좌석번호"+x);
+	if(num == 1){
+		
+	$("#payment_seat").val(x);
+
 	
-		if(num == 1){	
-				
-seat_info="<input type='text' id='payment_seat"+num+"' name='payment_seat' class='form-control' placeholder='좌석을 선택해주세요'>"	
-			
-		seat.innerHTML=seat_info
-				
-		$("#payment_seat"+num).val(x);
+	}else if(num > 1){	
+	
+	oTbl = document.getElementById("addTable");
+	  var oRow = oTbl.insertRow(-1);
+	 oRow.onmouseover=function(){oTbl.clickedRowIndex=this.rowIndex};//clickedRowIndex - 클릭한 Row의 위치를 확인;
+	  var oCell1 = oRow.insertCell(0);
+	  var oCell2 = oRow.insertCell(1);
+	  var oCell3 = oRow.insertCell(2);
+	  var oCell4 = oRow.insertCell(3);
+	  
+      oCell1.innerHTML ="";
+	  oCell2.innerHTML ="";
+	  oCell3.innerHTML ="";
+	  oCell4.innerHTML ="<input type='text' id='payment_seat' name='payment_seat' class='form-control' value='"+x+"' placeholder='좌석을 선택해주세요'>";
+	}
+	
+	}
+	
+function removeRow() {
+	  oTbl.deleteRow(oTbl.clickedRowIndex);
+	}
 
 
-	}else if(num > 1){
-				
-		
-seat_info+="<input type='text' id='payment_seat"+num+"' name='payment_seat' class='form-control' placeholder='좌석을 선택해주세요'>"	
-					
-	seat.innerHTML=seat_info
-							
-	$("#payment_seat"+num).val(x);
-			
-	}				
-		}	
-			
 
-		
+
 		
 	</script>
 <body onLoad="showCalendar(nowd,nowm,nowy)">
@@ -434,7 +438,7 @@ seat_info+="<input type='text' id='payment_seat"+num+"' name='payment_seat' clas
 
 				<hr>
 
-				<table class="table table-hover">
+				<table class="table table-hover" id="addTable">
 
 					<tr>
 						<th>선택한 날짜</th>
@@ -451,14 +455,21 @@ seat_info+="<input type='text' id='payment_seat"+num+"' name='payment_seat' clas
 						<td><input type="text" id="payment_amount"
 							name="payment_amount" class="form-control"
 							placeholder="좌석 수를 선택해주세요"></td>
-						<td width=200px;><p id="seat"></p></td>
+						<td><input type='text' id="payment_seat" name="payment_seat"
+						class='form-control' placeholder='좌석을 선택해주세요'></td>			
 					</tr>
 				</table>
+				
 				<input type="button" onclick="Send();" value="결제하기"
 					class="btn btn-insert" style="margin-left: 37%; width: 200px" />
 			</div>
 
 		</form>
+
+ 
+
+		
+		
 
 	</div>
 
