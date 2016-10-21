@@ -254,36 +254,31 @@ function Send() {
 	window.close();
     
 }
-
- 
-</script>
-<script>
-
+/* --------------------------제이쿼리------------------------------- */
 var num=0;
 var seat_info=null;
 var x=null;
+var y=null;
 var oTbl;
 
-		$(document).ready(function(){
-		
+		$(document).ready(function(){		
 		$(":checkbox").click(function(){			
 			
-				if($(this).is(":checked")){		
+				if($(this).is(":checked")==true){		
 					
 					num++;
 					x=$(this).val();
-					Seat_num(x,num);				
+					Seat_num(x,num);	
 					
+				}if($(this).is(":checked")==false){
 					
-				}
-			});	
+					removeRow();
+				}				
+			});			
 		
-		
-		$("#time").click(function(){
-			
-				$("#payment_time").val($(this).val());
-		
-				/* alert( $(this).val()); */												
+		$("#time").click(function(){			
+				$("#payment_time").val($(this).val());		
+				/* alert( $(this).val()); */		
 				
 		});	
 		
@@ -291,29 +286,32 @@ var oTbl;
 			
 			$("#payment_amount").val($(this).val());
 	
-			/* alert( $(this).val()); */												
+			/* alert( $(this).val()); */
+			
+			y=$(this).val();
+			
+			Amount(y);
 			
 	});	
 
 		}); 
 
 function Seat_num(){	
-	
-	if(num == 1){
+
+	if(num == 1){		
 		
 	$("#payment_seat").val(x);
-
 	
 	}else if(num > 1){	
-	
-	oTbl = document.getElementById("addTable");
-	  var oRow = oTbl.insertRow(-1);
-	 oRow.onmouseover=function(){oTbl.clickedRowIndex=this.rowIndex};//clickedRowIndex - 클릭한 Row의 위치를 확인;
-	  var oCell1 = oRow.insertCell(0);
-	  var oCell2 = oRow.insertCell(1);
-	  var oCell3 = oRow.insertCell(2);
-	  var oCell4 = oRow.insertCell(3);
 	  
+		oTbl = document.getElementById("addTable");
+		  var oRow = oTbl.insertRow(-1);
+/* 	 	 oRow.onmouseover=function(){oTbl.clickedRowIndex=this.rowIndex};//clickedRowIndex - 클릭한 Row의 위치를 확인;
+ */		  var oCell1 = oRow.insertCell(0);
+		  var oCell2 = oRow.insertCell(1);
+		  var oCell3 = oRow.insertCell(2);
+		  var oCell4 = oRow.insertCell(3);
+		
       oCell1.innerHTML ="";
 	  oCell2.innerHTML ="";
 	  oCell3.innerHTML ="";
@@ -323,9 +321,31 @@ function Seat_num(){
 	}
 	
 function removeRow() {
-	  oTbl.deleteRow(oTbl.clickedRowIndex);
+	
+	if(num == 1){
+		
+		$("#payment_seat").val("");
+
+		
+	}else{
+	
+	  oTbl.deleteRow(-1);
+	
+	  
+	}
+	
+	num--;
 	}
 
+
+function Amount(){
+	
+	/* for(num=1; num>; num++)
+	if(y == 1)
+	 */
+	
+	
+}
 
 
 
@@ -364,7 +384,7 @@ function removeRow() {
 
 				<h3>좌석 수 선택</h3>
 				<br> <select id="amount" class="form-control">
-					<option>좌석 수 선택</option>
+					<option >좌석 수 선택</option>
 					<option value="1">1</option>
 					<option value="2">2</option>
 					<option value="3">3</option>
