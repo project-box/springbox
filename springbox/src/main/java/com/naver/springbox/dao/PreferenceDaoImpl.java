@@ -95,7 +95,7 @@ public class PreferenceDaoImpl implements PreferenceDao {
 
 	@Override
 	public List<PreferenceBean> getPreferenceMusicList(String userId) {
-		List<PreferenceBean> list = sqlSession.selectList("preference.preference_music");
+		List<PreferenceBean> list = sqlSession.selectList("preference.preference_music", userId);
 		return list;
 	}
 
