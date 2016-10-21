@@ -266,55 +266,27 @@
 					</div>
 		       </c:otherwise>
 			</c:choose> --%>
-<<<<<<< HEAD
+
         
         <!-- 추천곡 -->
-					<div class="row">
-						<div class="col-lg-12">
-							<h1 class="page-header">
-								추천곡 <small> <a href="./recommend_music_list.box" aria-label="Skip to main navigation" title="추천곡 전체 목록">
-								<i class="fa fa-bars" aria-hidden="true"></i>
-								</a>
-								</small>
-							</h1>
-						</div>
-						
-						<c:forEach var="b" items="${musiclist}">
-							<div class="col-md-3 portfolio-item">
-								<a href="./NewmusicDetailAction.box?num=${b.music_num}"> <img class="img-responsive img-center"
-									src="<c:url value='/img/${b.albumcoverfilepath}'/>" alt="">
-								</a>
-								<div class="well well-sm">
-									<c:out value="${b.music_title}" />
-									<br>
-								</div>
-							</div>
-						</c:forEach>
-						
-=======
-
-		<!-- 추천곡 -->
 		<div class="row">
 			<div class="col-lg-12">
 				<h1 class="page-header">
-					추천곡 <small> <a href="recommendMusicList.box"
-						aria-label="Skip to main navigation" title="추천곡 전체 목록"> <i
-							class="fa fa-bars" aria-hidden="true"></i>
+					추천곡 <small> <a href="./recommend_music_list.box" aria-label="Skip to main navigation" title="추천곡 전체 목록">
+					<i class="fa fa-bars" aria-hidden="true"></i>
 					</a>
 					</small>
 				</h1>
 			</div>
-
+			
 			<c:forEach var="b" items="${musiclist}">
 				<div class="col-md-3 portfolio-item">
-					<a href="./NewmusicDetailAction.box?num=${b.music_num}"> <img
-						class="img-responsive img-center"
+					<a href="./NewmusicDetailAction.box?num=${b.music_num}"> <img class="img-responsive img-center"
 						src="<c:url value='/img/${b.albumcoverfilepath}'/>" alt="">
 					</a>
 					<div class="well well-sm">
 						<c:out value="${b.music_title}" />
 						<br>
->>>>>>> branch 'master' of https://github.com/project-box/springbox
 					</div>
 				</div>
 			</c:forEach>
