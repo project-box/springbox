@@ -35,7 +35,7 @@
 <script>
 	function myFunction(num) {
 		var ref="/springbox/music_pop.box?num="+num
-		window.open(ref,"","width=500, height=400,left=100, top=100,");
+		window.open(ref,"","width=500, height=400,left=100, top=100, scrollbars=no, resizable=no,  ");
 		 if (!e)
 			var e = window.event; // Get the window event
 		e.cancelBubble = true; // IE Stop propagation
