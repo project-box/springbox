@@ -15,7 +15,7 @@
 
 function Ok(payment_num, concert_num) {
 	
-	window.open('book_detail.box?payment_num='+payment_num, '_blank', 'width=970, height=600,toolbars=yes');
+	window.open('book_detail.box?payment_num='+payment_num, '_blank', 'width=800, height=500,toolbars=yes');
 
 	
 	/* 
@@ -76,6 +76,7 @@ function Ok(payment_num, concert_num) {
 						<td>${p.payment_amount}</td>
 						<td>${p.payment_price}</td>
 						<td><c:if test="${p.payment_check == '신용카드'}">	결제완료</c:if>
+						<c:if test="${p.payment_check == '실시간계좌이체'}">	결제완료</c:if>
 						<c:if test="${p.payment_check == '무통장입금'}">결제대기 <br>					
 						<input type="button" value="결제하기"></c:if>
 						</td>

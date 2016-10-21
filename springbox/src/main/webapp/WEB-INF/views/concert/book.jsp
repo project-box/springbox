@@ -49,6 +49,9 @@ font {
 /* -------------------------------------- */
 .form-control {
 	width: 200px;
+	font-weight: bold;
+	border: none;
+	text-align: center;
 }
 
 hr {
@@ -251,29 +254,31 @@ function Send() {
 	window.close();
     
 }
+/* --------------------------제이쿼리------------------------------- */
+var num=0;
+var seat_info=null;
+var x=null;
+var y=null;
+var oTbl;
 
- 
-</script>
-<script>
-
-
-		$(document).ready(function(){
-				
-		$(":checkbox").click(function(){
-				if($(this).is(":checked")){
-	
+		$(document).ready(function(){		
+		$(":checkbox").click(function(){			
+			
+				if($(this).is(":checked")==true){		
 					
-					$("#payment_seat").val($(this).val());
-			
-					/* alert( $(this).val()); */												
-				}	
-			});	
+					num++;
+					x=$(this).val();
+					Seat_num(x,num);	
+					
+				}if($(this).is(":checked")==false){
+					
+					removeRow();
+				}				
+			});			
 		
-		$("#time").click(function(){
-			
-				$("#payment_time").val($(this).val());
-		
-				/* alert( $(this).val()); */												
+		$("#time").click(function(){			
+				$("#payment_time").val($(this).val());		
+				/* alert( $(this).val()); */		
 				
 		});	
 		
@@ -281,13 +286,69 @@ function Send() {
 			
 			$("#payment_amount").val($(this).val());
 	
-			/* alert( $(this).val()); */												
+			/* alert( $(this).val()); */
+			
+			y=$(this).val();
+			
+			Amount(y);
 			
 	});	
 
 		}); 
 
+function Seat_num(){	
+
+	if(num == 1){		
 		
+	$("#payment_seat").val(x);
+	
+	}else if(num > 1){	
+	  
+		oTbl = document.getElementById("addTable");
+		  var oRow = oTbl.insertRow(-1);
+/* 	 	 oRow.onmouseover=function(){oTbl.clickedRowIndex=this.rowIndex};//clickedRowIndex - 클릭한 Row의 위치를 확인;
+ */		  var oCell1 = oRow.insertCell(0);
+		  var oCell2 = oRow.insertCell(1);
+		  var oCell3 = oRow.insertCell(2);
+		  var oCell4 = oRow.insertCell(3);
+		
+      oCell1.innerHTML ="";
+	  oCell2.innerHTML ="";
+	  oCell3.innerHTML ="";
+	  oCell4.innerHTML ="<input type='text' id='payment_seat' name='payment_seat' class='form-control' value='"+x+"' placeholder='좌석을 선택해주세요'>";
+	}
+	
+	}
+	
+function removeRow() {
+	
+	if(num == 1){
+		
+		$("#payment_seat").val("");
+
+		
+	}else{
+	
+	  oTbl.deleteRow(-1);
+	
+	  
+	}
+	
+	num--;
+	}
+
+
+function Amount(){
+	
+	/* for(num=1; num>; num++)
+	if(y == 1)
+	 */
+	
+	
+}
+
+
+
 		
 	</script>
 <body onLoad="showCalendar(nowd,nowm,nowy)">
@@ -312,27 +373,27 @@ function Send() {
 					<option value="2회차 15:30">2회차 15:30</option>
 					<option value="3회차 19:00">3회차 19:00</option>
 				</select>
-				
+
 
 			</div>
 
 			<br>
 
 			<div class="seatchoice">
-			
-			
+
+
 				<h3>좌석 수 선택</h3>
 				<br> <select id="amount" class="form-control">
-					<option>좌석 수 선택</option>
+					<option >좌석 수 선택</option>
 					<option value="1">1</option>
 					<option value="2">2</option>
 					<option value="3">3</option>
 					<option value="4">4</option>
 					<option value="5">5</option>
 					<option value="6">6</option>
-					<option value="7">7</option>				
+					<option value="7">7</option>
 				</select>
-			
+
 				<h3>좌석 선택</h3>
 				<br>
 				<div>
@@ -351,7 +412,7 @@ function Send() {
 
 						<c:forEach var="i" begin="1" end="50">
 							<input type="checkbox" class="checkbox" value="A구역${i}번"
-								id="A구역${i}번"/>
+								id="A구역${i}번" />
 							<label for="A구역${i}번" title="A구역${i}번"></label>
 							<c:if test="${i % 5 == 0 && i != 50}">
 								<br>
@@ -378,7 +439,7 @@ function Send() {
 						<c:forEach var="i" begin="201" end="250">
 
 							<input type="checkbox" class="checkbox" value="C구역${i-200}번"
-								id="C구역${i-200}번"/>
+								id="C구역${i-200}번" />
 							<label for="C구역${i-200}번" title="C구역${i-200}번"></label>
 
 							<c:if test="${i % 5 == 0 && i != 250}">
@@ -397,7 +458,7 @@ function Send() {
 
 				<hr>
 
-				<table class="table table-hover">
+				<table class="table table-hover" id="addTable">
 
 					<tr>
 						<th>선택한 날짜</th>
@@ -408,29 +469,27 @@ function Send() {
 					</tr>
 					<tr>
 						<td><input type="text" id="payment_date" name="payment_date"
-							class="form-control" placeholder="날짜를 선택해주세요"
-							style="font-weight: bold; border: none; align: center;">
-						</td>
+							class="form-control" placeholder="날짜를 선택해주세요"></td>
 						<td><input type="text" id="payment_time" name="payment_time"
-							class="form-control" placeholder="회차를 선택해주세요"
-							style="font-weight: bold; border: none; align: center;">
-						</td>
-						<td><input type="text" id="payment_amount" name="payment_amount"
-							class="form-control" placeholder="좌석 수를 선택해주세요"
-							style="font-weight: bold; border: none; align: center;">
-						</td>						
-						<td><input type="text" id="payment_seat" name="payment_seat"
-							class="form-control" placeholder="좌석을 선택해주세요"
-							style="font-weight: bold; border: none; align: center;"></td>
-							
-						<td><input type="button" onclick="Send();" value="결제하기" class="btn btn-insert" />
-						</td>
+							class="form-control" placeholder="회차를 선택해주세요"></td>
+						<td><input type="text" id="payment_amount"
+							name="payment_amount" class="form-control"
+							placeholder="좌석 수를 선택해주세요"></td>
+						<td><input type='text' id="payment_seat" name="payment_seat"
+						class='form-control' placeholder='좌석을 선택해주세요'></td>			
 					</tr>
-
 				</table>
+				
+				<input type="button" onclick="Send();" value="결제하기"
+					class="btn btn-insert" style="margin-left: 37%; width: 200px" />
 			</div>
 
 		</form>
+
+ 
+
+		
+		
 
 	</div>
 
