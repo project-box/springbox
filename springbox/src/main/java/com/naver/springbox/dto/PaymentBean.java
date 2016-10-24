@@ -1,6 +1,7 @@
 package com.naver.springbox.dto;
 
 import java.util.Date;
+import java.util.List;
 
 public class PaymentBean {
 	private int payment_num;
@@ -8,16 +9,15 @@ public class PaymentBean {
 	private String user_id;
 	private String payment_check;
 	private int payment_amount;
-	private Date payment_registerdate;	
-	private String payment_seat;
+	private Date payment_registerdate;		
 	private String payment_date;
 	private String payment_time;
 	private String payment_price;
 	private String payment_address;		
 	private String payment_title;
 	private String cancel;
-	private String payment_poster;
-	
+	private String payment_poster;/*
+	private List<SeatBean> payment_seats;	*/
 	
 	public int getPayment_num() {
 		return payment_num;
@@ -55,12 +55,12 @@ public class PaymentBean {
 	public void setPayment_registerdate(Date payment_registerdate) {
 		this.payment_registerdate = payment_registerdate;
 	}
-	public String getPayment_seat() {
-		return payment_seat;
+	/*public List<SeatBean> getPayment_seats() {
+		return payment_seats;
 	}
-	public void setPayment_seat(String payment_seat) {
-		this.payment_seat = payment_seat;
-	}
+	public void setPayment_seats(List<SeatBean> payment_seats) {
+		this.payment_seats = payment_seats;
+	}*/
 	public String getPayment_date() {
 		return payment_date;
 	}
