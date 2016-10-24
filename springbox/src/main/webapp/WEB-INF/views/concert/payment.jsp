@@ -80,7 +80,7 @@ table {
 }
 
 .title {
-	background-color: #FF4646;
+    background-color: #FF4646; 
 	color: white;
 	font-weight: bold;
 	height: 30px;
