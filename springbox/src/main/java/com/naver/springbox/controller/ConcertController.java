@@ -12,11 +12,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.naver.springbox.dto.ConcertBean;
 import com.naver.springbox.dto.ConcertBoardBean;
+import com.naver.springbox.dto.SeatBean;
+import com.naver.springbox.service.BookAction;
 import com.naver.springbox.service.ConcertAction;
 import com.naver.springbox.service.PreferenceAction;
 
@@ -110,8 +111,6 @@ public class ConcertController {
 			List <ConcertBoardBean> list= concertAction.concertboardList(concert_num);
 			int listcount=concertAction.concertboardListCount(concert_num);
 			
-			System.out.println("디테일 컨트롤 들어옴");
-			
 			// 데이터를 저장
 			mav.addObject("concertdata", dto);
 			mav.addObject("concertboarddata", list);
@@ -141,14 +140,25 @@ public class ConcertController {
 		return mav;
 	}
 	
+	@Autowired
+	private BookAction bookAction;
 	
 	
+	
+	@RequestMapping(value = "/book.box")
+	public ModelAndView book(int concert_num, HttpSession session) throws Exception {
 
-	@RequestMapping(value = "/book.box", method = RequestMethod.GET)
-	public String book(Locale locale, Model model) {
+	
+		List<SeatBean> sb = bookAction.seat_list(concert_num);
+		
+		ModelAndView mav = new ModelAndView();
+		
+		mav.addObject("seatdata", sb);		
+		mav.setViewName("/concert/book");
 
-		return "concert/book";
-	}
+				return mav;
+			}
+
 
 	/*-----------------------후기 등록-----------------------------------*/
 	

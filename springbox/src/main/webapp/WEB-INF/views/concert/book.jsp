@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
 <!doctype html>
 <html>
@@ -121,6 +122,10 @@ hr {
 	font-size: 13px;
 }
 
+.checkbox:disabled+label:before {
+	background-color: #ccc;
+}
+
 .checkbox+label:before {
 	content: "";
 	display: inline-block;
@@ -130,7 +135,7 @@ hr {
 	position: absolute;
 	left: 0;
 	bottom: 1px;
-	background-color: #ccc;
+	background-color: #F4B4B4;
 	border-radius: 2px;
 	box-shadow: inset 0px 1px 1px 0px rgba(0, 0, 0, .3), 0px 1px 0px 0px
 		rgba(255, 255, 255, .8);
@@ -142,7 +147,7 @@ hr {
 	font-size: 17px;
 	font-weight: 800;
 	color: #fff;
-	background: #2f87c1;
+	background: #800000;
 	text-align: center;
 	line-height: 19px;
 }
@@ -162,7 +167,8 @@ var nowd=now.getDate()
 var nowm=now.getMonth()
 var nowy=now.getFullYear()
 var max=1;
-
+var date=null;
+var time=null;
 
    function showCalendar(day,month,year) {
       if ((year%4==0||year%100==0)&&(year%400==0)) monthDays[1]=29; else monthDays[1]=28 //leap year test
@@ -233,10 +239,10 @@ var max=1;
 
  function Test(dayCount,month,year){	 
 
-	 var date = year+"/"+(month+1)+"/"+dayCount;
+	 date = year+"/"+(month+1)+"/"+dayCount;
 	 
-	document.getElementById('payment_date').value = date
-
+	document.getElementById('payment_date').value = date;
+	
  }
 
 
@@ -248,17 +254,13 @@ function Send() {
 	var seat = "";
 
 	for(i=0; i<seatnum.length; i++) { 		
-		  
-	      alert(seatnum[i].value); // 원하시는값 
-	      
-	    seat += seatnum[i].value+",";
+		
+	    seat += seatnum[i].value+"/";
 	
 	}
 	
 	opener.document.paymentform.seat_seat.value = seat;
-	
-	
-   /* opener.document.paymentform.seat_seat.value=$("#seat_seat").val(); */
+
    opener.document.paymentform.payment_date.value=$("#payment_date").val();
    opener.document.paymentform.payment_time.value=$("#payment_time").val();   
    opener.document.paymentform.payment_amount.value=$("#payment_amount").val(); 
@@ -283,7 +285,8 @@ var x=null;
 		$(document).ready(function(){	
 			
 			
-		$(":checkbox").click(function(){				
+		$(":checkbox").click(function(){	
+			// 체크박스 설정 및 해제
           		
 			checked = $(this);
           	      x = checked.val();
@@ -309,13 +312,31 @@ var x=null;
 			});			
 		
 		
-		$("#time").click(function(){			
-				$("#payment_time").val($(this).val());		
-				/* alert( $(this).val()); */		
+		$("#time").change(function(){	  // 회차 선택	
+			
+			   time=$(this).val();
+			
+			
+				$("#payment_time").val(time);		
+				/* alert( $(this).val()); */	
+				
+				if($("#payment_date").val() ==""){	
+					
+					alert("날짜를 선택해주세요!");	
+					$("#time option:eq(0)").prop("selected", true);
+					$("#payment_time").val("회차선택");
+					return false;
+					
+				}else if(time != "회차선택"){
+				
+					$("input[type=checkbox]").attr("disabled",false);
+					SeatView();
+				}					
 				
 		});	
 		
-		$("#amount").click(function(){
+		
+		$("#amount").click(function(){     //좌석 수 선택
 			
 			$("#payment_amount").val($(this).val());
 	
@@ -335,7 +356,8 @@ var x=null;
 		  });	
 
  function Delete(){
- 
+     // 체크박스 해제
+	 
 	 for(k=0; k < max; k++)	 
 		 if($("#seat_seat"+(k+1)).val() ==x){			 
 			 $("#seat_seat"+(k+1)).val("");
@@ -343,7 +365,8 @@ var x=null;
  }				
 		
 	
- function Amount(){
+ function Amount(){ 
+	 // 좌석 수 선택
 	 
 	 oTbl = document.getElementById('addTable');	
 
@@ -371,6 +394,74 @@ var x=null;
 		 
 	 } 
  }
+ 
+ 
+  function SeatView(){
+	 // 좌석 뷰
+	alert("호출"); 
+	 
+	var seatNum1 = new Array();
+	
+	<c:forEach items="${seatdata}" var="item1">
+	seatNum1.push("${item1.seat_seat}");	
+	</c:forEach>
+	
+	var seatNum2 = new Array();
+	
+	<c:forEach items="${seatdata}" var="item2">
+	seatNum2.push("${item2.seat_date}");	
+	</c:forEach>
+	
+	var seatNum3 = new Array();
+	
+	<c:forEach items="${seatdata}" var="item3">
+	seatNum3.push("${item3.seat_time}");	
+	</c:forEach>
+	
+	/* --------------------------A구역 루프------------------------------------- */
+	for(var k=1; k<51; k++){
+	
+     for (var i=0; i<seatNum1.length; i++) {
+			
+			var A = document.getElementById("A구역"+k+"번");
+				
+			if(seatNum1[i] == A.value && seatNum2[i] == date && seatNum3[i] == time){
+				
+				A.disabled=true; 
+			}	
+			
+		}} 
+	
+	
+	/* --------------------------B구역 루프------------------------------------- */
+	for(var k=121; k<201; k++){
+		
+		for (var i=0; i<seatNum1.length; i++) {
+			
+			var B = document.getElementById("B구역"+(k-120)+"번");
+			
+			if(seatNum1[i] == B.value && seatNum2[i] == date && seatNum3[i] == time){
+				
+				B.disabled=true; 
+			}	
+			
+		}} 
+	/* --------------------------C구역 루프------------------------------------- */
+   
+	for(var k=201; k<251; k++){
+	
+		for (var i=0; i<seatNum1.length; i++) {
+			
+			var C = document.getElementById("C구역"+(k-200)+"번");			
+		
+			if(seatNum1[i] == C.value && seatNum2[i] == date && seatNum3[i] == time){
+				
+		          C.disabled=true; 
+	          }	
+			
+		}} 
+	 
+ } 
  
 
 
@@ -420,7 +511,13 @@ var x=null;
 				</select>
 
 				<h3>좌석 선택</h3>
-				<br>
+
+				<br> <input type="checkbox" class="checkbox"
+					disabled="disabled" id="check" /> <label for="check" title="check">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					회색으로 채워진 좌석은 이미 예매된 좌석입니다. &nbsp; <font color="red">남은 좌석 수
+						${180-fn:length(seatdata)}</font>
+				</label>
+
 				<div>
 
 					<table class="box">
@@ -435,17 +532,16 @@ var x=null;
 
 					<div class="a">
 
-						<c:forEach var="i" begin="1" end="50">
-							<input type="checkbox" class="checkbox" value="A구역${i}번"
-								id="A구역${i}번" />
-							<label for="A구역${i}번" title="A구역${i}번"></label>
-							<c:if test="${i % 5 == 0 && i != 50}">
-								<br>
-							</c:if>
-						</c:forEach>
+							<c:forEach var="i" begin="1" end="50">
+								<input type="checkbox" class="checkbox" value="A구역${i}번"
+									id="A구역${i}번" />
+								<label for="A구역${i}번" title="A구역${i}번"></label>
+								<c:if test="${i % 5 == 0 && i != 50}">
+									<br>
+								</c:if>
+							</c:forEach>
 
 					</div>
-
 
 					<div class="b">
 
@@ -500,9 +596,8 @@ var x=null;
 						<td><input type="text" id="payment_amount"
 							name="payment_amount" class="form-control"
 							placeholder="좌석 수를 선택해주세요"></td>
-						<td><input type='text' id="seat_seat1" 
-					     	name="seat_seat[]" class='form-control' 
-					    	placeholder='좌석을 선택해주세요'></td>
+						<td><input type='text' id="seat_seat1" name="seat_seat[]"
+							class='form-control' placeholder='좌석을 선택해주세요'></td>
 						<td><input type='button' id="all" value='좌석 다시 선택하기'></td>
 					</tr>
 				</table>

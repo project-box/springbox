@@ -176,8 +176,17 @@ public class ConcertDaoImpl implements ConcertDao {
 		sqlSession.insert("concert.seat_add", sb);
 		
 	}
-	
-	
+
+
+	@Override
+	@Transactional
+	public List<SeatBean> seat_list(int concert_num) {
+		// TODO Auto-generated method stub
+		
+      List<SeatBean> list = sqlSession.selectList("concert.seat_list", concert_num);					
+		
+		return list;
+	}
 	
 }
 

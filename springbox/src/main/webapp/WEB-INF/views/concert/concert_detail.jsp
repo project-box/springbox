@@ -58,19 +58,19 @@ $(document).ready(function() {
 
 /* -----------------------팝업창에서 값 받기------------------------------ */
 
+
 function Book(){
-    window.name="Info"
-    window.open('book.box', '_blank', 'width=970, height=600,toolbars=yes');
+
+	var concert_num = "/springbox/book.box?concert_num="+'${concertdata.concert_num}';
+	
+   /*  window.name="Info" */
+    window.open(concert_num, "_blank", "width=970, height=600,toolbars=yes");
 
 }
 
     function Call(){
-    	
-    	
-    	
-    	
-
-		/* paymentform.submit(); */
+    
+		paymentform.submit(); 
 	} 
     
 
@@ -86,9 +86,7 @@ function Book(){
 <form name="paymentform" action="payment.box" method="post">
 <input type="hidden" name="payment_date" id="payment_date"/>
 <input type="hidden" name="payment_time" id="payment_time" />
-
-<input type="text" name="seat_seat"/>
-
+<input type="hidden" name="seat_seat"/>
 <input type="hidden" name="payment_amount" id="payment_amount"/>
 <input type="hidden" name="concert_num"	value="${concertdata.concert_num}" />
 
@@ -118,8 +116,8 @@ function Book(){
 		<br> <br> <b>가격</b>
 		&nbsp;&nbsp;&nbsp;&nbsp;${concertdata.concert_price}<br>
 		
-		<br><a href=# onclick="Book();">
-		<button type="button">예매하기</button></a> 
+		<br>
+		<button type="button" onclick="Book();">예매하기</button>
 		
 		<a	
 			href="concert_list.box">클릭 하면 리스트로</a> <br>
