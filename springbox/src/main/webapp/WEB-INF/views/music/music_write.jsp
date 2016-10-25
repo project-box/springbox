@@ -72,7 +72,7 @@
 				</h1>
 				</div>
 			</div>
-			<form action="/project10_11/MusicAction.box" method="post"
+			<form action="/springbox/MusicAction.box" method="post"
 				enctype="multipart/form-data" name="musicform">
 				<table align="center" width="70%">
 					<tr>

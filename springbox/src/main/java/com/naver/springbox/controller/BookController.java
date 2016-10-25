@@ -1,23 +1,20 @@
 package com.naver.springbox.controller;
 
 import java.util.List;
-import java.util.Locale;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.naver.springbox.dto.ConcertBean;
-import com.naver.springbox.dto.ConcertBoardBean;
 import com.naver.springbox.dto.PaymentBean;
+import com.naver.springbox.dto.SeatBean;
 import com.naver.springbox.service.BookAction;
 import com.naver.springbox.service.ConcertAction;
 
@@ -34,11 +31,11 @@ public class BookController {
 		public ModelAndView payment(HttpServletRequest request, HttpSession session)throws Exception {
 				
 			String payment_date = request.getParameter("payment_date");
-			String payment_seat = request.getParameter("payment_seat");
 			String payment_time = request.getParameter("payment_time");
 			int payment_amount = Integer.parseInt(request.getParameter("payment_amount"));
 			int concert_num = Integer.parseInt(request.getParameter("concert_num"));
-
+			String seat_seat = request.getParameter("seat_seat");
+			
 			ConcertBean dto = concertAction.concertDetail(concert_num);
 			
 			
@@ -46,7 +43,7 @@ public class BookController {
 			
 			// 데이터를 저장
 			mav.addObject("concertdata", dto);
-			mav.addObject("payment_seat", payment_seat);
+			mav.addObject("seat_seat", seat_seat);
 			mav.addObject("payment_date", payment_date);
 			mav.addObject("payment_time", payment_time);
 			mav.addObject("payment_amount", payment_amount);
@@ -68,16 +65,23 @@ public class BookController {
 		
 		
 		@RequestMapping("/book_add.box")
-		public ModelAndView book_list(@ModelAttribute PaymentBean pb, HttpSession session) throws Exception {
-			
+		public ModelAndView book_list(@ModelAttribute PaymentBean pb, SeatBean sb, HttpServletRequest request, HttpSession session) throws Exception {
+								
 			String id= (String) session.getAttribute("loginId");			
 			pb.setUser_id(id);	
-			
+							
 			int concert_num=pb.getConcert_num();			
 			ConcertBean cb = concertAction.concertDetail(concert_num);
 			
-			System.out.println("타이틀"+cb.getConcert_title());
-			System.out.println("파일명"+cb.getPosterfilepath());
+			
+     /*      String seat = request.getParameter("seat_seat");
+			
+			sb.setSeat_seat(seat);
+			sb.setConcert_num(concert_num);			
+			
+			bookAction.seat_add(sb);	*/
+			
+			
 			
 			pb.setPayment_title(cb.getConcert_title());
 			pb.setPayment_poster(cb.getPosterfilepath());

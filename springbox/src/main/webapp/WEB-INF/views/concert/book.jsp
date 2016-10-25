@@ -161,7 +161,7 @@ var now=new Date()
 var nowd=now.getDate()
 var nowm=now.getMonth()
 var nowy=now.getFullYear()
-
+var max=1;
 
 
    function showCalendar(day,month,year) {
@@ -222,7 +222,7 @@ var nowy=now.getFullYear()
 
 		var totCells=firstDay+monthDays[month]
 		
-		for (var i=0;i<(totCells>28?(totCells>35?42:35):28)-totCells;i++) 
+		for (var i=0; i<(totCells>28?(totCells>35?42:35):28) -totCells; i++) 
 			
 			cnj_str+="<td>"
 			cnj_str+="</table><BR>"
@@ -231,11 +231,10 @@ var nowy=now.getFullYear()
 	}
 
 
- function Test(dayCount,month,year){
-	 
+ function Test(dayCount,month,year){	 
 
 	 var date = year+"/"+(month+1)+"/"+dayCount;
-
+	 
 	document.getElementById('payment_date').value = date
 
  }
@@ -244,37 +243,71 @@ var nowy=now.getFullYear()
 
 function Send() {
 
+	
+	var seatnum=document.getElementsByName('seat_seat[]'); 
+	var seat = "";
+
+	for(i=0; i<seatnum.length; i++) { 		
+		  
+	      alert(seatnum[i].value); // 원하시는값 
+	      
+	    seat += seatnum[i].value+",";
+	
+	}
+	
+	opener.document.paymentform.seat_seat.value = seat;
+	
+	
+   /* opener.document.paymentform.seat_seat.value=$("#seat_seat").val(); */
    opener.document.paymentform.payment_date.value=$("#payment_date").val();
-   opener.document.paymentform.payment_time.value=$("#payment_time").val();
-   opener.document.paymentform.payment_seat.value=$("#payment_seat").val();
-   opener.document.paymentform.payment_amount.value=$("#payment_amount").val();
+   opener.document.paymentform.payment_time.value=$("#payment_time").val();   
+   opener.document.paymentform.payment_amount.value=$("#payment_amount").val(); 
    
     opener.location.href="javascript:Call();";
 
 	window.close();
-    
 }
-/* --------------------------제이쿼리------------------------------- */
-var num=0;
-var seat_info=null;
-var x=null;
-var y=null;
-var oTbl;
 
-		$(document).ready(function(){		
-		$(":checkbox").click(function(){			
+
+
+
+/* --------------------------제이쿼리------------------------------- */
+var num=0; //선택한 개수
+var seat_info=null; // 선택한 체크박스의 값
+var y=null;  /// 좌석 수
+var oTbl;
+   //선택가능 갯수
+var checked;
+var x=null;
+
+		$(document).ready(function(){	
 			
-				if($(this).is(":checked")==true){		
+			
+		$(":checkbox").click(function(){				
+          		
+			checked = $(this);
+          	      x = checked.val();
+          	    num =  $(":checkbox:checked").length;
+          	    
+				if(checked.is(":checked")==true){		
+					 
+					if (num > max) {
+			            alert ("좌석수를 다시 설정해주세요.");
+			            checked.prop("checked", false);        
+			        }
 					
-					num++;
-					x=$(this).val();
-					Seat_num(x,num);	
+					$("#seat_seat"+num).val(x);
 					
-				}if($(this).is(":checked")==false){
+					 				
 					
-					removeRow();
+				}if(checked.is(":checked")==false){	
+	
+					Delete();
+					
+					/* $("#payment_seat"+(num+1)).val(""); */
 				}				
 			});			
+		
 		
 		$("#time").click(function(){			
 				$("#payment_time").val($(this).val());		
@@ -286,69 +319,62 @@ var oTbl;
 			
 			$("#payment_amount").val($(this).val());
 	
-			/* alert( $(this).val()); */
+			max=$(this).val();
 			
-			y=$(this).val();
-			
-			Amount(y);
-			
-	});	
+			$("input[type=checkbox]").prop("checked",false);
+			Amount();
 
+	    });	
+		
+		 $("#all").click(function(){
+				
+			$("input[type=checkbox]").prop("checked",false);
+			Amount();
+			
 		}); 
+		  });	
 
-function Seat_num(){	
-
-	if(num == 1){		
+ function Delete(){
+ 
+	 for(k=0; k < max; k++)	 
+		 if($("#seat_seat"+(k+1)).val() ==x){			 
+			 $("#seat_seat"+(k+1)).val("");
+		 }
+ }				
 		
-	$("#payment_seat").val(x);
 	
-	}else if(num > 1){	
+ function Amount(){
+	 
+	 oTbl = document.getElementById('addTable');	
+
+	$("#seat_seat1").val("");
+	
+	 
+	var lastRow = addTable.rows.length - 1;
 	  
-		oTbl = document.getElementById("addTable");
-		  var oRow = oTbl.insertRow(-1);
-/* 	 	 oRow.onmouseover=function(){oTbl.clickedRowIndex=this.rowIndex};//clickedRowIndex - 클릭한 Row의 위치를 확인;
- */		  var oCell1 = oRow.insertCell(0);
-		  var oCell2 = oRow.insertCell(1);
-		  var oCell3 = oRow.insertCell(2);
-		  var oCell4 = oRow.insertCell(3);
-		
-      oCell1.innerHTML ="";
-	  oCell2.innerHTML ="";
-	  oCell3.innerHTML ="";
-	  oCell4.innerHTML ="<input type='text' id='payment_seat' name='payment_seat' class='form-control' value='"+x+"' placeholder='좌석을 선택해주세요'>";
+	for(var j = lastRow; j > 1; j--) {
+		addTable.deleteRow(j);
 	}
-	
-	}
-	
-function removeRow() {
-	
-	if(num == 1){
-		
-		$("#payment_seat").val("");
+ 
+	 for(var i=2; i <= max; i++){
 
-		
-	}else{
-	
-	  oTbl.deleteRow(-1);
-	
-	  
-	}
-	
-	num--;
-	}
+		 var oRow = oTbl.insertRow();
+		 var oCell1 = oRow.insertCell(0);
+		 var oCell2 = oRow.insertCell(1);
+		 var oCell3 = oRow.insertCell(2);
+		 var oCell4 = oRow.insertCell(3);
+		 
+	oCell1.innerHTML ="";
+	oCell2.innerHTML ="";
+	oCell3.innerHTML ="";
+	oCell4.innerHTML ="<input type='text' id='seat_seat"+i+"' name='seat_seat[]' class='form-control' placeholder='좌석을 선택해주세요'>";
+		 
+	 } 
+ }
+ 
 
 
-function Amount(){
-	
-	/* for(num=1; num>; num++)
-	if(y == 1)
-	 */
-	
-	
-}
-
-
-
+ 
 		
 	</script>
 <body onLoad="showCalendar(nowd,nowm,nowy)">
@@ -384,7 +410,6 @@ function Amount(){
 
 				<h3>좌석 수 선택</h3>
 				<br> <select id="amount" class="form-control">
-					<option >좌석 수 선택</option>
 					<option value="1">1</option>
 					<option value="2">2</option>
 					<option value="3">3</option>
@@ -475,21 +500,23 @@ function Amount(){
 						<td><input type="text" id="payment_amount"
 							name="payment_amount" class="form-control"
 							placeholder="좌석 수를 선택해주세요"></td>
-						<td><input type='text' id="payment_seat" name="payment_seat"
-						class='form-control' placeholder='좌석을 선택해주세요'></td>			
+						<td><input type='text' id="seat_seat1" 
+					     	name="seat_seat[]" class='form-control' 
+					    	placeholder='좌석을 선택해주세요'></td>
+						<td><input type='button' id="all" value='좌석 다시 선택하기'></td>
 					</tr>
 				</table>
-				
+
 				<input type="button" onclick="Send();" value="결제하기"
 					class="btn btn-insert" style="margin-left: 37%; width: 200px" />
 			</div>
 
 		</form>
 
- 
 
-		
-		
+
+
+
 
 	</div>
 
