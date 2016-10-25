@@ -6,39 +6,45 @@
 <mapper namespace="music">
 
 	<!-- 전체 음악 목록 -->
-	<select id="music_list" resultType="com.naver.springbox.dto.MusicBean" parameterType ="java.util.Map" >
+	<select id="music_list" resultType="com.naver.springbox.dto.MusicBean"
+		parameterType="java.util.Map">
 	    <![CDATA[
 		select * from 
-		 (select rownum rnum,music_num,music_genre,music_artist,music_title,music_album,music_publishdate,albumcoverfilepath,music_lyrics from  
+		 (select rownum rnum,music_num,music_genre,music_artist,music_title,music_album,music_publishdate,
+		 	albumcoverfilepath,music_lyrics,music_mp3 from  
 	  	  (select * from music order by music_num desc)) 
 	   	   where rnum >= #{start} and rnum <=#{end}
 		]]>
 	</select>
-	
+
 	<!-- 음악 상세보기 -->
-	<select id="music_detail" resultType="com.naver.springbox.dto.MusicBean" parameterType="Integer">
+	<select id="music_detail" resultType="com.naver.springbox.dto.MusicBean"
+		parameterType="Integer">
 		select * from music where music_num=#{music_num}
 	</select>
-	
+
 	<!-- 음악 저장 -->
-	<insert id = "music_add" parameterType="com.naver.springbox.dto.MusicBean">
-		<!-- insert into	music values(music_seq.nextval,#{music_genre},#{music_artist},#{music_title},#{music_album},
-		'2016/10/11',#{albumcoverfilepath,jdbcType=VARCHAR},#{music_lyrics}) -->
-		insert into	music values(music_seq.nextval,#{music_genre},#{music_artist},#{music_title},#{music_album},
-		#{music_publishdate},#{albumcoverfilepath,jdbcType=VARCHAR},#{music_lyrics})
+	<insert id="music_add" parameterType="com.naver.springbox.dto.MusicBean">
+		<!-- insert into music values(music_seq.nextval,#{music_genre},#{music_artist},#{music_title},#{music_album}, 
+			'2016/10/11',#{albumcoverfilepath,jdbcType=VARCHAR},#{music_lyrics}) -->
+		insert into music
+		values(music_seq.nextval,#{music_genre},#{music_artist},#{music_title},#{music_album},
+		#{music_publishdate},#{albumcoverfilepath,jdbcType=VARCHAR},#{music_lyrics},#{music_mp3,jdbcType=VARCHAR})
 	</insert>
-	
+
 	<!-- 음악 수정 -->
 	<update id="music_edit" parameterType="com.naver.springbox.dto.MusicBean">
-		update music set music_title=#{music_title},music_artist=#{music_artist},
+		update music set
+		music_title=#{music_title},music_artist=#{music_artist},
 		music_publishdate=#{music_publishdate},music_genre=#{music_genre},
-		music_album=#{music_album},albumcoverfilepath=#{albumcoverfilepath},music_lyrics=#{music_lyrics}
-		 where music_id=#{music_id} 
+		music_album=#{music_album},albumcoverfilepath=#{albumcoverfilepath},music_lyrics=#{music_lyrics},music_mp3=#{music_mp3}
+		where music_id=#{music_id}
 	</update>
-	
+
 	<!-- 게시판 총게시물 수 -->
-	<select id="music_count" parameterType ="com.naver.springbox.dto.MusicBean" resultType="Integer">
+	<select id="music_count" parameterType="com.naver.springbox.dto.MusicBean"
+		resultType="Integer">
 		select count(*) from music
-	</select>	
+	</select>
 
 </mapper>

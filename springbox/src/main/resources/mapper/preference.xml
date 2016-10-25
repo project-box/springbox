@@ -89,8 +89,8 @@
 	
 	<!-- 가장 취향이 비슷한 사람을 줄 세우는 쿼리 -->
 	<select id="preference_member_list" parameterType="String" resultType="com.naver.springbox.dto.MemberBean">
-		<![CDATA[
-		select user_id, music_count from(
+			<![CDATA[
+		select * from(
 			select user_id, music_count, rownum rnum from( -- 카운트
 			select user_id, count(music_num) as music_count -- 통계
 			from preference 
@@ -108,9 +108,9 @@
 		<![CDATA[
 			select * from 
 			(select rownum rnum, music_num,music_genre,music_artist,
-			music_title,music_album,music_publishdate,albumcoverfilepath,music_lyrics from 
+			music_title,music_album,music_publishdate,albumcoverfilepath,music_lyrics,music_mp3 from 
 			  (select music.music_num,music_genre,music_artist,
-			  music_title,music_album,music_publishdate,albumcoverfilepath,music_lyrics
+			  music_title,music_album,music_publishdate,albumcoverfilepath,music_lyrics,music_mp3
 			  from 
 			  ( -- 음악과 선호도를 조인하면 중복 튜플이 생기므로 조인하기 전에 선호도를 그룹핑한다
 			    select music_num from preference
@@ -166,6 +166,7 @@
 		<result column="music_publishdate" property="music_publishdate" jdbcType="DATE"/>
 		<result column="albumcoverfilepath" property="albumcoverfilepath" jdbcType="VARCHAR"/>
 		<result column="music_lyrics" property="music_lyrics" jdbcType="VARCHAR"/>
+		<result column="music_mp3" property="music_mp3" jdbcType="VARCHAR"/>
 	</resultMap>
 	
 	<resultMap id="preferenceResultMap" type="com.naver.springbox.dto.PreferenceBean">
@@ -179,7 +180,7 @@
 	<select id="preference_music" resultMap="preferenceResultMap" resultType="com.naver.springbox.dto.PreferenceBean" parameterType="String">
 		<![CDATA[
 			SELECT p.PREFERENCE_NUM, p.USER_ID, p.RATE, m.MUSIC_NUM, m.MUSIC_GENRE , m.MUSIC_ARTIST, m.MUSIC_TITLE
-				, m.MUSIC_ALBUM, m.MUSIC_PUBLISHDATE, m.ALBUMCOVERFILEPATH, m.MUSIC_LYRICS
+				, m.MUSIC_ALBUM, m.MUSIC_PUBLISHDATE, m.ALBUMCOVERFILEPATH, m.MUSIC_LYRICS,m.MUSIC_MP3
 				FROM PREFERENCE P JOIN MUSIC M
 				ON P.MUSIC_NUM = M.MUSIC_NUM
 				WHERE USER_ID = #{userId}
@@ -219,6 +220,34 @@
 		<![CDATA[
 			delete from preference
 			where user_id = #{user_id} and music_num = #{music_num}
+		]]>
+	</select>
+	
+	<select id="search_content_title" resultType="String" parameterType="String">
+		<![CDATA[
+			select title from(
+				select music_title as title from music
+				union
+				select music_artist as title from music
+				union
+				select concert_title as title from concert
+			)
+			where LOWER(title) like LOWER(#{keyword})
+		]]>
+	</select>
+	
+	<select id="search_content_music" resultType="com.naver.springbox.dto.MusicBean" parameterType="String">
+		<![CDATA[
+			select * from music
+			where LOWER(music_title) like LOWER('%' || #{keyword} || '%')
+			OR LOWER(music_artist) like LOWER('%' || #{keyword} || '%')
+		]]>
+	</select>
+	
+	<select id="search_content_concert" resultType="com.naver.springbox.dto.ConcertBean" parameterType="String">
+		<![CDATA[
+			select * from concert
+			where LOWER(concert_title) like LOWER('%' || #{keyword} || '%')
 		]]>
 	</select>
 </mapper>

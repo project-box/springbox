@@ -38,4 +38,11 @@ public interface PreferenceDao {
 	public void updatePreferenceItem(PreferenceBean preference);
 	// 선호도 삭제
 	public void removePreferenceItem(PreferenceBean preference);
+	
+	// 키워드검색
+	public List<String> searchKeyword(String keyword);
+	// 음악검색
+	public List<MusicBean> searchMusic(String keyword);
+	// 공연검색
+	public List<ConcertBean> searchConcert(String keyword);
 }

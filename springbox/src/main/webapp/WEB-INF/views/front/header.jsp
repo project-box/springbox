@@ -71,7 +71,7 @@
 						</button>
 						<ul class="dropdown-menu">
 							<c:if test="${sessionScope.loginId == null}">
-								<li><a href="memberJoin.box">회원가입</a></li>
+								<li><a href="member_join.member">회원가입</a></li>
 								<li><a href="login.box">로그인</a></li>
 								<li><a href="mypage.box">마이페이지</a></li>
 							</c:if>

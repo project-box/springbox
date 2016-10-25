@@ -1,19 +1,23 @@
 package com.naver.springbox.dto;
 
 import java.util.Date;
+import java.util.List;
 
 public class PaymentBean {
 	private int payment_num;
 	private int concert_num;
 	private String user_id;
-	private int payment_check;
+	private String payment_check;
 	private int payment_amount;
-	private Date payment_registerdate;	
-	private String payment_seat;
-	private Date payment_date;
+	private Date payment_registerdate;		
+	private String payment_date;
 	private String payment_time;
 	private String payment_price;
-	
+	private String payment_address;		
+	private String payment_title;
+	private String cancel;
+	private String payment_poster;/*
+	private List<SeatBean> payment_seats;	*/
 	
 	public int getPayment_num() {
 		return payment_num;
@@ -33,10 +37,10 @@ public class PaymentBean {
 	public void setUser_id(String user_id) {
 		this.user_id = user_id;
 	}
-	public int getPayment_check() {
+	public String getPayment_check() {
 		return payment_check;
 	}
-	public void setPayment_check(int payment_check) {
+	public void setPayment_check(String payment_check) {
 		this.payment_check = payment_check;
 	}
 	public int getPayment_amount() {
@@ -51,16 +55,16 @@ public class PaymentBean {
 	public void setPayment_registerdate(Date payment_registerdate) {
 		this.payment_registerdate = payment_registerdate;
 	}
-	public String getPayment_seat() {
-		return payment_seat;
+	/*public List<SeatBean> getPayment_seats() {
+		return payment_seats;
 	}
-	public void setPayment_seat(String payment_seat) {
-		this.payment_seat = payment_seat;
-	}
-	public Date getPayment_date() {
+	public void setPayment_seats(List<SeatBean> payment_seats) {
+		this.payment_seats = payment_seats;
+	}*/
+	public String getPayment_date() {
 		return payment_date;
 	}
-	public void setPayment_date(Date payment_date) {
+	public void setPayment_date(String payment_date) {
 		this.payment_date = payment_date;
 	}
 	public String getPayment_time() {
@@ -75,6 +79,31 @@ public class PaymentBean {
 	public void setPayment_price(String payment_price) {
 		this.payment_price = payment_price;
 	}
+	public String getPayment_address() {
+		return payment_address;
+	}
+	public void setPayment_address(String payment_address) {
+		this.payment_address = payment_address;
+	}	
+	public String getPayment_title() {
+		return payment_title;
+	}
+	public void setPayment_title(String payment_title) {
+		this.payment_title = payment_title;
+	}
+	public String getCancel() {
+		return cancel;
+	}
+	public void setCancel(String cancel) {
+		this.cancel = cancel;
+	}
+	public String getPayment_poster() {
+		return payment_poster;
+	}
+	public void setPayment_poster(String payment_poster) {
+		this.payment_poster = payment_poster;
+	}
+	
 	
 
 	

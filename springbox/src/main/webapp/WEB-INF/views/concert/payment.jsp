@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<!doctype html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -33,6 +34,21 @@
 
 		}
 	}
+	
+	function Num() {
+	    //대입 숫자
+	    var num1=document.getElementById("num1").value;
+	    var num2=document.getElementById("num2").value;
+	    var num3=document.getElementById("num3").value;
+
+	    //연산자
+	    var operation1=document.getElementById("operation1").value;
+	    var operation2=document.getElementById("operation2").value;
+	    //결과값 넣기
+	    document.getElementById("is_nums").innerHTML =eval(num1+operation1+num2+operation2+num3); 
+
+
+	  }
 
 	/* 	function Text(b) {
 
@@ -68,62 +84,109 @@
 
 
 <style>
-
-
-
-table {
-	border: 1px solid #bcbcbc;
+.tabel-box {
+	border: 1px solid #dcdcdc;
 	width: 1000px;
 	height: 90px;
 	text-align: center;
-	 
 }
 
 .title {
+<<<<<<< HEAD
     background-color: #FF4646; 
 	color: white;
+=======
+	background-color: white;
+	color: black;
+>>>>>>> branch 'master' of https://github.com/project-box/springbox.git
 	font-weight: bold;
 	height: 30px;
+	border-bottom-color: #FF6464;
+	border-bottom-style: double;
 }
 
 input:focus {
 	outline: none;
 }
 
-.select{
- 
- width:270px;
- height:30px;
- margin-top:10px;
- margin-bottom:5px;
+.select {
+	width: 270px;
+	height: 30px;
+	margin-top: 10px;
+	margin-bottom: 5px;
 }
 
-
-.choice_a{
-
- background-color: #dcdcdc;
- width:1000px;
- height:100px;
- border: 1px solid gray;
-  margin-left: 75px; 
- 
+.choice_a {
+	background-color: #dcdcdc;
+	width: 1000px;
+	height: 100px;
+	border: 1px solid gray;
+	margin-left: 75px;
 }
 
 hr {
-	border: 1px solid gray;
+	border: 1px solid #dcdcdc;
 	width: 1000px;
 	margin-top: 50px;
 	margin-left: 75px;
-	
+}
+
+h4 {
+	margin-left: 75px;
+	font-weight: bold;
 }
 
 .div1 {
-	 width: 1000px;
-     height: 170px;
-     border:1px solid black;
-     padding:10px;
-     margin-left: 75px;
-              }   
+	width: 1000px;
+	height: 170px;
+	border: 1px solid black;
+	padding: 10px;
+	margin-left: 75px;
+	overflow-x: hidden;
+	overflow-y: auto;
+	white-space: pre-wrap;
+}
+
+input[type=radio] {
+	margin-right: 5px;
+	margin-left: 10px;
+	width: 17px;
+	height: 17px;
+}
+
+input[type=checkbox] {
+	margin-left: 75px;
+}
+
+.ul-box {
+	list-style: none;
+	margin-left: 36px;
+	color: black;
+}
+
+.li-box {
+	padding: 5px;
+	border-top: 1px solid black;
+	border-left: 1px solid black;
+	border-right: 1px solid black;
+	float: left;
+	width: 333px;
+	text-align: center;
+	font-size: 17px;
+	color: black;
+}
+
+.submit{
+
+margin-left: 480px;
+width:200px;
+height:40px;
+color: white;
+background-color: red;
+
+}
+
+
 
 </style>
 
@@ -133,23 +196,31 @@ hr {
 <body>
 
 	<div class="container">
+	
+	<form name="payform" action="/springbox/book_add.box" method="post">
+	<input type="hidden" name="concert_num" value="${concertdata.concert_num}">
+	<input type="hidden" name="payment_date" value="${payment_date}">
+	<input type="hidden" name="payment_time" value="${payment_time}">
+	<input type="hidden" name="payment_amount" value="${payment_amount}">
+	<%-- <input type="hidden" name="seat_seat" value="${seat_seat}"> --%>
 		<!-- ----------------------------------------------------------------------------- -->
 		<h4>1. 티켓정보</h4>
-		<br>
-		<br>
+		<br> <br>
 
-		<table border=1; align="center" >
+		<table class="tabel-box" border=1; align="center">
 
 			<tr class="title">
 				<td>날짜</td>
 				<td>회차</td>
-				<td>좌석</td>
+				<td>좌석 수</td>
+				<td>좌석 번호</td>				
 			</tr>
 
 			<tr>
 				<td>${payment_date}</td>
 				<td>${payment_time}</td>
-				<td>${payment_seat}</td>
+				<td>${payment_amount}</td>
+				<td>${seat_seat}</td>
 			</tr>
 
 		</table>
@@ -159,53 +230,52 @@ hr {
 		<h4>2. 결제정보</h4>
 		<br>
 
-		<table border=1; align="center" >
+		<table class="tabel-box" border=1; align="center">
 
 			<tr class="title">
-				<td></td>
 				<td>티켓금액</td>
 				<td>예매수수료</td>
 				<td>배송비</td>
-				<td></td>
+				<td>총 합</td>
 			</tr>
 
 			<tr>
-				<td></td>
-				<td>${concertdata.concert_price}원</td>
-				<td>1,000원</td>
-				<td>2,500원</td>
-				<td>정보</td>
+				<td >${concertdata.concert_price}원</td>
+				<td >1,000원</td>
+				<td >2,500원</td>
+				<td><c:set var="num" value="${concertdata.concert_price}"></c:set>
+				<c:out value="${num+1000+2500}"></c:out>원</td>
 			</tr>
 		</table>
 
 		<br> <br> <br> <br>
 
-		<table border=1; align="center" >
+		<table class="tabel-box" border=1; align="center">
 			<tr class="title">
 				<td></td>
 				<td>할인금액</td>
 				<td>쿠폰/예매권</td>
 				<td>포인트</td>
-				<td></td>
+				<td>총 합</td>
 			</tr>
 
 			<tr>
 				<td></td>
-				<td>할인이 적용되지 않습니다..</td>
+				<td>할인이 적용되지 않습니다.</td>
 				<td>쿠폰 및 예매권이 없습니다.</td>
 				<td>포인트 사용이 적용되지 않습니다.</td>
-				<td>정보</td>
+				<td>-0 원</td>
 			</tr>
 		</table>
 
-		<br>
-		<br>
+		<br> <br>
 
-		<table border=1; align="center" >
+		<table class="tabel-box" border=1; align="center">
 			<tr class="title">
 				<td>총 결제금액</td>
 			<tr>
-				<td colspan="4">정보</td>
+				<td colspan="4"><c:out value="${num+1000+2500}"></c:out>원</td>				
+				<input type="hidden" name="payment_price" value="${num+1000+2500}">
 			</tr>
 
 		</table>
@@ -251,29 +321,26 @@ hr {
 	</div> -->
 
 		<div>
-
-			<table border=1; align="center" >
-
+			<table class="tabel-box" border=1; align="center">
 				<tr class="title">
 					<td colspan="2">주문자정보</td>
 				</tr>
 
 				<tr>
 					<td width="180px" height="45px">받으시는 분</td>
-					<td><input type="text" style="border: none;" size="70">
+					<td>${sessionScope.loginName}
 					</td>
 				</tr>
 
 				<tr>
 					<td height="45px">주소</td>
-					<td><input type="text" style="border: none;" size="70">
+					<td><input type="text" name="payment_address" style="border: none;" size="70" placeholder="주소를 입력해주세요">
 					</td>
 				</tr>
 
 				<tr>
-					<td>휴대번호</td>
-					<td height="45px"><input type="text" style="border: none;"
-						size="70"></td>
+					<td height="45px">휴대번호</td>
+					<td>${sessionScope.loginPhone}</td>
 				</tr>
 
 			</table>
@@ -282,71 +349,78 @@ hr {
 
 		<br> <br> <br> <br>
 		<!-- ----------------------------------------------------------------------------- -->
-		<h4>4. 결제수단</h4> <font color="red">*결제수단을 선택해 주세요</font>
-		
-		<br> <br>
-		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-		<input type=radio name=payment value="신용카드" onclick="Payment('pay1');">신용카드
-		<input type=radio name=payment value="계좌이체" onclick="Payment('pay2');">계좌이체
-		<input type=radio name=payment value="무통장입금" onclick="Payment('pay3');">무통장입금
+		<h4>4. 결제수단</h4>
+		<font color="red" style="margin-left: 75px;">*결제수단을 선택해 주세요</font> <br>
+		<br>
 
+		<div style="margin-left: 75px;">
 
-        <br><br>
+			<label><input type=radio name=payment_check value="신용카드" onclick="Payment('pay1');"> 
+			<font size=4px>신용카드</font></label> 
+			<label><input type=radio name=payment_check value="실시간계좌이체" onclick="Payment('pay2');">	
+			<font size=4px>실시간계좌이체</font></label> 
+			<label><input type=radio name=payment_check value="무통장입금" onclick="Payment('pay3');"> 
+			<font size=4px>무통장입금</font></label>
+
+		</div>
+
+		<br>
+		<br>
 
 		<div id="pay1" style="display: none;">
 
-				<div class="choice_a">
+			<div class="choice_a">
 
-					&nbsp;&nbsp;카드종류
-					<select class="select">
-						<option>선택</option>
-						<option value="국민카드">국민카드</option>
-						<option value="BC카드">BC카드</option>
-						<option value="우리카드">우리카드</option>
-						<option value="수협카드">수협카드</option>
-						<option value="전북카드">전북카드</option>
-						<option value="광주카드">광주카드</option>
-						<option value="제주은행카드">제주은행카드</option>
-						<option value="저축은행카드">저축은행카드</option>
-						<option value="MG새마을체크">MG새마을체크</option>
-						<option value="우체국카드">우체국카드</option>
-						<option value="KDB산업은행카드">KDB산업은행카드</option>
-						<option value="신협체크">신협체크</option>
-						<option value="삼성카드">삼성카드</option>
-						<option value="신한카드">신한카드</option>
-						<option value="씨티카드">씨티카드</option>
-						<option value="NG카드">NG카드</option>
-						<option value="하나카드">하나카드</option>
-						<option value="외환카드">외환카드</option>
-					</select> <font color="red">*카드종류를 선택해 주세요</font>
-					<br>
+				&nbsp;&nbsp;카드종류 <select class="select">
+					<option>선택</option>
+					<option value="국민카드">국민카드</option>
+					<option value="BC카드">BC카드</option>
+					<option value="우리카드">우리카드</option>
+					<option value="수협카드">수협카드</option>
+					<option value="전북카드">전북카드</option>
+					<option value="광주카드">광주카드</option>
+					<option value="제주은행카드">제주은행카드</option>
+					<option value="저축은행카드">저축은행카드</option>
+					<option value="MG새마을체크">MG새마을체크</option>
+					<option value="우체국카드">우체국카드</option>
+					<option value="KDB산업은행카드">KDB산업은행카드</option>
+					<option value="신협체크">신협체크</option>
+					<option value="삼성카드">삼성카드</option>
+					<option value="신한카드">신한카드</option>
+					<option value="씨티카드">씨티카드</option>
+					<option value="NG카드">NG카드</option>
+					<option value="하나카드">하나카드</option>
+					<option value="외환카드">외환카드</option>
+				</select> <font color="red">*카드종류를 선택해 주세요</font> <br> &nbsp;&nbsp;할부선택
+				<select class="select">
+					<option>선택</option>
+					<option value="2개월">2개월</option>
+					<option value="3개월">3개월</option>
+					<option value="4개월">4개월</option>
+					<option value="5개월">5개월</option>
+					<option value="6개월">6개월</option>
+					<option value="7개월">7개월</option>
+					<option value="8개월">8개월</option>
+					<option value="9개월">9개월</option>
+					<option value="10개월">10개월</option>
+					<option value="11개월">11개월</option>
+					<option value="12개월">12개월</option>
+				</select> <input type="button" value="무이자할부 안내" /> * 할부는 50,000원 이상만 가능합니다.
 
-					
-					&nbsp;&nbsp;할부선택
-					<select class="select">
-						<option>선택</option>
-						<option value="2개월">2개월</option>
-						<option value="3개월">3개월</option>
-						<option value="4개월">4개월</option>
-						<option value="5개월">5개월</option>
-						<option value="6개월">6개월</option>
-						<option value="7개월">7개월</option>
-						<option value="8개월">8개월</option>
-						<option value="9개월">9개월</option>
-						<option value="10개월">10개월</option>
-						<option value="11개월">11개월</option>
-						<option value="12개월">12개월</option>
-					</select>
-					
-					<input type="button" value="무이자할부 안내"/>
-					
-					* 할부는 50,000원 이상만 가능합니다.
+			</div>
 
-				</div>
-					
-					<hr>
+			<hr>
+			<h4>결제대행서비스 이용약관</h4>
 
-					<pre class="div1">
+			<ul class="ul-box">
+				<li><a class="li-box" href="#div1">기본약관</a></li>
+				<li><a class="li-box" href="#div2">개인정보 수집, 이용</a></li>
+				<li><a class="li-box" href="#div3">개인정보 제공, 위탁</a></li>
+			</ul>
+
+
+
+			<pre class="div1" id="div1">
 					[전자금융거래 기본약관]
 
 제1조 (목적)
@@ -470,50 +544,53 @@ hr {
 (제 17조 제1항 일부 개정, 제 12조 제 5항 신설)
 
 					</pre>
+			<input type="checkbox">본인은 위의 내용을 모두 읽어보았으며 이에 전체 동의합니다.
 
+			<hr>
+
+
+			<h4>개인정보 제3자 제공</h4>
+			<pre class="div1">
+(주)BOX는 귀하께서 판매자로부터 상품 및 서비스를 구매하는 경우, 거래의 이행 및 거래 당사간 의사소통 및 상담, 배송 등 원활한 거래이행을 위하여 아래와 같은 최소한의 개인정보를 판매자 및 기획사에 제공합니다.
+
+<table class="table table-bordered"> 
+<tr align="left">
+<td>제공받는자</td>
+<td>(주)취향저격, 본 공연(행사)기획사, 공연장(행사장), 배송업체</td>
+</tr>
+<tr align="left">
+<td>목적</td>
+<td>-(주)취향저격: 판매자와 구매자간 거래이행 및 거래의 원활한 진행, 고객상담 및 불만처리, 상품(경품)배송을 위한 배송지 확인 등 
+-본 공연(행사) 기획사: 티켓발권 및 현장운영, 캐스팅변경, 공연취소 등에 대한 고객안내, 응대
+-공연장(행사장), 공연(행사) 진행 및 현장 좌석 안내, 예매 확인
+-배송업체: 티켓 배송을 선택하였을 경우, 티켓 배송이행</td>
+</tr>
+<tr align="left">
+<td>항목</td>
+<td>성명, 아이디, 전화번호, 휴대폰번호, 이메일, 예매정보, 배송지 정보</td>
+</tr>
+<tr align="left">
+<td>보유기간</td>
+<td>개인정보 이용목적 달성 시까지(단, 관계법령의 규정에 의한 경우 규정된 시점까지 또는 이용자로부터 
+사전동의를 받은 경우 해당 보유기간까지)</td>
+</tr>			
+	</table>				
 					
+		</pre>
 
-				</div>
-
+		<input type="checkbox">개인정보 제3자 제공에 동의
 
 		</div>
-		<div id="pay2" style="display: none;">
-			<table border=1;>
 
-				<tr class="title">
-					<td>날짜</td>
-					<td>회차</td>
-					<td>좌석</td>
-				</tr>
+		<div id="pay2" style="display: none;"></div>
 
-				<tr>
-					<td>정보</td>
-					<td>정보</td>
-					<td>정보</td>
-				</tr>
-
-			</table>
-		</div>
-
-
-		<div id="pay3" style="display: none;">
-			<table border=1;>
-
-				<tr class="title">
-					<td>날짜</td>
-					<td>회차</td>
-					<td>좌석</td>
-				</tr>
-
-				<tr>
-					<td>정보</td>
-					<td>정보</td>
-					<td>정보</td>
-				</tr>
-
-			</table>
-		</div>
-
+		<div id="pay3" style="display: none;"></div>
+		
+		
+		<input type="submit" class="submit" value="결제하기">
+		
+		</form>
+		
 	</div>
 
 	<%@ include file="/WEB-INF/views/front/footer.jsp"%>

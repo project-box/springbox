@@ -10,6 +10,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.naver.springbox.dto.ConcertBean;
 import com.naver.springbox.dto.ConcertBoardBean;
+import com.naver.springbox.dto.PaymentBean;
+import com.naver.springbox.dto.SeatBean;
 
 @Repository
 public class ConcertDaoImpl implements ConcertDao {
@@ -136,6 +138,46 @@ public class ConcertDaoImpl implements ConcertDao {
 		else
 			return false;
 	}
+
+	@Override
+	@Transactional
+	public void book_add(PaymentBean pb) {
+		
+		sqlSession.insert("concert.book_add", pb);
+		
+	}
+	
+	
+	@Override
+	@Transactional
+	public List<PaymentBean> book_list(String user_id) {
+		// TODO Auto-generated method stub
+		
+		List<PaymentBean> list = sqlSession.selectList("concert.book_list", user_id);					
+		
+		return list;
+	}
+	
+	public PaymentBean book_detail(int payment_num){
+		
+		List<PaymentBean> list = sqlSession.selectList("concert.book_detail", payment_num);
+		
+		if (list == null || list.size() < 1)
+			return null;
+		else
+			return list.get(0);
+	}
+
+
+	@Override
+	public void seat_add(SeatBean sb) {
+		// TODO Auto-generated method stub
+		
+		sqlSession.insert("concert.seat_add", sb);
+		
+	}
+	
 	
 	
 }
+
