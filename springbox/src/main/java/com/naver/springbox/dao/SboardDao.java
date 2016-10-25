@@ -10,7 +10,7 @@ public interface SboardDao {
 	
 	public int getListCount();
 
-	public List<SboardDto> getSboardList(Map<String, Object> map);
+	public List<SboardDto> getSboardList(int page) throws Exception;
 	
 	
 	// 조회수를 1증가시키고 하나의 데이터를 가져오는 메소드
@@ -27,6 +27,8 @@ public interface SboardDao {
 
  	// 정수 1개를 받아서 데이터를 삭제하는 메소드
  	public boolean deleteSboard(int num);
+
+	
 	
 	
 }

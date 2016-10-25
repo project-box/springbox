@@ -95,8 +95,13 @@
 }
 
 .title {
+<<<<<<< HEAD
+    background-color: #FF4646; 
+	color: white;
+=======
 	background-color: white;
 	color: black;
+>>>>>>> branch 'master' of https://github.com/project-box/springbox.git
 	font-weight: bold;
 	height: 30px;
 	border-bottom-color: #FF6464;

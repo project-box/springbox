@@ -48,19 +48,27 @@
 
 	<!-- blogboard 테이블의 데이터 개수를 리턴해주는 sql -->
 	<select id="countSboardList" resultType="Integer">
-		select count(*) from
-		SboardDto
+		select count(s_num)	from SboardDto
 	</select>
 
 	<!-- start와 end의 값을 맵으로 받아서 s_date로 내림차순 정렬한 후 start와 end 번째에 해당하는 데이터를 
 		찾아와서 SboardDto 타입으로 리턴해주는 sql -->
-	<select id="selectSboardList" parameterType="java.util.Map"
+	<select id="selectSboardList" parameterType="Integer"
 		resultType="com.naver.springbox.dto.SboardDto">
-		select * from (select rownum rnum, s_num, sp_type,
-		s_channel, user_id,
-		s_phone, s_email, s_content, s_readcount, s_date,
-		s_ip, s_file, s_subject from(select * from SboardDto order by s_date desc))
-		where rnum &gt;=#{start} and rnum &lt;=#{end}
+		 <![CDATA[
+			
+	   select s_num, user_id, s_content, s_readcount, s_date,
+		 s_file, s_subject   from
+ 		(select rownum rnum,s_num, user_id, s_content, s_readcount, s_date,
+		 s_file, s_subject from  
+	  	 (select * from SboardDto order by s_date desc))
+	   		 where rnum >= ((#{page}-1) *  10+1)  and rnum <= (#{page} * 10)
+		
+		]]>
+		<!-- select * from (select rownum rnum, s_num,  user_id,
+		 s_content, s_readcount, s_date,
+		 s_file, s_subject from(select * from SboardDto order by s_num desc))
+		where rnum &gt;=#{start} and rnum &lt;=#{end} -->
 	</select>
 
 	<!-- 정수 1개를 받아서 blogboard 테이블에서 board_num과 일치하는 데이터를 찾아서 모든 컬럼을 BoardDto 
@@ -108,8 +116,8 @@
 
 	<insert id="insertSboard" parameterType="com.naver.springbox.dto.SboardDto">
 		insert into
-		SboardDto(s_num,user_id,s_subject,s_content,s_file )values(s_num_seq.nextval,#{user_id},
-		#{s_subject},#{s_content},#{s_file,jdbcType=VARCHAR})
+		SboardDto(s_num,user_id,s_subject,s_content,s_file,s_date, s_readcount )values(s_num_seq.nextval,#{user_id},
+		#{s_subject},#{s_content},#{s_file,jdbcType=VARCHAR},SYSDATE, 0)
 	</insert>
 
 
@@ -117,7 +125,7 @@
 	<update id="updateSboard" parameterType="java.util.Map">
 		update SboardDto set
 		s_subject=#{s_subject}, s_content=#{s_content}, s_file=#{s_file},
-		s_ip=#{s_ip}
+		
 		where s_num=#{s_num}
 	</update>
 
