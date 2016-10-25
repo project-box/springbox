@@ -66,12 +66,13 @@ function Book(){
 
     function Call(){
     	
-        /* 	location.href="/springbox/payment.box?payment_date="+
-		$("#payment_date").val()+"&payment_time="+$("#payment_time").val()+
-	"&payment_seat="+$("#payment_seat").val() */
+    	
+    	
+    	
 
-			paymentform.submit();
+		/* paymentform.submit(); */
 	} 
+    
 
 </script>
 
@@ -85,7 +86,9 @@ function Book(){
 <form name="paymentform" action="payment.box" method="post">
 <input type="hidden" name="payment_date" id="payment_date"/>
 <input type="hidden" name="payment_time" id="payment_time" />
-<input type="hidden" name="payment_seat" id="payment_seat"/>
+
+<input type="text" name="seat_seat"/>
+
 <input type="hidden" name="payment_amount" id="payment_amount"/>
 <input type="hidden" name="concert_num"	value="${concertdata.concert_num}" />
 

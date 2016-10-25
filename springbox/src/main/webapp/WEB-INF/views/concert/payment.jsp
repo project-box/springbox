@@ -197,7 +197,7 @@ background-color: red;
 	<input type="hidden" name="payment_date" value="${payment_date}">
 	<input type="hidden" name="payment_time" value="${payment_time}">
 	<input type="hidden" name="payment_amount" value="${payment_amount}">
-	<input type="hidden" name="payment_seat" value="${payment_seat}">
+	<%-- <input type="hidden" name="seat_seat" value="${seat_seat}"> --%>
 		<!-- ----------------------------------------------------------------------------- -->
 		<h4>1. 티켓정보</h4>
 		<br> <br>
@@ -215,7 +215,7 @@ background-color: red;
 				<td>${payment_date}</td>
 				<td>${payment_time}</td>
 				<td>${payment_amount}</td>
-				<td>${payment_seat}</td>
+				<td>${seat_seat}</td>
 			</tr>
 
 		</table>
