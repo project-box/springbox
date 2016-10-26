@@ -32,6 +32,7 @@ public class SboardInsertAction {
 	public boolean execute(HttpServletRequest request, HttpServletResponse response)
 	 throws Exception {
 		SboardDto dto = new SboardDto();
+		System.out.println("SboardInsertAction 들어옴");
 
 		String sboarduploadPath = request.getRealPath("sboardupload");		
 		int size = 10 * 1024 * 1024; // 10MB까지 업로드 가능
@@ -64,10 +65,10 @@ public class SboardInsertAction {
 		dto.setS_subject(s_subject);
 		dto.setS_content(s_content);
 	
-
+		System.out.println("SboardInsertAction에서  Dao.insertSboard로 나감");
 		boolean r = sboardDao.insertSboard(dto);
 			
-		
+		System.out.println("SboardInsertAction 나감");
 		return r;
 	}
 }

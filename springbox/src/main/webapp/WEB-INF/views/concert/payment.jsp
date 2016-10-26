@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>  
 <!doctype html>
 <html>
 <head>
@@ -49,6 +50,8 @@
 
 
 	  }
+	
+
 
 	/* 	function Text(b) {
 
@@ -92,8 +95,13 @@
 }
 
 .title {
+<<<<<<< HEAD
+    background-color: #FF4646; 
+	color: white;
+=======
 	background-color: white;
 	color: black;
+>>>>>>> branch 'master' of https://github.com/project-box/springbox.git
 	font-weight: bold;
 	height: 30px;
 	border-bottom-color: #FF6464;
@@ -197,8 +205,8 @@ background-color: red;
 	<input type="hidden" name="payment_date" value="${payment_date}">
 	<input type="hidden" name="payment_time" value="${payment_time}">
 	<input type="hidden" name="payment_amount" value="${payment_amount}">
-	<%-- <input type="hidden" name="seat_seat" value="${seat_seat}"> --%>
-		<!-- ----------------------------------------------------------------------------- -->
+	<input type="hidden" name="seat_seat" value="${seat_seat}">
+<!-- ----------------------------------------------------------------------------- -->
 		<h4>1. 티켓정보</h4>
 		<br> <br>
 
@@ -235,11 +243,13 @@ background-color: red;
 			</tr>
 
 			<tr>
-				<td >${concertdata.concert_price}원</td>
+				<td>
+				<c:set var="num" value="${concertdata.concert_price * payment_amount}"/>
+				<c:out value="${num}"/>원
+				</td>
 				<td >1,000원</td>
 				<td >2,500원</td>
-				<td><c:set var="num" value="${concertdata.concert_price}"></c:set>
-				<c:out value="${num+1000+2500}"></c:out>원</td>
+				<td ><c:out value="${num+1000+2500}"></c:out>원</td>
 			</tr>
 		</table>
 

@@ -50,5 +50,14 @@ public class BookAction {
 		return dto;
 	}
 	
+	/*----------------좌석 리스트----------------------------*/
+	public List<SeatBean> seat_list(int concert_num) throws Exception {
+		
+		List<SeatBean> sb = concertDao.seat_list(concert_num);
+
+		return sb;
+	}
+	
+	
 	
 }
