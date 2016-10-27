@@ -122,6 +122,16 @@
 								<td style="font-family: Tahoma; font-size: 10pt;">
 									<div align="center">${b.music_genre}</div>
 								</td>
+								<c:if test="${sessionScope.loginId == 'dev'}">
+									<td style="font-family: Tahoma; font-size: 10pt;">
+									<div><input id="button" type="button" value="수정" 
+									onclick="tdclick1(event)"></div></td>
+									<!-- onclick="location.href='./music_modify.box"></div></td> -->
+								<td>	
+									<div><input id="button" type="button" value="삭제" 
+									onclick="tdclick2(event,'${b.music_num}')"></div>
+								</td>
+								</c:if>
 							</tr>
 						</div>
 					</c:forEach>
