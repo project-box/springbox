@@ -227,7 +227,7 @@ var starty2=<fmt:formatDate value='${concertdata.concert_startdate}' pattern='yy
             cnj_str+="<tr bgcolor='#323232'><td colspan=7>"
 			cnj_str+="<table border=0 cellpadding=0 cellspacing=0 align=center width=100%>"
 			cnj_str+="<td><a href='javascript:;' onClick='startm--; if (startm<0) { starty--; startm=11; } showCalendar(startd,startm,starty)' title='이전 월'><font color='white'> << </font></a></td>"
-			cnj_str+="<td align=center><font color='white'><b>"+starty+"년"+" "+(startm+1)+"월</b></font></td>"
+			cnj_str+="<td align=center><font color='white'><b>"+starty+"년"+" "+monthName[month].toUpperCase()+"</b></font></td>"
 			cnj_str+="<td align=right><a href='javascript:;' onClick='startm++; if (startm>11) { starty++; startm=0; } showCalendar(startd,startm,starty)' title='다음 월'><font color='white'> >> </font></a></td>"
 			cnj_str+="</tr></table>"
 			cnj_str+="</td></tr>"
