@@ -31,7 +31,7 @@
                 </div>
                 <button class="btn btn-lg btn-primary btn-block btn-signin" type="submit"> 로그인</button>
             </form><!-- /form -->
-            <a href="#" class="forgot-password">
+            <a href="./PassView.member" class="forgot-password">
                 패스워드를 잃어버렸습니까?
             </a>
         </div><!-- /card-container -->

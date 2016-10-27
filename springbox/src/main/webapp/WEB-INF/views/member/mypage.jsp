@@ -122,9 +122,9 @@
   <div class="container-fluid">
     <ul class="nav navbar-nav">
       <li><a href="book_list.box"><font color="white"><b>예매정보확인</b></font></a></li>
-      <li><a href="MemberUpdate.box"><font color="white"><b>회원정보수정</b></font></a></li>
       <li><a href="edit_preference.box"><font color="white">선호도수정</b></font></a></li>
-      <li><a href="MemberDeleteForm.box"><font color="white">회원탈퇴</b></font></a></li>
+      <li><a href="/springbox/memberInfo_view.member"><font color="white"><b>회원정보수정</b></font></a></li>
+      <li><a href="Member_drop.member"><font color="white">회원탈퇴</b></font></a></li>
     </ul>
   </div>
 </nav> 

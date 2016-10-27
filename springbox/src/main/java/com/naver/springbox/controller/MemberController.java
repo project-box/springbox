@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.naver.springbox.dao.MemberDao;
@@ -21,6 +22,10 @@ import com.naver.springbox.dto.MemberBean;
 import com.naver.springbox.service.EmailCheckAction;
 import com.naver.springbox.service.IdCheckAction;
 import com.naver.springbox.service.MemberJoinAction;
+import com.naver.springbox.service.MemberLogincont;
+import com.naver.springbox.service.Member_getInfo;
+import com.naver.springbox.service.Member_passset;
+import com.naver.springbox.service.Member_update;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
@@ -41,6 +46,9 @@ public class MemberController {
 		return "member/login";
 	}
 
+	@Autowired 
+	private MemberLogincont memberLogincont;		//로그인횟수증가시키기
+	
 	@RequestMapping(value = "/login_action.box", method = RequestMethod.POST)
 	public ModelAndView Login( HttpServletRequest request, HttpServletResponse response) {
 
@@ -60,8 +68,10 @@ public class MemberController {
 					session.setAttribute("loginId", users.getUser_id());
 					session.setAttribute("loginName", users.getName());
 					session.setAttribute("loginPhone", users.getPhone());
-
-
+					
+					//로그인 성공에 따라서 로그인 횟수 증가시키기
+					memberLogincont.Logincont(users.getUser_id());
+					
 				} else {
 					// �뙣�뒪�썙�뱶 ��由�
 					response.setContentType("text/html;charset=utf-8");
@@ -136,21 +146,18 @@ public class MemberController {
 	@RequestMapping("/member_join.member")
 	public ModelAndView join() {
 		ModelAndView mav = new ModelAndView();
-
 		mav.setViewName("/member/member_join");
-
 		return mav;
 	}
 	
 	@Autowired
 	private MemberJoinAction memberJoinAction;
 
-	// 회원 가입
+
 	@RequestMapping(value="/join_process.member", method = RequestMethod.POST)
 //	public ModelAndView insertMember(HttpServletRequest request) {
 //	public ModelAndView insertMember(@ModelAttribute MemberBean member) {
 	public ModelAndView insertMember(HttpServletRequest request) throws Exception {
-		System.out.println("가입 들어옴");	
 		MemberBean member = new MemberBean();
 		
 		String uploadPath = request.getRealPath("sboardupload");		
@@ -189,6 +196,27 @@ public class MemberController {
 		return mav;
 	}
 	
+	//비밀번호 찾기-새로운 비빌번호를 생성하여 이메일 전송
+	@RequestMapping(value = "/PassView.member")
+	public ModelAndView passView() {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("/member/find");
+		return mav;
+	}
+	
+	@Autowired Member_passset member_passset;
+	
+	@RequestMapping(value = "/FindPassword.member")
+	public ModelAndView passset(HttpServletRequest request) {
+		ModelAndView mav = new ModelAndView();
+		boolean result = member_passset.Update_pass(request);
+		
+		if(result) 
+			mav.setViewName("/member/login");
+		
+		return mav;
+	}
+	
 	@RequestMapping(value = "/mypage.box")
 	public String myPage(HttpServletRequest request, HttpServletResponse response) {
 
@@ -211,4 +239,96 @@ public class MemberController {
 		}
 		return null;
 	}
+	
+	//회원정보 업데이트-정보 확인하기
+	@Autowired Member_getInfo member_getInfo;
+	
+	@RequestMapping("/memberInfo_view.member")
+	public ModelAndView memberInfoView(HttpSession session){
+		ModelAndView mav = new ModelAndView();	
+  
+  		MemberBean member = null;
+		String loginId = (String)session.getAttribute("loginId");
+				
+		if(loginId == null) {
+			mav.setViewName("/member/login");
+		}else {
+			member = member_getInfo.getUpdate_getInfo(loginId);
+			mav.addObject("member", member);
+			mav.setViewName("/member/update");
+		}
+		return mav;
+	}
+	
+	
+	//회원정보 업데이트-수정내용 반영하기
+	@RequestMapping(value = "/Member_update.member")
+	public ModelAndView memberUpdate() {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("/member/update");
+		return mav;
+	}
+		
+	@Autowired Member_update member_update;
+	
+	@RequestMapping(value = "/update_process.member", method = RequestMethod.POST)
+	public ModelAndView MemberUpdate(HttpServletRequest request, HttpSession session ) throws Exception {
+		MemberBean member = new MemberBean();
+		String user_id = (String) session.getAttribute("loginId");
+		
+		String uploadPath = request.getRealPath("sboardupload");		
+		int size = 10 * 1024 * 1024; // 10MB까지 업로드 가능
+
+		MultipartRequest multi=null;
+		multi = new MultipartRequest(
+				request, 
+				uploadPath,
+				size, 
+				"utf-8", 
+				new DefaultFileRenamePolicy());		
+		
+		member.setUser_id(user_id);
+		member.setPassword(multi.getParameter("password"));
+		member.setName(multi.getParameter("name"));
+		member.setEmail(multi.getParameter("email"));
+		member.setPhone(multi.getParameter("phone"));
+		member.setAge(Integer.parseInt(multi.getParameter("age")));
+		member.setImage(multi.getFilesystemName((String) multi.getFileNames().nextElement()));	
+		
+		ModelAndView mav = new ModelAndView();
+		boolean result = member_update.updateMember(member);
+		
+		if (result) {
+			mav.setViewName("redirect:memberInfo_view.member");
+		} else {
+			mav.addObject("result", result);
+			mav.setViewName("/member/update");
+		}
+		return mav;
+	}
+	
+	
+	
+	
+	/*@RequestMapping(value = "/update_process.member", method = RequestMethod.POST)
+	public ModelAndView mem_update(MultipartHttpServletRequest request, HttpSession session) { 
+		ModelAndView mav = new ModelAndView();
+		MemberBean member = (MemberBean)session.getAttribute("member");
+		
+		System.out.println("어디에있니");
+		
+		if(member == null) {
+			mav.setViewName("/member/login");
+		}else{
+			if(member_update.updateMember(request)){
+				session.invalidate();
+				mav.setViewName("redirect:login.box");
+			}else{
+				mav.addObject("result", false);
+				mav.setViewName("/member/update");
+			}
+		}
+		return mav;
+	}파일업로드 방식이라고 하네요*/
+	
 }

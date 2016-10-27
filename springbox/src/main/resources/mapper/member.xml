@@ -23,4 +23,27 @@
 		 values(#{user_id}, #{password}, #{name}, #{email}, #{gender}, #{phone}, #{age}, 0, '0', '0', #{image,jdbcType=VARCHAR})
 	</insert>
 	
+	<update id="Login_count" parameterType="com.naver.springbox.dto.MemberBean">
+		update users set logincont=logincont+1 where user_id=#{id}
+	</update>
+	
+	<!-- email과 pw를 맵으로 받아서 email인 데이터의 pw를 변경하는 sql -->
+	<update id="updatePass" parameterType="java.util.Map">
+		update users set password=#{password} where email=#{email}
+	</update>
+	
+	<!--회원정보변경을 위한 값을 불러오는 sql -->
+	<select id="update_getInfo" resultType="com.naver.springbox.dto.MemberBean"
+		parameterType="java.lang.String"> 
+			select * from users  where user_id = #{user_id}
+	</select>
+	
+	<!-- 회원정보 수정하기  -->
+	<update id="member_Update" parameterType="com.naver.springbox.dto.MemberBean" >
+		update users
+		set
+		password=#{password}, name=#{name}, email=#{email}, 
+		phone=#{phone}, age=#{age}, image=#{image,jdbcType=VARCHAR}
+		where user_id=#{user_id}
+	</update>
 </mapper>
