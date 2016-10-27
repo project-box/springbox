@@ -23,6 +23,10 @@ seat_time varchar2(200));
 
 select * from seat;
 
+
 alter table seat modify(seat_seat varchar2(200));
+
+
+select * from concert;
 
 

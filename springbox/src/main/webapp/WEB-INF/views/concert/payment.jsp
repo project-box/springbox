@@ -95,13 +95,10 @@
 }
 
 .title {
-<<<<<<< HEAD
     background-color: #FF4646; 
 	color: white;
-=======
 	background-color: white;
 	color: black;
->>>>>>> branch 'master' of https://github.com/project-box/springbox.git
 	font-weight: bold;
 	height: 30px;
 	border-bottom-color: #FF6464;
@@ -223,7 +220,10 @@ background-color: red;
 				<td>${payment_date}</td>
 				<td>${payment_time}</td>
 				<td>${payment_amount}</td>
-				<td>${seat_seat}</td>
+				<td><br><c:forTokens items="${seat_seat}" delims="/" var="sel">
+				 ${sel}<br><br>
+				</c:forTokens>
+				</td>
 			</tr>
 
 		</table>

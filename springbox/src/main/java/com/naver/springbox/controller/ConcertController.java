@@ -150,10 +150,12 @@ public class ConcertController {
 
 	
 		List<SeatBean> sb = bookAction.seat_list(concert_num);
+		ConcertBean cb = concertAction.concertDetail(concert_num);
 		
 		ModelAndView mav = new ModelAndView();
 		
-		mav.addObject("seatdata", sb);		
+		mav.addObject("seatdata", sb);	
+		mav.addObject("concertdata", cb);
 		mav.setViewName("/concert/book");
 
 				return mav;
