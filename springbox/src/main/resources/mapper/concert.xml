@@ -77,12 +77,22 @@
 	</insert>
 	
 	
+	
+	
+	
 	<!-- <좌석 등록> -->
 	<insert id="seat_add" parameterType="com.naver.springbox.dto.SeatBean">
 		insert into seat(
-		seat_num,seat_seat,concert_num values(
-		seat_seq.nextval,#{seat_seat},#{concert_num})
+		seat_num,seat_seat,concert_num,seat_date,seat_time) values(
+		seat_seq.nextval,#{seat_seat},#{concert_num},#{seat_date},#{seat_time})
 	</insert>
+	
+	<!-- 좌석 리스트 -->
+	<select id="seat_list" resultType="com.naver.springbox.dto.SeatBean">
+	    <![CDATA[
+			select * from seat where concert_num=#{concert_num}
+		]]>
+	</select>
 	
 	
 	

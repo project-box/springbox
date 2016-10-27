@@ -45,6 +45,8 @@ public interface ConcertDao {
 	
 	public PaymentBean book_detail(int payment_num);
 
+	public List<SeatBean> seat_list(int concert_num);
+
 
 
 }

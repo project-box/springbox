@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!doctype html>
 <html>
 <head>
@@ -66,7 +68,7 @@ function Ok(payment_num, concert_num) {
 						<tr align="center" valign="middle" height=100px>
 				<%-- 	<input type="hidden" name="concert_num" value="${p.concert_num}">
 					<input type="hidden" name="payment_num" value="${p.payment_num}"> --%>
-						<td>${p.payment_date}<br>
+						<td><fmt:formatDate value="${p.payment_registerdate}" pattern="yyyy-MM-dd"/>
 						<input type="button" value="상세보기" onclick="Ok(${p.payment_num});"></td>												
 				<td><br><a href="concert_detail.box?concert_num=${p.concert_num}">
 				<img src="/springbox/img/${p.payment_poster}" width="100" height="140" alt="title"/>
