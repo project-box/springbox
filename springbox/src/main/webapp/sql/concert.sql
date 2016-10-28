@@ -10,23 +10,35 @@ start with 1
 increment by 1
 nocache;
 
-select * from payment;
+select * from users;
 
 select * from payment;
 
-delete from seat;
-alter table payment drop column payment_seat;
-
-alter table seat drop column payment_num;
-alter table seat add(
-seat_time varchar2(200));
+select * from payment;
 
 select * from seat;
 
+delete from seat;
+alter table payment drop column cancel;
 
+alter table seat drop column payment_num;
+alter table seat add(
+payment_num references payment(payment_num));
+
+select * from seat;
+
+	update payment set payment_check='무통장입금' where concert_num=30;
+		
 alter table seat modify(seat_seat varchar2(200));
 
 
 select * from concert;
+
+
+
+select max(payment_num) from payment;
+
+
+
 
 
