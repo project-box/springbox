@@ -328,7 +328,7 @@ var starty2=<fmt:formatDate value='${concertdata.concert_startdate}' pattern='yy
 	}
 
 
- function Test(dayCount,month,year){	 
+ function Test(dayCount,month,year){	 // 날짜 선택
 
 	 date = year+"/"+(month+1)+"/"+dayCount;
 	 
@@ -339,8 +339,8 @@ var starty2=<fmt:formatDate value='${concertdata.concert_startdate}' pattern='yy
 	$("input[type=checkbox]").prop("checked",false);
 	$("#time option:eq(0)").prop("selected", true);
 	$("#payment_time").val("");
-	
-	
+	$("#amount option:eq(0)").prop("selected", true);
+	$("#payment_amount").val("");
  }
 
 
@@ -389,7 +389,7 @@ var x=null;
           	      x = checked.val();
           	    num =  $(":checkbox:checked").length;
           	    
-				if(checked.is(":checked")==true){		
+				if(checked.is(":checked")==true){	// 체크박스 클릭
 					 
 					if (num > max) {
 			            alert ("좌석수를 다시 설정해주세요.");
@@ -398,22 +398,41 @@ var x=null;
 					
 					$("#seat_seat"+num).val(x);
 					
-					 				
 					
+			//---------------체크박스 해제---------------------------------	
+					
+			
 				}if(checked.is(":checked")==false){	
 	
-					Delete();
-					
-					/* $("#payment_seat"+(num+1)).val(""); */
+					 for(k=0; k < max; k++)	{
+						  $("#seat_seat"+(k+1)).val(""); // 좌석번호 다 지우기
+					 } 
+					 
+					 var checked_num=0; 
+					 
+					$("input:checkbox:checked").each(function (index) {  // 선택된 좌석만 차례로 다시 뿌려주기  
+								
+						checked_num+=1;
+						
+					    $("#seat_seat"+checked_num).val( $(this).val());	
+						    	
+					 });  
 				}				
 			});			
 		
 		
 		$("#time").change(function(){	  // 회차 선택	
 			
+			/* --------회차 변경시 좌석수, 좌석번호 초기화------------------ */
+			  $("input[type=checkbox]").prop("checked",false);
+			  $("#amount option:eq(0)").prop("selected", true);
+			  $("#payment_amount").val("");
+			  max = 1;
+			  Amount();
+			  
 			   time=$(this).val();
 			
-			
+			  
 				$("#payment_time").val(time);		
 				/* alert( $(this).val()); */	
 				
@@ -453,15 +472,6 @@ var x=null;
 			
 		}); 
 		  });	
-
- function Delete(){
-     // 체크박스 해제
-	 
-	 for(k=0; k < max; k++)	 
-		 if($("#seat_seat"+(k+1)).val() ==x){			 
-			 $("#seat_seat"+(k+1)).val("");
-		 }
- }				
 		
 	
  function Amount(){ 

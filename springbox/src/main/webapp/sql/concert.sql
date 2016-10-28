@@ -18,7 +18,8 @@ select * from payment;
 
 select * from seat;
 
-delete from seat;
+
+delete from payment;
 alter table payment drop column cancel;
 
 alter table seat drop column payment_num;
@@ -26,8 +27,8 @@ alter table seat add(
 payment_num references payment(payment_num));
 
 select * from seat;
-
-	update payment set payment_check='무통장입금' where concert_num=30;
+select * from payment;
+	update payment set payment_registerdate='16/10/28' where concert_num=29;
 		
 alter table seat modify(seat_seat varchar2(200));
 
