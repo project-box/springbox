@@ -187,6 +187,43 @@ public class ConcertDaoImpl implements ConcertDao {
 		
 		return list;
 	}
+
+
+	@Override
+	@Transactional
+	public PaymentBean pay_ok(int payment_num) {
+		// TODO Auto-generated method stub
+		
+		sqlSession.update("concert.pay_ok", payment_num);
+		
+		return null;
+	}
+	
+	@Override
+	@Transactional
+	public PaymentBean book_c(int payment_num) {
+		// TODO Auto-generated method stub
+		
+		sqlSession.update("concert.book_c_payment", payment_num);
+		sqlSession.delete("concert.book_c_seat", payment_num);
+		
+		return null;
+	}
+
+
+	@Override
+	@Transactional
+	public int book_data() {
+		// TODO Auto-generated method stub
+		
+		int payment_num = sqlSession.selectOne("concert.book_data");
+		
+		return payment_num;
+	}
+	
+	
+	
+	
 	
 }
 

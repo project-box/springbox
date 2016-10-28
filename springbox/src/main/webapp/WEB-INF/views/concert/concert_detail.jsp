@@ -114,8 +114,8 @@ function Book(){
 		<fmt:formatDate value="${concertdata.concert_enddate}"
 			pattern="yyyy-MM-dd" />
 		<br> <br> <b>가격</b>
-		&nbsp;&nbsp;&nbsp;&nbsp;${concertdata.concert_price}<br>
-		
+		&nbsp;&nbsp;&nbsp;&nbsp;
+		<fmt:formatNumber value="${concertdata.concert_price}" pattern="#,###.##"/>&nbsp;원<br>
 		<br>
 		<button type="button" onclick="Book();">예매하기</button>
 		

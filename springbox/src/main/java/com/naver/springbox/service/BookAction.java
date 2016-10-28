@@ -45,8 +45,6 @@ public class BookAction {
 	public PaymentBean book_detail(int payment_num) throws Exception {
 		PaymentBean dto = concertDao.book_detail(payment_num);
 
-		
-		System.out.println("예매 디테일 서비스");
 		return dto;
 	}
 	
@@ -57,6 +55,38 @@ public class BookAction {
 
 		return sb;
 	}
+	
+	/*----------------결제하기 버튼----------------------------*/
+	public PaymentBean pay_ok(int payment_num) throws Exception {
+		
+		concertDao.pay_ok(payment_num);
+
+		return null;
+	}
+	
+	/*-------------------예약취소----------------------------------------*/
+	
+	public PaymentBean book_c(int payment_num) throws Exception {
+		
+		concertDao.book_c(payment_num);
+		
+		return null;
+		
+	}
+
+	/*----------------------payment_num 값 구해오기------------------------------*/
+	
+	
+	public int book_data() throws Exception{
+		// TODO Auto-generated method stub
+		
+		int payment_num = concertDao.book_data();
+		
+		return payment_num;
+	}
+	
+	
+	
 	
 	
 	

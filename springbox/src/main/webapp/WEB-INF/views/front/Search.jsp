@@ -151,7 +151,7 @@ input[type=text], select {
 					<div>
 						<tr id="over" align="center" valign="middle"
 							bordercolor="#333333"
-							onclick="location.href='./music_detail.box?num=${b.music_num}&page=${page}';"
+							onclick="location.href='./music_detail.box?num=${b.music_num}';"
 							onmouseover="this.style.backgroundColor='F8F8F8'"
 							onmouseout="this.style.backgroundColor=''">
 	

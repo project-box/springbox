@@ -144,16 +144,18 @@ public class ConcertController {
 	private BookAction bookAction;
 	
 	
-	
+	/*-------------------예매페이지 이동-----------------------------------------*/
 	@RequestMapping(value = "/book.box")
 	public ModelAndView book(int concert_num, HttpSession session) throws Exception {
 
 	
 		List<SeatBean> sb = bookAction.seat_list(concert_num);
+		ConcertBean cb = concertAction.concertDetail(concert_num);
 		
 		ModelAndView mav = new ModelAndView();
 		
-		mav.addObject("seatdata", sb);		
+		mav.addObject("seatdata", sb);	
+		mav.addObject("concertdata", cb);
 		mav.setViewName("/concert/book");
 
 				return mav;

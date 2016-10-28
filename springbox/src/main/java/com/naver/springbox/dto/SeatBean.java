@@ -8,6 +8,7 @@ public class SeatBean {
  private int concert_num;
  private String seat_date;
  private String seat_time;
+ private int payment_num;
   
 public int getSeat_num() {
 	return seat_num;
@@ -39,6 +40,12 @@ public String getSeat_time() {
 }
 public void setSeat_time(String seat_time) {
 	this.seat_time = seat_time;
+}
+public int getPayment_num() {
+	return payment_num;
+}
+public void setPayment_num(int payment_num) {
+	this.payment_num = payment_num;
 }
 
 }

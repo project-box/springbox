@@ -69,8 +69,17 @@ public class BookController {
 		int concert_num = pb.getConcert_num();
 		ConcertBean cb = concertAction.concertDetail(concert_num);
 
+		pb.setPayment_title(cb.getConcert_title());
+		pb.setPayment_poster(cb.getPosterfilepath());
+		bookAction.book_add(pb);
+		
+				
 		String seat_seat = request.getParameter("seat_seat");
-
+		int payment_num = bookAction.book_data();
+		
+		System.out.println("payment_num="+payment_num);
+		
+		
 		String[] values = seat_seat.split("/");
 		for (int x = 0; x < values.length; x++) {
 
@@ -78,16 +87,11 @@ public class BookController {
 			sb.setConcert_num(concert_num);
 			sb.setSeat_date(pb.getPayment_date());
 			sb.setSeat_time(pb.getPayment_time());
+			sb.setPayment_num(payment_num);
 			
 			bookAction.seat_add(sb);
-		}
-
+		}		
 		
-		
-		pb.setPayment_title(cb.getConcert_title());
-		pb.setPayment_poster(cb.getPosterfilepath());
-		pb.setCancel("0");
-		bookAction.book_add(pb);
 
 		ModelAndView mav = new ModelAndView();
 
@@ -128,5 +132,57 @@ public class BookController {
 
 		return mav;
 	}
+	
+	/*------------------------결제하기 버튼-------------------------------*/
+	@RequestMapping(value = "/pay_check.box")
+	public ModelAndView pay_check(int payment_num, HttpServletRequest request) throws Exception {
+
+
+		ModelAndView mav = new ModelAndView();
+		// 데이터를 저장
+		mav.addObject("payment_num", payment_num);
+		// 출력할 뷰 파일 설정
+		mav.setViewName("/concert/pay_check");
+
+		return mav;
+	}
+	
+	/*------------------------결제완료 버튼-------------------------------*/
+	@RequestMapping(value = "/pay_ok.box")
+	public ModelAndView pay_ok(int payment_num) throws Exception {
+
+		bookAction.pay_ok(payment_num);
+
+		ModelAndView mav = new ModelAndView();
+
+		// 출력할 뷰 파일 설정
+		mav.setViewName("redirect:book_list.box");
+
+		return mav;
+	}
+	
+	
+	/*------------------------------예약취소---------------------------*/
+	@RequestMapping(value = "/book_c.box")
+	public ModelAndView book_c(int payment_num) throws Exception {
+		
+		bookAction.book_c(payment_num);
+		
+		ModelAndView mav = new ModelAndView();
+
+		// 출력할 뷰 파일 설정
+		mav.setViewName("redirect:book_list.box");
+
+		return mav;
+		
+		
+		
+	}
+	
+	
+	
+	
+	
+	
 
 }
