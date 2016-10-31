@@ -28,48 +28,13 @@
 		$("#music_publishdate").datepicker();
 	});
 </script>
-<!-- <script>
-	$(document).ready(function() {
-		$("form").submit(function() {
-			if ($("#music_title").val() == "") {
-				alert("제목을 입력 하세요");
-				$("#music_title").focus();
-				return false;
-			}
-			if ($("#music_artist").val() == "") {
-				alert("아티스트를 입력 하세요");
-				$("#music_artist").focus();
-				return false;
-			}
-			if ($("#music_publishdate").val() == "") {
-				alert("발매일을 입력 하세요");
-				$("#music_publishdate").focus();
-				return false;
-			}
-			if ($("#music_genre").val() == "") {
-				alert("장르를 선택 하세요");
-				$("#music_genre").focus();
-				return false;
-			}
-			if ($("#music_lyrics").val() == "") {
-				alert("가사를 입력 하세요");
-				$("#music_lyrics").focus();
-				return false;
-			}
-			if ($("#music_album").val() == "") {
-				alert("앨범수록곡을 입력 하세요");
-				$("#music_album").focus();
-				return false;
-			}
-		});
-	});
-</script> -->
-
+<!-- 
 <style>
-table {
-	border: 1px solid black;
+td {
+	border: 1px dashed #777777;
+	
 }
-</style>
+</style> -->
 </head>
 <body>
 <body>
@@ -150,9 +115,6 @@ table {
 					<tr bgcolor="cccccc">
 						<td colspan="2" style="height: 1px;"></td>
 					</tr>
-					<tr>
-						<td colspan="2">&nbsp;</td>
-					</tr>
 					<tr align="center" valign="middle">
 						<td colspan="5"><input type=submit value="수정"> 
 						<input type=reset value="취소"
@@ -160,7 +122,6 @@ table {
 					</tr>
 				</table>
 	</form>
-
 	<%@ include file="../front/footer.jsp"%>
 </body>
 </html>

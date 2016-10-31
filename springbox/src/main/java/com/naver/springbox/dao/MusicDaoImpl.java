@@ -118,9 +118,10 @@ public class MusicDaoImpl implements MusicDao{
 	/*------------------- 음악 삭제 ------------------*/
 	@Override
 	public boolean deleteMusic(int num) {
-	 System.out.println("3333");
+	 System.out.println("음악삭제DaoImpl");
 	 
 	 int r = sqlSession.delete("music.music_delete", num);
+	 
 	 if (r >0 )
 		return true;
 	 else

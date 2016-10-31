@@ -51,5 +51,11 @@
 		resultType="Integer">
 		select count(*) from music
 	</select>
+	
+	<!-- 곡 삭제 -->
+	<delete id="music_delete" parameterType="Integer">
+		delete from music where music_num=#{music_num}
+	</delete>
+	
 
 </mapper>

@@ -227,15 +227,18 @@ public class MusicController {
 		return mav;	
 	}
 	
-	/*----------------------------목록 삭제(관리자)-------------------------*/
+/*----------------------------곡 삭제(관리자)-------------------------*/
 	
-	@RequestMapping("/music_delete.box")
-	public ModelAndView getMusicDelete(int num, HttpSession session) {
-		ModelAndView mav = new ModelAndView();		
+	@RequestMapping(value="/music_delete.box", method = RequestMethod.GET)
+	
+	public ModelAndView MusicDelete (@RequestParam("num") int num){
+		System.out.println("num="+num);
+		System.out.println(" 삭제 controller1");
+		ModelAndView mav = new ModelAndView();
 		
 		boolean r = (musicAction).musicDelete(num);
 		
-		System.out.println("삭제controller");
+		System.out.println("삭제controller2");
 		
 		if(r){
 			mav.setViewName("redirect:music_list.box");
@@ -244,6 +247,7 @@ public class MusicController {
 		}
 		return mav;
 	}
+	
 	
 	/*------------------추천곡 목록--------------------------------------*/
 	@RequestMapping("/recommend_music_list.box")

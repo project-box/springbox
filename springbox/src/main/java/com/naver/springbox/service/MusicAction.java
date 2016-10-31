@@ -113,12 +113,13 @@ public class MusicAction {
 		
 		
 	}
-	
-	/*-----------------------음악 삭제-----------------------------------------------------*/
+/*-----------------------음악 삭제-----------------------------------------------------*/
 	
 	public boolean musicDelete(int num) {
-		// TODO Auto-generated method stub
-		return false;
+	
+		System.out.println("deleteAction");
+		
+		return musicDao.deleteMusic(num);
 	}
 	
 	/*------------------------팝업창--------------------------------------------------------*/

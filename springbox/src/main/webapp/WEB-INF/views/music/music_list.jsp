@@ -28,36 +28,30 @@
 	background: #777777;
 	border: #777777;
 }
+
+#delete {
+	font-family: Tahoma;
+	font-size: 12px;
+	color: #ffffff;
+	padding: 5px 6px;
+	background: #777777;
+	border: #777777;
+}
 </style>
 
-<!-- <script>
-	var num = ${music.music_num};
-	alert("num1="+num);
-	function tdclick1(e) {
+<script>
+$(document).ready(function(){
+	$('#delete').click(function(){
+		var result = confirm("삭제하시겠습니까?");
 		
-		alert("num2="+num);
-		location.href= "/springbox/music_modify.box?num="+num;
-		if (!e)
-			var e = window.event; // Get the window event
-		e.cancelBubble = true; // IE Stop propagation
-		if (e.stopPropagation)
-			e.stopPropagation(); // Other Broswers
-		console.log('td clicked');
-
-		alert("수정");
-	};
-
-	function tdclick2(e, music_num) {
-		location.href = "/music_delete.box";  
-		if (!e)
-			var e = window.event; // Get the window event
-		e.cancelBubble = true; // IE Stop propagation
-		if (e.stopPropagation)
-			e.stopPropagation(); // Other Broswers
-		console.log('td clicked');
-
-		alert(music_num);
-	}; -->
+		if(result){
+			location.repalce('/music/music_list');
+		}else{
+			
+		}
+	})
+	
+});
 </script>
 
 <title>b o x</title>
@@ -167,7 +161,7 @@
 								<!-- onclick="location.href='./music_modify.box"></div></td> -->
 								<td>
 									<div>
-										<input id="button" type="button" value="삭제"
+										<input id="delete" name="delete" type="button" value="삭제"
 											onclick="location.href='./music_delete.box?num=${b.music_num}'">
 									</div></a>
 								</td>
