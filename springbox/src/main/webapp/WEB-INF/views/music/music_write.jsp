@@ -105,12 +105,16 @@
 						<td><select name="music_genre" id="music_genre">
 								<option value="">---
 								<option value="발라드">발라드
+								<option value="트로트">트로트
+								<option value="인디">인디
 								<option value="락">락
 								<option value="R&B">R&B
 								<option value="힙합/랩">힙합/랩
-								<option value="팝">팝
+								<option value="POP">POP
 								<option value="댄스">댄스
-								<option value="O.S.T">O.S.T
+								<option value="OST">OST
+								<option value="해외">해외
+								<option value="기타">기타
 						</select><br>
 					</tr>
 					<tr>
