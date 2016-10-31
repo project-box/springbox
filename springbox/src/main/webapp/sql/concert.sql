@@ -10,6 +10,8 @@ start with 1
 increment by 1
 nocache;
 
+select * from concert;
+delete from concert where concert_num=67;
 select * from users;
 
 select * from payment;
@@ -17,6 +19,8 @@ select * from payment;
 select * from payment;
 
 select * from seat;
+
+
 
 
 delete from payment;
@@ -33,7 +37,7 @@ select * from payment;
 alter table seat modify(seat_seat varchar2(200));
 
 
-select * from concert;
+select * from history;
 
 
 
