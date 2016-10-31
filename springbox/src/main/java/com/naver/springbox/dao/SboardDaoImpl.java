@@ -13,7 +13,7 @@ import com.naver.springbox.dto.SboardDto;
 
 
 @Repository
-public class SboardDaoImpl implements SboardDao {
+public  class SboardDaoImpl implements SboardDao {
 	
 
 	@Autowired
@@ -28,15 +28,21 @@ public class SboardDaoImpl implements SboardDao {
 		else
 			return list.get(0);
 	}
-
-	@Override
+	
+    @Override
 	@Transactional// 메소드 수행 중에 예외가 발생하면 rollback 그렇지 않으면 commit
-	public List<SboardDto> getSboardList(Map<String, Object> map) {
-		List<SboardDto> list = sqlSession.selectList("gogaek.selectSboardList",map);
+	public List<SboardDto> getSboardList(int page) throws Exception {
+		/*List<SboardDto> list = sqlSession.selectList("gogaek.selectSboardList",map);
 		if (list == null || list.size() == 0)
 			return null;
 		else
-			return list;
+			return list;*/
+    	System.out.println("sboardList 나감");
+		List<SboardDto> list = sqlSession.selectList("gogaek.selectSboardList", page);
+        System.out.println("sboardList 들어옴");
+		
+		return list;
+				
 	}
 	
 	@Override
@@ -61,10 +67,13 @@ public class SboardDaoImpl implements SboardDao {
 	@Override
 	@Transactional// 메소드 수행 중에 예외가 발생하면 rollback 그렇지 않으면 commit
 	public boolean insertSboard(SboardDto dto) {
+		System.out.println("SboardInsertAction에서  Dao.insertSboard로 들어옴");
+		System.out.println("  Dao.insertSboard에서 gogaek.insertSboard 나감 ");
 		int r = sqlSession.insert("gogaek.insertSboard", dto);
-		if (r > 0)
+		if (r > 0){
+			System.out.println("sboardinsert 실행");
 			return true;
-		else
+		}else
 			return false;
 	}
 

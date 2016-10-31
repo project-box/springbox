@@ -11,6 +11,7 @@ public class MusicBean {
 	private Date music_publishdate;
 	private String albumcoverfilepath;
 	private String music_lyrics;
+	private String music_mp3;
 	
 	public int getMusic_num() {
 		return music_num;
@@ -59,6 +60,12 @@ public class MusicBean {
 	}
 	public void setMusic_lyrics(String music_lyrics) {
 		this.music_lyrics = music_lyrics;
+	}
+	public String getMusic_mp3() {
+		return music_mp3;
+	}
+	public void setMusic_mp3(String music_mp3) {
+		this.music_mp3 = music_mp3;
 	}
 	
 	

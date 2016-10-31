@@ -40,6 +40,7 @@ public class PreferenceAction {
 		int limit = 10;
 		// page 파라미터의 값이 있으면 정수로 변환해서
 		// page에 대입
+		System.out.println("추천곡 Action1");
 		if (request.getParameter("page") != null) {
 			page = Integer.parseInt(request.getParameter("page"));
 		}
@@ -54,11 +55,15 @@ public class PreferenceAction {
 		// 키로 저장
 		Map<String, Object> map = new HashMap<String, Object>();
 
+		System.out.println("추천곡 Action2");
+		
 		// 로그인 사용자에 따른 추천곡을 가져오기 위한 코드
 		// 1. 로그인 사용자와 취향이 유사한 사용자들을 조회한다.
 		List<MemberBean> memberList = preferenceDao.getPreferenceMemberList(userId);
+		System.out.println("memberList="+memberList);
 		List<String> userList = new ArrayList<String>();
 
+		System.out.println("추천곡 Action3");
 		for (MemberBean member : memberList) {
 			userList.add(member.getUser_id());
 		}
@@ -67,28 +72,33 @@ public class PreferenceAction {
 		map.put("start", start);
 		map.put("end", end);
 
+		System.out.println("userList="+userList);
 		// 2. 사용자들을 통해 선호도가 높은 곡들을 가져온다.
 		List<MusicBean> list = preferenceDao.getPreferenceMusicList2(map);
 
+		System.out.println("list="+list);
+		System.out.println("추천곡 Action4");
 		// 데이터 가져오기
 		// List<MusicBean> list = preferenceDao.getPreferenceMusicList(map);
 
 		// 전체 데이터 개수 가져오기
 		// int listcount = preferenceDao.getPreferenceMusicCount();
 		int listcount = preferenceDao.getPreferenceMusicCount(map);
-
+		System.out.println("listcount="+listcount);
+		
 		// 가장 큰 페이지 번호 계산
 		int maxpage = (int) ((double) listcount / limit + 0.95);
 		// 시작하는 페이지 번호 계산
 		int startpage = (((int) ((double) page / 10 + 0.9)) - 1) * 10 + 1;
 		// 마지막 페이지 번호 계산
 		int endpage = maxpage;
+		System.out.println("추천곡 Action5");
 		if (endpage > (startpage + 9)) {
 			endpage = startpage + 9;
 		}
 
 		Map<String, Object> resultMap = new HashMap<String, Object>();
-
+		System.out.println("추천곡 Action6");
 		resultMap.put("page", page);
 		resultMap.put("listcount", listcount);
 		resultMap.put("musiclist", list);
@@ -97,7 +107,6 @@ public class PreferenceAction {
 		resultMap.put("endpage", endpage);
 
 		return resultMap;
-
 	}
 
 	// 추천공연 목록을 가져오는 메서드(추천 알고리즘 변경 예정)

@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.naver.springbox.dto.FaqBean;
-import com.naver.springbox.dto.FormBoardDto;
 import com.naver.springbox.dto.SboardDto;
 import com.naver.springbox.service.FaqDetailAction;
 import com.naver.springbox.service.FaqListAction;
@@ -108,16 +107,17 @@ public class GogaekController {
 	private SboardListAction sboardListAction;
 
 	@RequestMapping("/SboardList.box")
-	public ModelAndView getSboardList(HttpServletRequest request) {
+	public ModelAndView getSboardList(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		ModelAndView mav = new ModelAndView();		
 			// 서비스게시물 목록 가져오기
-			Map<String, Object> map = sboardListAction.execute(request);
+		    Map<String, Object> map = sboardListAction.execute(request,response);
 			// 여러 개의 데이터를 묶어서 저장할 때는
 			// addObject를 사용하지 않고 Map을 저장할 수
 			// 있습니다.
-			mav.addAllObjects(map); //
+    		mav.addAllObjects(map); 
 			// 공지사항을 다음페이지에 전달하기 위해서
 			// 저장하기
+//			mav.addObject("sboardlist",list);
 			mav.setViewName("/gogaek/sboardList");
 	
 		return mav;
@@ -152,7 +152,7 @@ public class GogaekController {
 	private ReplyInsertAction replyInsertAction;
 
 	@RequestMapping("/ReplyAdd.box")
-	public ModelAndView insertReply(HttpServletRequest request) {
+	public ModelAndView insertReply(HttpServletRequest request,HttpServletResponse response) throws Exception {
 		ModelAndView mav = new ModelAndView();
 		// 로그인 되어 있지 않으면 로그인 페이지로 이동
 		HttpSession session = request.getSession();
@@ -164,7 +164,7 @@ public class GogaekController {
 			// 삽입에 실패했을 때 목록보기로 이동
 			if (!r) {
 			
-				Map<String, Object> map = sboardListAction.execute(request);
+				Map<String, Object> map = sboardListAction.execute(request,response);
 				
 				mav.addAllObjects(map);
 				mav.setViewName("/gogaek/sboardList");

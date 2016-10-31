@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <!doctype html>
 <html>
@@ -25,16 +27,49 @@ th {
 	text-align: center;
 }
 
-A:link, A:active, A:visited {
-	text-decoration: none;
-	font-size: 10px;
-	color: #333333;
+
+.dateTabel{
+    border: 1px solid #bebebe;
 }
 
-A:hover {
-	text-decoration: none;
-	color: ff9900;
+
+ .dateClick1{
+ border:0px;
+ font-size: 10px;
+ background-color: white;
+ width:38px;
+ height: 38px;
+} 
+
+.dateClick1:hover, .dateClick1:active, .dateClick1:focus{
+
+background-color: #FF8282;
+color: white;
+outline: none;
+
 }
+
+.dateClick1:visited{
+
+background-color: white;
+
+}
+
+.dateClick2{
+
+border:0px;
+ font-size: 10px;
+ background-color: transparent;
+ width:38px;
+ height: 38px;
+
+}
+
+.dateClick2:hover, .dateClick2:active, .dateClick2:focus{
+ cursor: default;
+ outline: none;
+}
+
 
 font {
 	font-size: 12px;
@@ -46,12 +81,15 @@ font {
 	margin-left: 10px;
 }
 
+
+
+
 /* -------------------------------------- */
 .form-control {
 	width: 200px;
 	font-weight: bold;
 	border: none;
-	align: center;
+	text-align: center;
 }
 
 hr {
@@ -83,6 +121,7 @@ hr {
 	background-color: #a0a0a0;
 	color: white;
 }
+
 
 /* ----------------------------------------------------------- */
 
@@ -121,6 +160,10 @@ hr {
 	font-size: 13px;
 }
 
+.checkbox:disabled+label:before {
+	background-color: #ccc;
+}
+
 .checkbox+label:before {
 	content: "";
 	display: inline-block;
@@ -130,7 +173,7 @@ hr {
 	position: absolute;
 	left: 0;
 	bottom: 1px;
-	background-color: #ccc;
+	background-color: #F4B4B4;
 	border-radius: 2px;
 	box-shadow: inset 0px 1px 1px 0px rgba(0, 0, 0, .3), 0px 1px 0px 0px
 		rgba(255, 255, 255, .8);
@@ -142,7 +185,7 @@ hr {
 	font-size: 17px;
 	font-weight: 800;
 	color: #fff;
-	background: #2f87c1;
+	background: #800000;
 	text-align: center;
 	line-height: 19px;
 }
@@ -161,20 +204,31 @@ var now=new Date()
 var nowd=now.getDate()
 var nowm=now.getMonth()
 var nowy=now.getFullYear()
-
-
+var startd=<fmt:formatDate value='${concertdata.concert_startdate}' pattern='dd'/>;
+var startm=<fmt:formatDate value='${concertdata.concert_startdate}' pattern='MM'/>-1;
+var starty=<fmt:formatDate value='${concertdata.concert_startdate}' pattern='yyyy'/>;
+var endd=<fmt:formatDate value='${concertdata.concert_enddate}' pattern='dd'/>;
+var endm=<fmt:formatDate value='${concertdata.concert_enddate}' pattern='MM'/>-1;
+var endy=<fmt:formatDate value='${concertdata.concert_enddate}' pattern='yyyy'/>;
+var max=1;
+var date=null;
+var time=null;
+var startd2=<fmt:formatDate value='${concertdata.concert_startdate}' pattern='dd'/>;
+var startm2=<fmt:formatDate value='${concertdata.concert_startdate}' pattern='MM'/>-1;
+var starty2=<fmt:formatDate value='${concertdata.concert_startdate}' pattern='yyyy'/>;
 
    function showCalendar(day,month,year) {
       if ((year%4==0||year%100==0)&&(year%400==0)) monthDays[1]=29; else monthDays[1]=28 //leap year test
 
-        var firstDay=new Date(year,month,1).getDay()
-        var cnj_str="<table border=0 cellpadding=10 cellspacing=1 bgcolor=#CCCCCC>"
+        var firstDay=new Date(year,month,1).getDay() 
+        
+        var cnj_str="<table class='dateTabel' border=0 cellpadding=10 cellspacing=1 bgcolor=#CCCCCC>"
 
             cnj_str+="<tr bgcolor='#323232'><td colspan=7>"
 			cnj_str+="<table border=0 cellpadding=0 cellspacing=0 align=center width=100%>"
-			cnj_str+="<td><a href='javascript:;' onClick='nowm--; if (nowm<0) { nowy--; nowm=11; } showCalendar(nowd,nowm,nowy)' title='이전 월'><font color='white'> << </font></a></td>"
-			cnj_str+="<td align=center><font color='white'><b>"+nowy+"년"+" "+monthName[month].toUpperCase()+"</b></font></td>"
-			cnj_str+="<td align=right><a href='javascript:;' onClick='nowm++; if (nowm>11) { nowy++; nowm=0; } showCalendar(nowd,nowm,nowy)' title='다음 월'><font color='white'> >> </font></a></td>"
+			cnj_str+="<td><a href='javascript:;' onClick='startm--; if (startm<0) { starty--; startm=11; } showCalendar(startd,startm,starty)' title='이전 월'><font color='white'> << </font></a></td>"
+			cnj_str+="<td align=center><font color='white'><b>"+starty+"년"+" "+monthName[month].toUpperCase()+"</b></font></td>"
+			cnj_str+="<td align=right><a href='javascript:;' onClick='startm++; if (startm>11) { starty++; startm=0; } showCalendar(startd,startm,starty)' title='다음 월'><font color='white'> >> </font></a></td>"
 			cnj_str+="</tr></table>"
 			cnj_str+="</td></tr>"
 			cnj_str+="<tr align=center bgcolor='#FFFFFF'>"
@@ -187,34 +241,77 @@ var nowy=now.getFullYear()
 			cnj_str+="<th><font color='black'><b>토</b></font></th>" 
 			cnj_str+="</tr>"
 			
-			var dayCount=1
+			var dayCount=1;
 			
 			cnj_str+="<tr bgcolor=white>"
 
-   		for (var i=0;i<firstDay;i++) cnj_str+="<td bgcolor='#dcdcdc'> " //공백
+   		for (var i=0;i<firstDay;i++) cnj_str+="<td bgcolor='#dcdcdc'>" //공백
+   		
+   			/* -----------------------------공연날짜 표시하는 부분 시작------------------------------------ */
 
+   			
  		for (var i=0;i<monthDays[month];i++) {
-       		 	if(dayCount==nowd) {
-        		 cnj_str+="<td align=center bgcolor='#FAC6C6'><b>" // 오늘 날짜일때 배경색 지정,글자 진하게
-         		} else {
-         	     cnj_str+="<td align=center >" // 오늘 날짜가 아닐때 배경색 지정
-         		}
-
-       		 cnj_str+="<a href=javascript:void(0) id='date"+dayCount+"' onclick='Test("+dayCount+","+month+","+year+");'>" // 링크설정
-       		 cnj_str+=dayCount++ // 날짜
-       		 cnj_str+="</a>"
-
-          
-       		 
-			     if(dayCount==nowd) {
+ 			
+ 			
+ 			if(month == startm2 && month != endm){
+ 			
+ 		        if(dayCount >= startd2) {
+                       cnj_str+="<td align=center bgcolor='white'><b>" // 오늘 날짜일때 배경색 지정,글자 진하게
+                       cnj_str+="<input type=button class='dateClick1' id='date"+dayCount+"' onclick='Test("+dayCount+","+month+","+year+");' value='"+(dayCount++)+"'>" // 링크설정
+       		 	}else {
+            	     cnj_str+="<td align=center bgcolor='#dcdcdc'>" // 오늘 날짜가 아닐때 배경색 지정
+            	     cnj_str+="<input type=button class='dateClick2' id='date"+dayCount+"' value='"+(dayCount++)+"'>" // 링크설정
+            	}
+       	
+ 			}else if(month == endm && month != startm2){
+ 				
+ 				if(dayCount <= endd) {
+                    cnj_str+="<td align=center bgcolor='white'><b>" // 오늘 날짜일때 배경색 지정,글자 진하게
+                    cnj_str+="<input type=button class='dateClick1' id='date"+dayCount+"' onclick='Test("+dayCount+","+month+","+year+");' value='"+(dayCount++)+"'>" // 링크설정
+    		 	}else {
+         	     cnj_str+="<td align=center bgcolor='#dcdcdc'>" // 오늘 날짜가 아닐때 배경색 지정
+         	     cnj_str+="<input type=button class='dateClick2' id='date"+dayCount+"' value='"+(dayCount++)+"'>" // 링크설정
+    		 	}
+ 				
+			}else if(month == endm && month == startm2){
+ 				
+ 				if(dayCount <= endd && dayCount >= startd2) {
+                    cnj_str+="<td align=center bgcolor='white'><b>" // 오늘 날짜일때 배경색 지정,글자 진하게
+                    cnj_str+="<input type=button class='dateClick1' id='date"+dayCount+"' onclick='Test("+dayCount+","+month+","+year+");' value='"+(dayCount++)+"'>" // 링크설정
+    		 	}else {
+         	     cnj_str+="<td align=center bgcolor='#dcdcdc'>" // 오늘 날짜가 아닐때 배경색 지정
+         	     cnj_str+="<input type=button class='dateClick2' id='date"+dayCount+"' value='"+(dayCount++)+"'>" // 링크설정
+    		 	}	
+ 				
+    		}else {
+       	     cnj_str+="<td align=center bgcolor='#dcdcdc'>" // 오늘 날짜가 아닐때 배경색 지정
+        	     cnj_str+="<input type=button class='dateClick2' id='date"+dayCount+"' value='"+(dayCount++)+"'>" // 링크설정
+        	} /* else if(month == startm && month == endm){
+    			
+    			if(dayCount >= startd && dayCount <= endd) {
+                    cnj_str+="<td align=center bgcolor='white'><b>" // 오늘 날짜일때 배경색 지정,글자 진하게
+                    cnj_str+="<input type=button class='dateClick1' id='date"+dayCount+"' onclick='Test("+dayCount+","+month+","+year+");' value='"+(dayCount++)+"'>" // 링크설정
+    		 	}else {
+         	     cnj_str+="<td align=center bgcolor='#dcdcdc'>" // 오늘 날짜가 아닐때 배경색 지정
+         	     cnj_str+="<input type=button class='dateClick2' id='date"+dayCount+"' value='"+(dayCount++)+"'>" // 링크설정
+    		 	}
+    			
+    		}else {
+        	     cnj_str+="<td align=center bgcolor='#dcdcdc'>" // 오늘 날짜가 아닐때 배경색 지정
+             	     cnj_str+="<input type=button class='dateClick2' id='date"+dayCount+"' value='"+(dayCount++)+"'>" // 링크설정
+             	
+    		} 
+    	 */
+ 			
+			     /* if(dayCount==startd) {
 				  cnj_str+="</b>" // 오늘 날짜일때 글자 진하게
 				 } else {
 				  cnj_str+="" // 오늘 날짜가 글자 진하게 안함
-				 }
+				 } */
+ 
+       		/* -----------------------------공연날짜 표시하는 부분 끝------------------------------------ */
 
-
-
-			    if ((i+firstDay+1)%7==0&&(dayCount<monthDays[month]+1)) 
+			    if ((i+firstDay+1)%7==0 && (dayCount<monthDays[month]+1)) 
 	
 				  cnj_str+="<tr bgcolor=white>"
 
@@ -222,7 +319,7 @@ var nowy=now.getFullYear()
 
 		var totCells=firstDay+monthDays[month]
 		
-		for (var i=0;i<(totCells>28?(totCells>35?42:35):28)-totCells;i++) 
+		for (var i=0; i<(totCells>28?(totCells>35?42:35):28)-totCells; i++) 
 			
 			cnj_str+="<td>"
 			cnj_str+="</table><BR>"
@@ -231,103 +328,258 @@ var nowy=now.getFullYear()
 	}
 
 
- function Test(dayCount,month,year){
+ function Test(dayCount,month,year){	 
+
+	 date = year+"/"+(month+1)+"/"+dayCount;
 	 
-
-	 var date = year+"/"+(month+1)+"/"+dayCount;
-
-	document.getElementById('payment_date').value = date
-
+	document.getElementById('payment_date').value = date;
+    
+	
+	$("input[type=checkbox]").attr("disabled",false);
+	$("input[type=checkbox]").prop("checked",false);
+	$("#time option:eq(0)").prop("selected", true);
+	$("#payment_time").val("");
+	
+	
  }
 
 
 
-function Send() {
+function Send() { // 부모창으로 값 넘김
 
+	
+	var seatnum=document.getElementsByName('seat_seat[]'); 
+	var seat = "";
+
+	for(i=0; i<seatnum.length; i++) { 		
+		
+	    seat += seatnum[i].value+"/";
+	
+	}
+	
+   opener.document.paymentform.seat_seat.value = seat;
    opener.document.paymentform.payment_date.value=$("#payment_date").val();
-   opener.document.paymentform.payment_time.value=$("#payment_time").val();
-   opener.document.paymentform.payment_seat.value=$("#payment_seat").val();
-   opener.document.paymentform.payment_amount.value=$("#payment_amount").val();
+   opener.document.paymentform.payment_time.value=$("#payment_time").val();   
+   opener.document.paymentform.payment_amount.value=$("#payment_amount").val(); 
    
     opener.location.href="javascript:Call();";
 
 	window.close();
-    
 }
 
- 
-</script>
-<script>
 
-var num=0;
-var seat_info=null;
+
+
+/* --------------------------제이쿼리------------------------------- */
+var num=0; //선택한 개수
+var seat_info=null; // 선택한 체크박스의 값
+var y=null;  /// 좌석 수
+var oTbl;
+   //선택가능 갯수
+var checked;
 var x=null;
 
-		$(document).ready(function(){
-		
-		$(":checkbox").click(function(){			
+		$(document).ready(function(){	
 			
-				if($(this).is(":checked")){		
-				
-					x=$(this).val();
-					Seat_num(x);
+			
+		$(":checkbox").click(function(){	
+			// 체크박스 설정 및 해제
+          		
+			checked = $(this);
+          	      x = checked.val();
+          	    num =  $(":checkbox:checked").length;
+          	    
+				if(checked.is(":checked")==true){		
+					 
+					if (num > max) {
+			            alert ("좌석수를 다시 설정해주세요.");
+			            checked.prop("checked", false);        
+			        }
 					
-				}
-			});	
+					$("#seat_seat"+num).val(x);
+					
+					 				
+					
+				}if(checked.is(":checked")==false){	
+	
+					Delete();
+					
+					/* $("#payment_seat"+(num+1)).val(""); */
+				}				
+			});			
 		
 		
-		$("#time").click(function(){
+		$("#time").change(function(){	  // 회차 선택	
 			
-				$("#payment_time").val($(this).val());
-		
-				/* alert( $(this).val()); */												
+			   time=$(this).val();
+			
+			
+				$("#payment_time").val(time);		
+				/* alert( $(this).val()); */	
+				
+				if($("#payment_date").val() ==""){	
+					
+					alert("날짜를 선택해주세요!");	
+					$("#time option:eq(0)").prop("selected", true);
+					$("#payment_time").val("");
+					return false;
+					
+				}else if(time != "회차선택"){
+				
+					$("input[type=checkbox]").attr("disabled",false);
+					 $("#on").show();
+					 $("#off").hide();
+					SeatView();
+				}					
 				
 		});	
 		
-		$("#amount").click(function(){
+		
+		$("#amount").click(function(){     //좌석 수 선택
 			
 			$("#payment_amount").val($(this).val());
 	
-			/* alert( $(this).val()); */												
+			max=$(this).val();
 			
-	});	
+			$("input[type=checkbox]").prop("checked",false);
+			Amount();
 
+	    });	
+		
+		 $("#all").click(function(){
+				
+			$("input[type=checkbox]").prop("checked",false);
+			Amount();
+			
 		}); 
-		
+		  });	
 
+ function Delete(){
+     // 체크박스 해제
+	 
+	 for(k=0; k < max; k++)	 
+		 if($("#seat_seat"+(k+1)).val() ==x){			 
+			 $("#seat_seat"+(k+1)).val("");
+		 }
+ }				
 		
-function Seat_num(){
-	alert("호출");
-	num++;
 	
-	alert("좌석번호"+x);
+ function Amount(){ 
+	 // 좌석 수 선택
+	 
+	 oTbl = document.getElementById('addTable');	
+
+	$("#seat_seat1").val("");
 	
-		if(num == 1){	
-				
-seat_info="<input type='text' id='payment_seat"+num+"' name='payment_seat' class='form-control' placeholder='좌석을 선택해주세요'>"	
+	 
+	var lastRow = addTable.rows.length - 1;
+	  
+	for(var j = lastRow; j > 1; j--) {
+		addTable.deleteRow(j);
+	}
+ 
+	 for(var i=2; i <= max; i++){
+
+		 var oRow = oTbl.insertRow();
+		 var oCell1 = oRow.insertCell(0);
+		 var oCell2 = oRow.insertCell(1);
+		 var oCell3 = oRow.insertCell(2);
+		 var oCell4 = oRow.insertCell(3);
+		 
+	oCell1.innerHTML ="";
+	oCell2.innerHTML ="";
+	oCell3.innerHTML ="";
+	oCell4.innerHTML ="<input type='text' readonly id='seat_seat"+i+"' name='seat_seat[]' class='form-control' placeholder='좌석을 선택해주세요'>";
+		 
+	 } 
+ }
+ 
+ 
+  function SeatView(){
+	 // 좌석 뷰
+	 
+	
+	 
+	var seatNum1 = new Array();
+	
+	<c:forEach items="${seatdata}" var="item1">
+	seatNum1.push("${item1.seat_seat}");	
+	</c:forEach>
+	
+	var seatNum2 = new Array();
+	
+	<c:forEach items="${seatdata}" var="item2">
+	seatNum2.push("${item2.seat_date}");	
+	</c:forEach>
+	
+	var seatNum3 = new Array();
+	
+	<c:forEach items="${seatdata}" var="item3">
+	seatNum3.push("${item3.seat_time}");	
+	</c:forEach>
+	
+	
+   var count=0;  // 남은 좌석 수 카운트 변수
+  
+	
+	/* --------------------------A구역 루프------------------------------------- */
+	for(var k=1; k<51; k++){
+	
+     for (var i=0; i<seatNum1.length; i++) {
 			
-		seat.innerHTML=seat_info
+			var A = document.getElementById("A구역"+k+"번");
 				
-		$("#payment_seat"+num).val(x);
-
-
-	}else if(num > 1){
+			if(seatNum1[i] == A.value && seatNum2[i] == date && seatNum3[i] == time){
 				
+				A.disabled=true; 
+				
+				count += 1;
+			}	
+			
+		}} 
+	
+	
+	/* --------------------------B구역 루프------------------------------------- */
+	for(var k=121; k<201; k++){
 		
-seat_info+="<input type='text' id='payment_seat"+num+"' name='payment_seat' class='form-control' placeholder='좌석을 선택해주세요'>"	
-					
-	seat.innerHTML=seat_info
-							
-	$("#payment_seat"+num).val(x);
+		for (var i=0; i<seatNum1.length; i++) {
 			
-	}				
-		}	
+			var B = document.getElementById("B구역"+(k-120)+"번");
 			
-
+			if(seatNum1[i] == B.value && seatNum2[i] == date && seatNum3[i] == time){
+				
+				B.disabled=true; 
+				count += 1;
+			}	
+			
+		}} 
+	/* --------------------------C구역 루프------------------------------------- */
+   
+	for(var k=201; k<251; k++){
+	
+		for (var i=0; i<seatNum1.length; i++) {
+			
+			var C = document.getElementById("C구역"+(k-200)+"번");			
 		
+			if(seatNum1[i] == C.value && seatNum2[i] == date && seatNum3[i] == time){
+				
+		          C.disabled=true; 
+		          count += 1;
+	          }	
+			
+		}} 
+	
+      document.getElementById('count').value=180-count; // 남은 좌석수 뿌려주기
+ } 
+ 
+
+
+ 
 		
 	</script>
-<body onLoad="showCalendar(nowd,nowm,nowy)">
+<body onLoad="showCalendar(startd,startm,starty)">
+
+
 
 	<div class="container">
 
@@ -360,7 +612,6 @@ seat_info+="<input type='text' id='payment_seat"+num+"' name='payment_seat' clas
 
 				<h3>좌석 수 선택</h3>
 				<br> <select id="amount" class="form-control">
-					<option>좌석 수 선택</option>
 					<option value="1">1</option>
 					<option value="2">2</option>
 					<option value="3">3</option>
@@ -371,32 +622,48 @@ seat_info+="<input type='text' id='payment_seat"+num+"' name='payment_seat' clas
 				</select>
 
 				<h3>좌석 선택</h3>
+				
+			
+				<div id="off" style="display:inline;">
 				<br>
-				<div>
+				<table style="background-color:#dcdcdc;  width:480px; height:300px; ">
+				<tr align="center">
+				<td style="font-size: 20px;">날짜와 회차를 선택해주세요!</td>
+				</tr>
+				</table>				
+				</div> <!-- 좌석 뷰 off -->
+				
+				
+				<div id="on" style="display: none;">
 
+				<br> <input type="checkbox" class="checkbox"
+					disabled="disabled" id="check" /> <label for="check" title="check">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					회색으로 채워진 좌석은 이미 예매된 좌석입니다. &nbsp; <font color="red">남은 좌석 수
+						<input type="text" style="width:50px; border:none;" readonly id="count"></font>
+				</label>
+
+				<div>
 					<table class="box">
 						<tr align="center">
 							<td>무대</td>
 						</tr>
 					</table>
-
 				</div>
 
 				<div class="seat">
 
 					<div class="a">
 
-						<c:forEach var="i" begin="1" end="50">
-							<input type="checkbox" class="checkbox" value="A구역${i}번"
-								id="A구역${i}번" />
-							<label for="A구역${i}번" title="A구역${i}번"></label>
-							<c:if test="${i % 5 == 0 && i != 50}">
-								<br>
-							</c:if>
-						</c:forEach>
+							<c:forEach var="i" begin="1" end="50">
+								<input type="checkbox" class="checkbox" value="A구역${i}번"
+									id="A구역${i}번" />
+								<label for="A구역${i}번" title="A구역${i}번"></label>
+								<c:if test="${i % 5 == 0 && i != 50}">
+									<br>
+								</c:if>
+							</c:forEach>
 
 					</div>
-
 
 					<div class="b">
 
@@ -425,7 +692,8 @@ seat_info+="<input type='text' id='payment_seat"+num+"' name='payment_seat' clas
 						</c:forEach>
 					</div>
 
-				</div>
+				</div> <!-- 좌석 전체 div -->
+				</div> <!-- 좌석 뷰 온 오프 -->
 			</div>
 
 			<br> <br>
@@ -434,7 +702,7 @@ seat_info+="<input type='text' id='payment_seat"+num+"' name='payment_seat' clas
 
 				<hr>
 
-				<table class="table table-hover">
+				<table class="table table-hover" id="addTable">
 
 					<tr>
 						<th>선택한 날짜</th>
@@ -444,21 +712,32 @@ seat_info+="<input type='text' id='payment_seat"+num+"' name='payment_seat' clas
 						<th></th>
 					</tr>
 					<tr>
-						<td><input type="text" id="payment_date" name="payment_date"
+						<td><input type="text" readonly id="payment_date" name="payment_date"
 							class="form-control" placeholder="날짜를 선택해주세요"></td>
-						<td><input type="text" id="payment_time" name="payment_time"
+						<td><input type="text" readonly id="payment_time" name="payment_time"
 							class="form-control" placeholder="회차를 선택해주세요"></td>
-						<td><input type="text" id="payment_amount"
-							name="payment_amount" class="form-control"
+						<td><input type="text" readonly id="payment_amount"
+							name="payment_amount" class="form-control" value="1"
 							placeholder="좌석 수를 선택해주세요"></td>
-						<td width=200px;><p id="seat"></p></td>
+						<td><input type='text' readonly id="seat_seat1" name="seat_seat[]"
+							class='form-control' placeholder='좌석을 선택해주세요'></td>
+						<td><input type='button' id="all" value='좌석 다시 선택하기'></td>
 					</tr>
 				</table>
+
 				<input type="button" onclick="Send();" value="결제하기"
 					class="btn btn-insert" style="margin-left: 37%; width: 200px" />
 			</div>
-
+     
+      
 		</form>
+
+
+
+
+
+
+
 
 	</div>
 

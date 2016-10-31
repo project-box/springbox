@@ -1,23 +1,13 @@
 package com.naver.springbox.service;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-
-import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.naver.springbox.dao.ConcertDao;
-import com.naver.springbox.dto.ConcertBean;
-import com.naver.springbox.dto.ConcertBoardBean;
 import com.naver.springbox.dto.PaymentBean;
-import com.oreilly.servlet.MultipartRequest;
-import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
+import com.naver.springbox.dto.SeatBean;
 
 @Service
 public class BookAction {
@@ -33,6 +23,15 @@ public class BookAction {
 		concertDao.book_add(pb);
 		
 	}
+	
+	/*--------------좌석 등록--------------------------------------*/
+
+	public void seat_add(SeatBean sb) {
+		
+		concertDao.seat_add(sb);
+		
+	}
+	
 	
 	/*-------------------예매내역----------------------------------*/
 	
@@ -50,6 +49,15 @@ public class BookAction {
 		System.out.println("예매 디테일 서비스");
 		return dto;
 	}
+	
+	/*----------------좌석 리스트----------------------------*/
+	public List<SeatBean> seat_list(int concert_num) throws Exception {
+		
+		List<SeatBean> sb = concertDao.seat_list(concert_num);
+
+		return sb;
+	}
+	
 	
 	
 }

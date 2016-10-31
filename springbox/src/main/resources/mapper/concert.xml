@@ -68,13 +68,32 @@
 	<insert id="book_add" parameterType="com.naver.springbox.dto.PaymentBean">
 		insert into payment(
 		payment_num,concert_num,user_id,payment_check,
-		payment_amount,payment_registerdate,payment_seat,
-		payment_date,payment_time,payment_price,payment_address,
+		payment_amount,payment_registerdate,payment_date,
+		payment_time,payment_price,payment_address,
 		payment_title,cancel,payment_poster) values(
 		payment_seq.nextval,#{concert_num},#{user_id},#{payment_check},
-		#{payment_amount},sysdate,#{payment_seat},#{payment_date},#{payment_time},
+		#{payment_amount},sysdate,#{payment_date},#{payment_time},
 		#{payment_price},#{payment_address},#{payment_title},#{cancel},#{payment_poster})
 	</insert>
+	
+	
+	
+	
+	
+	<!-- <좌석 등록> -->
+	<insert id="seat_add" parameterType="com.naver.springbox.dto.SeatBean">
+		insert into seat(
+		seat_num,seat_seat,concert_num,seat_date,seat_time) values(
+		seat_seq.nextval,#{seat_seat},#{concert_num},#{seat_date},#{seat_time})
+	</insert>
+	
+	<!-- 좌석 리스트 -->
+	<select id="seat_list" resultType="com.naver.springbox.dto.SeatBean">
+	    <![CDATA[
+			select * from seat where concert_num=#{concert_num}
+		]]>
+	</select>
+	
 	
 	
 	<!-- 예매내역 -->
@@ -91,6 +110,10 @@
 		select * from payment where payment_num=#{payment_num}
 		]]>
 	</select>
+	
+	
+	
+	
 
 
 </mapper>

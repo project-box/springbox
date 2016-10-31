@@ -58,20 +58,21 @@ $(document).ready(function() {
 
 /* -----------------------팝업창에서 값 받기------------------------------ */
 
+
 function Book(){
-    window.name="Info"
-    window.open('book.box', '_blank', 'width=970, height=600,toolbars=yes');
+
+	var concert_num = "/springbox/book.box?concert_num="+'${concertdata.concert_num}';
+	
+   /*  window.name="Info" */
+    window.open(concert_num, "_blank", "width=970, height=600,toolbars=yes");
 
 }
 
     function Call(){
-    	
-        /* 	location.href="/springbox/payment.box?payment_date="+
-		$("#payment_date").val()+"&payment_time="+$("#payment_time").val()+
-	"&payment_seat="+$("#payment_seat").val() */
-
-			paymentform.submit();
+    
+		paymentform.submit(); 
 	} 
+    
 
 </script>
 
@@ -85,7 +86,7 @@ function Book(){
 <form name="paymentform" action="payment.box" method="post">
 <input type="hidden" name="payment_date" id="payment_date"/>
 <input type="hidden" name="payment_time" id="payment_time" />
-<input type="hidden" name="payment_seat" id="payment_seat"/>
+<input type="hidden" name="seat_seat"/>
 <input type="hidden" name="payment_amount" id="payment_amount"/>
 <input type="hidden" name="concert_num"	value="${concertdata.concert_num}" />
 
@@ -113,10 +114,10 @@ function Book(){
 		<fmt:formatDate value="${concertdata.concert_enddate}"
 			pattern="yyyy-MM-dd" />
 		<br> <br> <b>가격</b>
-		&nbsp;&nbsp;&nbsp;&nbsp;${concertdata.concert_price}<br>
-		
-		<br><a href=# onclick="Book();">
-		<button type="button">예매하기</button></a> 
+		&nbsp;&nbsp;&nbsp;&nbsp;
+		<fmt:formatNumber value="${concertdata.concert_price}" pattern="#,###.##"/>&nbsp;원<br>
+		<br>
+		<button type="button" onclick="Book();">예매하기</button>
 		
 		<a	
 			href="concert_list.box">클릭 하면 리스트로</a> <br>
