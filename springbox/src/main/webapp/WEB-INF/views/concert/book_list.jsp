@@ -56,10 +56,9 @@
 	margin-left: 115px;
 	border: 1px solid #FAC6C6;
 	width:85%;
-	height: 100px;
+	height: 120px;
 	padding-left: 25px;
-	padding-top: 15px;
-	padding-bottom: 17px;
+	padding-top: 22px;
 	
 }
 .dateButton{
@@ -101,15 +100,26 @@ var now=new Date()
 var nowd=now.getDate()
 var nowm=now.getMonth()
 var nowy=now.getFullYear()
+var month="${month}";
 
-function Now(year,month,day){
+function Now(y,m,d){
 	
-	nowDate.innerHTML='- '+year+'/'+(month+1)+'/'+day;
+	var Today = ' ~ '+y+' / '+(m+1)+' / '+d;
+	
+	now.setMonth(now.getMonth()-month);
+	
+	y=now.getFullYear();
+	m=now.getMonth();
+	d=now.getDate();
+	
+	var NotToday = ' - '+y+' / '+(m+1)+' / '+d;
+	
+	nowDate.innerHTML=NotToday+Today;
 	
 }
 
 
-function Ok(payment_num, concert_num) {
+function Ok(payment_num) {
 	
 	window.open('book_detail.box?payment_num='+payment_num, '_blank', 'width=800, height=500,toolbars=yes');
 
@@ -117,21 +127,15 @@ function Ok(payment_num, concert_num) {
 
 function payCheck(payment_num) {
 	
-	window.open('pay_check.box?payment_num='+payment_num, '_blank', 'width=300, height=200,toolbars=yes'); 
+	confirm("결제를 완료하셨습니까?");	
+	location.href="pay_ok.box?payment_num="+payment_num+'&month='+month;
 
-} 
-
- function Re(payment_num){
-	
-	 alert("부모창으로 돌아옴");
-	location.href="pay_ok.box?payment_num="+payment_num;
-	
 }
 
  function cBook(payment_num) {
 		
 		confirm("예약을 취소하시겠습니까?");		
-		location.href="book_c.box?payment_num="+payment_num;
+		location.href="book_c.box?payment_num="+payment_num+'&month='+month;
 
 	} 
 
@@ -154,14 +158,13 @@ function payCheck(payment_num) {
 	
 	<br>
 	<br>
+	<!-- -----------------------------날짜 버튼------------------------------------- -->
 		<div class="dateBox">
-			<input type="button" name="btnTerm1M" value="1개월" id="btnTerm1M" class="dateButton" /> 
-			<input type="button" name="btnTerm3M" value="3개월" id="btnTerm3M" class="dateButton" /> 
-			<input type="button" name="btnTerm6M" value="6개월" id="btnTerm6M" class="dateButton" />
-						
-			<br><br><p id="nowDate"></p>
-			</div>	
-		
+	 <a href="book_list.box?month=1"> <input type="button" value="1개월" class="dateButton"></a>
+	 <a href="book_list.box?month=3"> <input type="button" value="3개월" class="dateButton"></a>
+	 <a href="book_list.box?month=6"> <input type="button" value="6개월"  class="dateButton"></a>
+		<br><br><font size="4px"><p id="nowDate"></p></font>
+		</div>	
 	<br>
 	<br>
 
@@ -200,6 +203,8 @@ function payCheck(payment_num) {
 				</tr>
 
 				<c:forEach var="p" items="${paymentdata}">
+				
+			<!-- ---------------예매목록 시작---------------------------- -->
 					<tr align="center" valign="middle" height=100px>
 						<%-- 	<input type="hidden" name="concert_num" value="${p.concert_num}">
 					<input type="hidden" name="payment_num" value="${p.payment_num}"> --%>
@@ -229,29 +234,27 @@ function payCheck(payment_num) {
 						<input type="button" class="cButton"  value="예약취소" onclick="cBook(${p.payment_num});"><br><br>
 						</c:if> 
 						
-						<c:if test="${p.payment_check == '실시간계좌이체'}">	
-						<font color="red" style="font-weight: bold;">결제완료</font>
-					    <input type="button" class="cButton"  value="예약취소" onclick="cBook(${p.payment_num});"><br><br>
-						</c:if> 
-						
 						<c:if test="${p.payment_check == '무통장입금'}">
 						<font color="red" style="font-weight: bold;">결제대기 </font><br><br>								
 						<input type="button" class="payButton" value="결제하기" onclick="payCheck(${p.payment_num});"><br><br>		
 						<input type="button" class="cButton"  value="예약취소" onclick="cBook(${p.payment_num});"><br><br>				
 						</c:if>
-							
+						
 						<c:if test="${p.payment_check == '무통장입금 결제완료'}">
-						<font color="red" style="font-weight: bold;">결제완료 </font><br><br>	
-						<input type="button" class="cButton"  value="예약취소" onclick="cBook(${p.payment_num});"><br><br>					
-						</c:if>	
-						
-						<c:if test="${p.payment_check == '취소완료'}">
-						<font color="red" style="font-weight: bold;">취소완료 </font>								
-						</c:if>	
-						
+						<font color="red" style="font-weight: bold;">결제완료 </font><br><br>
+						<input type="button" class="cButton"  value="예약취소" onclick="cBook(${p.payment_num});"><br><br>									
+					    </c:if>	
+					    
+					    <c:if test="${p.payment_check == '취소완료'}">
+						<font color="red" style="font-weight: bold;">취소완료 </font><br><br>								
+					    </c:if>			
 						
 						</td>
 					</tr>
+					
+					
+					<!----------------------------예매목록 끝-------------------------------->
+					
 				</c:forEach>
 			</table>
 		</form>

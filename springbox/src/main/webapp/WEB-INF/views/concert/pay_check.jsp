@@ -8,14 +8,23 @@
 
 <style>
 
-.paycheck{
+.payCheck{
 
- width: 85%;
- height: 85%;
- color: white;
- padding : 25px;
+ border: 1px double gray;
+ width: 80%;
+ height: 80%;
+ padding: 50px;
 
 }
+
+
+.payOkButton{
+
+ width: 120px;
+ height: 30px;
+}
+
+
 </style>
 
 <script>
@@ -35,11 +44,13 @@ function payOk(payment_num){
 
 
 <div class="payCheck">
-
-무통장입금 결제를 완료하셨습니까?
-
-<input type="button" value="결제완료" onclick= "payOk(${payment_num});" >
-<input type="button" value="결제미완료" >
+<font>
+무통장입금 결제를 <br>
+완료하셨습니까?
+</font>
+<br><br>
+<input type="button" value="결제완료" onclick= "payOk(${payment_num});" class="payOkButton" >
+<input type="button" value="결제미완료" class="payOkButton" >
 
 </div>
 

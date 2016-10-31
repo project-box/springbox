@@ -90,13 +90,22 @@
 		]]>
 	</select>
 	
+	
 	<!-- 예매내역 -->
-	<select id="book_list" resultType="com.naver.springbox.dto.PaymentBean">
+	<select id="book_list" resultType="com.naver.springbox.dto.PaymentBean" parameterType="java.util.Map">
 	    <![CDATA[
-			select * from payment where user_id=#{user_id}
+			select * from payment where payment_registerdate <= sysdate
+  			and payment_registerdate >= #{nowMinus}
+  			and user_id=#{user_id}
 		]]>
 	</select>
-	
+<!-- select * from payment where payment_registerdate >= sysdate
+  			and payment_registerdate < #{nowMinus}
+  			and user_id=#{user_id} -->
+
+<!-- select * from payment where user_id=#{user_id} -->
+
+
 	<!-- 예매디테일 -->
 	<select id="book_detail" parameterType="Integer"
 		resultType="com.naver.springbox.dto.PaymentBean">
@@ -105,12 +114,14 @@
 		]]>
 	</select>
 	
+	
 	<!-- 결제하기 버튼 -->
 	<update id="pay_ok" parameterType="Integer">	
 		update payment set payment_check= '무통장입금 결제완료'
 		where payment_num=#{payment_num}
 		
 	</update>
+	
 	
 	<!-- 결제테이블 취소 -->
 	

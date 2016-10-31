@@ -119,8 +119,7 @@ function Book(){
 		<br>
 		<button type="button" onclick="Book();">예매하기</button>
 		
-		<a	
-			href="concert_list.box">클릭 하면 리스트로</a> <br>
+		<a href="concert_list.box">클릭 하면 리스트로</a> <br>
 		<br>관리자만 보입니다. <a
 			href="concert_delete.box?num=${concertdata.concert_num}">[삭제]</a>
 	</div>
