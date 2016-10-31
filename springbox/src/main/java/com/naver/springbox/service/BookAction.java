@@ -1,6 +1,9 @@
 package com.naver.springbox.service;
 
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -35,9 +38,18 @@ public class BookAction {
 	
 	/*-------------------예매내역----------------------------------*/
 	
-	public List<PaymentBean> book_list(String user_id) {
-		List<PaymentBean> list = concertDao.book_list(user_id);
+	public List<PaymentBean> book_list(String user_id ,int month) {
 
+		Date nowMinus = new Date (); //오늘 날짜를 기준으루..		
+		nowMinus.setMonth(nowMinus.getMonth()-month);//3개월 전....
+		
+		Map<String, Object> resultMap = new HashMap <String, Object>();
+		
+		resultMap.put("nowMinus", nowMinus);
+		resultMap.put("user_id", user_id);
+		
+		List<PaymentBean> list = concertDao.book_list(resultMap);
+		
 		return list;
 	}
 

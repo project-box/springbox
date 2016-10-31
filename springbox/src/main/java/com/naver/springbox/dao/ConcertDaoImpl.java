@@ -150,10 +150,11 @@ public class ConcertDaoImpl implements ConcertDao {
 	
 	@Override
 	@Transactional
-	public List<PaymentBean> book_list(String user_id) {
+	public List<PaymentBean> book_list(Map<String, Object> map) {
 		// TODO Auto-generated method stub
 		
-		List<PaymentBean> list = sqlSession.selectList("concert.book_list", user_id);					
+		List<PaymentBean> list = sqlSession.selectList("concert.book_list", map);					
+		
 		
 		return list;
 	}
