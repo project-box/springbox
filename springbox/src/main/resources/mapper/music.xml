@@ -33,14 +33,19 @@
 	</insert>
 
 	<!-- 음악 수정 -->
-	<update id="music_edit" parameterType="com.naver.springbox.dto.MusicBean">
+	<update id="music_update" parameterType="com.naver.springbox.dto.MusicBean">
 		update music set
 		music_title=#{music_title},music_artist=#{music_artist},
 		music_publishdate=#{music_publishdate},music_genre=#{music_genre},
-		music_album=#{music_album},albumcoverfilepath=#{albumcoverfilepath},music_lyrics=#{music_lyrics},music_mp3=#{music_mp3}
-		where music_id=#{music_id}
+		music_album=#{music_album},albumcoverfilepath=#{albumcoverfilepath,jdbcType=VARCHAR},music_lyrics=#{music_lyrics}
+		where music_num=#{music_num}
 	</update>
-
+	
+	<!-- 수정폼 내용 불러오기 -->
+	<select id="music_modify" parameterType="int" resultType="com.naver.springbox.dto.MusicBean">
+		select * from music where music_num=#{num}
+	</select>
+	
 	<!-- 게시판 총게시물 수 -->
 	<select id="music_count" parameterType="com.naver.springbox.dto.MusicBean"
 		resultType="Integer">

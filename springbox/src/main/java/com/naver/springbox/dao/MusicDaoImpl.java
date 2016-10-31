@@ -74,6 +74,47 @@ public class MusicDaoImpl implements MusicDao{
 		return list.get(0);
 	}
 	
+	/*-------------------곡내용 불러오기 수정폼------------------*/
+	@Override
+	public MusicBean musicmodify(int num) {
+		
+		System.out.println("DAO musicmodify 들어옴");
+		System.out.println("num="+num);
+		
+		MusicBean mb = sqlSession.selectOne("music.music_modify", num);
+		
+		System.out.println("mb 제목="+ mb.getMusic_title());
+		
+		return mb;
+		
+	}
+	/*-------------------곡내용 수정------------------*/
+	public boolean music_update(MusicBean dto) {
+		
+		System.out.println("music_update dao");
+		System.out.println("dto 제목="+ dto.getMusic_title());
+		System.out.println("dto 장르="+ dto.getMusic_genre());
+		System.out.println("dto 아티스트="+ dto.getMusic_artist());
+		System.out.println("dto 앨범="+ dto.getMusic_album());
+		System.out.println("dto 발매일="+ dto.getMusic_publishdate());
+		System.out.println("dto 사진="+ dto.getAlbumcoverfilepath());
+		System.out.println("dto 가사="+ dto.getMusic_lyrics());
+		System.out.println("dto num ="+ dto.getMusic_num());
+
+
+		//		boolean ok;
+		int r = sqlSession.update("music.music_update", dto);
+		System.out.println("music_update 맵퍼실행후");
+		if(r > 0) 
+			return true;
+		else
+			return false;
+		
+		/*return ok;*/
+		
+	}
+	
+	
 	/*------------------- 음악 삭제 ------------------*/
 	@Override
 	public boolean deleteMusic(int num) {
