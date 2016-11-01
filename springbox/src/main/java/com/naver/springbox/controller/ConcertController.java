@@ -30,7 +30,7 @@ public class ConcertController {
 	
 	/*--------------------글쓰기(관리자)-----------------------*/
 	
-	@RequestMapping(value = "/concert_write.box", method = RequestMethod.GET)
+	@RequestMapping(value = "/concert_write.box")
 	public String concertWrite(Locale locale, Model model) {
 
 		return "concert/concert_write";

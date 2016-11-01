@@ -18,7 +18,7 @@
 	<!-- 콘서트 리스트 -->
 	<select id="concert_list" resultType="com.naver.springbox.dto.ConcertBean">
 	    <![CDATA[
-			select * from concert
+			select * from concert order by concert_num desc
 		]]>
 	</select>
 
@@ -47,7 +47,7 @@
 	<!-- 후기 목록 -->
 	<select id="concertboard_list" resultType="com.naver.springbox.dto.ConcertBoardBean">
 	    <![CDATA[
-			select * from concertboard where concert_num=#{num}
+			select * from concertboard where concert_num=#{num} order by concertboard_num desc
 		]]>
 	</select>
 	
@@ -97,7 +97,7 @@
 	    <![CDATA[
 			select * from payment where payment_registerdate <= sysdate
   			and payment_registerdate >= #{nowMinus}
-  			and user_id=#{user_id}
+  			and user_id=#{user_id} order by payment_num desc
 		]]>
 	</select>
 <!-- select * from payment where payment_registerdate >= sysdate

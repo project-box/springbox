@@ -50,7 +50,7 @@
  height: 35px;
  font-size: 15px;
  margin-bottom: 10px;
-
+ margin-left: -80px;
 }
 
 
@@ -168,7 +168,7 @@ height: 55px;
 
 }
 
-
+.detailContent{}
 
 
 
@@ -276,7 +276,7 @@ function Book(){
 
 </form>
 
-
+<div class="detailContent">
 
 	<h2 style="margin-top:50px; margin-left:100px;">
 		<b>&lt;  ${concertdata.concert_title} &gt;</b>
@@ -309,17 +309,13 @@ function Book(){
 		<fmt:formatNumber value="${concertdata.concert_price}" pattern="#,###.##"/>&nbsp;원<br>
 		<br>	
 		
-	</div>	
-	
-	<div class="infoButton" style="float:left;">
-		<button type="button" class="Button00" onclick="Book();">예매하기</button><br>
+		<button type="button" class="Button00" onclick="Book();" >예매하기</button><br>
 		<button type="button" class="Button00" onclick="location.href='concert_list.box'">목록보기</button>
-        &nbsp; &nbsp;
-        <c:if test="${sessionScope.loginId == 'dev'}">         
+		<c:if test="${sessionScope.loginId == 'dev'}">         
 		<button class="delete" onclick="location.href='concert_delete.box?num=${concertdata.concert_num}'">삭제</button>
 	    (관리자아이디로 접속 시에만 보입니다.)
 	    </c:if>
-	 </div>
+	</div>	
 	</div>
 
 
@@ -331,15 +327,6 @@ function Book(){
 	<a data-toggle="tab" href="#menu4"><b>티켓취소/환불</b></a>    
     
     </div>
-
-
-<!-- 	 <ul class="nav nav-tabs"> 
-		<li id="first"><a data-toggle="tab" href="#menu1"><b>상세정보</b></a></li>
-		<li id="second"><a data-toggle="tab" href="#menu2"><b>관람후기</b></a></li>
-		<li id="map1"><a data-toggle="tab" href="#menu3"><b>공연장위치</b></a></li>
-		<li><a data-toggle="tab" href="#menu4"><b>티켓취소/환불</b></a></li>
-	</ul>  -->
-
 
 
 	<!-- -----------------------------상세정보------------------------------------ -->
@@ -556,21 +543,7 @@ function Book(){
 	</div>
 	</div>
 
-
 	<%@ include file="/WEB-INF/views/front/footer.jsp"%>
-
-	<!-- <tr class="">
-<th scope="row">평점</th>
-                    <td><input id="point0" name="point" fw-filter="" fw-label="평점" fw-msg="" value="5" type="radio" checked="checked"  /><label for="point0" ><span class="point5"><em>★★★★★</em></span></label>
-<input id="point1" name="point" fw-filter="" fw-label="평점" fw-msg="" value="4" type="radio"  /><label for="point1" ><span class="point4"><em>★★★★</em></span></label>
-<input id="point2" name="point" fw-filter="" fw-label="평점" fw-msg="" value="3" type="radio"  /><label for="point2" ><span class="point3"><em>★★★</em></span></label>
-<input id="point3" name="point" fw-filter="" fw-label="평점" fw-msg="" value="2" type="radio"  /><label for="point3" ><span class="point2"><em>★★</em></span></label>
-<input id="point4" name="point" fw-filter="" fw-label="평점" fw-msg="" value="1" type="radio"  /><label for="point4" ><span class="point1"><em>★</em></span></label></td>
-                </tr> -->
-
-
-
-
 
 
 </body>
