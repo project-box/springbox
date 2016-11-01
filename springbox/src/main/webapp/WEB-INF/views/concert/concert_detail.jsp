@@ -9,23 +9,119 @@
 <meta charset=UTF-8">
 
 <%@ include file="/WEB-INF/views/front/header.jsp"%>
+
+<!-- 구글맵 부트스트랩 -->
+<script src="http://maps.googleapis.com/maps/api/js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD0Id8D7bkKotALpSG6e_q4LhgjP8cwpg8"
+ type="text/javascript"></script>
+
 <title>b o x</title>
 
 <style type="text/css">
+
 .image {
 	float: left;
-	margin: 10px;
+	margin-right: 70px;
+	margin-left:100px;
+	margin-top:70px;
+	padding-right: 70px;
+	border-right: 1px dashed gray;
 }
 
 .info {
-	float: center;
-	margin: 30px;
+    float:inherit;
+	margin-left: 70px;	
+	height:280px;
+	line-height: 30px;
+	margin-top:110px;
+	margin-bottom: 100px;
+	font-size: 20px;
 }
+
+
+.Button00{
+
+ outline: none;
+ border:none;
+ background-color: black;
+ color:white;
+ width: 100px;
+ height: 35px;
+ font-size: 15px;
+ 
+
+}
+
+
+.Button00:hover{
+
+background-color: #c8c8c8;
+color: black;
+border: 1px solid black;
+
+}
+
+.delete {
+	
+	font-size: 17px;
+	color: #ffffff;
+	padding: 2px 6px;
+	background-color: #777777;
+	border: #777777;
+	width: 206px;
+    height: 35px;
+}
+
+.delete:hover {
+
+	background-color: black;
+
+}
+
+
+#tabList{
+ border-bottom:5px dashed #C35F5F; 
+ height: 75px;
+ width: 100%;
+ 
+}
+
+#tabList a:link{
+
+  color:#282828;
+  text-decoration: none;
+  font-size: 17px;
+  background-color: #dcdcdc;
+  padding-left: 100px;
+  padding-right: 100px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  display:inline-block;
+}
+
+
+#tabList a:hover {
+
+ background-color: black;
+ color:white;
+
+}
+
+
+.tab-content{
+padding-top: 100px;
+
+}
+
+
 </style>
 
 
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 <script type="text/javascript">
+
+/* ------------------------param 값 가져오기----------------------------------- */
+
 
 function getRequest() {
     if(location.search.length > 1) {
@@ -55,6 +151,36 @@ $(document).ready(function() {
 	  }
 	  
 	  });
+
+/* ------------------------구글지도----------------------------------- */
+var lat = '${concertdata.locationx}'
+var lon = '${concertdata.locationy}'
+var myCenter=new google.maps.LatLng(lat, lon);
+var marker;
+//var divid = document.getElementById("map1");
+
+function initialize()
+{
+var mapProp = {
+  center:myCenter,
+  zoom:18,
+  mapTypeId:google.maps.MapTypeId.ROADMAP
+  };
+
+var map=new google.maps.Map(document.getElementById("googleMap"),mapProp);
+
+var marker=new google.maps.Marker({
+  position:myCenter,
+  animation:google.maps.Animation.BOUNCE
+  });
+
+marker.setMap(map);
+}
+
+google.maps.event.addDomListener(window, 'load', initialize);
+//google.maps.event.addDomListener(divid, 'click', initialize());
+
+
 
 /* -----------------------팝업창에서 값 받기------------------------------ */
 
@@ -94,9 +220,9 @@ function Book(){
 
 
 
-	<h3>
-		<b>${concertdata.concert_title}</b>
-	</h3>
+	<h2 style="margin-top:50px; margin-left:100px;">
+		<b>&lt;  ${concertdata.concert_title} &gt;</b>
+	</h2>
 
 	<div class="image">
 		<img src="./img/${concertdata.posterfilepath}" width="250"
@@ -117,20 +243,33 @@ function Book(){
 		&nbsp;&nbsp;&nbsp;&nbsp;
 		<fmt:formatNumber value="${concertdata.concert_price}" pattern="#,###.##"/>&nbsp;원<br>
 		<br>
-		<button type="button" onclick="Book();">예매하기</button>
 		
-		<a href="concert_list.box">클릭 하면 리스트로</a> <br>
-		<br>관리자만 보입니다. <a
-			href="concert_delete.box?num=${concertdata.concert_num}">[삭제]</a>
+		<button type="button" class="Button00" onclick="Book();">예매하기</button>
+		<button type="button" class="Button00" onclick="location.href='concert_list.box'">목록보기</button>
+        &nbsp; &nbsp;
+        <c:if test="${sessionScope.loginId == 'dev'}">         
+		<button class="delete" onclick="location.href='concert_delete.box?num=${concertdata.concert_num}'">삭제</button>
+	    (관리자아이디로 접속 시에만 보입니다.)
+	    </c:if>
 	</div>
 
 
-	<ul class="nav nav-tabs">
+    <div id="tabList" align=center>
+     
+    <a id="first" data-toggle="tab" href="#menu1"><b>상세정보</b></a>
+	<a id="second" data-toggle="tab" href="#menu2"><b>관람후기</b></a>
+	<a id="map1" data-toggle="tab" href="#menu3"><b>공연장위치</b></a>
+	<a data-toggle="tab" href="#menu4"><b>티켓취소/환불</b></a>    
+    
+    </div>
+
+
+<!-- 	 <ul class="nav nav-tabs"> 
 		<li id="first"><a data-toggle="tab" href="#menu1"><b>상세정보</b></a></li>
 		<li id="second"><a data-toggle="tab" href="#menu2"><b>관람후기</b></a></li>
 		<li id="map1"><a data-toggle="tab" href="#menu3"><b>공연장위치</b></a></li>
 		<li><a data-toggle="tab" href="#menu4"><b>티켓취소/환불</b></a></li>
-	</ul>
+	</ul>  -->
 
 
 
