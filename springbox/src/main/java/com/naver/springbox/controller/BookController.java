@@ -73,33 +73,13 @@ public class BookController {
 
 		pb.setPayment_title(cb.getConcert_title());
 		pb.setPayment_poster(cb.getPosterfilepath());
-		                   // payment 테이블에 인서트
-		
-				
-		String seat_seat = request.getParameter("seat_seat");
-		int payment_num = bookAction.book_data();    // payment 테이블의 시쿼스값 가져옴
-		
-		
-		String[] values = seat_seat.split("/");
-		for (int x = 0; x < values.length; x++) {
+		                   // payment dto에 필요한 데이터 저장
 
-			sb.setSeat_seat(values[x]);
-			sb.setConcert_num(concert_num);
-			sb.setSeat_date(pb.getPayment_date());
-			sb.setSeat_time(pb.getPayment_time());
-			sb.setPayment_num(payment_num);
-			
-			bookAction.seat_add(sb);               //seat 테이블에 인서트
-		}	
-		
 		ModelAndView mav = new ModelAndView();
 		
-		// 무통장입금시, 가상계좌 뿌려줌
-		if(pb.getPayment_check().equals("무통장입금")){
-	
-		/*	String payment_price = pb.getPayment_price();
-			String payment_title = pb.getPayment_title();
-			String payment_bank = pb.getPayment_bank();*/
+		
+		if(pb.getPayment_check().equals("무통장입금")){// 무통장입금시, 가상계좌 뿌려줌
+
 		int payment_account= (int) Math.floor((Math.random() * (999999999 - 111111111 + 1)) + 111111111 );
 		
 		   pb.setPayment_account(payment_account);
@@ -108,13 +88,32 @@ public class BookController {
 		    mav.addObject("paymentdata", pb);
 			mav.setViewName("/concert/book_account");	
 			
-		}else{
+		}else{   // 신용카드
 			
 			pb.setPayment_account(0);
 			bookAction.book_add(pb);  
 			
 			mav.setViewName("redirect:book_list.box?month=1");		
 		}	
+		
+		
+		String seat_seat = request.getParameter("seat_seat");
+		int payment_num = bookAction.book_data();  // payment 테이블의 시쿼스값 가져옴
+		
+		
+		String[] values = seat_seat.split("/");     //seat 테이블에 인서트
+		for (int x = 0; x < values.length; x++) {
+
+			sb.setSeat_seat(values[x]);
+			sb.setConcert_num(concert_num);
+			sb.setSeat_date(pb.getPayment_date());
+			sb.setSeat_time(pb.getPayment_time());
+			sb.setPayment_num(payment_num);
+			
+			bookAction.seat_add(sb);               
+		}	
+		
+		
 		
 		return mav;
 

@@ -37,10 +37,11 @@ payment_account varchar2(200));
 
 select * from payment;
 delete from payment;
+delete from seat;
 
-
-	update payment set payment='16/10/28' where concert_num=29;
+	update payment set payment_registerdate='16/08/28' where payment_num=233;
 		
+	rollback;
 alter table payment modify(payment_account number);
 
 alter table payment 

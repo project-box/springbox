@@ -526,6 +526,7 @@ input[type=checkbox] {
 						</select> <font color="red">&nbsp;&nbsp;*카드종류를 선택해 주세요</font> <br> <select
 							class="select" id="monthly">
 							<option value="">선택</option>
+							<option value="일시불">일시불</option>
 							<option value="2개월">2개월</option>
 							<option value="3개월">3개월</option>
 							<option value="4개월">4개월</option>
@@ -538,7 +539,7 @@ input[type=checkbox] {
 							<option value="11개월">11개월</option>
 							<option value="12개월">12개월</option>
 						</select> <input type="button" class=choice_button value="무이자할부 안내" /> *
-						할부는 50,000원 이상만 가능합니다.
+						할부는 50,000원 이상만 가능합니다.						
 					</div>
 				</div>
 				<!-- 박스 -->
