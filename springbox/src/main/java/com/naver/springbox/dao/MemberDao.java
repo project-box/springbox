@@ -35,6 +35,9 @@ public interface MemberDao {
 	//회원정보수정을 처리해 주는 메소드
 	public boolean updateMember(MemberBean member);
 
+	//회원탈퇴
+	public boolean memberDown(MemberBean user);
+
 
 
 

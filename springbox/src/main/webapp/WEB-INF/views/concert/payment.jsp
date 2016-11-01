@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>  
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!doctype html>
 <html>
 <head>
@@ -19,39 +20,19 @@
 
 			document.getElementById("pay1").style.display = "";
 			document.getElementById("pay2").style.display = "none";
-			document.getElementById("pay3").style.display = "none";
+			document.getElementById("terms").style.display = "";
 
 		} else if (pay_choice == "pay2") {
 
 			document.getElementById("pay1").style.display = "none";
 			document.getElementById("pay2").style.display = "";
-			document.getElementById("pay3").style.display = "none";
-
-		} else if (pay_choice == "pay3") {
-
-			document.getElementById("pay1").style.display = "none";
-			document.getElementById("pay2").style.display = "none";
-			document.getElementById("pay3").style.display = "";
+			document.getElementById("terms").style.display = "";
 
 		}
 	}
 	
-	function Num() {
-	    //대입 숫자
-	    var num1=document.getElementById("num1").value;
-	    var num2=document.getElementById("num2").value;
-	    var num3=document.getElementById("num3").value;
-
-	    //연산자
-	    var operation1=document.getElementById("operation1").value;
-	    var operation2=document.getElementById("operation2").value;
-	    //결과값 넣기
-	    document.getElementById("is_nums").innerHTML =eval(num1+operation1+num2+operation2+num3); 
-
-
-	  }
 	
-
+	
 
 	/* 	function Text(b) {
 
@@ -68,23 +49,34 @@
 	 }
 	
 	 } */
-</script>
-
-<script>
-	/* $(document).ready(function(){
-	
-	 $(":text").click(function(){
-	
-	 $(this).css("border",none);
-	
-	
+	 
+	 $(document).ready(function(){			
+				
+				if($("#cash_check").is(":checked")==true){					
+					$("#cash_choice").css("display","block");
+					
+				}else if($("#cash_check").is(":checked")==false){					
+					$("#cash_choice").css("display","none");
+					
+				}				
+				
+				$(":checkbox").click(function(){						
+					
+					if($("#cash_check").is(":checked")==true){						
+						$("#cash_choice").css("display","block");
+						
+					}else if($("#cash_check").is(":checked")==false){							
+						$("#cash_choice").css("display","none");
+						
+					}
+				});
+			
 	 });
-	
-	
-	 }); */
+	 
+	 
+	 
+	 
 </script>
-
-
 
 <style>
 .tabel-box {
@@ -109,11 +101,30 @@ input:focus {
 	outline: none;
 }
 
-.select {
+.select{
 	width: 270px;
 	height: 30px;
-	margin-top: 10px;
 	margin-bottom: 5px;
+	margin-top:2px;
+}
+
+.textbox1{
+width: 270px;
+	height: 30px;
+ margin-top:2px;
+ margin-bottom:2px;
+}
+
+.textbox3{
+width: 270px;
+	height: 30px;
+
+}
+
+.cash_check{
+margin-top:10px;
+   width: 20px;
+	height: 20px;  
 }
 
 .choice_a {
@@ -122,7 +133,62 @@ input:focus {
 	height: 100px;
 	border: 1px solid gray;
 	margin-left: 75px;
+	
 }
+
+.choice_b {
+	background-color: #dcdcdc;
+	width: 1000px;
+	height: 135px;
+	border: 1px solid gray;
+	margin-left: 75px;
+	margin-top:5px;
+}
+
+.choice_c {
+	background-color: #dcdcdc;
+	width: 1000px;
+	height: 100px;
+	border: 1px solid gray;
+	margin-left: 75px;
+	margin-top:5px;
+}
+
+.choice_label{	
+	float:left;
+	margin-left:20px;
+	margin-right:20px;
+    margin-top:13px;
+	line-height: 35px;
+	font-size: 15px;
+}
+
+.choice_content{
+   
+   float: left;
+   margin-top:12px;
+   margin-right:10px;
+   align:left;
+
+}
+
+.choice_button{
+
+  margin-left:10px;
+  margin-right:10px;
+	height: 30px;
+}
+
+
+
+#cash1,#cash2{
+
+	margin-top:10px;
+	margin-bottom: 13px;
+
+}
+
+
 
 hr {
 	border: 1px solid #dcdcdc;
@@ -136,7 +202,7 @@ h4 {
 	font-weight: bold;
 }
 
-.div1 {
+.div1,.div2 {
 	width: 1000px;
 	height: 170px;
 	border: 1px solid black;
@@ -245,11 +311,11 @@ background-color: red;
 			<tr>
 				<td>
 				<c:set var="num" value="${concertdata.concert_price * payment_amount}"/>
-				<c:out value="${num}"/>원
+				<fmt:formatNumber value="${num}" pattern="#,###.##"/>원
 				</td>
 				<td >1,000원</td>
 				<td >2,500원</td>
-				<td ><c:out value="${num+1000+2500}"></c:out>원</td>
+				<td ><fmt:formatNumber value="${num+1000+2500}" pattern="#,###.##"/>원</td>
 			</tr>
 		</table>
 
@@ -279,7 +345,7 @@ background-color: red;
 			<tr class="title">
 				<td>총 결제금액</td>
 			<tr>
-				<td colspan="4"><c:out value="${num+1000+2500}"></c:out>원</td>				
+				<td colspan="4"><fmt:formatNumber value="${num+1000+2500}" pattern="#,###.##"/>원</td>				
 				<input type="hidden" name="payment_price" value="${num+1000+2500}">
 			</tr>
 
@@ -353,7 +419,9 @@ background-color: red;
 		</div>
 
 		<br> <br> <br> <br>
+		
 		<!-- ----------------------------------------------------------------------------- -->
+		
 		<h4>4. 결제수단</h4>
 		<font color="red" style="margin-left: 75px;">*결제수단을 선택해 주세요</font> <br>
 		<br>
@@ -362,9 +430,7 @@ background-color: red;
 
 			<label><input type=radio name=payment_check value="신용카드" onclick="Payment('pay1');"> 
 			<font size=4px>신용카드</font></label> 
-			<label><input type=radio name=payment_check value="실시간계좌이체" onclick="Payment('pay2');">	
-			<font size=4px>실시간계좌이체</font></label> 
-			<label><input type=radio name=payment_check value="무통장입금" onclick="Payment('pay3');"> 
+			<label><input type=radio name=payment_check value="무통장입금" onclick="Payment('pay2');">	
 			<font size=4px>무통장입금</font></label>
 
 		</div>
@@ -375,8 +441,13 @@ background-color: red;
 		<div id="pay1" style="display: none;">
 
 			<div class="choice_a">
-
-				&nbsp;&nbsp;카드종류 <select class="select">
+			
+			<div class="choice_label">
+			카드종류<br>할부선택
+			</div>
+			
+			<div class="choice_content">
+				<select class="select">
 					<option>선택</option>
 					<option value="국민카드">국민카드</option>
 					<option value="BC카드">BC카드</option>
@@ -396,7 +467,8 @@ background-color: red;
 					<option value="NG카드">NG카드</option>
 					<option value="하나카드">하나카드</option>
 					<option value="외환카드">외환카드</option>
-				</select> <font color="red">*카드종류를 선택해 주세요</font> <br> &nbsp;&nbsp;할부선택
+				</select> <font color="red">&nbsp;&nbsp;*카드종류를 선택해 주세요</font> <br> 
+				
 				<select class="select">
 					<option>선택</option>
 					<option value="2개월">2개월</option>
@@ -410,23 +482,87 @@ background-color: red;
 					<option value="10개월">10개월</option>
 					<option value="11개월">11개월</option>
 					<option value="12개월">12개월</option>
-				</select> <input type="button" value="무이자할부 안내" /> * 할부는 50,000원 이상만 가능합니다.
-
+				</select> <input type="button" class=choice_button value="무이자할부 안내" /> * 할부는 50,000원 이상만 가능합니다.
+            </div> 
+			</div> <!-- 박스 -->
 			</div>
+			
+<!-- -----------------------------신용카드 끝 ------------------------------------------------- -->
+        
+		<div id="pay2" style="display: none;">
+		
+		<div class="choice_b">
 
+			<div class="choice_label">
+			입금은행 <br> 입금자  <br>현금영수증
+			</div>
+			
+			<div class="choice_content">
+
+				     <select class="select">
+					<option>선택</option>
+					<option value="우리은행">우리은행</option>
+					<option value="SC제일은행">SC제일은행</option>
+					<option value="신한(조흥)은행">신한(조흥)은행</option>
+					<option value="부산은행">부산은행</option>
+					<option value="광주은행">광주은행</option>
+					<option value="하나(외환)은행">하나(외환)은행</option>
+					<option value="국민은행">국민은행</option>
+					<option value="우체국">우체국</option>
+					<option value="기업은행">기업은행</option>
+					<option value="농협중앙회">농협중앙회</option>
+					<option value="수협은행">수협은행</option>
+					<option value="대구은행">대구은행</option>
+					</select> <font color="red">&nbsp;&nbsp;*입금은행을 선택해 주세요</font> 
+					
+					<br>
+					
+			      <input type=text size=30px class=textbox1 value='${sessionScope.loginName}'> <!-- 입금자 -->
+			      
+			     <br>
+			   <input type=checkbox checked="checked" id=cash_check class=cash_check> 현금영수증 발행<br> <!-- 체크박스 -->
+			
+			      </div>  <!-- 입금은행, 입금자, 현금영수증 input -->
+
+				</div> <!-- 입금은행, 입금자, 현금영수증 선택 박스 -->
+	
+
+			<div class=choice_c id=cash_choice style="display: none;">  <!-- 현금영수증 체크시 상세설정 -->
+						
+			<div class=choice_label>			
+			용도 <br> 발급방법				
+			</div> <!-- 현금영수증 라벨 -->
+			
+			
+			<div class=choice_content>			
+		        <input type="radio" name=cash id=cash1 >소득공제
+				<input type="radio" name=cash id=cash2 >지출증빙	
+				
+				<br>
+				 <select style="height:30px; width:150px;">
+					<option value="휴대폰번호">휴대폰번호</option>
+					<option value="주민등록번호">주민등록번호</option>				
+				</select> 
+				<input type=text size=30 class=textbox3 placeholder="숫자만 입력해주세요">
+				<font color="red">&nbsp;&nbsp;* '-' 빼고 입력해 주세요</font> 							
+			</div> <!-- 현금영수증 input -->
+			
+			</div><!-- 현금영수증 체크시 상세설정 끝 -->	
+			
+				
+		</div>
+		
+		
+	<!-- ----------------------------무통장입금 끝------------------------------------------ -->
+		
+	<!-- ----------------------------------약관----------------------------------------- -->
+ 
+     <div id="terms" style="display: none;">
 			<hr>
-			<h4>결제대행서비스 이용약관</h4>
-
-			<ul class="ul-box">
-				<li><a class="li-box" href="#div1">기본약관</a></li>
-				<li><a class="li-box" href="#div2">개인정보 수집, 이용</a></li>
-				<li><a class="li-box" href="#div3">개인정보 제공, 위탁</a></li>
-			</ul>
-
-
-
-			<pre class="div1" id="div1">
-					[전자금융거래 기본약관]
+			<h4 align="center">결제대행서비스 이용약관</h4>
+			
+           <h4>[전자금융거래 기본약관]</h4>
+			<pre class="div1">					
 
 제1조 (목적)
 이 약관은 주식회사 한국사이버결제(이하 '회사'라 합니다)가 제공하는 전자지급결제대행서비스 및 결제대금예치서비스를 이용자가 이용함에 있어 회사와 이용자 사이의 전자금융거래에 관한 기본적인 사항을 정함을 목적으로 합니다.
@@ -554,8 +690,8 @@ background-color: red;
 			<hr>
 
 
-			<h4>개인정보 제3자 제공</h4>
-			<pre class="div1">
+			<h4>[개인정보 제3자 제공]</h4>
+			<pre class="div2" >
 (주)BOX는 귀하께서 판매자로부터 상품 및 서비스를 구매하는 경우, 거래의 이행 및 거래 당사간 의사소통 및 상담, 배송 등 원활한 거래이행을 위하여 아래와 같은 최소한의 개인정보를 판매자 및 기획사에 제공합니다.
 
 <table class="table table-bordered"> 
@@ -579,17 +715,15 @@ background-color: red;
 <td>개인정보 이용목적 달성 시까지(단, 관계법령의 규정에 의한 경우 규정된 시점까지 또는 이용자로부터 
 사전동의를 받은 경우 해당 보유기간까지)</td>
 </tr>			
-	</table>				
-					
+	</table>					
 		</pre>
 
 		<input type="checkbox">개인정보 제3자 제공에 동의
+ </div> <!-- 약관 -->
 
-		</div>
 
-		<div id="pay2" style="display: none;"></div>
-
-		<div id="pay3" style="display: none;"></div>
+	<!------------------------------------약관 끝----------------------------------------- -->		
+		
 		
 		
 		<input type="submit" class="submit" value="결제하기">

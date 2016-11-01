@@ -25,10 +25,36 @@
 	font-size: 12px;
 	color: #ffffff;
 	padding: 5px 6px;
-	background: #000000;
-	border: #000000;
+	background: #777777;
+	border: #777777;
 }
 </style>
+
+<script>
+	function tdclick1(e) {
+
+		if (!e)
+			var e = window.event; // Get the window event
+		e.cancelBubble = true; // IE Stop propagation
+		if (e.stopPropagation)
+			e.stopPropagation(); // Other Broswers
+		console.log('td clicked');
+
+		alert("수정");
+	};
+
+	function tdclick2(e, music_num) {
+		location.href = "/springbox/music_delete.box"
+		if (!e)
+			var e = window.event; // Get the window event
+		e.cancelBubble = true; // IE Stop propagation
+		if (e.stopPropagation)
+			e.stopPropagation(); // Other Broswers
+		console.log('td clicked');
+
+		alert(music_num);
+	};
+</script>
 
 <title>b o x</title>
 </head>

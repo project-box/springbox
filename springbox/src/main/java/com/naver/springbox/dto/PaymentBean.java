@@ -15,7 +15,6 @@ public class PaymentBean {
 	private String payment_price;
 	private String payment_address;		
 	private String payment_title;
-	private String cancel;
 	private String payment_poster;/*
 	private List<SeatBean> payment_seats;	*/
 	
@@ -90,12 +89,6 @@ public class PaymentBean {
 	}
 	public void setPayment_title(String payment_title) {
 		this.payment_title = payment_title;
-	}
-	public String getCancel() {
-		return cancel;
-	}
-	public void setCancel(String cancel) {
-		this.cancel = cancel;
 	}
 	public String getPayment_poster() {
 		return payment_poster;

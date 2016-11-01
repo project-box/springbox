@@ -144,7 +144,7 @@ public class ConcertController {
 	private BookAction bookAction;
 	
 	
-	
+	/*-------------------예매페이지 이동-----------------------------------------*/
 	@RequestMapping(value = "/book.box")
 	public ModelAndView book(int concert_num, HttpSession session) throws Exception {
 

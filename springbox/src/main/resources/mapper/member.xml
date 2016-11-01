@@ -10,7 +10,7 @@
 	</select>
 	
 	<select id="select_member" parameterType="String" resultType="com.naver.springbox.dto.MemberBean">
-		select * from users where user_id = #{id}
+		select * from users where user_id = #{id} and status !='-1'
 	</select>
 	
 	<!-- 회원가입시 email check를 처리해주는 sql -->
@@ -20,7 +20,7 @@
 	<!-- 회원가입을 처리해주는 sql -->
 	<insert id="join_process" parameterType="com.naver.springbox.dto.MemberBean">
 		insert into users(user_id, password, name, email, gender, phone, age, logincont, status, gubun, image)
-		 values(#{user_id}, #{password}, #{name}, #{email}, #{gender}, #{phone}, #{age}, 0, '0', '0', #{image,jdbcType=VARCHAR})
+		 values(#{user_id}, #{password}, #{name}, #{email}, #{gender}, #{phone}, #{age}, 0, '1', '0', #{image,jdbcType=VARCHAR})
 	</insert>
 	
 	<update id="Login_count" parameterType="com.naver.springbox.dto.MemberBean">
@@ -46,4 +46,16 @@
 		phone=#{phone}, age=#{age}, image=#{image,jdbcType=VARCHAR}
 		where user_id=#{user_id}
 	</update>
+	
+	<!-- 아이디로 비밀번호를 찾아오는 sql -->
+	<select id="pwSelect" parameterType="com.naver.springbox.dto.MemberBean" resultType="java.lang.String">
+		select password from users where user_id=#{user_id}
+	</select>
+	
+	<!-- 비밀번호를 확인한 후 회원가입상태를 바꾸는 것으로 회원탈퇴처리 -->
+	<update id="Member_drop" parameterType="com.naver.springbox.dto.MemberBean" >
+		update users set status='-1' where password=#{password}
+	</update>
+	
+	
 </mapper>

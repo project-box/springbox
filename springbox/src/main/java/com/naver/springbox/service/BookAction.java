@@ -1,6 +1,9 @@
 package com.naver.springbox.service;
 
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -35,9 +38,18 @@ public class BookAction {
 	
 	/*-------------------예매내역----------------------------------*/
 	
-	public List<PaymentBean> book_list(String user_id) {
-		List<PaymentBean> list = concertDao.book_list(user_id);
+	public List<PaymentBean> book_list(String user_id ,int month) {
 
+		Date nowMinus = new Date (); //오늘 날짜를 기준으루..		
+		nowMinus.setMonth(nowMinus.getMonth()-month);//3개월 전....
+		
+		Map<String, Object> resultMap = new HashMap <String, Object>();
+		
+		resultMap.put("nowMinus", nowMinus);
+		resultMap.put("user_id", user_id);
+		
+		List<PaymentBean> list = concertDao.book_list(resultMap);
+		
 		return list;
 	}
 
@@ -45,8 +57,6 @@ public class BookAction {
 	public PaymentBean book_detail(int payment_num) throws Exception {
 		PaymentBean dto = concertDao.book_detail(payment_num);
 
-		
-		System.out.println("예매 디테일 서비스");
 		return dto;
 	}
 	
@@ -57,6 +67,38 @@ public class BookAction {
 
 		return sb;
 	}
+	
+	/*----------------결제하기 버튼----------------------------*/
+	public PaymentBean pay_ok(int payment_num) throws Exception {
+		
+		concertDao.pay_ok(payment_num);
+
+		return null;
+	}
+	
+	/*-------------------예약취소----------------------------------------*/
+	
+	public PaymentBean book_c(int payment_num) throws Exception {
+		
+		concertDao.book_c(payment_num);
+		
+		return null;
+		
+	}
+
+	/*----------------------payment_num 값 구해오기------------------------------*/
+	
+	
+	public int book_data() throws Exception{
+		// TODO Auto-generated method stub
+		
+		int payment_num = concertDao.book_data();
+		
+		return payment_num;
+	}
+	
+	
+	
 	
 	
 	

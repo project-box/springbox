@@ -117,5 +117,20 @@ public class MemberDaoImpl implements MemberDao{
 			return false;
 	}
 
+	@Override
+	public boolean memberDown(MemberBean user) {
+		List<String> list = sqlSession.selectList("member.pwSelect", user);		//DB에서 비밀번호 세션에 설정
+		
+		if (list.size() >= 1) {
+			if(list.get(0).equals(user.getPassword())) {
+				int r = sqlSession.update("member.Member_drop", user);
+				if(r>0)
+					return true;
+			}
+			
+		}			
+		return false;
+	}
+
 	
 }

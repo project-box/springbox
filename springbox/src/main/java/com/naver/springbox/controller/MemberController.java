@@ -3,6 +3,7 @@ package com.naver.springbox.controller;
 import java.io.PrintWriter;
 import java.util.Locale;
 
+import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -10,11 +11,8 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.naver.springbox.dao.MemberDao;
@@ -23,6 +21,7 @@ import com.naver.springbox.service.EmailCheckAction;
 import com.naver.springbox.service.IdCheckAction;
 import com.naver.springbox.service.MemberJoinAction;
 import com.naver.springbox.service.MemberLogincont;
+import com.naver.springbox.service.Member_drop;
 import com.naver.springbox.service.Member_getInfo;
 import com.naver.springbox.service.Member_passset;
 import com.naver.springbox.service.Member_update;
@@ -53,7 +52,7 @@ public class MemberController {
 	public ModelAndView Login( HttpServletRequest request, HttpServletResponse response) {
 
 		try {
-			// ... 濡쒓렇�씤
+			// 입력창에서 값 가져오기
 			String userId = request.getParameter("inputId");
 			String userPassword = request.getParameter("inputPassword");
 			HttpSession session =request.getSession();
@@ -63,7 +62,6 @@ public class MemberController {
 			if (users != null) {
 				if (users.getPassword().equals(userPassword)) {
 					// 로그인 성공
-					
 				    session.setAttribute("users", users);
 					session.setAttribute("loginId", users.getUser_id());
 					session.setAttribute("loginName", users.getName());
@@ -155,8 +153,6 @@ public class MemberController {
 
 
 	@RequestMapping(value="/join_process.member", method = RequestMethod.POST)
-//	public ModelAndView insertMember(HttpServletRequest request) {
-//	public ModelAndView insertMember(@ModelAttribute MemberBean member) {
 	public ModelAndView insertMember(HttpServletRequest request) throws Exception {
 		MemberBean member = new MemberBean();
 		
@@ -179,7 +175,7 @@ public class MemberController {
 		member.setPhone(multi.getParameter("phone"));
 		member.setAge(Integer.parseInt(multi.getParameter("age")));
 //		member.setLogincont(Integer.parseInt(multi.getParameter("logincont")));
-//		member.setStatus(multi.getParameter("status"));		
+		member.setStatus(multi.getParameter("status"));		
 		member.setImage(multi.getFilesystemName((String) multi.getFileNames().nextElement()));	
 		
 		
@@ -307,9 +303,6 @@ public class MemberController {
 		return mav;
 	}
 	
-	
-	
-	
 	/*@RequestMapping(value = "/update_process.member", method = RequestMethod.POST)
 	public ModelAndView mem_update(MultipartHttpServletRequest request, HttpSession session) { 
 		ModelAndView mav = new ModelAndView();
@@ -330,5 +323,48 @@ public class MemberController {
 		}
 		return mav;
 	}파일업로드 방식이라고 하네요*/
+
+	//회원탈퇴화면가기
+	@RequestMapping("/Member_drop.member")
+	public ModelAndView dropView(HttpSession session) {
+		ModelAndView mav = new ModelAndView();
+		
+		if(session.getAttribute("loginId") == null) {
+			mav.setViewName("/member/login");
+		} else {
+			mav.setViewName("/member/member_drop");
+		}
+		return mav;
+	}
+	
+	@Autowired Member_drop member_drop;
+	
+	@RequestMapping("/Drop_process.member")
+	public ModelAndView dropMember(MemberBean member, HttpSession session, ServletRequest request) {
+		ModelAndView mav = new ModelAndView();
+		
+		 System.out.println("어디에 있니2222");	
+		 
+		if(session.getAttribute("loginId") == null) {
+			mav.setViewName("/member/login");
+		} else {
+			MemberBean user = (MemberBean)session.getAttribute("users");
+			
+				System.out.println("user = "+ user);	
+				
+			boolean result = member_drop.memberDown(user);
+			
+				System.out.println("user = "+ user);	
+			
+			if(result){
+				session.invalidate();
+				mav.setViewName("redirect:main.box");
+			}else {
+				mav.addObject("result", result);
+				mav.setViewName("/member/member_drop");
+			}
+		}
+		return mav;
+	}
 	
 }

@@ -8,7 +8,7 @@
 <head>
 <!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
 <meta charset=UTF-8>
-<title>Insert title here</title>
+<title>예매정보 확인창</title>
 
 <style>
 .bookListTable {
@@ -46,23 +46,21 @@
 	height: 80px;
 	background-color: #4A4E5D;
 	color: white;
+	margin-left: 115px;
+	padding-left: 25px;
+	padding-top: 15px;
+	padding-bottom: 17px;
 }
 
 .dateBox{	
 	margin-left: 115px;
 	border: 1px solid #FAC6C6;
 	width:85%;
-	height: 100px;
+	height: 120px;
+	padding-left: 25px;
+	padding-top: 22px;
+	
 }
-
-.dateBox td{
-
-	padding-left: 30px;
-	padding-top: 25px;
-	padding-bottom: 17px;
-
-}
-
 .dateButton{
 	background-color: white;
 	outline: none;
@@ -70,7 +68,6 @@
 	width: 80px;
 	height: 30px;
 	vertical-align: middle;
-
 }
 
 #nowDate{
@@ -103,20 +100,44 @@ var now=new Date()
 var nowd=now.getDate()
 var nowm=now.getMonth()
 var nowy=now.getFullYear()
+var month="${month}";
 
-function Now(year,month,day){
+function Now(y,m,d){
 	
-	nowDate.innerHTML='- '+year+'/'+(month+1)+'/'+day;
+	var Today = ' ~ '+y+' / '+(m+1)+' / '+d;
+	
+	now.setMonth(now.getMonth()-month);
+	
+	y=now.getFullYear();
+	m=now.getMonth();
+	d=now.getDate();
+	
+	var NotToday = ' - '+y+' / '+(m+1)+' / '+d;
+	
+	nowDate.innerHTML=NotToday+Today;
 	
 }
 
 
-function Ok(payment_num, concert_num) {
+function Ok(payment_num) {
 	
 	window.open('book_detail.box?payment_num='+payment_num, '_blank', 'width=800, height=500,toolbars=yes');
 
 } 
 
+function payCheck(payment_num) {
+	
+	confirm("결제를 완료하셨습니까?");	
+	location.href="pay_ok.box?payment_num="+payment_num+'&month='+month;
+
+}
+
+ function cBook(payment_num) {
+		
+		confirm("예약을 취소하시겠습니까?");		
+		location.href="book_c.box?payment_num="+payment_num+'&month='+month;
+
+	} 
 
 </script>
 
@@ -129,33 +150,21 @@ function Ok(payment_num, concert_num) {
 
 	<br>
 	<br>
-	<table align=center border=1 class="nameBox">
-		<tr>
-			<td>&nbsp;&nbsp; <font size="6px"
-				style="text-decoration: underline;">${sessionScope.loginName}</font>
-				<font size="5px">님의 예매내역</font>
-			</td>
-		</tr>
-	</table>
+	
+	<div class="nameBox">
+	<font size="6px" style="text-decoration: underline;">${sessionScope.loginName}</font>
+	<font size="5px">님의 예매내역</font>		
+	</div>
+	
 	<br>
 	<br>
-	<br>
-
- 
- 
-	<table class="dateBox" border=1 cellpacing=3>
-		<tr>
-			<td>
-			
-			<input type="button" name="btnTerm1M" value="1개월" id="btnTerm1M" class="dateButton" /> 
-			<input type="button" name="btnTerm3M" value="3개월" id="btnTerm3M" class="dateButton" /> 
-			<input type="button" name="btnTerm6M" value="6개월" id="btnTerm6M" class="dateButton" />
-						
-			<br><br><p id="nowDate"></p>
-			
-			</td>
-		</tr>
-	</table>
+	<!-- -----------------------------날짜 버튼------------------------------------- -->
+		<div class="dateBox">
+	 <a href="book_list.box?month=1"> <input type="button" value="1개월" class="dateButton"></a>
+	 <a href="book_list.box?month=3"> <input type="button" value="3개월" class="dateButton"></a>
+	 <a href="book_list.box?month=6"> <input type="button" value="6개월"  class="dateButton"></a>
+		<br><br><font size="4px"><p id="nowDate"></p></font>
+		</div>	
 	<br>
 	<br>
 
@@ -194,6 +203,8 @@ function Ok(payment_num, concert_num) {
 				</tr>
 
 				<c:forEach var="p" items="${paymentdata}">
+				
+			<!-- ---------------예매목록 시작---------------------------- -->
 					<tr align="center" valign="middle" height=100px>
 						<%-- 	<input type="hidden" name="concert_num" value="${p.concert_num}">
 					<input type="hidden" name="payment_num" value="${p.payment_num}"> --%>
@@ -219,17 +230,31 @@ function Ok(payment_num, concert_num) {
 						<td>
 						<br>
 						<c:if test="${p.payment_check == '신용카드'}">	
-						<font color="red" style="font-weight: bold;">결제완료</font></c:if> 
-						<c:if test="${p.payment_check == '실시간계좌이체'}">	
-						<font color="red" style="font-weight: bold;">결제완료</font></c:if> 
+						<font color="red" style="font-weight: bold;">결제완료</font>
+						<input type="button" class="cButton"  value="예약취소" onclick="cBook(${p.payment_num});"><br><br>
+						</c:if> 
+						
 						<c:if test="${p.payment_check == '무통장입금'}">
-						<font color="red" style="font-weight: bold;">결제대기 </font>
-								<br>
-								<br>
-						<input type="button" class="payButton" value="결제하기"><br><br>
-						<input type="button" class="cButton"  value="예약취소"><br><br>
-							</c:if></td>
+						<font color="red" style="font-weight: bold;">결제대기 </font><br><br>								
+						<input type="button" class="payButton" value="결제하기" onclick="payCheck(${p.payment_num});"><br><br>		
+						<input type="button" class="cButton"  value="예약취소" onclick="cBook(${p.payment_num});"><br><br>				
+						</c:if>
+						
+						<c:if test="${p.payment_check == '무통장입금 결제완료'}">
+						<font color="red" style="font-weight: bold;">결제완료 </font><br><br>
+						<input type="button" class="cButton"  value="예약취소" onclick="cBook(${p.payment_num});"><br><br>									
+					    </c:if>	
+					    
+					    <c:if test="${p.payment_check == '취소완료'}">
+						<font color="red" style="font-weight: bold;">취소완료 </font><br><br>								
+					    </c:if>			
+						
+						</td>
 					</tr>
+					
+					
+					<!----------------------------예매목록 끝-------------------------------->
+					
 				</c:forEach>
 			</table>
 		</form>
