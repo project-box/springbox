@@ -101,6 +101,7 @@ var nowd=now.getDate()
 var nowm=now.getMonth()
 var nowy=now.getFullYear()
 var month="${month}";
+var payment_num="";
 
 function Now(y,m,d){
 	
@@ -119,25 +120,40 @@ function Now(y,m,d){
 }
 
 
-function Ok(payment_num) {
+function Ok(num) {
 	
-	window.open('book_detail.box?payment_num='+payment_num, '_blank', 'width=800, height=500,toolbars=yes');
+	window.open('book_detail.box?payment_num='+num, '_blank', 'width=800, height=500,toolbars=yes');
 
 } 
 
-function payCheck(payment_num) {
+function payCheck(y) {
+
+	payment_num = y
 	
-	confirm("결제를 완료하셨습니까?");	
-	location.href="pay_ok.box?payment_num="+payment_num+'&month='+month;
+	window.open('pay_check.box?payment_num='+payment_num, '_blank', 'width=600, height=450,toolbars=yes');
+	
+	/* location.href="pay_ok.box?payment_num="+payment_num+'&month='+month; */
 
 }
 
- function cBook(payment_num) {
+
+
+ function cBook(z) {
 		
 		confirm("예약을 취소하시겠습니까?");		
-		location.href="book_c.box?payment_num="+payment_num+'&month='+month;
+		location.href="book_c.box?payment_num="+z+'&month='+month;
 
 	} 
+ 
+ 
+ function pay_check_ok(x){
+ 
+	 if(x == 1){
+		 
+		 location.href="pay_ok.box?payment_num="+payment_num+'&month='+month;
+	 }
+	 
+ }
 
 </script>
 

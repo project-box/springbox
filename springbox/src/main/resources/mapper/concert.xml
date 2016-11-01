@@ -70,10 +70,11 @@
 		payment_num,concert_num,user_id,payment_check,
 		payment_amount,payment_registerdate,payment_date,
 		payment_time,payment_price,payment_address,
-		payment_title,payment_poster) values(
+		payment_title,payment_poster,payment_bank,payment_account) values(
 		payment_seq.nextval,#{concert_num},#{user_id},#{payment_check},
 		#{payment_amount},sysdate,#{payment_date},#{payment_time},
-		#{payment_price},#{payment_address},#{payment_title},#{payment_poster})
+		#{payment_price},#{payment_address},#{payment_title},#{payment_poster},
+		#{payment_bank},#{payment_account})
 	</insert>
 	
 	<!-- <좌석 등록> -->

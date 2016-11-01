@@ -73,11 +73,11 @@ public class BookController {
 
 		pb.setPayment_title(cb.getConcert_title());
 		pb.setPayment_poster(cb.getPosterfilepath());
-		bookAction.book_add(pb);
+		                   // payment 테이블에 인서트
 		
 				
 		String seat_seat = request.getParameter("seat_seat");
-		int payment_num = bookAction.book_data();
+		int payment_num = bookAction.book_data();    // payment 테이블의 시쿼스값 가져옴
 		
 		
 		String[] values = seat_seat.split("/");
@@ -89,17 +89,30 @@ public class BookController {
 			sb.setSeat_time(pb.getPayment_time());
 			sb.setPayment_num(payment_num);
 			
-			bookAction.seat_add(sb);
+			bookAction.seat_add(sb);               //seat 테이블에 인서트
 		}	
 		
 		ModelAndView mav = new ModelAndView();
 		
 		// 무통장입금시, 가상계좌 뿌려줌
 		if(pb.getPayment_check().equals("무통장입금")){
-			
-			mav.setViewName("redirect:book_account.box");	
+	
+		/*	String payment_price = pb.getPayment_price();
+			String payment_title = pb.getPayment_title();
+			String payment_bank = pb.getPayment_bank();*/
+		int payment_account= (int) Math.floor((Math.random() * (999999999 - 111111111 + 1)) + 111111111 );
+		
+		   pb.setPayment_account(payment_account);
+	    	bookAction.book_add(pb);   
+		
+		    mav.addObject("paymentdata", pb);
+			mav.setViewName("/concert/book_account");	
 			
 		}else{
+			
+			pb.setPayment_account(0);
+			bookAction.book_add(pb);  
+			
 			mav.setViewName("redirect:book_list.box?month=1");		
 		}	
 		
@@ -107,14 +120,14 @@ public class BookController {
 
 	}
 
-	/*------------------------ 가상계좌 확인 ------------------------------------*/
+/*	------------------------ 가상계좌 확인 ------------------------------------
 	
 	@RequestMapping("/book_account.box")
 	public String book_account(Locale locale, Model model) {
 
 		return "concert/book_account";
 	}
-	
+	*/
 	/*-------------------------------예매내역------------------------------*/
 
 	@RequestMapping("/book_list.box")
@@ -155,8 +168,11 @@ public class BookController {
 
 
 		ModelAndView mav = new ModelAndView();
+		
+		PaymentBean pb = bookAction.book_detail(payment_num);
+		
 		// 데이터를 저장
-		mav.addObject("payment_num", payment_num);
+		mav.addObject("paymentdata", pb);
 		// 출력할 뷰 파일 설정
 		mav.setViewName("/concert/pay_check");
 
