@@ -7,8 +7,7 @@
 
 	<!-- blognotice 테이블의 데이터를 notice_date의 내림차순으로 정렬해서 첫번째부터 5개의 데이터를 가져오는 sql -->
 	<select id="selectFaqList" resultType="com.naver.springbox.dto.FaqBean">
-		select *
-		from (select
+		select * from (select
 		rownum rnum, faq_num, faq_subject, faq_content,
 		faq_readcount, faq_date
 		from
