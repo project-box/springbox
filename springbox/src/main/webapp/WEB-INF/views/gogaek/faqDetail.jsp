@@ -77,10 +77,8 @@ p.test1 {
 
 
 	<div class="container">
-		<h2>상세보기</h2>
-		<p>Contextual classes can be used to color table rows or table
-			cells. The classes that can be used are: .active, .success, .info,
-			.warning, and .danger.</p>
+		<h2>도움말 상세 보기</h2>
+		<p>고객분들의 대표적인 궁금증을 풀어 드리겠습니다.</p>
 		<table class="table">
 			
 			<%--  <tr>
