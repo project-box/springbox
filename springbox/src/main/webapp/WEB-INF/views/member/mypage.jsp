@@ -111,8 +111,10 @@
 	<tr>
 	<td>
 	<h2 class="blind">&nbsp;&nbsp;&nbsp;My Page</h2>
-	<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong class="name">${sessionScope.loginName}</strong>님의 멤버십 등급은 
-	<font style="color:navy;"><b>VIP</b></font>입니다.</p>
+	<%-- <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong class="name">${sessionScope.loginName}</strong>님의 멤버십 등급은 
+	<font style="color:navy;"><b>VIP</b></font>입니다.</p> --%>
+	<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong class="name">${sessionScope.loginName}</strong>님의 마이페이지입니다 
+	</p> 	
 	</td>
 	</tr>	
 </table><br>
