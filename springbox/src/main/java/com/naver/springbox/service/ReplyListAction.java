@@ -19,6 +19,8 @@ public class ReplyListAction {
 	
 	public List<Map<String, Object>> getReplyList(int num) {
 		List<Map<String, Object>> list = replyDao.getReplyList(num);
+		
+		
 		return list;
 	}
 }

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!doctype html>
 <html>
 <head>
@@ -7,17 +8,6 @@
 <title>가상계좌 확인창</title>
 
 <%@ include file="/WEB-INF/views/front/header.jsp"%>
-
-<script type="text/javascript">
-
-function Account(){
-
-  var result = Math.floor( (Math.random() * (9999999999999 - 1111111111111 + 1)) + 1111111111111 );
-  
-  account_num.innerHTML=result;
-}
-</script>
-
 
 <style>
 
@@ -78,11 +68,10 @@ background-color: gray;
 <body onload="Account();">
 
 <div class="titleText" align="center">
-공연명을 예매하셨습니다.<br><br>
+${paymentdata.payment_title}을 예매하셨습니다.<br><br>
 <p style="font-size:14px; color:gray;">
 입금기한은 예매날짜로부터 <b><font color=red>일주일</font></b>입니다. <br>
-일주일안에 입금확인이 되지 않으며 예매취소처리되며, <br>
-공연날짜 하루전까지 입금되지 않아도 예매취소될 수 있습니다.</p>
+일주일안에 입금확인이 되지 않으며 예매취소처리됩니다.</p>
 </div>
 
 
@@ -101,7 +90,15 @@ ${sessionScope.loginName}
 입금은행
 </th>
 <td>
-입금은행
+${paymentdata.payment_bank}
+</td>
+</tr>
+
+<tr align="center">
+<th>
+입금금액
+</th>
+<td><fmt:formatNumber value="${paymentdata.payment_price}" pattern="#,###.##" /> &nbsp; 원
 </td>
 </tr>
 
@@ -110,13 +107,13 @@ ${sessionScope.loginName}
 가상 계좌번호
 </th>
 <td class=accountTd>
-<p id=account_num ></p>
+${paymentdata.payment_account}&nbsp;&nbsp;(주)BOX
 </td>
 </tr>
 </table>
 
 <div align="center" >
-<a href="book_list.box?month=1"><input type="button" class="okButton" value="확인" width="300px" height="70px"/></a>
+<a href="book_list.box?month=1&payment_num="><input type="button" class="okButton" value="확인" width="300px" height="70px"/></a>
 </div>
 
 

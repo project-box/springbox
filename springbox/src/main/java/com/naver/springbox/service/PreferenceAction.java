@@ -114,7 +114,7 @@ public class PreferenceAction {
 		// 기본적으로 사용할 페이지 번호 설정
 		int page = 1;
 		// 한 페이지에 출력할 데이터 개수 설정
-		int limit = 10;
+		int limit = 12;
 		// page 파라미터의 값이 있으면 정수로 변환해서
 		// page에 대입
 		if (request.getParameter("page") != null) {
