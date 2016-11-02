@@ -130,7 +130,7 @@
   </div>
 </nav> 
  
- <div class="tap content">
+ <!-- <div class="tap content">
   <table class="table table-striped">
     <thead>
       <tr align="center">
@@ -143,7 +143,18 @@
       </tr>      
     </tbody>
   </table>
-  </div>
+  </div> -->
+  
+  
+  
+   <div style="font-size: 30px; text-align: center; margin-top:80px; margin-bottom:80px;">
+   
+   MY PAGE
+   
+   </div>
+  
+  
+  
   
 	</div>
 	

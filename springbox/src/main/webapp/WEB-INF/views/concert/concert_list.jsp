@@ -33,7 +33,7 @@
 
 .write {
 	float: right;
-	margin-top: 35px;
+	margin-top: 25px;
 	margin-right: 85px;
 	display: none;
 	width: 17%;
@@ -74,7 +74,7 @@ margin-top: 40px; */
 
 .page{
 
-	margin-top:100px;
+	margin-top:70px;
 	margin-bottom:150px;
 	font-size: 25px;
 	border: 1px solid #dcdcdc;
@@ -113,7 +113,6 @@ margin-top: 40px; */
 	<div class="text0">
 		<div class="text">추천공연 목록</div>
 	</div>
-
 
 	<div class="write" id="write">
 		<font size=4px><a href="concert_write.box">	<button >추천공연등록</button></a>

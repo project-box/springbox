@@ -139,9 +139,16 @@ function payCheck(y) {
 
 
  function cBook(z) {
+	
+		  if(confirm("예약을 취소하시겠습니까?")) {
+			  
+			  location.href="book_c.box?payment_num="+z+'&month='+month;
+			  
+	        } else {
+	        	
+	            return false;
+	        }
 		
-		confirm("예약을 취소하시겠습니까?");		
-		location.href="book_c.box?payment_num="+z+'&month='+month;
 
 	} 
  
