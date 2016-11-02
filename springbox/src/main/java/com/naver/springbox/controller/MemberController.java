@@ -63,22 +63,22 @@ public class MemberController {
 
 
 				} else {
-					// �뙣�뒪�썙�뱶 ��由�
+					// 비밀번호 틀림
 					response.setContentType("text/html;charset=utf-8");
 					PrintWriter out = response.getWriter();
 					out.println("<script>");
-					out.println("alert('鍮꾨�踰덊샇媛� �씪移섑븯吏� �븡�뒿�땲�떎.');");
+					out.println("alert('패스워드가 유효하지 않습니다.');");
 					out.println("location.href='./login.box';");
 					out.println("</script>");
 					out.close();
 					return null;
 				}
 			} else {
-				// �궗�슜�옄媛� �뾾�쓬.
+				// 가입 안된 사용자
 				response.setContentType("text/html;charset=utf-8");
 				PrintWriter out = response.getWriter();
 				out.println("<script>");
-				out.println("alert('�븘�씠�뵒媛� 議댁옱�븯吏� �븡�뒿�땲�떎.');");
+				out.println("alert('ID가 존재하지 않습니다.');");
 				out.println("location.href='./login.box';");
 				out.println("</script>");
 				out.close();
@@ -199,7 +199,7 @@ public class MemberController {
 				response.setContentType("text/html;charset=utf-8");
 				PrintWriter out = response.getWriter();
 				out.println("<script>");
-				out.println("alert('留덉씠�럹�씠吏�濡� 媛��젮硫� 濡쒓렇�씤�씠 �븘�슂�빀�땲�떎.');");
+				out.println("alert('로그인 되지 않았습니다. 먼저 로그인하여 주십시오.');");
 				out.println("location.href='./login.box';");
 				out.println("</script>");
 				return null;
