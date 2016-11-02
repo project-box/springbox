@@ -41,10 +41,17 @@ public interface ConcertDao {
 	
 	void seat_add(SeatBean sb);
 	
-	public List<PaymentBean> book_list(String user_id);
+	public List<PaymentBean> book_list(Map<String, Object> map);
 	
 	public PaymentBean book_detail(int payment_num);
 
+	public List<SeatBean> seat_list(int concert_num);
 
+	public PaymentBean pay_ok(int payment_num);
+	
+	public PaymentBean book_c(int payment_num);
+
+	public int book_data();
+	
 
 }

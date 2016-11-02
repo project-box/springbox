@@ -18,7 +18,7 @@
 	<!-- 콘서트 리스트 -->
 	<select id="concert_list" resultType="com.naver.springbox.dto.ConcertBean">
 	    <![CDATA[
-			select * from concert
+			select * from concert order by concert_num desc
 		]]>
 	</select>
 
@@ -47,7 +47,7 @@
 	<!-- 후기 목록 -->
 	<select id="concertboard_list" resultType="com.naver.springbox.dto.ConcertBoardBean">
 	    <![CDATA[
-			select * from concertboard where concert_num=#{num}
+			select * from concertboard where concert_num=#{num} order by concertboard_num desc
 		]]>
 	</select>
 	
@@ -70,35 +70,83 @@
 		payment_num,concert_num,user_id,payment_check,
 		payment_amount,payment_registerdate,payment_date,
 		payment_time,payment_price,payment_address,
-		payment_title,cancel,payment_poster) values(
+		payment_title,payment_poster,payment_bank,payment_account) values(
 		payment_seq.nextval,#{concert_num},#{user_id},#{payment_check},
 		#{payment_amount},sysdate,#{payment_date},#{payment_time},
-		#{payment_price},#{payment_address},#{payment_title},#{cancel},#{payment_poster})
+		#{payment_price},#{payment_address},#{payment_title},#{payment_poster},
+		#{payment_bank},#{payment_account})
 	</insert>
-	
 	
 	<!-- <좌석 등록> -->
 	<insert id="seat_add" parameterType="com.naver.springbox.dto.SeatBean">
 		insert into seat(
-		seat_num,seat_seat,concert_num values(
-		seat_seq.nextval,#{seat_seat},#{concert_num})
+		seat_num,seat_seat,concert_num,seat_date,seat_time,payment_num) values(
+		seat_seq.nextval,#{seat_seat},#{concert_num},#{seat_date},#{seat_time},#{payment_num})
 	</insert>
 	
-	
-	
-	<!-- 예매내역 -->
-	<select id="book_list" resultType="com.naver.springbox.dto.PaymentBean">
+	<!-- 좌석 리스트 -->
+	<select id="seat_list" resultType="com.naver.springbox.dto.SeatBean">
 	    <![CDATA[
-			select * from payment where user_id=#{user_id}
+			select * from seat where concert_num=#{concert_num}
 		]]>
 	</select>
 	
+	
+	<!-- 예매내역 -->
+	<select id="book_list" resultType="com.naver.springbox.dto.PaymentBean" parameterType="java.util.Map">
+	    <![CDATA[
+			select * from payment where payment_registerdate <= sysdate
+  			and payment_registerdate >= #{nowMinus}
+  			and user_id=#{user_id} order by payment_num desc
+		]]>
+	</select>
+<!-- select * from payment where payment_registerdate >= sysdate
+  			and payment_registerdate < #{nowMinus}
+  			and user_id=#{user_id} -->
+
+<!-- select * from payment where user_id=#{user_id} -->
+
+
 	<!-- 예매디테일 -->
 	<select id="book_detail" parameterType="Integer"
 		resultType="com.naver.springbox.dto.PaymentBean">
 		<![CDATA[
 		select * from payment where payment_num=#{payment_num}
 		]]>
+	</select>
+	
+	
+	<!-- 결제하기 버튼 -->
+	<update id="pay_ok" parameterType="Integer">	
+		update payment set payment_check= '무통장입금 결제완료'
+		where payment_num=#{payment_num}
+		
+	</update>
+	
+	
+	<!-- 결제테이블 취소 -->
+	
+	<update id="book_c_payment" parameterType="Integer">	
+		update payment set payment_check= '취소완료'
+		where payment_num=#{payment_num}
+		
+	</update>
+	
+	<!-- 좌석 취소 -->
+	
+	<delete id="book_c_seat" parameterType="Integer">
+	
+	delete from seat where payment_num=#{payment_num}	
+		
+	</delete>
+	
+	
+	<!-- payment_num 불러오기 -->
+	
+	<select id="book_data" parameterType="Integer" resultType="Integer">
+	
+	select max(payment_num) from payment	
+	
 	</select>
 	
 	

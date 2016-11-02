@@ -10,34 +10,131 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>추천 공연</title>
+
+<%@ include file="/WEB-INF/views/front/header.jsp"%>
+
+<style>
+
+.listTable {
+	border: 1px solid #dcdcdc;
+	margin-top: 10px;
+	width:85%;
+	
+	
+}
+
+.listTable td {
+	padding-top: 40px;
+	padding-left: 45px;
+	padding-right: 45px;
+	border: 1px solid #dcdcdc;
+}
+
+.write {
+	float: right;
+	margin-top: 35px;
+	margin-right: 80px;
+	display: none;
+}
+
+.write button {
+	text-decoration: none;
+	outline: none;
+	color: white;
+	border-radius: 0.2em;
+	background-color: #787878;
+	height: 50px;
+	width: 265px;
+}
+
+.text {
+	font-size: 30px;
+	font-weight: bold;
+	font-family: inherit;
+	color: #646464;
+	width: 100%; height : 100px;
+	float: left;
+	/* margin-left: 75px;
+margin-top: 40px; */
+	border: 1px dashed #8c8c8c;
+	padding-left: 25px;
+	padding-top: 15px;
+	padding-bottom: 17px;
+	height: 90px;
+}
+
+.text0 {
+	margin-left: 75px;
+	margin-top: 40px;
+	width: 90%;
+	height: 90px;
+	border: 1px solid #8c8c8c;
+	padding: 10px;
+}
+</style>
+
+
+<script>
+	var id = '${sessionScope.loginId}';
+
+	function writebutton() {
+
+		if (id != 'dev') {
+
+			document.getElementById("write").style.display = "none";
+			document.getElementById("listTable").style.marginTop = "100px";
+
+		} else if (id == 'dev') {
+
+			document.getElementById("write").style.display = "block";
+		}
+
+	}
+</script>
+
+
 </head>
-<body>
+<body onload="writebutton();">
 
-	추천공연 게시판 리스트
-	
-	<a href="concert_write.box">클릭 하면 글쓰기</a>
+	<div class="text0">
+		<div class="text">추천공연 목록</div>
+	</div>
 
-	<br>
-	<table cellpadding="15px" cellspacing="15px">
-		<tr>
-			<c:forEach var="b" items="${concertlist}">
 
-				<c:set var="i" value="${i+1}" />
+	<div class="write" id="write">
+		<font size=5px><a href="concert_write.box">	<button>추천공연등록</button></a>
+		</font><br> <font size=3px>(관리자 아이디 접속 시에만 보입니다)</font><br>
+		<br>
+	</div>
 
-				<td width="250" height="500" valign="top" >
-				<a href="concert_detail.box?concert_num=${b.concert_num}"> 
-				<img width="250" src="<c:url value='/img/${b.posterfilepath}'/>" alt=""></a> <br><br>
-					<c:out value="${b.concert_title}" /> <br></td>
 
-				<c:if test="${i % 4 == 0}">
-		</tr>
-		<tr>
-			</c:if>
+	<div id=listTable>
+		<table border=1 class=listTable align="center"> 
+			<tr align="center">
+				<c:forEach var="b" items="${concertlist}">
 
-			</c:forEach>
-		</tr>
-	</table>
-	
-	
+					<c:set var="i" value="${i+1}" />
+
+					<td class="col-md-3 portfolio-item" width="250" height="500"
+						valign="top"><a
+						href="concert_detail.box?concert_num=${b.concert_num}"> <img
+							class="img-responsive img-center" width="300" height="400"
+							src="<c:url value='/img/${b.posterfilepath}'/>" alt=""></a> <br>
+						<br>
+						<div class="well well-sm">
+							<font size=4px color="#505050"><b><c:out
+										value="${b.concert_title}" /></b></font>
+						</div> <br></td>
+
+					<c:if test="${i % 4 == 0}">
+			</tr>
+			<tr align="center">
+				</c:if>
+
+				</c:forEach>
+			</tr>
+		</table>
+	</div>
+
 </body>
 </html>

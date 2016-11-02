@@ -15,9 +15,12 @@ public class PaymentBean {
 	private String payment_price;
 	private String payment_address;		
 	private String payment_title;
-	private String cancel;
 	private String payment_poster;/*
 	private List<SeatBean> payment_seats;	*/
+	private String payment_bank;
+	private int payment_account;
+	
+	
 	
 	public int getPayment_num() {
 		return payment_num;
@@ -91,17 +94,23 @@ public class PaymentBean {
 	public void setPayment_title(String payment_title) {
 		this.payment_title = payment_title;
 	}
-	public String getCancel() {
-		return cancel;
-	}
-	public void setCancel(String cancel) {
-		this.cancel = cancel;
-	}
 	public String getPayment_poster() {
 		return payment_poster;
 	}
 	public void setPayment_poster(String payment_poster) {
 		this.payment_poster = payment_poster;
+	}
+	public String getPayment_bank() {
+		return payment_bank;
+	}
+	public void setPayment_bank(String payment_bank) {
+		this.payment_bank = payment_bank;
+	}
+	public int getPayment_account() {
+		return payment_account;
+	}
+	public void setPayment_account(int payment_account) {
+		this.payment_account = payment_account;
 	}
 	
 	
