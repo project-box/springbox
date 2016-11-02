@@ -34,6 +34,7 @@ public class ReplyInsertAction {
 		map.put("user_id", users.getUser_id());
 		
 		
+		
 		return replyDao.insertReply(map);
 	}
 }

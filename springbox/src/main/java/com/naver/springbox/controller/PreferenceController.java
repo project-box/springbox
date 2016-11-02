@@ -1,9 +1,11 @@
 package com.naver.springbox.controller;
 
+import java.io.PrintWriter;
 import java.util.List;
 import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,17 +47,33 @@ public class PreferenceController {
 	}
 
 	@RequestMapping(value = "/make_preference.box", method = RequestMethod.GET)
-	public ModelAndView makePreference(HttpServletRequest request) {
+	public ModelAndView makePreference(HttpServletRequest request, HttpServletResponse response) {
 		
-		ModelAndView mav = new ModelAndView();
-		
-		HttpSession session = request.getSession();
-		String loginId = (String) session.getAttribute("loginId");
-		
-		mav.addObject("musiclist", preferenceAction.getSubjectMusicList(loginId, 50));
-		mav.addObject("preferenceCount", preferenceAction.getPreferenceCountByUser(loginId));
-		mav.setViewName("preference/make_preference");
-		return mav;
+		try{
+			ModelAndView mav = new ModelAndView();
+			
+			HttpSession session = request.getSession();
+			if (session.getAttribute("loginId") == null) {
+
+				response.setContentType("text/html;charset=utf-8");
+				PrintWriter out = response.getWriter();
+				out.println("<script>");
+				out.println("alert('로그인 되지 않았습니다. 먼저 로그인하여 주십시오.');");
+				out.println("location.href='./login.box';");
+				out.println("</script>");
+				return null;
+			} else {
+				String loginId = (String) session.getAttribute("loginId");
+				mav.addObject("musiclist", preferenceAction.getSubjectMusicList(loginId, 50));
+				mav.addObject("preferenceCount", preferenceAction.getPreferenceCountByUser(loginId));
+				mav.setViewName("preference/make_preference");
+				return mav;
+			}
+			
+		}catch (Exception e){
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 	@RequestMapping(value = "/edit_preference.box", method = RequestMethod.GET)
