@@ -223,8 +223,8 @@ var starty2=<fmt:formatDate value='${concertdata.concert_startdate}' pattern='yy
         var firstDay=new Date(year,month,1).getDay() 
         
         var cnj_str="<table class='dateTabel' border=0 cellpadding=10 cellspacing=1 bgcolor=#CCCCCC>"
-
-            cnj_str+="<tr bgcolor='#323232'><td colspan=7>"
+     /*    	#323232 */
+            cnj_str+="<tr bgcolor='#EB3232	'><td colspan=7>"
 			cnj_str+="<table border=0 cellpadding=0 cellspacing=0 align=center width=100%>"
 			cnj_str+="<td><a href='javascript:;' onClick='startm--; if (startm<0) { starty--; startm=11; } showCalendar(startd,startm,starty)' title='이전 월'><font color='white'> << </font></a></td>"
 			cnj_str+="<td align=center><font color='white'><b>"+starty+"년"+" "+monthName[month].toUpperCase()+"</b></font></td>"
@@ -598,13 +598,11 @@ var x=null;
 			<div class="date_time_choice">
 
 
-				<h3>공연날짜 선택</h3>
+				<h4><b>공연날짜 선택</b></h4>
 				<br>
 				<p id="calendar" class="cnj_input"></p>
 
-
-
-				<h3>회차선택</h3>
+				<h4><b>회차선택</b></h4>
 				<br> <select id="time" class="form-control">
 					<option>회차선택</option>
 					<option value="1회차 12:00">1회차 12:00</option>
@@ -615,12 +613,10 @@ var x=null;
 
 			</div>
 
-			<br>
-
 			<div class="seatchoice">
 
 
-				<h3>좌석 수 선택</h3>
+				<h4><b>좌석 수 선택</b></h4>
 				<br> <select id="amount" class="form-control">
 					<option value="1">1</option>
 					<option value="2">2</option>
@@ -631,7 +627,7 @@ var x=null;
 					<option value="7">7</option>
 				</select>
 
-				<h3>좌석 선택</h3>
+				<h4><b>좌석 선택</b></h4>
 				
 			
 				<div id="off" style="display:inline;">
@@ -706,9 +702,7 @@ var x=null;
 				</div> <!-- 좌석 뷰 온 오프 -->
 			</div>
 
-			<br> <br>
-
-			<div class="col-sm-12">
+			<div> <!-- 선택한 항목 텍스트로 보여주기 -->
 
 				<hr>
 
@@ -731,7 +725,7 @@ var x=null;
 							placeholder="좌석 수를 선택해주세요"></td>
 						<td><input type='text' readonly id="seat_seat1" name="seat_seat[]"
 							class='form-control' placeholder='좌석을 선택해주세요'></td>
-						<td><input type='button' id="all" value='좌석 다시 선택하기'></td>
+						<td><input type='button' id="all" style="background-color: #EB3232	; color:white; width: 85px; height: 35px;" value='좌석다시선택'></td>
 					</tr>
 				</table>
 

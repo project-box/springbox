@@ -91,11 +91,35 @@ public class MusicAction {
 		return dto;
 	}
 	
-	/*-----------------------음악 삭제-----------------------------------------------------*/
+	/*-----------------------음악 수정페이지-----------------------------------------------------*/
+
+	
+	public MusicBean musicmodify(int num){
+		System.out.println("서비스 musicmodify 들어옴");
+		System.out.println("num="+num);
+		MusicBean bean = musicDao.musicmodify(num);
+
+		return bean;
+  }
+	
+	/*	---------------곡 수정----------------------*/		
+
+	public boolean music_update(MusicBean dto) {
+		System.out.println("music_update 서비스");
+		
+		boolean r = musicDao.music_update(dto);
+		
+		return r;
+		
+		
+	}
+/*-----------------------음악 삭제-----------------------------------------------------*/
 	
 	public boolean musicDelete(int num) {
-		// TODO Auto-generated method stub
-		return false;
+	
+		System.out.println("deleteAction");
+		
+		return musicDao.deleteMusic(num);
 	}
 	
 	/*------------------------팝업창--------------------------------------------------------*/
