@@ -6,124 +6,158 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>추천공연 등록 - 관리자페이지</title>
 
-<script>
-	function addboard() {
-		concertform.submit();
-	}
-</script>
+<%@ include file="/WEB-INF/views/front/header.jsp"%>
+
+<style>
+
+.writeTable{
+
+width: 55%;
+height:600px;
+margin-top:70px;
+border: 1px solid #bebebe;
+
+}
+
+.writeTable th {
+
+font-size: 18px;
+text-align: center;
+background-color: #F7F5F5;
+
+}
+
+.writeTable td {
+
+padding-left:35px;
+
+}
+
+
+.writeButton{
+
+text-decoration: none; 
+color:black; 
+font-size: 20px;
+background-color: white;
+outline: none;
+width: 100px;
+
+}
+
+</style>
+
+
 
 </head>
 <body>
-
-	<h4 align="center">추천공연 등록하기</h4>
+    <br>
+    <br>
+    
+   <div class=writeForm align="center">
+    
+	<font style="text-align:center; font-size: 25px; font-weight: bold;">추천공연 등록하기</font>
 	
 	<form action="./concert_add.box" method="post"
 		enctype="multipart/form-data" name="concertform">
 
-		<table align="center">
+		<table border="1"  class="writeTable">
+		
 			<tr>
-				<td width="150" colspan=2 style="font-family: 돋음; font-size: 12"
-					height="16">
+				<th colspan=2 width="30%">
 					공연제목
-				</td>
-				<td><input name="concert_title" type="text" size="50"
-					maxlength="100" value="" /></td>
+				</th>
+				<td><input name="concert_title" type="text" size="70"
+					maxlength="100" value=""  /></td>
 			</tr>
 
 
 			<tr>
-				<td rowspan=2 style="font-family: 돋음; font-size: 12" height="16">
+				<th rowspan=2>
 					공연날짜
-				</td>
-				<td style="font-family: 돋음; font-size: 12" height="16">
-					<div align="center">시작날짜</div>
-				</td>
+				</th>
+				<th>
+					시작날짜
+				</th>
 				<td><input name="concert_startdate1" type="text" size="4"
-					maxlength="100" value="" />&nbsp;/
+					maxlength="80" value="" />&nbsp;/
 					<input name="concert_startdate2" type="text" size="02"
-					maxlength="100" value="" />&nbsp;/
+					maxlength="80" value="" />&nbsp;/
 					<input name="concert_startdate3" type="text" size="02"
-					maxlength="100" value="" />
+					maxlength="80" value="" />
 					</td>
 			</tr>
 
 			<tr>
-				<td style="font-family: 돋음; font-size: 12" height="16">
+				<th>
 					끝나는 날짜
-				</td>
+				</th>
 				<td><input name="concert_enddate1" type="text" size="4"
-					maxlength="100" value="" />&nbsp;/
+					maxlength="80" value="" />&nbsp;/
 					<input name="concert_enddate2" type="text" size="02"
-					maxlength="100" value="" />&nbsp;/
+					maxlength="80" value="" />&nbsp;/
 					<input name="concert_enddate3" type="text" size="02"
-					maxlength="100" value="" />
+					maxlength="80" value="" />
 					</td>
 			</tr>
 
 			<tr>
-				<td colspan=2 style="font-family: 돋음; font-size: 12" height="16">
+				<th colspan=2 >
 					공연장소
-				</td>
-				<td><input name="concert_place" type="text" size="50"
-					maxlength="100" value="" /></td>
+				</th>
+				<td><input name="concert_place" type="text" size="70"
+					maxlength="80" value="" /></td>
 			</tr>
 			
 			<tr>
-				<td colspan=2 style="font-family: 돋음; font-size: 12" height="16">
+				<th colspan=2>
 					출연자
-				</td>
-				<td><input name="concert_artist" type="text" size="50"
-					maxlength="100" value="" /></td>
+				</th>
+				<td><input name="concert_artist" type="text" size="70"
+					maxlength="80" value="" /></td>
 			</tr>
 
 			<tr>
-				<td colspan=2 style="font-family: 돋음; font-size: 12" height="16">
+				<th colspan=2 >
 					예매가격
-				</td>
-				<td><input name="concert_price" type="text" size="50"
-					maxlength="100" value="" /></td>
+				</th>
+				<td><input name="concert_price" type="text" size="70"
+					maxlength="80" value="" /></td>
 			</tr>
 			<tr>
-				<td rowspan=2 style="font-family: 돋음; font-size: 12" height="16">
+				<th rowspan=2 >
 					
 						공연장<br> 위치정보
 					
-				</td>
-				<td style="font-family: 돋음; font-size: 12" height="16">
-					<div align="center">위도</div>
-				</td>
-				<td><input name="locationx" type="text" size="50"
-					maxlength="100" value="" /></td>
+				</th>
+				<th >
+					위도
+				</th>
+				<td><input name="locationx" type="text" size="30"
+					maxlength="80" value="" /></td>
 			</tr>
 			<tr>
-				<td style="font-family: 돋음; font-size: 12" height="16">
-					<div align="center">경도</div>
-				</td>
-				<td><input name="locationy" type="text" size="50"
-					maxlength="100" value="" /></td>
+				<th>
+					경도
+				</th>
+				<td><input name="locationy" type="text" size="30"
+					maxlength="80" value="" /></td>
 			</tr>
 
 			<tr>
-				<td colspan=2 style="font-family: 돋음; font-size: 12">
+				<th colspan=2 >
 					파일 첨부
-				</td>
+				</th>
 
 				<td><input name="posterfilepath" type="file" /></td>
 			</tr>
-			<tr bgcolor="cccccc">
-				<td colspan="2" style="height: 1px;"></td>
-			</tr>
-
-			<tr>
-				<td colspan="2">&nbsp;</td>
-			</tr>
-			<tr align="center" valign="middle">
-				<td colspan="5"><a href="javascript:addboard()">[등록]</a>&nbsp;&nbsp;
-					<a href="javascript:history.go(-1)">[뒤로]</a></td>
-			</tr>
 		</table>
+		<br><br>
+	<input type="submit" class="writeButton" value="등록">
+	<input type="button" class="writeButton" onclick="javascript:history.go(-1)" value="뒤로">
+
 	</form>
-
-
+</div> 
+<%@ include file="/WEB-INF/views/front/footer.jsp"%>
 </body>
 </html>

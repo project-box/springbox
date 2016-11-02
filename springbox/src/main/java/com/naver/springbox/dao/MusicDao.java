@@ -29,4 +29,10 @@ public interface MusicDao {
 	//하나의 데이터를 가져오는 메소드(팝업창)
 	public MusicBean getMusicPop(int num);
 
+	//곡내용수정불러오기
+	public MusicBean musicmodify(int num);
+	
+	// 곡내용수정
+	public boolean music_update(MusicBean dto);
+
 }

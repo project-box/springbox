@@ -10,30 +10,43 @@ start with 1
 increment by 1
 nocache;
 
+select * from concert;
+delete from concert where concert_num=67;
 select * from users;
 
-select * from payment;
+delete from payment;
+
+
 
 select * from payment;
 
 select * from seat;
+
+
 
 
 delete from payment;
 alter table payment drop column cancel;
 
 alter table seat drop column payment_num;
-alter table seat add(
-payment_num references payment(payment_num));
+alter table payment add(
+payment_bank varchar2(200));
+alter table payment add(
+payment_account varchar2(200));
 
-select * from seat;
+
 select * from payment;
-	update payment set payment_registerdate='16/10/28' where concert_num=29;
+delete from payment;
+delete from seat;
+
+	update payment set payment_registerdate='16/08/28' where payment_num=233;
 		
-alter table seat modify(seat_seat varchar2(200));
+	rollback;
+alter table payment modify(payment_account number);
 
+alter table payment 
 
-select * from concert;
+select * from history;
 
 
 
