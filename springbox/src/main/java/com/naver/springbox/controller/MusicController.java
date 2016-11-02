@@ -76,7 +76,7 @@ public class MusicController {
 			dto.setMusic_publishdate(pDate);
 			dto.setMusic_lyrics(multi.getParameter("music_lyrics").trim());
 			dto.setMusic_album(multi.getParameter("music_album").trim());
-			dto.setAlbumcoverfilepath(multi.getFilesystemName((String) multi.getFileNames().nextElement()));
+			dto.setAlbumcoverfilepath(multi.getOriginalFileName((String) multi.getFileNames().nextElement()));
 
 			/*System.out.println("music_title="+dto.getMusic_title());*/
 			r = musicAction.add(dto);

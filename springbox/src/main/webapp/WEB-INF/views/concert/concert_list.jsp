@@ -20,21 +20,23 @@
 	margin-top: 10px;
 	width:85%;
 	
-	
 }
 
 .listTable td {
-	padding-top: 40px;
-	padding-left: 45px;
-	padding-right: 45px;
+	padding-top: 35px;
+	padding-left: 35px;
+	padding-right: 35px;
 	border: 1px solid #dcdcdc;
+	height: 100%;
 }
+
 
 .write {
 	float: right;
 	margin-top: 35px;
-	margin-right: 80px;
+	margin-right: 85px;
 	display: none;
+	width: 17%;
 }
 
 .write button {
@@ -43,34 +45,46 @@
 	color: white;
 	border-radius: 0.2em;
 	background-color: #787878;
-	height: 50px;
-	width: 265px;
+	height: 40px;
+	width: 80%;
 }
 
 .text {
-	font-size: 30px;
+	font-size: 20px;
 	font-weight: bold;
 	font-family: inherit;
 	color: #646464;
-	width: 100%; height : 100px;
+	width: 100%; height : 45px;
 	float: left;
 	/* margin-left: 75px;
 margin-top: 40px; */
 	border: 1px dashed #8c8c8c;
-	padding-left: 25px;
-	padding-top: 15px;
-	padding-bottom: 17px;
-	height: 90px;
+	padding-left:10px;
+	padding-top:5px;
 }
 
 .text0 {
-	margin-left: 75px;
-	margin-top: 40px;
-	width: 90%;
-	height: 90px;
+	margin-left: 100px;
+	margin-top: 30px;
+	width: 85%;
+	height: 63px;
 	border: 1px solid #8c8c8c;
-	padding: 10px;
+	padding: 8px;
 }
+
+.page{
+
+	margin-top:100px;
+	margin-bottom:150px;
+	font-size: 25px;
+	border: 1px solid #dcdcdc;
+	width:85%;
+	padding-bottom: 10px;
+	padding-top: 10px;
+	margin-left:100px;
+}
+
+
 </style>
 
 
@@ -102,8 +116,9 @@ margin-top: 40px; */
 
 
 	<div class="write" id="write">
-		<font size=5px><a href="concert_write.box">	<button>추천공연등록</button></a>
-		</font><br> <font size=3px>(관리자 아이디 접속 시에만 보입니다)</font><br>
+		<font size=4px><a href="concert_write.box">	<button >추천공연등록</button></a>
+		</font><br>
+		<font size=2px>(관리자 아이디 접속 시에만 보입니다)</font><br>
 		<br>
 	</div>
 
@@ -122,7 +137,7 @@ margin-top: 40px; */
 							src="<c:url value='/img/${b.posterfilepath}'/>" alt=""></a> <br>
 						<br>
 						<div class="well well-sm">
-							<font size=4px color="#505050"><b><c:out
+							<font size=3px color="#505050"><b><c:out
 										value="${b.concert_title}" /></b></font>
 						</div> <br></td>
 
@@ -133,7 +148,40 @@ margin-top: 40px; */
 
 				</c:forEach>
 			</tr>
-		</table>
+		
+	</table>	
+	<!-- -------------------------페이징처리----------------------------------------------	 -->
+
+<div class="page" align="center">
+
+	<c:if test = "${page>1}">
+					<a href="concert_list.box?page=${page-1}">
+					<font color=black>[이전]</font>
+					</a>
+				</c:if>
+				<!-- 페이지 번호 목록 출력 -->
+				<c:forEach var="a" begin="${startpage}" 
+				end="${endpage}">
+				<!-- 출력하는 페이지 번호가 현재 페이지
+				번호이면 그냥 출력하고 그렇지 않으면 링크 설정 -->
+				<c:if test="${a==page}">
+					<font color=red>[${a}]</font>
+				</c:if>
+				<c:if test="${a!=page}">
+				<a href="concert_list.box?page=${a}">
+					<font color=black>
+					[${a}]</font></a>
+				</c:if>
+				</c:forEach>
+				<!-- 현재 출력 중인 페이지가 마지막 페이지가 아니면
+				[다음]을 만들어서 현재 출력 중인 페이지 다음으로
+				이동하도록 링크 설정 -->
+				<c:if test="${page!=maxpage}">
+					<a href="concert_list.box?page=${page+1}">
+					<font color=black>[다음]</font></a>
+				</c:if> 
+	
+		</div>
 	</div>
 
 </body>

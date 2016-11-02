@@ -50,8 +50,7 @@
 		      where rnum <=  #{count}
 		]]>
 	</select>
-	
-	
+
 	
 	<!-- 선호도(추천) 곡, 공연 관련 SQL 들...  -->
 	

@@ -1,17 +1,18 @@
 package com.naver.springbox.controller;
 
+import java.io.PrintWriter;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.naver.springbox.dto.ConcertBean;
@@ -75,8 +76,10 @@ public class ConcertController {
 		ModelAndView mav = new ModelAndView();
 		HttpSession session = request.getSession();
 
-		String userId = (String) session.getAttribute("loginId");		
-	
+
+	     	String userId = (String) session.getAttribute("loginId");		
+
+		
 			// 게시물 목록 가져오기
 			Map<String, Object> map = preferenceAction.suggestConcert(userId, request);
 			// 여러 개의 데이터를 묶어서 저장할 때는
@@ -146,29 +149,46 @@ public class ConcertController {
 	
 	/*-------------------예매페이지 이동-----------------------------------------*/
 	@RequestMapping(value = "/book.box")
-	public ModelAndView book(int concert_num, HttpSession session) throws Exception {
-
+	public ModelAndView book(int concert_num, HttpServletRequest request, HttpServletResponse response) throws Exception {
+		ModelAndView mav = new ModelAndView();
+		
+		// 로그인 되어 있지 않으면 로그인 페이지로 이동
 	
 		List<SeatBean> sb = bookAction.seat_list(concert_num);
 		ConcertBean cb = concertAction.concertDetail(concert_num);
-		
-		ModelAndView mav = new ModelAndView();
 		
 		mav.addObject("seatdata", sb);	
 		mav.addObject("concertdata", cb);
 		mav.setViewName("/concert/book");
 
-				return mav;
-			}
+			return mav;
+				
+				}
+		
 
 
 	/*-----------------------후기 등록-----------------------------------*/
-	
+
+
 	@RequestMapping("/concertboard_add.box")
-	public ModelAndView concertboard_add(ConcertBoardBean dto, HttpServletRequest request) {
+	public ModelAndView concertboard_add(ConcertBoardBean dto, HttpServletRequest request, HttpServletResponse response) throws Exception{
 		ModelAndView mav = new ModelAndView();
 		// 로그인 되어 있지 않으면 로그인 페이지로 이동
+		
+		response.setContentType("text/html;charset=utf-8");	
+		PrintWriter out = response.getWriter();
+		
 		HttpSession session = request.getSession();
+	
+		if( session.getAttribute("loginId") == null ){
+			out.println("<script>");
+	   		out.println("alert('로그인이 필요 합니다!');");
+	   		out.println("history.go(-1)");
+	   		out.println("</script>");
+	   		out.close();
+	   		return null;
+	   		
+		}else{
 		
 			// 데이터 삽입
 			boolean r = concertAction.concertboardadd(dto, request);
@@ -182,6 +202,8 @@ public class ConcertController {
 			
 		
 		return mav;
+		
+		}
 	}
 	
 /*----------------------------후기 삭제(관리자)-------------------------*/

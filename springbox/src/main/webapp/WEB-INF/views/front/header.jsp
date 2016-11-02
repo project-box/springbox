@@ -41,7 +41,7 @@
 				<li><a href="music_list.box">음악</a></li>
 				<li><a href="concert_list.box">공연</a></li>
 				<li><a href="Gogaekmain.box">고객센터</a></li>
-				<li><a href="make_preference.box">신규선호도입력(임시)</a></li>
+				<li><a href="make_preference.box">선호도추가</a></li>
 			</ul>
 		</div>
 
