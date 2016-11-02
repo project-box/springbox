@@ -476,11 +476,17 @@ function Book(){
 							<fmt:formatDate value="${c.concertboard_registerdate}"
 			pattern="yyyy-MM-dd" />
 			
-			<c:if test="${sessionScope.loginId == 'dev'}">  
+			<c:if test="${sessionScope.loginId == 'dev' || sessionScope.loginId == c.user_id}">  
 			&nbsp;&nbsp;&nbsp;&nbsp;<a href="./concertboard_delete.box?concertboard_num=${c.concertboard_num}
 		&concert_num=${c.concert_num}" style="color:black;text-decoration: none; font-weight: bold;">
 		[삭제]</a>
 		</c:if> <!--  관리자만 삭제가능 -->
+		<%-- <c:if test="${sessionScope.loginId == c.user_id}">  
+			&nbsp;&nbsp;&nbsp;&nbsp;<a href="./concertboard_delete.box?concertboard_num=${c.concertboard_num}
+		&concert_num=${c.concert_num}" style="color:black;text-decoration: none; font-weight: bold;">
+		[삭제]</a>
+		</c:if> --%>
+		
 		
 							</td>
 						</tr>
