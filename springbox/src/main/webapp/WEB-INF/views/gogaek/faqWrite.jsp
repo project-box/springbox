@@ -8,7 +8,7 @@ uri = "http://java.sun.com/jsp/jstl/core" %>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <%@ include file="/WEB-INF/views/front/header.jsp"%>
 <title>도움말 쓰기</title>
-<script >
+ <script >
 	function addFaq() {
 		faqform.submit();
 	}
@@ -58,7 +58,8 @@ uri = "http://java.sun.com/jsp/jstl/core" %>
 			<em>완료 Click 전에 한번 더 점검하기!</em>
 		</p>
 		<div class="row test">
-			<form action="./FaqAddAction.box" method="post" name="faqform">
+		 <form action="./FaqAddAction.box" method="post" name="faqform"> 
+		
 			<div class="col-md-12">
 				<div class="row">
 					<div class="col-sm-12 form-group">
@@ -89,8 +90,10 @@ uri = "http://java.sun.com/jsp/jstl/core" %>
 						<div class="col-md-12 form-group" align="Center">&nbsp;
 							<input class="btn btn-primary" type="button" value="도움말 리스트"
 								onclick="location.href='FaqList.box'" /> &nbsp;&nbsp;&nbsp; 
-							<input class="btn btn-primary" type="button" value="도움말 작성"
-								onclick="location.href='Gogaekmain.box'" />
+							<input class="btn btn-primary" type="submit" value="도움말 작성"
+							href="javascript:addFaq()"/>
+							
+								<!-- onclick="location.href='Gogaekmain.box'" /> -->
 						</div>
 					</div>
 					

@@ -89,6 +89,7 @@ public class GogaekController {
 	public ModelAndView faqWriteAction(FaqBean dto) {
 		ModelAndView mav = new ModelAndView();
 		boolean r = faqWriteAction.execute(dto);
+		System.out.println("도움말 작성후 컨트롤");
 		if (r) {
 			// 목록보기로 redirect
 			
@@ -102,6 +103,7 @@ public class GogaekController {
 		return mav;
 	}
 	
+		
 	
 	@Autowired
 	private SboardListAction sboardListAction;
