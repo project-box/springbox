@@ -1,12 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>	
+
+	
+<%
+	pageContext.setAttribute("newLineChar", "\n");
+%>	
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <%@ include file="/WEB-INF/views/front/header.jsp"%>
 
-<style>
+<style type="text/css">
 
 .title {
     background-color: #D2E1FF; 
@@ -17,6 +24,20 @@
 .btn {
 color: black;
 }
+p.test {
+	width: 550px;
+	height: 100px; /*  border : 1px solid #000001; */
+	word-wrap: break-word;
+	/* border: 1px solid #000001; */
+}
+p.test1 {
+	width: 550px;
+	height: 10px; /*  border : 1px solid #000001; */
+	word-wrap: break-word;
+
+}
+
+
 
 </style>
 
@@ -61,20 +82,46 @@ color: black;
 			cells. The classes that can be used are: .active, .success, .info,
 			.warning, and .danger.</p>
 		<table class="table">
-			<thead>
-				<tr>
+			
+			<%--  <tr>
 					<th>제목</th>
 					<th>내용</th>
 					
 				</tr>
-			</thead>
-			<tbody>
+			
+		
 				
 					
 					<td>${result.faq_subject }</td>
 					<td>${result.faq_content }</td>
 					
-				</tr>
+				</tr>  --%>
+			<tr>
+
+				<td align="center" width="200">제목</td>
+				<td align="center" >
+				<p class="test1" align="left"><c:set var="aont"
+						value="${result.faq_subject }" /> ${fn:replace(aont, newLineChar, '<br/>')}
+					</p>
+				</td>
+
+			</tr>
+
+
+			<tr>
+
+				<td align="center" width="200">내용</td>
+				<td align="center" >
+					<%-- ${sboarddata.s_content}</td> --%> 
+					<p class="test" align="left"><c:set var="bont"
+						value="${result.faq_content }" /> ${fn:replace(bont, newLineChar, '<br/>')}
+					</p>
+			</tr>
+				
+				
+				
+				
+				
 		
 			    <tr>
 			        <div class="row">
@@ -87,7 +134,7 @@ color: black;
 						</div>
 					</div>
 				</tr>
-			</tbody>
+		
 						
 			
 		</table>
