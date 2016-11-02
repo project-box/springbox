@@ -10,8 +10,8 @@
 <!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
 <meta charset=UTF-8">
 <title>Insert title here</title>
-
-<%@ include file="/WEB-INF/views/front/header.jsp"%>
+ 
+<%@ include file="/WEB-INF/views/front/header.jsp"%> 
 <script src="https://code.jquery.com/jquery-latest.js"></script>
 
 <style>
@@ -339,8 +339,8 @@ var starty2=<fmt:formatDate value='${concertdata.concert_startdate}' pattern='yy
 	$("input[type=checkbox]").prop("checked",false);
 	$("#time option:eq(0)").prop("selected", true);
 	$("#payment_time").val("");
-	$("#amount option:eq(0)").prop("selected", true);
-	$("#payment_amount").val("");
+	/* $("#amount option:eq(0)").prop("selected", true); 
+	$("#payment_amount").val(1);*/
  }
 
 
@@ -400,10 +400,11 @@ var x=null;
 			
 			/* --------회차 변경시 좌석수, 좌석번호 초기화------------------ */
 			  $("input[type=checkbox]").prop("checked",false);
-			  $("#amount option:eq(0)").prop("selected", true);
+			
+		      /*   $("#amount option:eq(0)").prop("selected", true);
 			  $("#payment_amount").val("");
 			  max = 1;
-			  Amount();
+			  Amount(); */
 			  
 			   time=$(this).val();
 			
@@ -418,7 +419,7 @@ var x=null;
 					$("#payment_time").val("");
 					return false;
 					
-				}else if(time != "회차선택"){
+				}else{
 				
 					$("input[type=checkbox]").attr("disabled",false);
 					 $("#on").show();
@@ -446,6 +447,33 @@ var x=null;
 			Amount();
 			
 		}); 
+		 
+		 
+		 $("#submit").click(function(){
+			
+			 
+			if( $("#payment_date").val() ==""){
+				
+				alert("예매하실 날짜를 선택하세요!");
+				return false;
+				
+			}else if($("#payment_time").val()==""){
+				
+				
+				alert("예매하실 회차를 선택하세요!");
+				return false;
+				
+			}else{
+				
+				Send();
+				
+			}
+			 
+			 
+			 
+			 
+		 });	 
+		 
 		 
 		  });	
 		
@@ -483,9 +511,7 @@ var x=null;
  
   function SeatView(){
 	 // 좌석 뷰
-	 
-	
-	 
+
 	var seatNum1 = new Array();
 	
 	<c:forEach items="${seatdata}" var="item1">
@@ -558,33 +584,26 @@ var x=null;
       document.getElementById('count').value=180-count; // 남은 좌석수 뿌려주기
  } 
  
+  
+  
   function Send() { // 부모창으로 값 넘김
 
-		
-		if($("#payment_date").val()==""){    // 유효성 검사
-			
-			alert("예매하실 날짜를 선택하세요!");
-			return false;
-			
-		}else if($("#payment_time").val()==""){
-			
-			alert("예매하실 회차를 선택하세요!");
-			return false;
-			
-		}else if(seatnum.length < max){
-			
-			alert("예매하실 좌석을 선택하세요!");
-			return false;
-			
-		}else{
-		
-		
 		var seatnum=document.getElementsByName('seat_seat[]'); 
 		var seat = "";
 
 		for(i=0; i<seatnum.length; i++) { 		
 			
-		    seat += seatnum[i].value+"/";
+			
+			if(seatnum[i].value == ""){
+				
+				alert("예매하실 좌석을 선택하세요!");
+				return false;
+				
+			}else{
+				seat += seatnum[i].value+"/";
+				
+			}
+		    
 		
 		}
 		
@@ -597,7 +616,7 @@ var x=null;
 
 		window.close();
 		
-		}
+		
 	}
 
 
@@ -621,7 +640,7 @@ var x=null;
 
 				<h4><b>회차선택</b></h4>
 				<br> <select id="time" class="form-control">
-					<option>회차선택</option>
+					<option value="">회차선택</option>
 					<option value="1회차 12:00">1회차 12:00</option>
 					<option value="2회차 15:30">2회차 15:30</option>
 					<option value="3회차 19:00">3회차 19:00</option>
@@ -734,19 +753,19 @@ var x=null;
 					</tr>
 					<tr>
 						<td><input type="text" readonly id="payment_date" name="payment_date"
-							class="form-control" placeholder="날짜를 선택해주세요"></td>
+							class="form-control" placeholder="날짜를 선택해주세요" ></td>
 						<td><input type="text" readonly id="payment_time" name="payment_time"
-							class="form-control" placeholder="회차를 선택해주세요"></td>
+							class="form-control" placeholder="회차를 선택해주세요" ></td>
 						<td><input type="text" readonly id="payment_amount"
 							name="payment_amount" class="form-control" value="1"
 							placeholder="좌석 수를 선택해주세요"></td>
 						<td><input type='text' readonly id="seat_seat1" name="seat_seat[]"
-							class='form-control' placeholder='좌석을 선택해주세요'></td>
+							class='form-control' placeholder='좌석을 선택해주세요' ></td>
 						<td><input type='button' id="all" style="background-color: #EB3232	; color:white; width: 85px; height: 35px;" value='좌석다시선택'></td>
 					</tr>
 				</table>
 
-				<input type="button" onclick="Send();" value="결제하기"
+				<input type="button" id="submit" value="결제하기"
 					class="btn btn-insert" style="margin-left: 37%; width: 200px" />
 			</div>
      

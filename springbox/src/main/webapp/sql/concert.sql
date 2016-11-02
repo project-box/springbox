@@ -17,7 +17,7 @@ select * from users;
 delete from payment;
 
 
-
+select * from users;
 select * from payment;
 
 select * from seat;
@@ -39,7 +39,9 @@ select * from payment;
 delete from payment;
 delete from seat;
 
-	update payment set payment_registerdate='16/08/28' where payment_num=233;
+	update payment set payment_check='무통장입금' where payment_num=239;
+	update payment set payment_registerdate='16/08/10' where payment_num=240;
+	update payment set payment_registerdate='16/06/22' where payment_num=241;
 		
 	rollback;
 alter table payment modify(payment_account number);

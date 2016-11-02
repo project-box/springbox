@@ -99,6 +99,7 @@ border: 1px solid black;
   padding-top: 20px;
   padding-bottom: 20px;
   display:inline-block;
+  
 }
 
 
@@ -106,8 +107,17 @@ border: 1px solid black;
 
  background-color: black;
  color:white;
-
+ text-decoration: none;
 }
+
+#tabList a:active {
+
+ background-color: black;
+ color:white;
+ text-decoration: none;
+}
+
+
 
 
 .tab-content{
@@ -258,7 +268,7 @@ function Book(){
 	}else{
 	
    /*  window.name="Info" */
-    window.open(concert_num, "_blank", "width=1000, height=750,toolbars=yes");
+    window.open(concert_num, "_blank", "width=900, height=750");
    
 	}
 	

@@ -111,8 +111,10 @@
 	<tr>
 	<td>
 	<h2 class="blind">&nbsp;&nbsp;&nbsp;My Page</h2>
-	<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong class="name">${sessionScope.loginName}</strong>님의 멤버십 등급은 
-	<font style="color:navy;"><b>VIP</b></font>입니다.</p>
+	<%-- <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong class="name">${sessionScope.loginName}</strong>님의 멤버십 등급은 
+	<font style="color:navy;"><b>VIP</b></font>입니다.</p> --%>
+	<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong class="name">${sessionScope.loginName}</strong>님의 마이페이지입니다 
+	</p> 	
 	</td>
 	</tr>	
 </table><br>
@@ -130,7 +132,7 @@
   </div>
 </nav> 
  
- <div class="tap content">
+ <!-- <div class="tap content">
   <table class="table table-striped">
     <thead>
       <tr align="center">
@@ -143,7 +145,18 @@
       </tr>      
     </tbody>
   </table>
-  </div>
+  </div> -->
+  
+  
+  
+   <div style="font-size: 30px; text-align: center; margin-top:80px; margin-bottom:80px;">
+   
+   MY PAGE
+   
+   </div>
+  
+  
+  
   
 	</div>
 	
