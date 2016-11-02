@@ -1,22 +1,46 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<%@ include file= "/WEB-INF/views/front/header.jsp" %>
+<%@ include file="/WEB-INF/views/front/header.jsp"%>
 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <title>회원가입</title>
 
 <style type="text/css">
-   #join_form { width : 900px; 	align-content: center; }  
-   div { color:blue; float:left;}
-   div.image_window { margin-top: 20px; margin-left: 10px; }
-   label {color:darkgreen; } 
-   p {color: green; }  
-   input.m_join { margin-left:180px; background-color:GreenYellow; }
-   input.g_main { background-color:Cornsilk;}
+#join_form {
+	align-content: center;
+}
+
+div {
+	color: blue;
+}
+
+div.image_window {
+	margin-top: 120px;
+	margin-left: 10px;
+}
+
+label {
+	color: darkgreen;
+}
+
+p {
+	color: green;
+	margin-left: 2px;
+}
+
+input.m_join {
+	margin-left: 180px;
+	background-color: GreenYellow;
+}
+
+input.g_main {
+	background-color: Cornsilk;
+}
 </style>
 
 
@@ -170,71 +194,79 @@ function readURL(input){
 </head>
 
 <body>
-<form name="joinform" action="/springbox/join_process.member" enctype="multipart/form-data" method="post" onsubmit="return check()">
-	
-	<!-- 아이디 중복 검사 여부를 저장할 변수 -->
-	<input type="hidden" name="idCheck" value="false" />
-	<input type="hidden" name="emailCheck" value="false" />
-<table>
-<tr>
-	<td>
-		<div class="image_window" width=25% style="float:left">
-		<img id="image" width="200" height="300" /><br />
-		<input type="file" id="imageI" name="image" />
-		</div>
-	</td>
-	<td>
-<div id="join_form" width=60% style="float:right">
-	
-  	<label for="id">&nbsp;아&nbsp;이&nbsp;디&nbsp;&nbsp;</label>
-  	<input type="text" name="user_id" size="20"/>
-  	<span id="idSpan"></span>
-  	<br>
-  	<label for="pw">비밀번호&nbsp;</label>
-  	<input type="password" name="password" size="15" />
-  	<br>
-  	<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (비밀번호는 대문자,소문자와 숫자를 조합하여 7~12자리로 만들어 주세요)</p>
-  	<label for="pw2">비밀번호 확인</label>
-  	<input type="password" name="password2" size="15" />
-  	<br>
-  	<label for="name">&nbsp;&nbsp;&nbsp;&nbsp;이&nbsp;&nbsp;름&nbsp;&nbsp;&nbsp;</label>
-  	<input type="text" name="name" size="20" onblur="confirmId()"/>
-  	<span id="nameSpan"></span>
-  	<br>
-  	<label>&nbsp;이&nbsp;메&nbsp;일&nbsp;&nbsp;</label>
-  	<input type="text" name="email" id="email" size="20" maxlength=30 onblur="confirmEamil()" />
-  	<span id="emailSpan"></span>
-  	<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (이메일 형식은 "***@****.***" 입니다)</p> 
-  	<br>
-  	<label>&nbsp;&nbsp;&nbsp;성&nbsp;&nbsp;별&nbsp;&nbsp;&nbsp;&nbsp;</label>
-  	<input type="radio" name="gender" vlaue="남자" id="gender_man"/> <label>남자</label>
-	<input type="radio" name="gender" vlaue="여자" id="gender_woman"/> <label>여자</label>
-  	<br>
-  	
-  	<label>전화번호&nbsp;</label>
-  	<input type="text" name="phone" size="11" maxlength="11" style="ime-mode: disabled;"
-		   onfocus="this.value='';" onkeydown="return onlyNum(event)" />
-	<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (전화번호는 -없이 숫자만 입력하세요)</p>
-  	<br>
-  	<label>&nbsp;&nbsp;&nbsp;나&nbsp;&nbsp;이&nbsp;&nbsp;&nbsp;&nbsp;</label>
-  	<input type="text" name="age" size="10" />
-  	
-  
-  	
-</div>
-		</td>
-	</tr>
-	<tr>
-		<td colspan="2">
-			<br>			
-			<input class="m_join" type="submit" value="회원가입" />
-			<input class="g_main" type="button" value="메인으로" onclick="javascript:window.location='./index.jsp'">
-		</td>
-	</tr>
-</table>
-</form>
+	<form name="joinform"
+		action="/springbox/join_process.member" enctype="multipart/form-data"
+		method="post" onsubmit="return check()">
 
-<%@ include file= "/WEB-INF/views/front/footer.jsp" %>
+		<!-- 아이디 중복 검사 여부를 저장할 변수 -->
+		<input type="hidden" name="idCheck" value="false" />
+		<input type="hidden" name="emailCheck" value="false" />
+		
+		<table class="table" >
+			<tr>
+				<td align="center" width="30%">
+					<div>
+						<img id="image" class="image_window" width="250" height="300" /><br /> 
+						<input type="file" id="imageI" name="image" width="250px" />
+					</div>
+				</td>
+				<td>
+					<div class="form-group">
+						<label for="id" class="control-label" >아이디:</label> 
+						<input type="text" name="user_id" size="20" onblur="confirmId()" class="form-control"/>
+						<span id="idSpan"></span>
+					</div>
+					<div class="form-group">
+						<label for="pw" class="control-label">비밀번호:</label> 
+						<input type="password" name="password" size="20" class="form-control"/>
+					</div>
+					<p>(대문자,소문자와 숫자를 조합하여 7~12자리로 만들어 주세요)</p>
+					<div class="form-group">
+						<label for="pw2" class="control-label">비밀번호 확인:</label>
+						<input type="password" name="password2" size="15" class="form-control"/> 
+					</div>
+					<div class="form-group">
+						<label for="name" class="control-label">이름:</label>
+						<input type="text" name="name" size="20" class="form-control"/>
+						<span id="nameSpan"></span>
+					</div>
+					<div class="form-group">		
+						<label for="email" class="control-label">이메일:</label>
+						<input type="text" name="email" id="email" size="20" maxlength=30
+							onblur="confirmEamil()" class="form-control"/> <span id="emailSpan"></span>
+						<p>(이메일 형식은 "***@****.***" 입니다)</p>
+					</div>
+					<div class="form-group">	
+						<label for="gender" class="control-label">성별:</label>
+						<input type="radio" name="gender" vlaue="남자" id="gender_man" /> <label>남자</label>
+						<input type="radio" name="gender" vlaue="여자" id="gender_woman" />
+						<label>여자</label>
+					</div>
+					<div class="form-group">
+						<label for="phone" class="control-label">전화번호</label>
+						<input type="text" name="phone" size="11" maxlength="11"
+							style="ime-mode: disabled;" onfocus="this.value='';"
+							onkeydown="return onlyNum(event)" class="form-control"/>
+						<p>('-' 없이 숫자만 입력하세요)</p>
+					</div>
+					<div class="form-group">
+						<label for="age" class="control-label">나이:</label>
+						<input type="text" name="age" size="10" class="form-control"/>
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2"><br> 
+				<input
+					class="m_join m_join-info btn-lg" type="submit" value="회원가입" /> 
+				<input
+					class="g_main g_main-info btn-lg" type="button" value="메인으로"
+					onclick="javascript:window.location='./index.jsp'"></td>
+			</tr>
+		</table>
+	</form>
+
+	<%@ include file="/WEB-INF/views/front/footer.jsp"%>
 
 </body>
 </html>
