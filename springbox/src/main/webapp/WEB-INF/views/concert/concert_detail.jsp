@@ -246,10 +246,22 @@ google.maps.event.addDomListener(window, 'load', initialize);
 function Book(){
 
 	var concert_num = "/springbox/book.box?concert_num="+'${concertdata.concert_num}';
+
+	var login = '${sessionScope.loginId}';
+	
+	if(login == ""){
+		
+		alert("로그인이 필요합니다!");
+		
+		location.href="login.box";
+		
+	}else{
 	
    /*  window.name="Info" */
-    window.open(concert_num, "_blank", "width=970, height=650,toolbars=yes");
-
+    window.open(concert_num, "_blank", "width=1000, height=750,toolbars=yes");
+   
+	}
+	
 }
 
     function Call(){
@@ -311,10 +323,7 @@ function Book(){
 		
 		<button type="button" class="Button00" onclick="Book();" >예매하기</button><br>
 		<button type="button" class="Button00" onclick="location.href='concert_list.box'">목록보기</button>
-		<c:if test="${sessionScope.loginId == 'dev'}">         
-		<button class="delete" onclick="location.href='concert_delete.box?num=${concertdata.concert_num}'">삭제</button>
-	    (관리자아이디로 접속 시에만 보입니다.)
-	    </c:if>
+
 	</div>	
 	</div>
 

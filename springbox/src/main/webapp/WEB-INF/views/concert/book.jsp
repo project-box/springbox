@@ -345,31 +345,6 @@ var starty2=<fmt:formatDate value='${concertdata.concert_startdate}' pattern='yy
 
 
 
-function Send() { // 부모창으로 값 넘김
-
-	
-	var seatnum=document.getElementsByName('seat_seat[]'); 
-	var seat = "";
-
-	for(i=0; i<seatnum.length; i++) { 		
-		
-	    seat += seatnum[i].value+"/";
-	
-	}
-	
-   opener.document.paymentform.seat_seat.value = seat;
-   opener.document.paymentform.payment_date.value=$("#payment_date").val();
-   opener.document.paymentform.payment_time.value=$("#payment_time").val();   
-   opener.document.paymentform.payment_amount.value=$("#payment_amount").val(); 
-   
-    opener.location.href="javascript:Call();";
-
-	window.close();
-}
-
-
-
-
 /* --------------------------제이쿼리------------------------------- */
 var num=0; //선택한 개수
 var seat_info=null; // 선택한 체크박스의 값
@@ -471,6 +446,7 @@ var x=null;
 			Amount();
 			
 		}); 
+		 
 		  });	
 		
 	
@@ -582,6 +558,47 @@ var x=null;
       document.getElementById('count').value=180-count; // 남은 좌석수 뿌려주기
  } 
  
+  function Send() { // 부모창으로 값 넘김
+
+		
+		if($("#payment_date").val()==""){    // 유효성 검사
+			
+			alert("예매하실 날짜를 선택하세요!");
+			return false;
+			
+		}else if($("#payment_time").val()==""){
+			
+			alert("예매하실 회차를 선택하세요!");
+			return false;
+			
+		}else if(seatnum.length < max){
+			
+			alert("예매하실 좌석을 선택하세요!");
+			return false;
+			
+		}else{
+		
+		
+		var seatnum=document.getElementsByName('seat_seat[]'); 
+		var seat = "";
+
+		for(i=0; i<seatnum.length; i++) { 		
+			
+		    seat += seatnum[i].value+"/";
+		
+		}
+		
+	   opener.document.paymentform.seat_seat.value = seat;
+	   opener.document.paymentform.payment_date.value=$("#payment_date").val();
+	   opener.document.paymentform.payment_time.value=$("#payment_time").val();   
+	   opener.document.paymentform.payment_amount.value=$("#payment_amount").val(); 
+	   
+	    opener.location.href="javascript:Call();";
+
+		window.close();
+		
+		}
+	}
 
 
  
