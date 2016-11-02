@@ -212,6 +212,7 @@ input:focus {
 	border: 1px solid gray;
 	margin-left: 75px;
 	margin-top: 5px;
+	line-height: 37px;
 }
 
 .choice_c {
@@ -280,7 +281,7 @@ input[type=radio] {
 	height: 17px;
 }
 
-input[type=checkbox] {
+#term1, #term2 {
 	margin-left: 75px;
 }
 
@@ -571,9 +572,8 @@ input[type=checkbox] {
 							<option value="농협중앙회">농협중앙회</option>
 							<option value="수협은행">수협은행</option>
 							<option value="대구은행">대구은행</option>
-						</select> <font color="red">&nbsp;&nbsp;*입금은행을 선택해 주세요</font> <br> <input
-							type=text size=30px class=textbox1
-							value='${sessionScope.loginName}'>
+						</select> <font color="red">&nbsp;&nbsp;*입금은행을 선택해 주세요</font> <br>
+						${sessionScope.loginName}
 						<!-- 입금자 -->
 
 						<br> <input type=checkbox checked="checked" id=cash_check

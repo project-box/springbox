@@ -83,6 +83,7 @@ color: black;
 							onclick="location.href='FaqList.box'"/> &nbsp;&nbsp;&nbsp;
 							<input class="btn btn-primary" type="button"
 							 value="초기화면"  onclick="location.href='Gogaekmain.box'"/>
+							
 						</div>
 					</div>
 				</tr>

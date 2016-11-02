@@ -57,9 +57,7 @@ font-weight: bold;
 <script>
 
 function bookList(x){
-	
-	alert(x);
-	
+
 	opener.location.href="javascript:pay_check_ok("+x+");";
 
 	window.close();

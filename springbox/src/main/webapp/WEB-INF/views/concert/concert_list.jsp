@@ -14,16 +14,20 @@
 <%@ include file="/WEB-INF/views/front/header.jsp"%>
 
 <style>
+
 .listTable {
-	width: 90%;
 	border: 1px solid #dcdcdc;
 	margin-top: 10px;
+	width:85%;
+	
+	
 }
 
 .listTable td {
 	padding-top: 40px;
-	padding-left: 18px;
-	padding-right: 18px;
+	padding-left: 45px;
+	padding-right: 45px;
+	border: 1px solid #dcdcdc;
 }
 
 .write {
@@ -44,7 +48,7 @@
 }
 
 .text {
-	font-size: 40px;
+	font-size: 30px;
 	font-weight: bold;
 	font-family: inherit;
 	color: #646464;
@@ -56,14 +60,14 @@ margin-top: 40px; */
 	padding-left: 25px;
 	padding-top: 15px;
 	padding-bottom: 17px;
-	height: 100px;
+	height: 90px;
 }
 
 .text0 {
 	margin-left: 75px;
 	margin-top: 40px;
 	width: 90%;
-	height: 120px;
+	height: 90px;
 	border: 1px solid #8c8c8c;
 	padding: 10px;
 }
@@ -105,8 +109,8 @@ margin-top: 40px; */
 
 
 	<div id=listTable>
-		<table cellspacing="10" border=1 align=center class=listTable>
-			<tr>
+		<table border=1 class=listTable align="center"> 
+			<tr align="center">
 				<c:forEach var="b" items="${concertlist}">
 
 					<c:set var="i" value="${i+1}" />
@@ -124,7 +128,7 @@ margin-top: 40px; */
 
 					<c:if test="${i % 4 == 0}">
 			</tr>
-			<tr>
+			<tr align="center">
 				</c:if>
 
 				</c:forEach>
