@@ -42,8 +42,8 @@
 <script>
 $(document).ready(function(){
 	$('#delete').click(function(){
-		var result = confirm("삭제하시겠습니까?");
-		
+		var result = confirm("   삭제하시겠습니까?  확인을 누르면 삭제됩니다!   ");
+		 	
 		if(result){
 			location.repalce('/music/music_list');
 		}else{
@@ -112,8 +112,11 @@ $(document).ready(function(){
 							onmouseout="this.style.backgroundColor=''">
 							
 							<td height="23" style="font-family: Tahoma; font-size: 10pt;">						
-								<!-- 번호 출력 부분 --> <c:out value="${b.music_num}" /> 
+								<!-- 번호 출력 부분 -->
+								<input type="hidden" name="music_num" value="${music.music_num}">
+								<c:out value="${num}"/>		
 								<c:set var="num" value="${num-1}" />
+								<%-- <input type=hidden>${b.music_num} --%>
 								<div onclick="location.href='./music_detail.box?num=${b.music_num}&page=${page}';"></div>
 							</td>
 							
