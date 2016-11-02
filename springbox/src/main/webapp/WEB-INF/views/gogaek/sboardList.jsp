@@ -69,9 +69,7 @@ uri = "http://java.sun.com/jsp/jstl/core" %>
 
 	<div class="container" align="Center">
 		<h2>서비스 문의 목록 </h2>
-		<p>Contextual classes can be used to color table rows or table
-			cells. The classes that can be used are: .active, .success, .info,
-			.warning, and .danger.</p>
+		<p>취향고객 서비스 관련 모든 질문을 올려주세요</p>
 		<table class="table">
 			<thead>
 				<tr>
