@@ -120,10 +120,10 @@ enctype을 반드시 변경해 주어야 합니다. 그렇지 않으면 파일�
 					<textarea class="form-control" id="comments" name="s_content"
 						placeholder="서비스 내용 " rows="20"></textarea>
 
-					<!-- <tr>
+					<tr>
 
 						<td><input name="s_file" type="file" /></td>
-					</tr> -->
+					</tr> 
 					<tr bgcolor="cccccc">
 						<td colspan="2" style="height: 1px;"></td>
 					</tr>

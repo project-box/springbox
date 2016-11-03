@@ -27,13 +27,13 @@
 		</ol>
 
 		Wrapper for Slides -->
-		<div class="carousel-inner">
+		<!-- <div class="carousel-inner"> -->
 		    
 		    <div class="item active">
 				<!-- Set the second background image using inline CSS below. -->
 				<div class="fill" style="background-image: url('img/custom.JPG');"></div>
 				<div class="carousel-caption">
-					<h2>고객의 소리를 기다리고 있습니다!</h2>
+				<!-- 	<h2>고객의 소리를 기다리고 있습니다!</h2> -->
 				</div>
 			</div>  	
 			<!-- <div class="item">
@@ -62,7 +62,7 @@
 			data-slide="next"> <span class="icon-next"></span>
 		</a> -->
 
-	</div>
+	<!-- </div> -->
 
 
 
@@ -78,10 +78,10 @@
 
 			<div class="container text-center">
 				<h3>${users.name}님환영합니다.</h3>
-				<p>
+				<!-- <p>
 					<em>We love music!</em>
 				</p>
-				<p>We have created a fictional band website. Lorem ipsum..</p>
+				<p>We have created a fictional band website. Lorem ipsum..</p> -->
 			</div>
 			<br>
 
@@ -128,10 +128,10 @@
 		<div class="Out user">
 			<div class="container text-center">
 				<h3>문의가 있는 경우 로그인을 하세요.</h3>
-				<p>
+				<!-- <p>
 					<em>We love music!</em>
 				</p>
-				<p>We have created a fictional band website. Lorem ipsum..</p>
+				<p>We have created a fictional band website. Lorem ipsum..</p> -->
 			</div>
 			<br>
 
@@ -183,10 +183,10 @@
 		<div class="manager">
 			<div class="container text-center">
 				<h3>관리자 ${users.name}님 환영합니다.</h3>
-				<p>
+				<!-- <p>
 					<em>We love music!</em>
 				</p>
-				<p>We have created a fictional band website. Lorem ipsum..</p>
+				<p>We have created a fictional band website. Lorem ipsum..</p> -->
 			</div>
 			<br>
 
