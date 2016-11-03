@@ -10,6 +10,8 @@ start with 1
 increment by 1
 nocache;
 
+
+                                                                                                                                                                                                                                                                                                                                              
 select * from concert;
 delete from concert where concert_num=67;
 select * from users;
