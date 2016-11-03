@@ -249,4 +249,11 @@
 			where LOWER(concert_title) like LOWER('%' || #{keyword} || '%')
 		]]>
 	</select>
+	
+	<select id="add_concert_history" parameterType="com.naver.springbox.dto.HistoryBean">
+		<![CDATA[
+			insert into history(history_num, concert_num, user_id, history_registerdate) values
+      			(history_seq.nextval, #{concert_num}, #{user_id}, sysdate)
+		]]>
+	</select>
 </mapper>

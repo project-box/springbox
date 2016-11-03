@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.naver.springbox.dto.ConcertBean;
+import com.naver.springbox.dto.HistoryBean;
 import com.naver.springbox.dto.MemberBean;
 import com.naver.springbox.dto.MusicBean;
 import com.naver.springbox.dto.PreferenceBean;
@@ -45,4 +46,7 @@ public interface PreferenceDao {
 	public List<MusicBean> searchMusic(String keyword);
 	// 공연검색
 	public List<ConcertBean> searchConcert(String keyword);
+	
+	// 공연 히스토리
+	public void addConcertHistory(HistoryBean history);
 }
