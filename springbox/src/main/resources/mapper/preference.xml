@@ -155,6 +155,63 @@
 		]]>
 	</select>
 	
+	<!-- 사용자 선호도에 따른 공연 검색 -->
+	<select id="preference_concert_list2" parameterType="java.util.Map" resultType="com.naver.springbox.dto.ConcertBean">
+		<![CDATA[
+			select * from(
+			select rownum rnum, concert.concert_num, concert_place, concert_startdate, concert_enddate, 
+			concert_title, posterfilepath, concert_artist, locationx, locationy, concert_price from
+			    (
+			      select concert_num from history
+			      where user_id in 
+			      ]]> 
+					<foreach collection="userList" item="item" open="(" separator="," close=")">
+			            #{item}
+			        </foreach>
+				  <![CDATA[ 
+			      union
+			      select concert_num from payment
+			      where user_id in 
+			      ]]> 
+					<foreach collection="userList" item="item" open="(" separator="," close=")">
+			            #{item}
+			        </foreach>
+				  <![CDATA[ 
+			    )H join concert
+			on H.concert_num = concert.concert_num
+			)
+			where rnum >= #{start} and rnum <= #{end}
+		]]>
+	</select>
+	
+	<!-- 사용자 선호도에 따른 공연 검색(카운트) -->
+	<select id="preference_concert_count" parameterType="java.util.Map" resultType="Integer">
+		<![CDATA[
+			select count(*) from(
+			select rownum rnum, concert.concert_num, concert_place, concert_startdate, concert_enddate, 
+			concert_title, posterfilepath, concert_artist, locationx, locationy, concert_price from
+			    (
+			      select concert_num from history
+			      where user_id in 
+			      ]]> 
+					<foreach collection="userList" item="item" open="(" separator="," close=")">
+			            #{item}
+			        </foreach>
+				  <![CDATA[ 
+			      union
+			      select concert_num from payment
+			      where user_id in 
+			      ]]> 
+					<foreach collection="userList" item="item" open="(" separator="," close=")">
+			            #{item}
+			        </foreach>
+				  <![CDATA[ 
+			    )H join concert
+			on H.concert_num = concert.concert_num
+			)
+		]]>
+	</select>
+	
 	<!-- [Test] Nested class 가져오기 -->
 	<resultMap id="musicResultMap" type="com.naver.springbox.dto.MusicBean">
 		<id column="music_num" property="music_num" jdbcType="INTEGER"/>
@@ -247,6 +304,13 @@
 		<![CDATA[
 			select * from concert
 			where LOWER(concert_title) like LOWER('%' || #{keyword} || '%')
+		]]>
+	</select>
+	
+	<select id="add_concert_history" parameterType="com.naver.springbox.dto.HistoryBean">
+		<![CDATA[
+			insert into history(history_num, concert_num, user_id, history_registerdate) values
+      			(history_seq.nextval, #{concert_num}, #{user_id}, sysdate)
 		]]>
 	</select>
 </mapper>

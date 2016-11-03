@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.naver.springbox.dto.ConcertBean;
+import com.naver.springbox.dto.HistoryBean;
 import com.naver.springbox.dto.MemberBean;
 import com.naver.springbox.dto.MusicBean;
 import com.naver.springbox.dto.PreferenceBean;
@@ -92,6 +93,17 @@ public class PreferenceDaoImpl implements PreferenceDao {
 	public int getPreferenceMusicCount(Map<String, Object> map) {
 		return Integer.parseInt(sqlSession.selectOne("preference.preference_music_count", map).toString());
 	}
+	
+	@Override
+	public List<ConcertBean> getPreferenceConcertList2(Map<String, Object> map) {
+		List<ConcertBean> list = sqlSession.selectList("preference.preference_concert_list2", map);
+		return list;
+	}
+
+	@Override
+	public int getPreferenceConcertCount(Map<String, Object> map) {
+		return Integer.parseInt(sqlSession.selectOne("preference.preference_concert_count", map).toString());
+	}
 
 	@Override
 	public List<PreferenceBean> getPreferenceMusicList(String userId) {
@@ -143,5 +155,10 @@ public class PreferenceDaoImpl implements PreferenceDao {
 	public List<ConcertBean> searchConcert(String keyword){
 		List<ConcertBean> list = sqlSession.selectList("search_content_concert", keyword);
 		return list;
+	}
+	
+	@Override
+	public void addConcertHistory(HistoryBean history){
+		sqlSession.insert("add_concert_history", history);
 	}
 }

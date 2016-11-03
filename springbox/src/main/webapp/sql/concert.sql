@@ -55,6 +55,6 @@ select * from history;
 select max(payment_num) from payment;
 
 
-
+select * from history;
 
 

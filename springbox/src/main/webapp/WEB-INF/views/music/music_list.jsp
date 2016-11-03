@@ -28,7 +28,6 @@
 	background: #777777;
 	border: #777777;
 }
-
 #delete {
 	font-family: Tahoma;
 	font-size: 12px;
@@ -39,20 +38,21 @@
 }
 </style>
 
+
 <script>
-$(document).ready(function(){
-	$('#delete').click(function(){
-		var result = confirm("   삭제하시겠습니까?  확인을 누르면 삭제됩니다!   ");
-		 	
-		if(result){
-			location.repalce('/music/music_list');
-		}else{
-			
-		}
-	})
-	
-});
+function del(num){
+   var retVal = confirm("삭제하시겠습니까?");
+   if( retVal == true ){
+	  
+      alert("삭제합니다");
+      location.href="music_delete.box?num="+num;
+   }else{
+      alert("취소되었습니다");
+      location.repalce('/music/music_list');
+   }
+};
 </script>
+
 
 <title>b o x</title>
 </head>
@@ -70,7 +70,7 @@ $(document).ready(function(){
 							<input id="button" type=button
 								onclick="location.href ='./music_write.box' " value="글쓰기" />  &nbsp;&nbsp;&nbsp;
 					<!-- <input id="button" type=button 
-						onclick="location.href ='/springbox/MusicAction.box'" value="&nbsp;&nbsp;삭제&nbsp;&nbsp;"> -->
+						onclick="location.href ='/10_24springbox/MusicAction.box'" value="&nbsp;&nbsp;삭제&nbsp;&nbsp;"> -->
 						</c:if>
 					</small>
 				</h1>
@@ -112,11 +112,8 @@ $(document).ready(function(){
 							onmouseout="this.style.backgroundColor=''">
 							
 							<td height="23" style="font-family: Tahoma; font-size: 10pt;">						
-								<!-- 번호 출력 부분 -->
-								<input type="hidden" name="music_num" value="${music.music_num}">
-								<c:out value="${num}"/>		
+								<!-- 번호 출력 부분 --> <c:out value="${num}" /> 
 								<c:set var="num" value="${num-1}" />
-								<%-- <input type=hidden>${b.music_num} --%>
 								<div onclick="location.href='./music_detail.box?num=${b.music_num}&page=${page}';"></div>
 							</td>
 							
@@ -165,7 +162,7 @@ $(document).ready(function(){
 								<td>
 									<div>
 										<input id="delete" name="delete" type="button" value="삭제"
-											onclick="location.href='./music_delete.box?num=${b.music_num}'">
+											onclick="javascript:del('${b.music_num}')">
 									</div></a>
 								</td>
 							</c:if>
