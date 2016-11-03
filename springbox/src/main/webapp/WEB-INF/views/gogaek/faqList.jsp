@@ -60,9 +60,7 @@ color: black;
 	
 	<div class="container" align="Center">
 		<h2>도움말</h2>
-		<p>Contextual classes can be used to color table rows or table
-			cells. The classes that can be used are: .active, .success, .info,
-			.warning, and .danger.</p>
+		<p>궁금한 점이 있으시면 도움말을 이용해주세요</p>
 		<table class="table">
 			<thead>
 				<tr>

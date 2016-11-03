@@ -98,7 +98,7 @@
 	    <![CDATA[
 			select * from payment where payment_registerdate <= sysdate
   			and payment_registerdate >= #{nowMinus}
-  			and user_id=#{user_id} order by payment_num desc
+  			and user_id=#{user_id} order by payment_num asc
 		]]>
 	</select>
 <!-- select * from payment where payment_registerdate >= sysdate

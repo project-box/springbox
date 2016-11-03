@@ -119,12 +119,12 @@
 						rows="20" >${sboarddata.s_content}
 					</textarea>
 
-					<tr>
+				<%-- 	<tr>
 						<td align="right">첨부파일</td>
 						<td>기존파일:${sboarddata.s_file}<br /> <input name="s_file"
 							type="file" /></td>
 					</tr>
-					<br /> 파일을 수정하려면 다시 선택하세요
+					<br /> 파일을 수정하려면 다시 선택하세요 --%>
 					<!-- 	<tr bgcolor="cccccc">
 						<td colspan="2" style="height: 1px;"></td>
 					</tr>

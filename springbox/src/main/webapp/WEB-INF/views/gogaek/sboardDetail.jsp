@@ -17,10 +17,17 @@
 <style type="text/css">
 p.test {
 	width: 550px;
-	height: 100px; border : 1px solid #000001;
+	height: 100px; /*  border : 1px solid #000001; */
 	word-wrap: break-word;
-	border: 1px solid #000001;
+	/* border: 1px solid #000001; */
 }
+p.test1 {
+	width: 550px;
+	height: 10px; /*  border : 1px solid #000001; */
+	word-wrap: break-word;
+
+}
+
 </style>
 
 <title>서비스 문의 상세보기</title>
@@ -29,40 +36,53 @@ p.test {
 
 
 	<div class="container">
-		<h2>Basic Table</h2>
-		<p>The .table class adds basic styling (light padding and only
-			horizontal dividers) to a table:</p>
+		<h2>서비스 문의 상세보기</h2>
+		<p>사용자 분들의 의견을 빠르게 반영하는 고객센터가 되겠습니다.</p>
 		<table class="table">
 
 			<tr>
 
-				<td align="center" width="50%">제목</td>
-				<td align="center" width="50%">${sboarddata.s_subject}</td>
+				<td align="center" width="200">제목</td>
+				<td align="center" ><%-- ${sboarddata.s_subject} --%>
+				<p class="test1" align="left"><c:set var="aont"
+						value="${sboarddata.s_subject}" /> ${fn:replace(aont, newLineChar, '<br/>')}
+					</p>
+				</td>
 
 			</tr>
 
 
 			<tr>
 
-				<td align="center" width="50%">내용</td>
-				<td align="left" width="50%">
-					<%-- ${sboarddata.s_content}</td> --%> <c:set var="bont"
+				<td align="center" width="200">내용</td>
+				<td align="center" >
+					<%-- ${sboarddata.s_content}</td> --%> 
+					<p class="test" align="left"><c:set var="bont"
 						value="${sboarddata.s_content}" /> ${fn:replace(bont, newLineChar, '<br/>')}
 					</p>
 			</tr>
-			<tr>
+			<%-- <tr>
+				<td>
+					<div align="center">
+						<img width="200" height="130" src="./sboardupload/${sboarddata.s_file}" />
+				</td>
+			</tr> --%>
+
+
+			<%-- <tr>
 				<td>
 					<div align="center">첨부파일</div>
 				</td>
-				<td>
-					<div align="center">
+				 <td>
+					<div align="left">
 
-						<input class="btn btn-primary" type="button" value="수정"
+						<!-- <input class="btn btn-primary" type="button" value="수정" -->
+						<input type="submit" value="${sboarddata.s_file}" witdh="200" />
 							onclick="location.href='/downdload.jsp=${sboarddata.s_file}'" />
 					</div>
-				</td>
+				</td> 
 			</tr>
-			<tr>
+ --%>			<tr>
 				<td colspan="2" align="center"><c:if
 						test="${sessionScope.loginId == sboarddata.user_id}">
 						<input class="btn btn-primary" type="button" value="수정"
@@ -87,8 +107,8 @@ p.test {
 
 							<!-- <div class="reply" align="Left" > -->
 							<div align="center">
-								<div align="left">
-									<h6>${re.NAME}</h6>
+								<div align="center">
+									<%-- <h6>${re.NAME}</h6> --%>
 								</div>
 								<div align="center">
 									<p class="test" align="left">

@@ -41,7 +41,7 @@ public class BookAction {
 	public List<PaymentBean> book_list(String user_id ,int month) {
 
 		Date nowMinus = new Date (); //오늘 날짜를 기준으루..		
-		nowMinus.setMonth(nowMinus.getMonth()-month);//3개월 전....
+		nowMinus.setMonth(nowMinus.getMonth()-month);//month개월 전....
 		
 		Map<String, Object> resultMap = new HashMap <String, Object>();
 		

@@ -55,7 +55,7 @@ uri = "http://java.sun.com/jsp/jstl/core" %>
 	<div class="container">
 		<h3 class="text-center">도움말 작성 하기</h3>
 		<p class="text-center">
-			<em>완료 Click 전에 한번 더 점검하기!</em>
+			<em> 도움말 작성 Click 하기 전에 한번 더 점검하기!</em>
 		</p>
 		<div class="row test">
 		 <form action="./FaqAddAction.box" method="post" name="faqform"> 
