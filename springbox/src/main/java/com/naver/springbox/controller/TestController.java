@@ -108,7 +108,7 @@ public class TestController {
 			System.out.println(music.getMusic_title());
 		}
 
-		int count = preferenceDao.getPreferenceMusicCount(map);
+		int count = preferenceDao.countPreferenceMusic(map);
 		System.out.println("추천곡 카운트: " + count);
 	}
 }

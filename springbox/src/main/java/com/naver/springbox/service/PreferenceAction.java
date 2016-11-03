@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.naver.springbox.dao.ConcertDao;
+import com.naver.springbox.dao.MusicDao;
 import com.naver.springbox.dao.PreferenceDao;
 import com.naver.springbox.dto.ConcertBean;
 import com.naver.springbox.dto.HistoryBean;
@@ -22,6 +24,9 @@ public class PreferenceAction {
 
 	@Autowired
 	private PreferenceDao preferenceDao;
+	
+	@Autowired
+	private MusicDao musicDao;
 
 	public void TestMethod() {
 		// 테스트 테스트 코드
@@ -31,17 +36,15 @@ public class PreferenceAction {
 			System.out.println(preference.getRate());
 		}
 	}
-	
-	private List<String> getMatchUsers(String userId){
+
+	private List<String> getMatchUsers(String userId) {
 		List<MemberBean> memberList = preferenceDao.getPreferenceMemberList(userId);
-		System.out.println("memberList="+memberList);
 		List<String> userList = new ArrayList<String>();
 
-		System.out.println("추천곡 Action3");
 		for (MemberBean member : memberList) {
 			userList.add(member.getUser_id());
 		}
-		
+
 		return userList;
 	}
 
@@ -68,23 +71,32 @@ public class PreferenceAction {
 		// 위 2개의 값을 Map을 생성해서 start와 end라는
 		// 키로 저장
 		Map<String, Object> map = new HashMap<String, Object>();
-
-		map.put("userList", getMatchUsers(userId));
+		List<String> userList;
+		List<MusicBean> list;
+		int listcount;
+		
 		map.put("start", start);
 		map.put("end", end);
-
-		// 2. 사용자들을 통해 선호도가 높은 곡들을 가져온다.
-		List<MusicBean> list = preferenceDao.getPreferenceMusicList2(map);
-
-		System.out.println("list="+list);
-		// 데이터 가져오기
-		// List<MusicBean> list = preferenceDao.getPreferenceMusicList(map);
-
-		// 전체 데이터 개수 가져오기
-		// int listcount = preferenceDao.getPreferenceMusicCount();
-		int listcount = preferenceDao.getPreferenceMusicCount(map);
-		System.out.println("listcount="+listcount);
 		
+		if (userId != null) {
+			userList = getMatchUsers(userId);
+			
+			if(userList.size() > 0){
+				map.put("userList", userList);
+				list = preferenceDao.getPreferenceMusicList2(map);
+				listcount = preferenceDao.countPreferenceMusic(map);	
+			}else{
+				list = musicDao.getMusicList(map);
+				listcount = musicDao.getMusicListCount();
+			}
+
+		} else {
+			
+			list = musicDao.getMusicList(map);
+			listcount = musicDao.getMusicListCount();
+			
+		}
+
 		// 가장 큰 페이지 번호 계산
 		int maxpage = (int) ((double) listcount / limit + 0.95);
 		// 시작하는 페이지 번호 계산
@@ -128,15 +140,32 @@ public class PreferenceAction {
 		// 위 2개의 값을 Map을 생성해서 start와 end라는
 		// 키로 저장
 		Map<String, Object> map = new HashMap<String, Object>();
+		List<String> userList;
+		List<ConcertBean> list;
+		int listcount;
 		
-		map.put("userList", getMatchUsers(userId));
 		map.put("start", start);
 		map.put("end", end);
+		
+		if (userId != null) {
+			userList = getMatchUsers(userId);
+			
+			if(userList.size() > 0){
+				map.put("userList", userList);
+				list = preferenceDao.getPreferenceConcertList2(map);
+				listcount = preferenceDao.getPreferenceConcertCount(map);	
+				
+			}else{
+				list = preferenceDao.getConcertList(map);
+				listcount = preferenceDao.countConcertList();
+			}
 
-		// 데이터 가져오기
-		List<ConcertBean> list = preferenceDao.getPreferenceConcertList2(map);
-		// 전체 데이터 개수 가져오기
-		int listcount = preferenceDao.getPreferenceConcertCount(map);
+		} else {
+			
+			list = preferenceDao.getConcertList(map);
+			listcount = preferenceDao.countConcertList();
+			
+		}
 
 		// 가장 큰 페이지 번호 계산
 		int maxpage = (int) ((double) listcount / limit + 0.95);
@@ -245,27 +274,28 @@ public class PreferenceAction {
 
 		return jsonList;
 	}
-	
+
 	public Map<String, Object> searchContent(String keyword) {
 		Map<String, Object> map = new HashMap<String, Object>();
-		
+
 		map.put("resultMusic", preferenceDao.searchMusic(keyword));
 		map.put("resultConcert", preferenceDao.searchConcert(keyword));
-		
+
 		return map;
 	}
-	
-	public void addConcertHistory(int concertNum, String userId){
-		
+
+	public void addConcertHistory(int concertNum, String userId) {
+
 		// 만약 로그인 된 상태가 아니면 히스토리를 기록하지 않는다.
 		System.out.println(userId);
-		if(userId == null) return;
-		
+		if (userId == null)
+			return;
+
 		HistoryBean history = new HistoryBean();
-		
+
 		history.setConcert_num(concertNum);
 		history.setUser_id(userId);
-		
+
 		preferenceDao.addConcertHistory(history);
 	}
 }

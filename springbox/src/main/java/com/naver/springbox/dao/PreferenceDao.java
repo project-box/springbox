@@ -13,20 +13,25 @@ import com.naver.springbox.dto.PreferenceBean;
 public interface PreferenceDao {
 	public List<PreferenceBean> getPreferenceList();
 	public List<MusicBean> getRecentMusicList(int count) throws SQLException;
-	public List<MusicBean> getSubjectMusicList(Map<String, Object> map) throws SQLException;
 	public List<ConcertBean> getRecentConcertList(int count) throws SQLException;
-	
 	public int countPreferenceMusic();
-	public int countPreferenceConcert();
+	
+	// 사용자의 선택한 선호도 아이템(nested class 포함)
+	public List<MusicBean> getSubjectMusicList(Map<String, Object> map);
+	
+	// 사용자의 추천 갯수
 	public int countPreferenceByUser(String userId);
 	
-	//public List<MusicBean> getPreferenceMusicList(Map<String, Object> map);
-	public List<ConcertBean> getPreferenceConcertList(Map<String, Object> map);
+	// 추천 사용자가 없을 경우 사용하는 최신 목록
+	public List<ConcertBean> getConcertList(Map<String, Object> map);
+	public int countConcertList();
+	
+	// 나랑 취향이 비슷한 사용자들
+	public List<MemberBean> getPreferenceMemberList(String loginId);
 	
 	// 추천곡
-	public List<MemberBean> getPreferenceMemberList(String loginId);
 	public List<MusicBean> getPreferenceMusicList2(Map<String, Object> map);
-	public int getPreferenceMusicCount(Map<String, Object> map);
+	public int countPreferenceMusic(Map<String, Object> map);
 	
 	// 추천공연
 	public List<ConcertBean> getPreferenceConcertList2(Map<String, Object> map);

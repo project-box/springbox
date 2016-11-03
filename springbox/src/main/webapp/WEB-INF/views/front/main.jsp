@@ -28,7 +28,7 @@
 .bgimg-1 {
 	opacity: 1;
 	background-image: url("img/bobdylan.jpg");
-	min-height: 100%;
+	min-height: 80%;
 }
 
 .bgimg-2 {

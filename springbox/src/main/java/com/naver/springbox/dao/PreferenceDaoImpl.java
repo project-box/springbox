@@ -37,7 +37,7 @@ public class PreferenceDaoImpl implements PreferenceDao {
 	
 	@Override
 	@Transactional
-	public List<MusicBean> getSubjectMusicList(Map<String, Object> map) throws SQLException {
+	public List<MusicBean> getSubjectMusicList(Map<String, Object> map) {
 		List<MusicBean> list = sqlSession.selectList("preference.subject_music_list", map);
 		return list;
 	}
@@ -56,7 +56,7 @@ public class PreferenceDaoImpl implements PreferenceDao {
 	}
 
 	@Override
-	public int countPreferenceConcert() {
+	public int countConcertList() {
 		return Integer.parseInt(sqlSession.selectOne("preference.count_preference_concert_list").toString());
 	}
 	
@@ -72,7 +72,7 @@ public class PreferenceDaoImpl implements PreferenceDao {
 	}*/
 
 	@Override
-	public List<ConcertBean> getPreferenceConcertList(Map<String, Object> map) {
+	public List<ConcertBean> getConcertList(Map<String, Object> map) {
 		List<ConcertBean> list = sqlSession.selectList("preference.preference_concert_list", map);
 		return list;
 	}
@@ -90,7 +90,7 @@ public class PreferenceDaoImpl implements PreferenceDao {
 	}
 
 	@Override
-	public int getPreferenceMusicCount(Map<String, Object> map) {
+	public int countPreferenceMusic(Map<String, Object> map) {
 		return Integer.parseInt(sqlSession.selectOne("preference.preference_music_count", map).toString());
 	}
 	
