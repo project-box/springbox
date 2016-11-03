@@ -122,6 +122,8 @@ public class ConcertController {
 			mav.setViewName("/concert/concert_detail");
 //		}
 
+			preferenceAction.addConcertHistory(concert_num, (String)session.getAttribute("loginId"));
+			
 		return mav;
 	}
 	

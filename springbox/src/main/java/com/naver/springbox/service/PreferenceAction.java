@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import com.naver.springbox.dao.PreferenceDao;
 import com.naver.springbox.dto.ConcertBean;
+import com.naver.springbox.dto.HistoryBean;
 import com.naver.springbox.dto.MemberBean;
 import com.naver.springbox.dto.MusicBean;
 import com.naver.springbox.dto.PreferenceBean;
@@ -252,5 +253,19 @@ public class PreferenceAction {
 		map.put("resultConcert", preferenceDao.searchConcert(keyword));
 		
 		return map;
+	}
+	
+	public void addConcertHistory(int concertNum, String userId){
+		
+		// 만약 로그인 된 상태가 아니면 히스토리를 기록하지 않는다.
+		System.out.println(userId);
+		if(userId == null) return;
+		
+		HistoryBean history = new HistoryBean();
+		
+		history.setConcert_num(concertNum);
+		history.setUser_id(userId);
+		
+		preferenceDao.addConcertHistory(history);
 	}
 }
