@@ -7,6 +7,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.swing.JOptionPane;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -29,7 +30,6 @@ public class MusicController {
 	@Autowired 
 	private PreferenceAction preferenceAction;
 
-	
 	@RequestMapping(value="/music_write.box", method = RequestMethod.GET)
 	public ModelAndView musicWrite (){
 		
@@ -234,6 +234,8 @@ public class MusicController {
 	public ModelAndView MusicDelete (@RequestParam("num") int num){
 		System.out.println("num="+num);
 		System.out.println(" 삭제 controller1");
+		
+
 		ModelAndView mav = new ModelAndView();
 		
 		boolean r = (musicAction).musicDelete(num);
