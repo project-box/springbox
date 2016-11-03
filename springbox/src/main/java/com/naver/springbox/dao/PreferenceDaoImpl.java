@@ -65,12 +65,6 @@ public class PreferenceDaoImpl implements PreferenceDao {
 		return Integer.parseInt(sqlSession.selectOne("preference.count_preference_music_by_user", userId).toString());
 	}
 
-	/*@Override
-	public List<MusicBean> getPreferenceMusicList(Map<String, Object> map) {
-		List<MusicBean> list = sqlSession.selectList("preference.preference_music_list", map);
-		return list;
-	}*/
-
 	@Override
 	public List<ConcertBean> getConcertList(Map<String, Object> map) {
 		List<ConcertBean> list = sqlSession.selectList("preference.preference_concert_list", map);
@@ -84,7 +78,7 @@ public class PreferenceDaoImpl implements PreferenceDao {
 	}
 
 	@Override
-	public List<MusicBean> getPreferenceMusicList2(Map<String, Object> map) {
+	public List<MusicBean> getPreferenceMusicList(Map<String, Object> map) {
 		List<MusicBean> list = sqlSession.selectList("preference.preference_music_list2", map);
 		return list;
 	}
@@ -95,7 +89,7 @@ public class PreferenceDaoImpl implements PreferenceDao {
 	}
 	
 	@Override
-	public List<ConcertBean> getPreferenceConcertList2(Map<String, Object> map) {
+	public List<ConcertBean> getPreferenceConcertList(Map<String, Object> map) {
 		List<ConcertBean> list = sqlSession.selectList("preference.preference_concert_list2", map);
 		return list;
 	}
@@ -106,7 +100,7 @@ public class PreferenceDaoImpl implements PreferenceDao {
 	}
 
 	@Override
-	public List<PreferenceBean> getPreferenceMusicList(String userId) {
+	public List<PreferenceBean> getPreferenceItems(String userId) {
 		List<PreferenceBean> list = sqlSession.selectList("preference.preference_music", userId);
 		return list;
 	}

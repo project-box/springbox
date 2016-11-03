@@ -30,15 +30,15 @@ public interface PreferenceDao {
 	public List<MemberBean> getPreferenceMemberList(String loginId);
 	
 	// 추천곡
-	public List<MusicBean> getPreferenceMusicList2(Map<String, Object> map);
+	public List<MusicBean> getPreferenceMusicList(Map<String, Object> map);
 	public int countPreferenceMusic(Map<String, Object> map);
 	
 	// 추천공연
-	public List<ConcertBean> getPreferenceConcertList2(Map<String, Object> map);
+	public List<ConcertBean> getPreferenceConcertList(Map<String, Object> map);
 	public int getPreferenceConcertCount(Map<String, Object> map);
 	
 	// 로그인한 사용자의 선호도 수정 시 초기 로드에 사용.
-	public List<PreferenceBean> getPreferenceMusicList(String userId);
+	public List<PreferenceBean> getPreferenceItems(String userId);
 	
 	// 선호도 조회
 	public boolean isExistPreferenceItem(PreferenceBean preference);
