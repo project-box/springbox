@@ -268,7 +268,7 @@ function Book(){
 	}else{
 	
    /*  window.name="Info" */
-    window.open(concert_num, "_blank", "width=1000, height=750");
+    window.open(concert_num, "_blank", "width=1000, height=750,toolbars=yes");
    
 	}
 	
