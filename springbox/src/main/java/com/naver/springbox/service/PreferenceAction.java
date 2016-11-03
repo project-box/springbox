@@ -31,6 +31,19 @@ public class PreferenceAction {
 			System.out.println(preference.getRate());
 		}
 	}
+	
+	private List<String> getMatchUsers(String userId){
+		List<MemberBean> memberList = preferenceDao.getPreferenceMemberList(userId);
+		System.out.println("memberList="+memberList);
+		List<String> userList = new ArrayList<String>();
+
+		System.out.println("추천곡 Action3");
+		for (MemberBean member : memberList) {
+			userList.add(member.getUser_id());
+		}
+		
+		return userList;
+	}
 
 	// 추천곡 목록을 가져오는 메서드
 	public Map<String, Object> suggestMusic(String userId, HttpServletRequest request) {
@@ -56,29 +69,14 @@ public class PreferenceAction {
 		// 키로 저장
 		Map<String, Object> map = new HashMap<String, Object>();
 
-		System.out.println("추천곡 Action2");
-		
-		// 로그인 사용자에 따른 추천곡을 가져오기 위한 코드
-		// 1. 로그인 사용자와 취향이 유사한 사용자들을 조회한다.
-		List<MemberBean> memberList = preferenceDao.getPreferenceMemberList(userId);
-		System.out.println("memberList="+memberList);
-		List<String> userList = new ArrayList<String>();
-
-		System.out.println("추천곡 Action3");
-		for (MemberBean member : memberList) {
-			userList.add(member.getUser_id());
-		}
-
-		map.put("userList", userList);
+		map.put("userList", getMatchUsers(userId));
 		map.put("start", start);
 		map.put("end", end);
 
-		System.out.println("userList="+userList);
 		// 2. 사용자들을 통해 선호도가 높은 곡들을 가져온다.
 		List<MusicBean> list = preferenceDao.getPreferenceMusicList2(map);
 
 		System.out.println("list="+list);
-		System.out.println("추천곡 Action4");
 		// 데이터 가져오기
 		// List<MusicBean> list = preferenceDao.getPreferenceMusicList(map);
 
@@ -130,13 +128,15 @@ public class PreferenceAction {
 		// 위 2개의 값을 Map을 생성해서 start와 end라는
 		// 키로 저장
 		Map<String, Object> map = new HashMap<String, Object>();
+		
+		map.put("userList", getMatchUsers(userId));
 		map.put("start", start);
 		map.put("end", end);
 
 		// 데이터 가져오기
-		List<ConcertBean> list = preferenceDao.getPreferenceConcertList(map);
+		List<ConcertBean> list = preferenceDao.getPreferenceConcertList2(map);
 		// 전체 데이터 개수 가져오기
-		int listcount = preferenceDao.countPreferenceConcert();
+		int listcount = preferenceDao.getPreferenceConcertCount(map);
 
 		// 가장 큰 페이지 번호 계산
 		int maxpage = (int) ((double) listcount / limit + 0.95);

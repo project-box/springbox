@@ -28,6 +28,10 @@ public interface PreferenceDao {
 	public List<MusicBean> getPreferenceMusicList2(Map<String, Object> map);
 	public int getPreferenceMusicCount(Map<String, Object> map);
 	
+	// 추천공연
+	public List<ConcertBean> getPreferenceConcertList2(Map<String, Object> map);
+	public int getPreferenceConcertCount(Map<String, Object> map);
+	
 	// 로그인한 사용자의 선호도 수정 시 초기 로드에 사용.
 	public List<PreferenceBean> getPreferenceMusicList(String userId);
 	
