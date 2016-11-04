@@ -52,7 +52,7 @@ alter table payment
 
 select * from history;
 
-
+select * from payment;
 
 select max(payment_num) from payment;
 
