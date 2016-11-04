@@ -38,7 +38,7 @@ payment_account varchar2(200));
 
 
 select * from payment;
-delete from payment;
+delete from payment where payment_num=242;
 delete from seat;
 
 	update payment set payment_check='무통장입금' where payment_num=239;
