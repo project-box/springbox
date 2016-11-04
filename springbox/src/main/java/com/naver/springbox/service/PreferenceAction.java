@@ -83,7 +83,7 @@ public class PreferenceAction {
 			
 			if(userList.size() > 0){
 				map.put("userList", userList);
-				list = preferenceDao.getPreferenceMusicList2(map);
+				list = preferenceDao.getPreferenceMusicList(map);
 				listcount = preferenceDao.countPreferenceMusic(map);	
 			}else{
 				list = musicDao.getMusicList(map);
@@ -152,7 +152,7 @@ public class PreferenceAction {
 			
 			if(userList.size() > 0){
 				map.put("userList", userList);
-				list = preferenceDao.getPreferenceConcertList2(map);
+				list = preferenceDao.getPreferenceConcertList(map);
 				listcount = preferenceDao.getPreferenceConcertCount(map);	
 				
 			}else{
@@ -252,7 +252,7 @@ public class PreferenceAction {
 	}
 
 	public List<PreferenceBean> getPreferenceMusic(String loginId) {
-		return preferenceDao.getPreferenceMusicList(loginId);
+		return preferenceDao.getPreferenceItems(loginId);
 	}
 
 	public int getPreferenceCountByUser(String userId) {

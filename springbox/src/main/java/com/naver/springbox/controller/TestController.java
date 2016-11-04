@@ -102,7 +102,7 @@ public class TestController {
 		map.put("start", 1);
 		map.put("end", 10);
 
-		List<MusicBean> musicList = preferenceDao.getPreferenceMusicList2(map);
+		List<MusicBean> musicList = preferenceDao.getPreferenceMusicList(map);
 
 		for (MusicBean music : musicList) {
 			System.out.println(music.getMusic_title());

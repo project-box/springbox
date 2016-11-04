@@ -6,9 +6,9 @@
 <mapper namespace="theme">
 
 	<!-- 전체 음악 목록 -->
-	<select id="theme_list" resultType="com.naver.springbox.dto.ThemeBean">
+	<select id="theme_list" resultType="com.naver.springbox.dto.ThemeMusicBean">
 	    <![CDATA[
-		select * from theme
+		select * from theme_music
 		]]>
 	</select>
 	
