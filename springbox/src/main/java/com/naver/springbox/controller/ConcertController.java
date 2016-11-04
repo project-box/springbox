@@ -72,13 +72,26 @@ public class ConcertController {
 	
 	
 	@RequestMapping("/concert_list.box")
-	public ModelAndView concert_list(HttpServletRequest request) {
+	public ModelAndView concert_list(HttpServletRequest request, HttpServletResponse response)throws Exception {
 		ModelAndView mav = new ModelAndView();
 		HttpSession session = request.getSession();
+		
+		response.setContentType("text/html;charset=utf-8");	
+		PrintWriter out = response.getWriter();
 
-
-	     	String userId = (String) session.getAttribute("loginId");		
-
+	     	String userId = (String) session.getAttribute("loginId");	
+	     	
+	     	if( session.getAttribute("loginId") == null ){
+				out.println("<script>");
+		   		out.println("alert('로그인이 필요 합니다!');");
+		   		out.println("history.go(-1)");
+		   		out.println("</script>");
+		   		out.close();
+		   		return null;
+		   		
+			}else{
+	     	
+	     	
 		
 			// 게시물 목록 가져오기
 			Map<String, Object> map = preferenceAction.suggestConcert(userId, request);
@@ -90,9 +103,10 @@ public class ConcertController {
 			// 저장하기
 			mav.setViewName("/concert/concert_list");
 			
-			
-		
 		return mav;
+		
+		
+			}
 	}
 
 //	@RequestMapping(value = "/concert_detail.box", method = RequestMethod.GET)
