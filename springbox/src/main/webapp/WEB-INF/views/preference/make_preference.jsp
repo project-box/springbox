@@ -40,7 +40,8 @@
 		toastr.options.timeOut = 2000;
 
 		initStar($('.star'));
-		
+
+		document.getElementById("preferenceCount").style.color = "White";
 		counter = document.getElementById("preferenceCount").innerHTML;
 		counter *= 1;
 	});
@@ -114,11 +115,11 @@
 	function removePreference(num) {
 
 		if ($("#" + num).attr('class') == "thumbnail cover selected") {
-			
+
 			var items = {
-					"music_num" : num,
-				};
-			
+				"music_num" : num,
+			};
+
 			$.ajax({
 				url : "remove_preference.box",
 				type : "POST",
@@ -193,18 +194,33 @@
 	}
 </script>
 
+<style>
+
+p {
+	color: #f8f8f8;
+	font-family: 'Raleway', sans-serif;
+	font-size: 14px;
+	font-weight: 500;
+	line-height: 32px;
+	margin: 10px 10px 10px;
+}
+</style>
+
 </head>
 <body>
 
 	<!-- Navigation -->
 	<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
 	<div class="container">
-		<ul class="nav navbar-nav">
-			<li class="preferenceCountTitle">평가한 항목 수:</li>
-			<li class="vertical-li"><p id="preferenceCount"><c:out value="${preferenceCount}"></c:out></p></li>
-			<li><p>평가를 많이 할수록 더 정확하게 취향저격 당할 수 있습니다! 고고!</p></li>
-		</ul>
-
+		<div class="navbar-header">
+			<ul class="nav navbar-nav">
+				<li class="preferenceCountTitle"><p>평가한 항목 수</p></li>
+				<li class="vertical-li"><p id="preferenceCount">
+						<c:out value="${preferenceCount}"></c:out>
+					</p></li>
+			</ul>
+		</div>
+	
 		<ul class="nav navbar-nav navbar-right">
 			<li><button type="button"
 					onclick="window.location='./main.box';"
@@ -212,6 +228,7 @@
 			<!-- <li><button type="button" onClick="getStars()"
 					class="btn btn-warning command-button">추천받기</button></li> -->
 		</ul>
+		
 	</div>
 
 	<!-- <ul class="nav navbar-nav navbar-right">
