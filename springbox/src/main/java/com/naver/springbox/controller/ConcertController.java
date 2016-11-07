@@ -44,7 +44,7 @@ public class ConcertController {
 	public ModelAndView concert_add(ConcertBean dto, HttpServletRequest request) {
 		ModelAndView mav = new ModelAndView();
 		
-		boolean r = concertAction.add(dto, request);
+		boolean r = concertAction.concert_add(dto, request);
 
 		
 		
@@ -72,13 +72,26 @@ public class ConcertController {
 	
 	
 	@RequestMapping("/concert_list.box")
-	public ModelAndView concert_list(HttpServletRequest request) {
+	public ModelAndView concert_list(HttpServletRequest request, HttpServletResponse response)throws Exception {
 		ModelAndView mav = new ModelAndView();
 		HttpSession session = request.getSession();
+		
+		response.setContentType("text/html;charset=utf-8");	
+		PrintWriter out = response.getWriter();
 
-
-	     	String userId = (String) session.getAttribute("loginId");		
-
+	     	String userId = (String) session.getAttribute("loginId");	
+	     	
+	     	if( session.getAttribute("loginId") == null ){
+				out.println("<script>");
+		   		out.println("alert('로그인이 필요 합니다!');");
+		   		out.println("history.go(-1)");
+		   		out.println("</script>");
+		   		out.close();
+		   		return null;
+		   		
+			}else{
+	     	
+	     	
 		
 			// 게시물 목록 가져오기
 			Map<String, Object> map = preferenceAction.suggestConcert(userId, request);
@@ -90,9 +103,10 @@ public class ConcertController {
 			// 저장하기
 			mav.setViewName("/concert/concert_list");
 			
-			
-		
 		return mav;
+		
+		
+			}
 	}
 
 //	@RequestMapping(value = "/concert_detail.box", method = RequestMethod.GET)
@@ -110,9 +124,9 @@ public class ConcertController {
 	@RequestMapping("/concert_detail.box")
 	public ModelAndView concert_detail(int concert_num, HttpSession session) throws Exception {
 		ModelAndView mav = new ModelAndView();
-			ConcertBean dto = concertAction.concertDetail(concert_num);
-			List <ConcertBoardBean> list= concertAction.concertboardList(concert_num);
-			int listcount=concertAction.concertboardListCount(concert_num);
+			ConcertBean dto = concertAction.concert_detail(concert_num);
+			List <ConcertBoardBean> list= concertAction.concertboard_list(concert_num);
+			int listcount=concertAction.concertboard_count(concert_num);
 			
 			// 데이터를 저장
 			mav.addObject("concertdata", dto);
@@ -134,7 +148,7 @@ public class ConcertController {
 			HttpSession session) {
 		ModelAndView mav = new ModelAndView();		
 		
-		boolean r = (concertAction).concertDelete(num);
+		boolean r = (concertAction).concert_delete(num);
 		System.out.println("들어옴");
 		if (r) {
 			mav.setViewName("redirect:concert_list.box");
@@ -157,7 +171,7 @@ public class ConcertController {
 		// 로그인 되어 있지 않으면 로그인 페이지로 이동
 	
 		List<SeatBean> sb = bookAction.seat_list(concert_num);
-		ConcertBean cb = concertAction.concertDetail(concert_num);
+		ConcertBean cb = concertAction.concert_detail(concert_num);
 		
 		mav.addObject("seatdata", sb);	
 		mav.addObject("concertdata", cb);
@@ -193,7 +207,7 @@ public class ConcertController {
 		}else{
 		
 			// 데이터 삽입
-			boolean r = concertAction.concertboardadd(dto, request);
+			boolean r = concertAction.concertboard_add(dto, request);
 		
 				// 상세보기 수행
 				// 글번호가져오기
@@ -214,7 +228,7 @@ public class ConcertController {
 	public String concertboard_delete(int concertboard_num, int concert_num,
 			HttpSession session) {	
 		
-		concertAction.concertboardDelete(concertboard_num);
+		concertAction.concertboard_delete(concertboard_num);
 
 		return "redirect:concert_detail.box?concert_num=" + concert_num+"&param=123";
 	}

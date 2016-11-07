@@ -20,21 +20,21 @@ public interface ConcertDao {
 	public List<ConcertBean> getConcertList(Map<String, Object> map);
 	
 	// 조회수를 1증가시키고 하나의 데이터를 가져오는 메소드
-	public ConcertBean getConcertDetail(int concert_num);
+	public ConcertBean concert_detail(int concert_num);
 	
 	// 데이터를 삽입하는 메소드
-	public boolean insertConcert(ConcertBean dto);
+	public boolean concert_add(ConcertBean dto);
 
 	// 정수 1개를 받아서 데이터를 삭제하는 메소드
-	public boolean deleteConcert(int num);
+	public boolean concert_delete(int num);
 
-	public boolean insertConcertboard(ConcertBoardBean dto);
+	public boolean concertboard_add(ConcertBoardBean dto);
 
-	public List<ConcertBoardBean> getConcertBoardList(int num);
+	public List<ConcertBoardBean> concertboard_list(int num);
 
-	public int getConcertBoardListCount(int num);
+	public int concertboard_count(int num);
 
-	boolean getConcertBoardDelete(int num);
+	boolean concertboard_delete(int num);
 
 	void book_add(PaymentBean pb);
 //	public boolean insertPayment(PaymentBean dto);

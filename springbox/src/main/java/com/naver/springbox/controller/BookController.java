@@ -38,7 +38,7 @@ public class BookController {
 		int concert_num = Integer.parseInt(request.getParameter("concert_num"));
 		String seat_seat = request.getParameter("seat_seat");
 
-		ConcertBean dto = concertAction.concertDetail(concert_num);
+		ConcertBean dto = concertAction.concert_detail(concert_num);
 
 		ModelAndView mav = new ModelAndView();
 
@@ -62,14 +62,14 @@ public class BookController {
 	/*----------------------결제정보 등록----------------------------*/
 
 	@RequestMapping("/book_add.box")
-	public ModelAndView book_list(@ModelAttribute PaymentBean pb, SeatBean sb, HttpServletRequest request,
+	public ModelAndView book_add(@ModelAttribute PaymentBean pb, SeatBean sb, HttpServletRequest request,
 			HttpSession session) throws Exception {
 
 		String id = (String) session.getAttribute("loginId");
 		pb.setUser_id(id);
 
 		int concert_num = pb.getConcert_num();
-		ConcertBean cb = concertAction.concertDetail(concert_num);
+		ConcertBean cb = concertAction.concert_detail(concert_num);
 
 		pb.setPayment_title(cb.getConcert_title());
 		pb.setPayment_poster(cb.getPosterfilepath());
