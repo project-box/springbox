@@ -21,11 +21,10 @@ public class ConcertDaoImpl implements ConcertDao {
 
 	@Override
 	@Transactional // 메소드 수행 중에 예외가 발생하면 rollback 그렇지 않으면 commit
-	public boolean insertConcert(ConcertBean dto) {
+	public boolean concert_add(ConcertBean dto) {
 		int r = sqlSession.insert("concert.concert_add", dto);
 		if (r > 0)
 			return true;
-		else
 			return false;
 	}
 
@@ -55,7 +54,7 @@ public class ConcertDaoImpl implements ConcertDao {
 
 	@Override
 	@Transactional
-	public ConcertBean getConcertDetail(int detail_num) {
+	public ConcertBean concert_detail(int detail_num) {
 		// TODO Auto-generated method stub
 
 		// // 조회수를 1증가시키는 sql 실행
@@ -77,7 +76,7 @@ public class ConcertDaoImpl implements ConcertDao {
 
 	@Override
 	@Transactional
-	public boolean deleteConcert(int num) {
+	public boolean concert_delete(int num) {
 		// TODO Auto-generated method stub
 
 		System.out.println("들어옴3");
@@ -91,7 +90,7 @@ public class ConcertDaoImpl implements ConcertDao {
 
 	@Override
 	@Transactional
-	public boolean insertConcertboard(ConcertBoardBean dto) {
+	public boolean concertboard_add(ConcertBoardBean dto) {
 		// TODO Auto-generated method stub
 
 				// 데이터 추가
@@ -106,7 +105,7 @@ public class ConcertDaoImpl implements ConcertDao {
 
 	@Override
 	@Transactional
-	public List<ConcertBoardBean> getConcertBoardList(int num) {
+	public List<ConcertBoardBean> concertboard_list(int num) {
 		// TODO Auto-generated method stub
 		
 		List<ConcertBoardBean> list = sqlSession.selectList(
@@ -118,7 +117,7 @@ public class ConcertDaoImpl implements ConcertDao {
 
 	@Override
 	@Transactional
-	public int getConcertBoardListCount(int num) {
+	public int concertboard_count(int num) {
 		// TODO Auto-generated method stub
 				
 		int count = 0;
@@ -130,7 +129,7 @@ public class ConcertDaoImpl implements ConcertDao {
 
 	@Override
 	@Transactional// 메소드 수행 중에 예외가 발생하면 rollback 그렇지 않으면 commit
-	public boolean getConcertBoardDelete(int num) {
+	public boolean concertboard_delete(int num) {
 		int r = sqlSession.insert("concert.concertboard_delete", num);
 		
 		if (r > 0)

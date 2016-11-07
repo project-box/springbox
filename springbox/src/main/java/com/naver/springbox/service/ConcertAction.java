@@ -25,7 +25,7 @@ public class ConcertAction {
 
 	/*--------------공연 등록--------------------------------------*/
 
-	public boolean add(ConcertBean dto, HttpServletRequest request)  {
+	public boolean concert_add(ConcertBean dto, HttpServletRequest request)  {
 		// 실제 파일 업로드 처리
 		// 업로드할 폴더의 경로를 생성
 		String realFolder = request.getSession().getServletContext()
@@ -74,7 +74,7 @@ public class ConcertAction {
 		}	
 
 		// 데이터 삽입
-		boolean r = concertDao.insertConcert(dto);
+		boolean r = concertDao.concert_add(dto);
 
 		return r;
 	}
@@ -138,25 +138,25 @@ public class ConcertAction {
 	}*/
 
 	/*----------------디테일 서비스----------------------------*/
-	public ConcertBean concertDetail(int concert_num) throws Exception {
-		ConcertBean dto = concertDao.getConcertDetail(concert_num);
+	public ConcertBean concert_detail(int concert_num) throws Exception {
+		ConcertBean dto = concertDao.concert_detail(concert_num);
 
 		return dto;
 	}
 	
 	/* -------------------------목록 삭제-------------------------*/
 	
-	public boolean concertDelete(int num) {
+	public boolean concert_delete(int num) {
 		System.out.println("들어옴2");
 		
-		return concertDao.deleteConcert(num);
+		return concertDao.concert_delete(num);
 	}
 	
 	
 	/*--------------후기 등록--------------------------------------*/
 
 	// request를 매개변수로 받아서 Dao를 호출하는 메소드
-	public boolean concertboardadd(ConcertBoardBean dto, HttpServletRequest request) {
+	public boolean concertboard_add(ConcertBoardBean dto, HttpServletRequest request) {
 			
 		// 파라미터 가져오기
 		int num = Integer.parseInt(request.getParameter("concert_num"));
@@ -169,7 +169,7 @@ public class ConcertAction {
 		dto.setConcertboard_content(content);			
 		dto.setUser_id(loginId);
 		
-		boolean r = concertDao.insertConcertboard(dto);
+		boolean r = concertDao.concertboard_add(dto);
 
 		return r;
 	}
@@ -177,26 +177,26 @@ public class ConcertAction {
 	/*----------------------후기 목록----------------------------*/
 
 
-	public List<ConcertBoardBean> concertboardList(int concert_num) {
-		List<ConcertBoardBean> list = concertDao.getConcertBoardList(concert_num);
+	public List<ConcertBoardBean> concertboard_list(int concert_num) {
+		List<ConcertBoardBean> list = concertDao.concertboard_list(concert_num);
 				
 		return list;
 	}
 	
 	/*----------------------후기 카운트-----------------------*/
 
-	public int concertboardListCount(int concert_num) {
+	public int concertboard_count(int concert_num) {
 	
-		int listcount = concertDao.getConcertBoardListCount(concert_num);
+		int listcount = concertDao.concertboard_count(concert_num);
 	
 	  return listcount ;
 }
 	
 	/*-----------------------후기 삭제---------------------------*/
 	
-	public boolean concertboardDelete(int concertboard_num) {
+	public boolean concertboard_delete(int concertboard_num) {
 		
-	  return concertDao.getConcertBoardDelete(concertboard_num);
+	  return concertDao.concertboard_delete(concertboard_num);
 }
 	
 
